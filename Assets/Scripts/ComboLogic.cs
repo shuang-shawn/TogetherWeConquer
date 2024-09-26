@@ -6,7 +6,7 @@ public class ComboLogic : MonoBehaviour
 {
     KeyCode[] sequence = new KeyCode[] { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow };
     public int currentSequenceIndex = 0;
-    public float timeLimit = 10f; // Time allowed between key presses
+    public float timeLimit = 5f; // 5 seconds
     public float timer = 0f;
     public int mistake = 0;
 
@@ -16,16 +16,15 @@ public class ComboLogic : MonoBehaviour
     }
     void Update()
     {
+        // Increments time
         timer += Time.deltaTime;
-       
-        //if (timer > timeLimit)
-        //{
-        //    // If too much time has passed, reset the sequence
-        //    Debug.Log("Not done");
-        //    currentSequenceIndex = 0;
-        //    mistake = 0;
-        //    timer = 0f;
-        //}
+
+        if (timer > timeLimit)
+        {
+            // If too much time has passed comob failed
+            Debug.Log("Ran out of itme for combo");
+            Destroy(gameObject);
+        }
         RestartCombo();
         CheckComboInput();
     }
@@ -63,6 +62,7 @@ public class ComboLogic : MonoBehaviour
             currentSequenceIndex = 0; // Reset for the next combo
             mistake = 0;
             Debug.Log("RESTART COMBO");
+            timer = 0f;
             PrintNextSequence();
         }
     }
