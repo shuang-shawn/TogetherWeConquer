@@ -2,26 +2,17 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "Player",
+            "name": "Player1",
             "id": "50a879ea-827a-42e3-b553-0f76ee600955",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "MovementP1",
                     "type": "Value",
                     "id": "12bb233e-d947-4110-9471-6b32bb3bfb54",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "2a6822e8-d705-4d0a-9944-eb012ea379d8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -32,7 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementP1",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,7 +34,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementP1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -54,7 +45,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementP1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -65,7 +56,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementP1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -76,7 +67,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementP1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -87,31 +78,136 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementP1",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "Player2",
+            "id": "bd1c4500-c662-477f-be33-5917c56f99b0",
+            "actions": [
                 {
-                    "name": "",
-                    "id": "bed94540-8254-4ef1-9262-1bbe3cb52f96",
-                    "path": "<Keyboard>/space",
+                    "name": "MovementP2",
+                    "type": "Value",
+                    "id": "62a25625-10e9-4aa6-881a-0c0155c62dcf",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "IJKL",
+                    "id": "960b3180-9568-4d38-9f0e-c24bf16b34c5",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
+                    "action": "MovementP2",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "3511b1aa-66b2-4891-abb1-4a61a66a769c",
-                    "path": "<Gamepad>/buttonSouth",
+                    "name": "up",
+                    "id": "c2308aaf-428c-4792-b3b9-d8e251b9e448",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "MovementP2",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "d1402227-0c8a-4c8b-9f72-00cc5a5bb29f",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovementP2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "7657568e-41f2-4f1e-9662-57cec83e6ef7",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovementP2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "6491f22b-d6ec-4ed0-bff1-85870c4b3557",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovementP2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "1a2d31ff-3f79-4cb7-9cea-8b498b72f732",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovementP2",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "74b9504b-0e6c-40f7-a29d-0a59100d5109",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovementP2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "47a21604-39af-4cc2-95d7-1ca5936c1424",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovementP2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "7f587175-6e49-4f7f-95f2-950e70ff6674",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovementP2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "e43fba61-9e26-4752-b590-82ee146f890c",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovementP2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
