@@ -41,14 +41,12 @@ public class ComboTimer : MonoBehaviour
             {
                 isRunning = false;
 
-                resetTimer();
+                ResetTimer();
             }
         }
     }
 
-    
-
-    public void resetTimer()
+    public void ResetTimer()
     {
         timeLeft = maxTime;
         timer.value = 1.0f;
