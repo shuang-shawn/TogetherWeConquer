@@ -1,35 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ComboTimer : MonoBehaviour
 {
-    private Slider slider;
+    public Slider timer;
+    public float maxTime = 5.0f;
 
-    public float downTick = 0.5f;
-    private float target = 1.0f;
+    private float timeLeft;
+    private bool isRunning = false;
 
-    private void Awake()
+    private void Start()
     {
-        slider = gameObject.GetComponent<Slider>();
+        //Initialize the timer to the maximum value
+        timeLeft = maxTime;
+
+        //Set slider value to full
+        timer.value = 1.0f;
     }
 
-    void Start()
+    private void Update()
     {
-        Decrement(0.0f);
-    }
-
-    void Update()
-    {
-        if(slider.value > target)
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) 
+            || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            slider.value -= downTick * Time.deltaTime;
+            isRunning = true;
+        }
+
+        if(isRunning)
+        {
+            //Decrement timer
+            timeLeft -= Time.deltaTime;
+
+            //Update slider
+            timer.value = timeLeft / maxTime;
+
+            if(timer.value <= 0.0f)
+            {
+                isRunning = false;
+
+                resetTimer();
+            }
         }
     }
 
-    public void Decrement(float value)
+    
+
+    public void resetTimer()
     {
-        target = slider.value - value;
+        timeLeft = maxTime;
+        timer.value = 1.0f;
     }
 }
