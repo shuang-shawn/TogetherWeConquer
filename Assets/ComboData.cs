@@ -40,15 +40,18 @@ public class ComboData : MonoBehaviour
     /** Tracks the position of mistakes in the current combo. **/
     public List<string> mistakeOrder;
 
+    /** Combo timer. **/
+    public float timerVal;
+
     void PrintSummary()
     {
-        string summary =
-                     $"First Input: {firstInput}\n" +
-                     $"Second Input: {secondInput}\n" +
-                     $"Combo Selected: {string.Join(", ", currentCombo)}\n" +
-                     $"Total Mistake Count: {mistakeCount}\n" +
-                     $"Mistakes: {string.Join(", ", mistakeKeysPressed)}" +
-                     $"Order of wrong inputs: {string.Join(", ", mistakeOrder)}";
+        string summary = $"First Input: {firstInput}\n" +
+                         $"Second Input: {secondInput}\n" +
+                         $"Combo Selected: {string.Join(", ", currentCombo)}\n" +
+                         $"Total Mistake Count: {mistakeCount}\n" +
+                         $"Mistakes: {string.Join(", ", mistakeKeysPressed)}" +
+                         $"Order of wrong inputs: {string.Join(", ", mistakeOrder)}\n" +
+                         $"Remaining Time: {timerVal}s";
 
         Debug.Log("--Click to view summary--\n" + summary);
     }
@@ -64,6 +67,6 @@ public class ComboData : MonoBehaviour
         lastKeyPressed = KeyCode.None;
         mistakeKeysPressed = new List<KeyCode>();
         mistakeCount = 0;
-        mistakeOrder.Clear(); 
+        mistakeOrder.Clear();
     }
 }

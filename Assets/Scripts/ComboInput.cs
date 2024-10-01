@@ -12,6 +12,7 @@ public class ComboInput : MonoBehaviour
     private InputAction down;
     private InputAction left;
     private InputAction right;
+    private InputAction cancel;
 
     ComboData comboData;
     private void Awake()
@@ -21,6 +22,7 @@ public class ComboInput : MonoBehaviour
         down = actionMap.FindAction("Down");
         left = actionMap.FindAction("Left");
         right = actionMap.FindAction("Right");
+        cancel = actionMap.FindAction("Cancel");
         comboData = GetComponent<ComboData>();
     }
 
@@ -30,6 +32,7 @@ public class ComboInput : MonoBehaviour
         down.Enable();
         left.Enable();
         right.Enable();
+        cancel.Enable();
 
         // Assigning callback to each input key
         up.performed += CheckInitialInput;
@@ -44,6 +47,7 @@ public class ComboInput : MonoBehaviour
         down.Disable();
         left.Disable();
         right.Disable();
+        cancel.Disable();
 
         // Removing callback from each input key
         up.performed -= CheckInitialInput;
@@ -104,21 +108,27 @@ public class ComboInput : MonoBehaviour
         down.performed += ComboSequence;
         left.performed += ComboSequence;
         right.performed += ComboSequence;
+        cancel.performed += CancelCombo;
+
+        StartCoroutine(StartCountdown());
     }
 
     void RestartCombo()
     {
         comboData.ResetData();
+        StopAllCoroutines();
         up.performed -= ComboSequence;
         down.performed -= ComboSequence;
         left.performed -= ComboSequence;
         right.performed -= ComboSequence;
+        cancel.performed -= CancelCombo;
 
         up.performed += CheckInitialInput;
         down.performed += CheckInitialInput;
         left.performed += CheckInitialInput;
         right.performed += CheckInitialInput;
     }
+
     private void ComboSequence(InputAction.CallbackContext context)
     {
             // Determine the current input
@@ -143,6 +153,29 @@ public class ComboInput : MonoBehaviour
             Debug.Log("Combo Completed");
             RestartCombo();
         }
+    }
+
+    private void CancelCombo(InputAction.CallbackContext context)
+    {
+        Debug.Log("Combo Canceled");
+        RestartCombo();
+    }
+
+    private void ComboTimerExpired()
+    {
+        Debug.Log("Ran out of time");
+        RestartCombo();
+    }
+    public IEnumerator StartCountdown(float countdownValue = 10) // 10 seconds
+    {
+        comboData.timerVal = countdownValue;
+        while(comboData.timerVal > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            comboData.timerVal--;
+        }
+        // If out of time
+        ComboTimerExpired();
     }
 
     // Helper method to translate the InputAction context to KeyCode

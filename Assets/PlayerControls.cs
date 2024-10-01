@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""87d68cf4-5771-4eb9-935e-41b2dab5cb05"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -108,6 +117,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c62c15f-2244-4419-8d6d-46fc395f6aab"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +140,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Combo_Down = m_Combo.FindAction("Down", throwIfNotFound: true);
         m_Combo_Left = m_Combo.FindAction("Left", throwIfNotFound: true);
         m_Combo_Right = m_Combo.FindAction("Right", throwIfNotFound: true);
+        m_Combo_Cancel = m_Combo.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,6 +206,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Combo_Down;
     private readonly InputAction m_Combo_Left;
     private readonly InputAction m_Combo_Right;
+    private readonly InputAction m_Combo_Cancel;
     public struct ComboActions
     {
         private @PlayerControls m_Wrapper;
@@ -193,6 +215,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Down => m_Wrapper.m_Combo_Down;
         public InputAction @Left => m_Wrapper.m_Combo_Left;
         public InputAction @Right => m_Wrapper.m_Combo_Right;
+        public InputAction @Cancel => m_Wrapper.m_Combo_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_Combo; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -214,6 +237,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Right.started += instance.OnRight;
             @Right.performed += instance.OnRight;
             @Right.canceled += instance.OnRight;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         private void UnregisterCallbacks(IComboActions instance)
@@ -230,6 +256,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Right.started -= instance.OnRight;
             @Right.performed -= instance.OnRight;
             @Right.canceled -= instance.OnRight;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         public void RemoveCallbacks(IComboActions instance)
@@ -253,5 +282,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDown(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }
