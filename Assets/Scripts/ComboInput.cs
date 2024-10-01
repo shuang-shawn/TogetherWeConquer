@@ -69,18 +69,23 @@ public class ComboInput : MonoBehaviour
 
     public void CheckComboList()
     {
+        bool foundMatch = false;
         foreach (var combo in comboData.comboList)
         {
             if (combo[0] == comboData.firstInput && combo[1] == comboData.secondInput)
             {
                 Debug.Log("Matching Combo" + string.Join(", ", combo));
                 StartCombo(combo);
+                foundMatch = true;
                 break;
             }
         }
-        comboData.firstInput = KeyCode.None;
-        comboData.secondInput = KeyCode.None;
-        Debug.Log("No matching combo");
+        if (!foundMatch)
+        {
+            comboData.firstInput = KeyCode.None;
+            comboData.secondInput = KeyCode.None;
+            Debug.Log("No matching combo");
+        }
     }
 
     void StartCombo(List<KeyCode> combo)
