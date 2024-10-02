@@ -10,12 +10,19 @@ public class BasicAI : MonoBehaviour
     private float speed = 2.0f;
     private float minDist = 1f;
 
+    // Returns the distance between the object the script is attached to, and the targetObject
+    // Takes in a single GameObject and returns a float representing the distance
+    private float findDistance(GameObject targetObject){
+        return Vector3.Distance(transform.position, targetObject.transform.position);
+    }
+
+    // FindClosestPlayer determines which player is the closest, and sets it to that player
     private void findClosestPlayer(){
         GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
         GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
 
-        float player1Distance = Vector3.Distance(transform.position, player1.transform.position);
-        float player2Distance = Vector3.Distance(transform.position, player2.transform.position);
+        float player1Distance = findDistance(player1);
+        float player2Distance = findDistance(player2);
 
         if(player2Distance > player1Distance){
             closestPlayerObj = player1;
@@ -28,10 +35,7 @@ public class BasicAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (playerObj == null){
-            playerObj = GameObject.FindGameObjectWithTag("Player1");
-        }
-        findClosestPlayer();
+        // findClosestPlayer();
     }
     
     // Update is called once per frame
@@ -42,22 +46,11 @@ public class BasicAI : MonoBehaviour
         
         transform.LookAt(closestPlayerObj.transform);
 
-        float distance = Vector3.Distance(transform.position, closestPlayerObj.transform.position);
+        float distance = findDistance(closestPlayerObj);
 
         if(distance > minDist){
             transform.position += transform.forward * speed * Time.deltaTime;
         }
-        
-        
-        /**
-        transform.LookAt(playerObj.transform);
-
-        float distance = Vector3.Distance(transform.position, playerObj.transform.position);
-
-        if(distance > minDist){
-            transform.position += transform.forward * speed * Time.deltaTime;
-        }
-        */
         // Debug.Log(transform.position);
     }
 }
