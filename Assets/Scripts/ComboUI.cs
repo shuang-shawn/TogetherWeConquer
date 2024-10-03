@@ -10,13 +10,15 @@ public class ComboUI : MonoBehaviour
     public Color correctColor = Color.green;
     public Color incorrectColor = Color.red;
 
-    private KeyCode[] arrowSequence = { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow };
+    private List<KeyCode> arrowSequence;
 
     private int currentArrowIndex;
 
     private void Start()
     {
-        foreach(Image arrow in arrowImages)
+        arrowSequence = new List<KeyCode> { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow };
+
+        foreach (Image arrow in arrowImages)
         {
             arrow.color = Color.white;
         }
@@ -27,8 +29,11 @@ public class ComboUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow)
            || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (currentArrowIndex < arrowSequence.Length)
+            if (currentArrowIndex < arrowSequence.Count)
             {
+                Vector3 up = new Vector3(100.0f, 0.0f, 0.0f);
+                arrowImages[currentArrowIndex].transform.Translate(up);
+
                 KeyCode correctArrow = arrowSequence[currentArrowIndex];
 
                 if (Input.GetKeyDown(correctArrow))
@@ -43,7 +48,7 @@ public class ComboUI : MonoBehaviour
 
             currentArrowIndex++;
 
-            if (currentArrowIndex > arrowSequence.Length)
+            if (currentArrowIndex > arrowSequence.Count)
             {
                 foreach (Image arrow in arrowImages)
                 {
