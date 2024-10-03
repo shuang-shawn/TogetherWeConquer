@@ -208,8 +208,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.28620797, y: 0.1816868, z: -0.055367187, w: -0.9391536}
-  m_LocalPosition: {x: 4.5740404, y: 8.544405, z: -10.035843}
+  m_LocalRotation: {x: -0.4158179, y: 0.15080978, z: -0.07013348, w: -0.8941103}
+  m_LocalPosition: {x: 2.7030277, y: 11.874123, z: -8.035398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -271,7 +271,6 @@ GameObject:
   - component: {fileID: 383471046}
   - component: {fileID: 383471045}
   - component: {fileID: 383471044}
-  - component: {fileID: 383471048}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -366,33 +365,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &383471048
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383471043}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,9 +497,10 @@ GameObject:
   - component: {fileID: 602792597}
   - component: {fileID: 602792596}
   - component: {fileID: 602792601}
+  - component: {fileID: 602792602}
   m_Layer: 0
   m_Name: Basic Enemy
-  m_TagString: Untagged
+  m_TagString: BasicEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -657,6 +630,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66f9f57547c862c43920c43d72563ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &602792602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602792595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9511601f9661f1d4b8c7d015e55282af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &832575517
