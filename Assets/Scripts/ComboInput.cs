@@ -16,6 +16,8 @@ public class ComboInput : MonoBehaviour
 
     ComboData comboData;
     ComboUI comboUI;
+    public GameObject timer;
+   
     private void Awake()
     {
         var actionMap = playerControls.FindActionMap("Combo");
@@ -122,6 +124,7 @@ public class ComboInput : MonoBehaviour
         comboData.ResetData();
         comboUI.ResetUI();
         StopAllCoroutines();
+        timer.GetComponent<ComboTimer>().ResetTimer();
         up.performed -= ComboSequence;
         down.performed -= ComboSequence;
         left.performed -= ComboSequence;
@@ -173,9 +176,10 @@ public class ComboInput : MonoBehaviour
         Debug.Log("Ran out of time");
         RestartCombo();
     }
-    public IEnumerator StartCountdown(float countdownValue = 10) // 10 seconds
+    public IEnumerator StartCountdown(float countdownValue = 7) // 7 seconds
     {
         comboData.timerVal = countdownValue;
+        timer.GetComponent<ComboTimer>().InitializeTimer(countdownValue);
         while(comboData.timerVal > 0)
         {
             yield return new WaitForSeconds(1.0f);

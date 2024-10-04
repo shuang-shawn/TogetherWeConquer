@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ComboTimer : MonoBehaviour
 {
     public Slider timer;
-    public float maxTime = 5.0f;
+    public float maxTime;
 
     private float timeLeft;
     private bool isRunning = false;
@@ -19,17 +19,20 @@ public class ComboTimer : MonoBehaviour
 
         //Set slider value to full
         timer.value = 1.0f;
+
+    }
+
+    public void InitializeTimer(float maxTimeLimit)
+    {
+        maxTime = maxTimeLimit;
+        timeLeft = maxTimeLimit;
+        gameObject.SetActive(true);
+        isRunning = true;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) 
-            || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            isRunning = true;
-        }
-
-        if(isRunning)
+        if (isRunning)
         {
             //Decrement timer
             timeLeft -= Time.deltaTime;
@@ -37,7 +40,7 @@ public class ComboTimer : MonoBehaviour
             //Update slider
             timer.value = timeLeft / maxTime;
 
-            if(timer.value <= 0.0f)
+            if (timer.value <= 0.0f)
             {
                 isRunning = false;
 
@@ -50,5 +53,7 @@ public class ComboTimer : MonoBehaviour
     {
         timeLeft = maxTime;
         timer.value = 1.0f;
+        gameObject.SetActive(false);
+        isRunning = false;
     }
 }

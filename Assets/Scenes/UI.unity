@@ -911,6 +911,7 @@ MonoBehaviour:
   comboUIParent: {fileID: 153970356}
   correctColor: {r: 0, g: 1, b: 0, a: 1}
   incorrectColor: {r: 1, g: 0, b: 0, a: 1}
+  currentComboUI: []
 --- !u!114 &764947626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,6 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControls: {fileID: -944628639613478452, guid: d13efae24a1888c43a5b5588cc56ff68,
     type: 3}
+  timer: {fileID: 463371739}
 --- !u!4 &764947628
 Transform:
   m_ObjectHideFlags: 0
