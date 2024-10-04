@@ -15,6 +15,7 @@ public class ComboInput : MonoBehaviour
     private InputAction cancel;
 
     ComboData comboData;
+    ComboUI comboUI;
     private void Awake()
     {
         var actionMap = playerControls.FindActionMap("Combo");
@@ -24,6 +25,7 @@ public class ComboInput : MonoBehaviour
         right = actionMap.FindAction("Right");
         cancel = actionMap.FindAction("Cancel");
         comboData = GetComponent<ComboData>();
+        comboUI = GetComponent<ComboUI>();
     }
 
     private void OnEnable()
@@ -99,6 +101,8 @@ public class ComboInput : MonoBehaviour
         comboData.currentSequenceIndex = 2;
         comboData.mistakeOrder.AddRange(new[] { "Correct", "Correct" });
 
+        comboUI.InitializeUI(combo, 2);
+
         up.performed -= CheckInitialInput;
         down.performed -= CheckInitialInput;
         left.performed -= CheckInitialInput;
@@ -116,6 +120,7 @@ public class ComboInput : MonoBehaviour
     void RestartCombo()
     {
         comboData.ResetData();
+        comboUI.ResetUI();
         StopAllCoroutines();
         up.performed -= ComboSequence;
         down.performed -= ComboSequence;
@@ -137,8 +142,9 @@ public class ComboInput : MonoBehaviour
             comboData.lastKeyPressed = inputKey;
             if (inputKey == comboData.currentCombo[comboData.currentSequenceIndex])
             {
-            comboData.mistakeOrder.Add("Correct");
+                comboData.mistakeOrder.Add("Correct");
                 Debug.Log("Correct Input");
+            comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
             }
             else
             {
@@ -146,6 +152,7 @@ public class ComboInput : MonoBehaviour
                 comboData.mistakeCount++;
                 comboData.mistakeKeysPressed.Add(inputKey);
                 comboData.mistakeOrder.Add("Incorrect");
+            comboUI.UpdateArrow(comboData.currentSequenceIndex, false);
         }
             comboData.currentSequenceIndex++;
         if (comboData.currentSequenceIndex >= comboData.currentCombo.Count)

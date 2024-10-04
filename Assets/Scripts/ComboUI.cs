@@ -5,58 +5,65 @@ using UnityEngine.UI;
 
 public class ComboUI : MonoBehaviour
 {
-    public Image[] arrowImages;
+    public GameObject[] arrowImages;
+    public GameObject comboUIParent;
 
     public Color correctColor = Color.green;
     public Color incorrectColor = Color.red;
 
-    private List<KeyCode> arrowSequence;
+    public List<GameObject> currentComboUI = new List<GameObject>();
 
-    private int currentArrowIndex;
-
-    private void Start()
+    public void InitializeUI(List<KeyCode> combo, int comboIndex)
     {
-        arrowSequence = new List<KeyCode> { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow };
-
-        foreach (Image arrow in arrowImages)
+        foreach (KeyCode key in combo)
         {
-            arrow.color = Color.white;
+            GameObject arrow = null;
+            switch (key)
+            {
+                case KeyCode.UpArrow:
+                    arrow = Instantiate(arrowImages[0], comboUIParent.transform);
+                    break;
+                case KeyCode.DownArrow:
+                    arrow = Instantiate(arrowImages[1], comboUIParent.transform);
+                    break;
+                case KeyCode.LeftArrow:
+                    arrow = Instantiate(arrowImages[2], comboUIParent.transform);
+                    break;
+                case KeyCode.RightArrow:
+                    arrow = Instantiate(arrowImages[3], comboUIParent.transform);
+                    break;
+                default:
+                    break;
+            }
+            currentComboUI?.Add(arrow);
+        }
+
+        // Make first two arrows green
+        for (int index = 0; index < comboIndex; index++)
+        {
+            currentComboUI[index].GetComponent<Image>().color = correctColor;
         }
     }
 
-    private void Update()
+    // Updates current arrow color depending if input is right or wrong
+    public void UpdateArrow(int currentSequenceIndex, bool inputState)
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow)
-           || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (inputState)
         {
-            if (currentArrowIndex < arrowSequence.Count)
-            {
-                Vector3 up = new Vector3(100.0f, 0.0f, 0.0f);
-                arrowImages[currentArrowIndex].transform.Translate(up);
+            currentComboUI[currentSequenceIndex].GetComponent<Image>().color = correctColor; // If Correct Input
+        } else
+        {
+            currentComboUI[currentSequenceIndex].GetComponent<Image>().color = incorrectColor; // If Wrong Input
+        }
+    }
 
-                KeyCode correctArrow = arrowSequence[currentArrowIndex];
-
-                if (Input.GetKeyDown(correctArrow))
-                {
-                    arrowImages[currentArrowIndex].color = correctColor;
-                }
-                else
-                {
-                    arrowImages[currentArrowIndex].color = incorrectColor;
-                }
-            }
-
-            currentArrowIndex++;
-
-            if (currentArrowIndex > arrowSequence.Count)
-            {
-                foreach (Image arrow in arrowImages)
-                {
-                    arrow.color = Color.white;
-                }
-
-                currentArrowIndex = 0;
-            }
+    public void ResetUI()
+    {
+        currentComboUI.Clear();
+        // Destroy all child objects of comboUIParent
+        foreach (Transform child in comboUIParent.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }
