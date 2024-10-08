@@ -14,13 +14,23 @@ public class ComboInput : MonoBehaviour
     private InputAction right;
     private InputAction cancel;
 
+    private InputActionMap actionMap;
+
     ComboData comboData;
     ComboUI comboUI;
     public GameObject timer;
    
     private void Awake()
     {
-        var actionMap = playerControls.FindActionMap("Combo");
+        // Assigns different Action Map depending on player
+        if (transform.parent.gameObject.name.Equals("Player1"))
+        {
+            actionMap = playerControls.FindActionMap("ComboP1");
+        } else if (transform.parent.gameObject.name.Equals("Player2"))
+        {
+            actionMap = playerControls.FindActionMap("ComboP2");
+        }
+    
         up = actionMap.FindAction("Up");
         down = actionMap.FindAction("Down");
         left = actionMap.FindAction("Left");
