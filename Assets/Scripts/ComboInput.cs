@@ -88,6 +88,11 @@ public class ComboInput : MonoBehaviour
         comboData.isInDuoCombo = cond;
     }
 
+    public bool IsInSoloCombo()
+    {
+        return comboData.isInSoloCombo;
+    }
+
     // Checks if first 2 inputs match any combos that start off with the 2 inputs
     void CheckInitialInput(InputAction.CallbackContext context)
     {
@@ -118,10 +123,14 @@ public class ComboInput : MonoBehaviour
                 Debug.Log("Matching Combo" + string.Join(", ", combo));
                 if (comboData.duoToggle)
                 {
-                    duoComboManager.StartDuoCombo(combo, transform.parent.gameObject);
+                    if (!duoComboManager.IsOtherPlayerInSoloCombo(transform.parent.gameObject)) {
+                        duoComboManager.StartDuoCombo(combo, transform.parent.gameObject);
+                    }
+                    break;
                 } else
                 {
                     StartCombo(combo, true);
+                    comboData.isInSoloCombo = true;
                 }
                 foundMatch = true;
                 break;
