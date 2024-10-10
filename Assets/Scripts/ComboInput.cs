@@ -259,6 +259,8 @@ public class ComboInput : MonoBehaviour
         }
         else
         {
+            comboUI.comboUIParent.SetActive(false);
+
             comboUI.ShowCancel();
             UnityEngine.Debug.Log("Combo Cancelled");
         }
@@ -266,6 +268,8 @@ public class ComboInput : MonoBehaviour
         timer.GetComponent<ComboTimer>().ResetTimer();
 
         yield return new WaitForSeconds(1.0f);
+
+        comboUI.comboUIParent.SetActive(true);
 
         RestartCombo();
     }

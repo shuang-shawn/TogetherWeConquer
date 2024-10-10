@@ -465,6 +465,7 @@ MonoBehaviour:
   - {fileID: 3389720553634140654, guid: da130605ba298c140867d3031c9dd9ab, type: 3}
   - {fileID: 3389720553634140654, guid: 1c7b486423136c84cb2344bec7f56524, type: 3}
   - {fileID: 3389720553634140654, guid: cf805278d4e7bfc4abee1a5a876c81b6, type: 3}
+  - {fileID: 3389720553634140654, guid: ef2259f6bf38f2d4dbf83f5fed212025, type: 3}
   comboUIParent: {fileID: 4603445359747606199}
   scoreUIParent: {fileID: 1026036645796278349}
   shake: {fileID: 0}
