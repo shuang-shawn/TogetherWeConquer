@@ -195,21 +195,24 @@ public class ComboInput : MonoBehaviour
         KeyCode inputKey = GetKeyFromContext(context);
         Debug.Log(inputKey);
         comboData.lastKeyPressed = inputKey;
-        if (inputKey == comboData.currentCombo[comboData.currentSequenceIndex])
+        if (comboData.currentSequenceIndex < comboData.currentCombo.Count)
         {
-            comboData.mistakeOrder.Add("Correct");
-            Debug.Log("Correct Input");
-            comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
+            if (inputKey == comboData.currentCombo[comboData.currentSequenceIndex])
+            {
+                comboData.mistakeOrder.Add("Correct");
+                Debug.Log("Correct Input");
+                comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
+            }
+            else
+            {
+                Debug.Log("Incorrect Input");
+                comboData.mistakeCount++;
+                comboData.mistakeKeysPressed.Add(inputKey);
+                comboData.mistakeOrder.Add("Incorrect");
+                comboUI.UpdateArrow(comboData.currentSequenceIndex, false);
+            }
+            comboData.currentSequenceIndex++;
         }
-        else
-        {
-            Debug.Log("Incorrect Input");
-            comboData.mistakeCount++;
-            comboData.mistakeKeysPressed.Add(inputKey);
-            comboData.mistakeOrder.Add("Incorrect");
-            comboUI.UpdateArrow(comboData.currentSequenceIndex, false);
-        }
-        comboData.currentSequenceIndex++;
         if (comboData.currentSequenceIndex >= comboData.currentCombo.Count)
         {
             StartCoroutine(Scoring());
