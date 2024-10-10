@@ -33,6 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 163699903084069539}
   - {fileID: 4353020639416375401}
+  - {fileID: 4316262862025198120}
   m_Father: {fileID: 4088919656228118061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -103,6 +104,83 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &1026036645796278349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4316262862025198120}
+  - component: {fileID: 4599474693492848754}
+  - component: {fileID: 6049907654578253545}
+  m_Layer: 5
+  m_Name: ScoreUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4316262862025198120
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026036645796278349}
+  m_LocalRotation: {x: -0, y: -0, z: -0.08715578, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3761426528758450555}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 200, y: 150}
+  m_SizeDelta: {x: 0, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4599474693492848754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026036645796278349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 7
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &6049907654578253545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026036645796278349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 1
+  m_VerticalFit: 0
 --- !u!1 &1592294940055090233
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +414,7 @@ MonoBehaviour:
   playerControls: {fileID: -944628639613478452, guid: 7dee962c77266344f9133841f616f6c3,
     type: 3}
   timer: {fileID: 4755752813063710339}
+  duoComboManager: {fileID: 0}
 --- !u!114 &2146291468075380449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +436,11 @@ MonoBehaviour:
   mistakeKeysPressed: 
   mistakeCount: 0
   mistakeOrder: []
+  isAbrupt: 0
   timerVal: 0
+  duoToggle: 0
+  isInDuoCombo: 0
+  isInputEnabled: 1
 --- !u!114 &7311925358895068241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +458,13 @@ MonoBehaviour:
   - {fileID: 3389720553634140654, guid: acff69e92c3da4b4fbe2389129880a88, type: 3}
   - {fileID: 1845979064856681964, guid: e796e726f469b3844a3c1eb5d151b9b6, type: 3}
   - {fileID: 4732216928512118712, guid: 1a5924da52352d84b9eb06aebb5b49bf, type: 3}
+  scores:
+  - {fileID: 3389720553634140654, guid: da130605ba298c140867d3031c9dd9ab, type: 3}
+  - {fileID: 3389720553634140654, guid: 1c7b486423136c84cb2344bec7f56524, type: 3}
+  - {fileID: 3389720553634140654, guid: cf805278d4e7bfc4abee1a5a876c81b6, type: 3}
   comboUIParent: {fileID: 4603445359747606199}
+  scoreUIParent: {fileID: 1026036645796278349}
+  shake: {fileID: 0}
   correctColor: {r: 0, g: 1, b: 0, a: 1}
   incorrectColor: {r: 1, g: 0, b: 0, a: 1}
   currentComboUI: []

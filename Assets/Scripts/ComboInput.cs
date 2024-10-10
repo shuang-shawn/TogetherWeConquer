@@ -211,12 +211,15 @@ public class ComboInput : MonoBehaviour
                 comboData.mistakeOrder.Add("Incorrect");
                 comboUI.UpdateArrow(comboData.currentSequenceIndex, false);
             }
-            comboData.currentSequenceIndex++;
         }
-        if (comboData.currentSequenceIndex >= comboData.currentCombo.Count)
+
+        comboData.currentSequenceIndex++;
+
+        if (comboData.currentSequenceIndex == comboData.currentCombo.Count)
         {
             StartCoroutine(Scoring());
         }
+
     }
 
     private IEnumerator Scoring()

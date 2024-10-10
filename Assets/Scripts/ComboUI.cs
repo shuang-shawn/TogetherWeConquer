@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class ComboUI : MonoBehaviour
 {
     public GameObject[] arrowImages;
+    public GameObject[] scores;
     public GameObject comboUIParent;
+    public GameObject scoreUIParent;
     public ComboUIFX shake;
 
     public Color correctColor = Color.green;
@@ -68,20 +70,27 @@ public class ComboUI : MonoBehaviour
 
     public void ShowScore(int mistakeCount, int totalKeys)
     {
-        float ratio = mistakeCount / totalKeys;
+        GameObject score = null;
+        float ratio = (float)mistakeCount / totalKeys;
+        Debug.Log(ratio);
 
         if (mistakeCount <= 0)
         {
+            score = Instantiate(scores[0], scoreUIParent.transform);
             Debug.Log("Perfect!");
         }
         else if (ratio < 0.5f)
         {
+            score = Instantiate(scores[1], scoreUIParent.transform);
             Debug.Log("Good");
         }
         else
         {
+            score = Instantiate(scores[2], scoreUIParent.transform);
             Debug.Log("Fail");
         }
+
+        currentComboUI?.Add(score);
     }
 
     public void ResetUI()
@@ -89,6 +98,11 @@ public class ComboUI : MonoBehaviour
         currentComboUI.Clear();
         // Destroy all child objects of comboUIParent
         foreach (Transform child in comboUIParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in scoreUIParent.transform)
         {
             Destroy(child.gameObject);
         }
