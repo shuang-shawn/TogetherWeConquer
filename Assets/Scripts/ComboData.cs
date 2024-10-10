@@ -8,10 +8,20 @@ public class ComboData : MonoBehaviour
     // Static Combo List
     public List<List<KeyCode>> comboList = new List<List<KeyCode>>()
     {
-        new List<KeyCode> { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow },
+        new List<KeyCode> { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.RightArrow},
         new List<KeyCode> { KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow },
         new List<KeyCode> { KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow },
         new List<KeyCode> { KeyCode.LeftArrow, KeyCode.LeftArrow, KeyCode.LeftArrow, KeyCode.LeftArrow },
+        new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }
+    };
+
+    // Static Combo List
+    public List<List<KeyCode>> duoComboList = new List<List<KeyCode>>()
+    {
+        new List<KeyCode> { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow },
+        new List<KeyCode> { KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow },
+        new List<KeyCode> { KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow },
+        new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow },
         new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }
     };
 
@@ -40,8 +50,20 @@ public class ComboData : MonoBehaviour
     /** Tracks the position of mistakes in the current combo. **/
     public List<string> mistakeOrder;
 
+    /** Indicates if combo was ended abrupting (Ex. cancel, time ran out) **/
+    public bool isAbrupt;
+
     /** Combo timer. **/
     public float timerVal;
+
+    /** Toggle whether a player is in duo combo selection mode. **/
+    public bool duoToggle = false;
+
+    /** Indicates whether a player is currently in a duo combo state. **/
+    public bool isInDuoCombo;
+
+    /** Enables whether a player can input combos keys.  **/
+    public bool isInputEnabled = true;
 
     void PrintSummary()
     {
@@ -68,5 +90,8 @@ public class ComboData : MonoBehaviour
         mistakeKeysPressed = new List<KeyCode>();
         mistakeCount = 0;
         mistakeOrder.Clear();
+        timerVal = 0;
+        isAbrupt = false;
+        
     }
 }

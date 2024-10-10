@@ -174,6 +174,9 @@ MonoBehaviour:
   mistakeCount: 0
   mistakeOrder: []
   timerVal: 0
+  duoToggle: 0
+  isInDuoCombo: 0
+  isInputEnabled: 1
 --- !u!114 &1624193989433774667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +291,7 @@ GameObject:
   - component: {fileID: 1037317699132644804}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
