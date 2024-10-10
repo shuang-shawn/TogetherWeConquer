@@ -91,6 +91,8 @@ public class ComboUI : MonoBehaviour
         }
 
         currentComboUI?.Add(score);
+
+        shake.TriggerShake(score.GetComponent<Image>());
     }
 
     public void ResetUI()
