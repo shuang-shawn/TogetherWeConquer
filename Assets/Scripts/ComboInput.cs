@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -123,7 +124,7 @@ public class ComboInput : MonoBehaviour
         {
             if (combo[0] == comboData.firstInput && combo[1] == comboData.secondInput)
             {
-                Debug.Log("Matching Combo" + string.Join(", ", combo));
+                UnityEngine.Debug.Log("Matching Combo" + string.Join(", ", combo));
                 if (comboData.duoToggle)
                 {
                     if (!duoComboManager.IsOtherPlayerInSoloCombo(transform.parent.gameObject)) {
@@ -143,7 +144,7 @@ public class ComboInput : MonoBehaviour
         {
             comboData.firstInput = KeyCode.None;
             comboData.secondInput = KeyCode.None;
-            Debug.Log("No matching combo");
+            UnityEngine.Debug.Log("No matching combo");
         }
     }
 
@@ -179,7 +180,7 @@ public class ComboInput : MonoBehaviour
 
     public void StartTimer(float remainingTime)
     {
-        Debug.Log(comboData.isInDuoCombo);
+        UnityEngine.Debug.Log(comboData.isInDuoCombo);
 
         if (comboData.isInDuoCombo)
         {
@@ -216,19 +217,19 @@ public class ComboInput : MonoBehaviour
         }
         // Determine the current input
         KeyCode inputKey = GetKeyFromContext(context);
-        Debug.Log(inputKey);
+        UnityEngine.Debug.Log(inputKey);
         comboData.lastKeyPressed = inputKey;
         if (comboData.currentSequenceIndex < comboData.currentCombo.Count)
         {
             if (inputKey == comboData.currentCombo[comboData.currentSequenceIndex])
             {
                 comboData.mistakeOrder.Add("Correct");
-                Debug.Log("Correct Input");
+                UnityEngine.Debug.Log("Correct Input");
                 comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
             }
             else
             {
-                Debug.Log("Incorrect Input");
+                UnityEngine.Debug.Log("Incorrect Input");
                 comboData.mistakeCount++;
                 comboData.mistakeKeysPressed.Add(inputKey);
                 comboData.mistakeOrder.Add("Incorrect");
@@ -240,7 +241,7 @@ public class ComboInput : MonoBehaviour
 
         if (comboData.currentSequenceIndex == comboData.currentCombo.Count)
         {
-            StartCoroutine(Scoring());
+            StartCoroutine(Scoring(true));
             if (comboData.isInDuoCombo)
             {
                 duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
@@ -249,10 +250,18 @@ public class ComboInput : MonoBehaviour
 
     }
 
-    private IEnumerator Scoring()
+    private IEnumerator Scoring(bool isComplete)
     {
-        comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
-        Debug.Log("Combo Completed");
+        if (isComplete)
+        {
+            comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
+            UnityEngine.Debug.Log("Combo Completed");
+        }
+        else
+        {
+            comboUI.ShowCancel();
+            UnityEngine.Debug.Log("Combo Cancelled");
+        }
 
         timer.GetComponent<ComboTimer>().ResetTimer();
 
@@ -267,19 +276,20 @@ public class ComboInput : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Combo Canceled");
+        UnityEngine.Debug.Log("Combo Canceled");
         comboData.isAbrupt = true;
         timer.GetComponent<ComboTimer>().ResetTimer();
         if (comboData.isInDuoCombo)
         {
             duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
         }
-        RestartCombo();
+
+        StartCoroutine(Scoring(false));
     }
 
     private void ComboTimerExpired()
     {
-        Debug.Log("Ran out of time");
+        UnityEngine.Debug.Log("Ran out of time");
         comboData.isAbrupt = true;
         if (comboData.isInDuoCombo)
         {

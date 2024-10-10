@@ -22,6 +22,7 @@ public class ComboUI : MonoBehaviour
     {
         shake = GameObject.FindGameObjectWithTag("FXManager").GetComponent<ComboUIFX>();
     }
+
     public void InitializeUI(List<KeyCode> combo, int comboIndex)
     {
         foreach (KeyCode key in combo)
@@ -93,6 +94,15 @@ public class ComboUI : MonoBehaviour
         currentComboUI?.Add(score);
 
         shake.TriggerShake(score.GetComponent<Image>());
+    }
+
+    public void ShowCancel()
+    {
+        GameObject cancel = Instantiate(scores[3], scoreUIParent.transform);
+
+        currentComboUI?.Add(cancel);
+
+        shake.TriggerShake(cancel.GetComponent<Image>());
     }
 
     public void ResetUI()
