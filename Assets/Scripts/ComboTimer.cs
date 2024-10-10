@@ -14,18 +14,13 @@ public class ComboTimer : MonoBehaviour
 
     private void Start()
     {
-        //Initialize the timer to the maximum value
-        timeLeft = maxTime;
-
-        //Set slider value to full
-        timer.value = 1.0f;
-
+        timer.value = timeLeft / maxTime;
     }
 
-    public void InitializeTimer(float maxTimeLimit)
+    public void InitializeTimer(float maxTimeLimit, float remaining)
     {
         maxTime = maxTimeLimit;
-        timeLeft = maxTimeLimit;
+        timeLeft = remaining;
         gameObject.SetActive(true);
         isRunning = true;
     }
@@ -51,8 +46,6 @@ public class ComboTimer : MonoBehaviour
 
     public void ResetTimer()
     {
-        timeLeft = maxTime;
-        timer.value = 1.0f;
         gameObject.SetActive(false);
         isRunning = false;
     }

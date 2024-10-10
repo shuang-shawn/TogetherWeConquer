@@ -163,13 +163,13 @@ public class ComboInput : MonoBehaviour
         if (startedCombo)
         {
             comboData.mistakeOrder.AddRange(new[] { "Correct", "Correct" });
-            StartTimer(30);
+            StartTimer(30, 30);
         } 
     }
 
-    public void StartTimer(float time)
+    public void StartTimer(float totalTime, float remainingTime)
     {
-        StartCoroutine(StartCountdown(time));
+        StartCoroutine(StartCountdown(totalTime, remainingTime));
     }
 
     public void RestartCombo()
@@ -258,10 +258,10 @@ public class ComboInput : MonoBehaviour
         comboData.isAbrupt = true;
         RestartCombo();
     }
-    public IEnumerator StartCountdown(float countdownValue) // 7 seconds
+    public IEnumerator StartCountdown(float countdownValue, float remainingTime) // 7 seconds
     {
         comboData.timerVal = countdownValue;
-        timer.GetComponent<ComboTimer>().InitializeTimer(countdownValue);
+        timer.GetComponent<ComboTimer>().InitializeTimer(countdownValue, remainingTime);
         while (comboData.timerVal > 0)
         {
             yield return new WaitForSeconds(1.0f);
