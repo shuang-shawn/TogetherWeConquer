@@ -35,15 +35,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""ComboP1"",
-                    ""type"": ""Button"",
-                    ""id"": ""f2c1b3b2-9e81-4ff3-a87a-f0effaf150ba"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,17 +101,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MovementP1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""40716fae-4599-4a1f-a4f0-5534b9e54b73"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboP1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -301,6 +281,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DuoToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""3cba431b-00e7-415c-bee4-be8b2d69a917"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,11 +340,22 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cac36989-1826-4235-aa4e-f59f513e299a"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf91f34c-eb1f-45a8-b055-c33beb230267"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DuoToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -405,6 +405,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""04ac6415-dea3-4b6e-b54e-de324acf5377"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DuoToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""71e2f1aa-2889-436c-9078-79838e60fd67"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -466,6 +475,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c5a1dce-6f47-4b9f-9db1-eea36a9c4706"",
+                    ""path"": ""<Keyboard>/numpad9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DuoToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -475,7 +495,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_MovementP1 = m_Player1.FindAction("MovementP1", throwIfNotFound: true);
-        m_Player1_ComboP1 = m_Player1.FindAction("ComboP1", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_MovementP2 = m_Player2.FindAction("MovementP2", throwIfNotFound: true);
@@ -486,6 +505,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_ComboP1_Left = m_ComboP1.FindAction("Left", throwIfNotFound: true);
         m_ComboP1_Right = m_ComboP1.FindAction("Right", throwIfNotFound: true);
         m_ComboP1_Cancel = m_ComboP1.FindAction("Cancel", throwIfNotFound: true);
+        m_ComboP1_DuoToggle = m_ComboP1.FindAction("DuoToggle", throwIfNotFound: true);
         // ComboP2
         m_ComboP2 = asset.FindActionMap("ComboP2", throwIfNotFound: true);
         m_ComboP2_Up = m_ComboP2.FindAction("Up", throwIfNotFound: true);
@@ -493,6 +513,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_ComboP2_Left = m_ComboP2.FindAction("Left", throwIfNotFound: true);
         m_ComboP2_Right = m_ComboP2.FindAction("Right", throwIfNotFound: true);
         m_ComboP2_Cancel = m_ComboP2.FindAction("Cancel", throwIfNotFound: true);
+        m_ComboP2_DuoToggle = m_ComboP2.FindAction("DuoToggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -555,13 +576,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player1;
     private List<IPlayer1Actions> m_Player1ActionsCallbackInterfaces = new List<IPlayer1Actions>();
     private readonly InputAction m_Player1_MovementP1;
-    private readonly InputAction m_Player1_ComboP1;
     public struct Player1Actions
     {
         private @InputActions m_Wrapper;
         public Player1Actions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @MovementP1 => m_Wrapper.m_Player1_MovementP1;
-        public InputAction @ComboP1 => m_Wrapper.m_Player1_ComboP1;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -574,9 +593,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MovementP1.started += instance.OnMovementP1;
             @MovementP1.performed += instance.OnMovementP1;
             @MovementP1.canceled += instance.OnMovementP1;
-            @ComboP1.started += instance.OnComboP1;
-            @ComboP1.performed += instance.OnComboP1;
-            @ComboP1.canceled += instance.OnComboP1;
         }
 
         private void UnregisterCallbacks(IPlayer1Actions instance)
@@ -584,9 +600,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MovementP1.started -= instance.OnMovementP1;
             @MovementP1.performed -= instance.OnMovementP1;
             @MovementP1.canceled -= instance.OnMovementP1;
-            @ComboP1.started -= instance.OnComboP1;
-            @ComboP1.performed -= instance.OnComboP1;
-            @ComboP1.canceled -= instance.OnComboP1;
         }
 
         public void RemoveCallbacks(IPlayer1Actions instance)
@@ -659,6 +672,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_ComboP1_Left;
     private readonly InputAction m_ComboP1_Right;
     private readonly InputAction m_ComboP1_Cancel;
+    private readonly InputAction m_ComboP1_DuoToggle;
     public struct ComboP1Actions
     {
         private @InputActions m_Wrapper;
@@ -668,6 +682,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Left => m_Wrapper.m_ComboP1_Left;
         public InputAction @Right => m_Wrapper.m_ComboP1_Right;
         public InputAction @Cancel => m_Wrapper.m_ComboP1_Cancel;
+        public InputAction @DuoToggle => m_Wrapper.m_ComboP1_DuoToggle;
         public InputActionMap Get() { return m_Wrapper.m_ComboP1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -692,6 +707,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @DuoToggle.started += instance.OnDuoToggle;
+            @DuoToggle.performed += instance.OnDuoToggle;
+            @DuoToggle.canceled += instance.OnDuoToggle;
         }
 
         private void UnregisterCallbacks(IComboP1Actions instance)
@@ -711,6 +729,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @DuoToggle.started -= instance.OnDuoToggle;
+            @DuoToggle.performed -= instance.OnDuoToggle;
+            @DuoToggle.canceled -= instance.OnDuoToggle;
         }
 
         public void RemoveCallbacks(IComboP1Actions instance)
@@ -737,6 +758,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_ComboP2_Left;
     private readonly InputAction m_ComboP2_Right;
     private readonly InputAction m_ComboP2_Cancel;
+    private readonly InputAction m_ComboP2_DuoToggle;
     public struct ComboP2Actions
     {
         private @InputActions m_Wrapper;
@@ -746,6 +768,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Left => m_Wrapper.m_ComboP2_Left;
         public InputAction @Right => m_Wrapper.m_ComboP2_Right;
         public InputAction @Cancel => m_Wrapper.m_ComboP2_Cancel;
+        public InputAction @DuoToggle => m_Wrapper.m_ComboP2_DuoToggle;
         public InputActionMap Get() { return m_Wrapper.m_ComboP2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -770,6 +793,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @DuoToggle.started += instance.OnDuoToggle;
+            @DuoToggle.performed += instance.OnDuoToggle;
+            @DuoToggle.canceled += instance.OnDuoToggle;
         }
 
         private void UnregisterCallbacks(IComboP2Actions instance)
@@ -789,6 +815,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @DuoToggle.started -= instance.OnDuoToggle;
+            @DuoToggle.performed -= instance.OnDuoToggle;
+            @DuoToggle.canceled -= instance.OnDuoToggle;
         }
 
         public void RemoveCallbacks(IComboP2Actions instance)
@@ -809,7 +838,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IPlayer1Actions
     {
         void OnMovementP1(InputAction.CallbackContext context);
-        void OnComboP1(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {
@@ -822,6 +850,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnDuoToggle(InputAction.CallbackContext context);
     }
     public interface IComboP2Actions
     {
@@ -830,5 +859,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnDuoToggle(InputAction.CallbackContext context);
     }
 }

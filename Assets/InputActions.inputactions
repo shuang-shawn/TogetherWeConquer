@@ -13,15 +13,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "ComboP1",
-                    "type": "Button",
-                    "id": "f2c1b3b2-9e81-4ff3-a87a-f0effaf150ba",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -88,17 +79,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "MovementP1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "40716fae-4599-4a1f-a4f0-5534b9e54b73",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ComboP1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -279,6 +259,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DuoToggle",
+                    "type": "Button",
+                    "id": "3cba431b-00e7-415c-bee4-be8b2d69a917",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -329,11 +318,22 @@
                 {
                     "name": "",
                     "id": "cac36989-1826-4235-aa4e-f59f513e299a",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf91f34c-eb1f-45a8-b055-c33beb230267",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DuoToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -383,6 +383,15 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "04ac6415-dea3-4b6e-b54e-de324acf5377",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DuoToggle",
+                    "type": "Button",
+                    "id": "71e2f1aa-2889-436c-9078-79838e60fd67",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -442,6 +451,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c5a1dce-6f47-4b9f-9db1-eea36a9c4706",
+                    "path": "<Keyboard>/numpad9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DuoToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
