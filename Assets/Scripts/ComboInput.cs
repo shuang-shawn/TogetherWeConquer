@@ -177,7 +177,6 @@ public class ComboInput : MonoBehaviour
         comboData.ResetData();
         comboUI.ResetUI();
         StopAllCoroutines();
-        timer.GetComponent<ComboTimer>().ResetTimer();
         up.performed -= ComboSequence;
         down.performed -= ComboSequence;
         left.performed -= ComboSequence;
@@ -235,6 +234,8 @@ public class ComboInput : MonoBehaviour
     {
         comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
         Debug.Log("Combo Completed");
+
+        timer.GetComponent<ComboTimer>().ResetTimer();
 
         yield return new WaitForSeconds(1.0f);
 
