@@ -414,6 +414,8 @@ MonoBehaviour:
   playerControls: {fileID: -944628639613478452, guid: 7dee962c77266344f9133841f616f6c3,
     type: 3}
   timer: {fileID: 4755752813063710339}
+  duoComboTime: 10
+  comboTime: 5
   duoComboManager: {fileID: 0}
 --- !u!114 &2146291468075380449
 MonoBehaviour:

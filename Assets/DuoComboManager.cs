@@ -41,7 +41,7 @@ public class DuoComboManager : MonoBehaviour
         {
             startedCombo.ToggleInput(false);
             endingCombo.ToggleInput(true);
-            endingCombo.StartTimer(30, remainingTime);
+            endingCombo.StartTimer(remainingTime);
             return;
         }
         else if (player == startedCombo.transform.parent.gameObject && abrupt)

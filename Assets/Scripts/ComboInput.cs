@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class ComboInput : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ComboInput : MonoBehaviour
     ComboData comboData;
     ComboUI comboUI;
     public GameObject timer;
+    public float duoComboTime;
+    public float comboTime;
 
     //public GameObject otherPlayer;
     public DuoComboManager duoComboManager;
@@ -163,13 +166,29 @@ public class ComboInput : MonoBehaviour
         if (startedCombo)
         {
             comboData.mistakeOrder.AddRange(new[] { "Correct", "Correct" });
-            StartTimer(30, 30);
+            if (comboData.isInDuoCombo)
+            {
+                StartTimer(duoComboTime);
+            }
+            else
+            {
+                StartTimer(comboTime);
+            }
         } 
     }
 
-    public void StartTimer(float totalTime, float remainingTime)
+    public void StartTimer(float remainingTime)
     {
-        StartCoroutine(StartCountdown(totalTime, remainingTime));
+        Debug.Log(comboData.isInDuoCombo);
+
+        if (comboData.isInDuoCombo)
+        {
+            StartCoroutine(StartCountdown(duoComboTime, remainingTime));
+        }
+        else
+        {
+            StartCoroutine(StartCountdown(comboTime, remainingTime));
+        }
     }
 
     public void RestartCombo()
