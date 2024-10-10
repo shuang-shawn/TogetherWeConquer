@@ -174,10 +174,6 @@ public class ComboInput : MonoBehaviour
 
     public void RestartCombo()
     {
-        if (comboData.isInDuoCombo)
-        {
-            duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
-        }
         comboData.ResetData();
         comboUI.ResetUI();
         StopAllCoroutines();
@@ -227,6 +223,10 @@ public class ComboInput : MonoBehaviour
         if (comboData.currentSequenceIndex == comboData.currentCombo.Count)
         {
             StartCoroutine(Scoring());
+            if (comboData.isInDuoCombo)
+            {
+                duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
+            }
         }
 
     }
@@ -238,7 +238,7 @@ public class ComboInput : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        RestartCombo();
+        RestartCombo(); // Fix
     }
 
     private void CancelCombo(InputAction.CallbackContext context)
