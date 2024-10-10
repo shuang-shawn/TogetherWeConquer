@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ComboUI : MonoBehaviour
 {
     public GameObject[] arrowImages;
     public GameObject comboUIParent;
+    public ComboUIFX shake;
 
     public Color correctColor = Color.green;
     public Color incorrectColor = Color.red;
@@ -54,6 +57,26 @@ public class ComboUI : MonoBehaviour
         } else
         {
             currentComboUI[currentSequenceIndex].GetComponent<Image>().color = incorrectColor; // If Wrong Input
+        }
+
+        shake.TriggerShake(currentComboUI[currentSequenceIndex].GetComponent<Image>());
+    }
+
+    public void ShowScore(int mistakeCount, int totalKeys)
+    {
+        float ratio = mistakeCount / totalKeys;
+
+        if (mistakeCount <= 0)
+        {
+            Debug.Log("Perfect!");
+        }
+        else if (ratio < 0.5f)
+        {
+            Debug.Log("Good");
+        }
+        else
+        {
+            Debug.Log("Fail");
         }
     }
 

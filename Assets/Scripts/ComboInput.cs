@@ -26,7 +26,8 @@ public class ComboInput : MonoBehaviour
         if (transform.parent.gameObject.name.Equals("Player1"))
         {
             actionMap = playerControls.FindActionMap("ComboP1");
-        } else if (transform.parent.gameObject.name.Equals("Player2"))
+        } 
+        else if (transform.parent.gameObject.name.Equals("Player2"))
         {
             actionMap = playerControls.FindActionMap("ComboP2");
         }
@@ -73,16 +74,16 @@ public class ComboInput : MonoBehaviour
     // Checks if first 2 inputs match any combos that start off with the 2 inputs
     void CheckInitialInput(InputAction.CallbackContext context)
     {
-            KeyCode inputKey = GetKeyFromContext(context);
-            if (comboData.firstInput == KeyCode.None)
-            {
-                comboData.firstInput = inputKey;
-            }
-            else if (comboData.secondInput == KeyCode.None)
-            {
-                comboData.secondInput = inputKey;
-                CheckComboList();
-            }
+        KeyCode inputKey = GetKeyFromContext(context);
+        if (comboData.firstInput == KeyCode.None)
+        {
+            comboData.firstInput = inputKey;
+        }
+        else if (comboData.secondInput == KeyCode.None)
+        {
+            comboData.secondInput = inputKey;
+            CheckComboList();
+        }
     }
 
     public void CheckComboList()
@@ -149,30 +150,39 @@ public class ComboInput : MonoBehaviour
 
     private void ComboSequence(InputAction.CallbackContext context)
     {
-            // Determine the current input
-            KeyCode inputKey = GetKeyFromContext(context);
-            Debug.Log(inputKey);
-            comboData.lastKeyPressed = inputKey;
-            if (inputKey == comboData.currentCombo[comboData.currentSequenceIndex])
-            {
-                comboData.mistakeOrder.Add("Correct");
-                Debug.Log("Correct Input");
+        // Determine the current input
+        KeyCode inputKey = GetKeyFromContext(context);
+        Debug.Log(inputKey);
+        comboData.lastKeyPressed = inputKey;
+        if (inputKey == comboData.currentCombo[comboData.currentSequenceIndex])
+        {
+            comboData.mistakeOrder.Add("Correct");
+            Debug.Log("Correct Input");
             comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
-            }
-            else
-            {
+        }
+        else
+        {
             Debug.Log("Incorrect Input");
-                comboData.mistakeCount++;
-                comboData.mistakeKeysPressed.Add(inputKey);
-                comboData.mistakeOrder.Add("Incorrect");
+            comboData.mistakeCount++;
+            comboData.mistakeKeysPressed.Add(inputKey);
+            comboData.mistakeOrder.Add("Incorrect");
             comboUI.UpdateArrow(comboData.currentSequenceIndex, false);
         }
-            comboData.currentSequenceIndex++;
+        comboData.currentSequenceIndex++;
         if (comboData.currentSequenceIndex >= comboData.currentCombo.Count)
         {
-            Debug.Log("Combo Completed");
-            RestartCombo();
+            StartCoroutine(Scoring());
         }
+    }
+
+    private IEnumerator Scoring()
+    {
+        comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
+        Debug.Log("Combo Completed");
+
+        yield return new WaitForSeconds(1.0f);
+
+        RestartCombo();
     }
 
     private void CancelCombo(InputAction.CallbackContext context)
