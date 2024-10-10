@@ -12,10 +12,15 @@ public class PlayerMovement:MonoBehaviour
     public float movementSpeed = 5f;
     public int playerNo = 1;
 
+    private SpriteRenderer sr;
+    private Animator animator;
+
     Rigidbody rb;
 
     private void Awake()
     {
+        sr = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>(); //get rigidbody, responsible for enabling collision with other colliders
         inputActions = new InputActions(); //create new InputActions
     }
@@ -51,6 +56,14 @@ public class PlayerMovement:MonoBehaviour
         Vector3 v3P1 = new Vector3(v2P1.x, 0, v2P1.y); //convert to 3d space
 
         //transform.Translate(v3); //moves transform, ignoring physics
+
+        animator.SetFloat("XInput", v3P1.x);
+        animator.SetFloat("ZInput", v3P1.z);
+        if (v3P1.x < 0) {
+            sr.flipX = true;
+        } else if (v3P1.x > 0) {
+            sr.flipX = false;
+        }
         rb.velocity = v3P1 *movementSpeed;
         // rb.AddForce(v3P1, ForceMode.VelocityChange); //apply instant physics force, ignoring mass
 
