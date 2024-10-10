@@ -258,7 +258,7 @@ public class ComboInput : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        RestartCombo(); // Fix
+        RestartCombo();
     }
 
     private void CancelCombo(InputAction.CallbackContext context)
@@ -269,6 +269,11 @@ public class ComboInput : MonoBehaviour
         }
         Debug.Log("Combo Canceled");
         comboData.isAbrupt = true;
+        timer.GetComponent<ComboTimer>().ResetTimer();
+        if (comboData.isInDuoCombo)
+        {
+            duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
+        }
         RestartCombo();
     }
 
@@ -276,6 +281,10 @@ public class ComboInput : MonoBehaviour
     {
         Debug.Log("Ran out of time");
         comboData.isAbrupt = true;
+        if (comboData.isInDuoCombo)
+        {
+            duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
+        }
         RestartCombo();
     }
     public IEnumerator StartCountdown(float countdownValue, float remainingTime) // 7 seconds
