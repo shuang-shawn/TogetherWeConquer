@@ -8,12 +8,47 @@ public class DuoComboManager : MonoBehaviour
     public GameObject player2;
     public ComboInput startedCombo;
     public ComboInput endingCombo;
-    //public bool 
+
     private void Start()
     {
         FindPlayers();
     }
     public void StartDuoCombo(List<KeyCode> combo, GameObject player)
+    {
+        AssignPlayerOrder(player);
+        startedCombo.IsInDuoCombo(true);
+        endingCombo.IsInDuoCombo(true);
+        var (firstHalf, secondHalf) = SplitCombo(combo);
+        startedCombo.StartCombo(firstHalf, true);
+        endingCombo.ToggleInput(false);
+        endingCombo.StartCombo(secondHalf, false);
+    }
+
+    public void CompletedHalf(GameObject player, float remainingTime, bool abrupt)
+    {
+        if (player == startedCombo.transform.parent.gameObject && !abrupt)
+        {
+            startedCombo.ToggleInput(false);
+            endingCombo.ToggleInput(true);
+            endingCombo.StartTimer(remainingTime);
+            return;
+        }
+        else if (player == startedCombo.transform.parent.gameObject && abrupt)
+        {
+            endingCombo.RestartCombo();
+        }
+        startedCombo.ToggleInput(true);
+        endingCombo.ToggleInput(true);
+        startedCombo.IsInDuoCombo(false);
+        endingCombo.IsInDuoCombo(false);
+    }
+    private void FindPlayers()
+    {
+        player1 = GameObject.FindGameObjectWithTag("Player1");
+        player2 = GameObject.FindGameObjectWithTag("Player2");
+    }
+
+    private void AssignPlayerOrder(GameObject player)
     {
         // Check which player initiated the combo
         if (player == player1)
@@ -28,34 +63,6 @@ public class DuoComboManager : MonoBehaviour
             endingCombo = player1?.GetComponentInChildren<ComboInput>();
             Debug.Log("Player 2 initiated the combo!");
         }
-        startedCombo.IsInDuoCombo(true);
-        endingCombo.IsInDuoCombo(true);
-        var (firstHalf, secondHalf) = SplitCombo(combo);
-        startedCombo.StartCombo(firstHalf, true);
-        endingCombo.ToggleInput(false);
-        endingCombo.StartCombo(secondHalf, false);
-    }
-
-    public void CompletedHalf(GameObject player, float remainingTime)
-    {
-        if (player == startedCombo.transform.parent.gameObject)
-        {
-            startedCombo.ToggleInput(false);
-            endingCombo.ToggleInput(true);
-            endingCombo.StartTimer(remainingTime);
-        }
-        else if (player == endingCombo.transform.parent.gameObject)
-        {
-            startedCombo.ToggleInput(true);
-            endingCombo.ToggleInput(true);
-            startedCombo.IsInDuoCombo(false);
-            endingCombo.IsInDuoCombo(false);
-        }
-    }
-    private void FindPlayers()
-    {
-        player1 = GameObject.FindGameObjectWithTag("Player1");
-        player2 = GameObject.FindGameObjectWithTag("Player2");
     }
 
     // Utility function that splits combo into two halves

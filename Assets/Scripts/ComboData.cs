@@ -50,13 +50,19 @@ public class ComboData : MonoBehaviour
     /** Tracks the position of mistakes in the current combo. **/
     public List<string> mistakeOrder;
 
+    /** Indicates if combo was ended abrupting (Ex. cancel, time ran out) **/
+    public bool isAbrupt;
+
     /** Combo timer. **/
     public float timerVal;
 
+    /** Toggle whether a player is in duo combo selection mode. **/
     public bool duoToggle = false;
 
+    /** Indicates whether a player is currently in a duo combo state. **/
     public bool isInDuoCombo;
 
+    /** Enables whether a player can input combos keys.  **/
     public bool isInputEnabled = true;
 
     void PrintSummary()
@@ -84,5 +90,8 @@ public class ComboData : MonoBehaviour
         mistakeKeysPressed = new List<KeyCode>();
         mistakeCount = 0;
         mistakeOrder.Clear();
+        timerVal = 0;
+        isAbrupt = false;
+        
     }
 }

@@ -154,21 +154,20 @@ public class ComboInput : MonoBehaviour
         if (startedCombo)
         {
             comboData.mistakeOrder.AddRange(new[] { "Correct", "Correct" });
-            StartTimer(7);
+            StartTimer(30);
         } 
     }
 
     public void StartTimer(float time)
     {
-       
         StartCoroutine(StartCountdown(time));
     }
 
-    void RestartCombo()
+    public void RestartCombo()
     {
         if (comboData.isInDuoCombo)
         {
-            duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal);
+            duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
         }
         comboData.ResetData();
         comboUI.ResetUI();
@@ -220,13 +219,19 @@ public class ComboInput : MonoBehaviour
 
     private void CancelCombo(InputAction.CallbackContext context)
     {
+        if (!comboData.isInputEnabled)
+        {
+            return;
+        }
         Debug.Log("Combo Canceled");
+        comboData.isAbrupt = true;
         RestartCombo();
     }
 
     private void ComboTimerExpired()
     {
         Debug.Log("Ran out of time");
+        comboData.isAbrupt = true;
         RestartCombo();
     }
     public IEnumerator StartCountdown(float countdownValue) // 7 seconds
@@ -265,7 +270,4 @@ public class ComboInput : MonoBehaviour
 
         return KeyCode.None;
     }
-
-   
-
 }
