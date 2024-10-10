@@ -16,6 +16,10 @@ public class ComboUI : MonoBehaviour
 
     public List<GameObject> currentComboUI = new List<GameObject>();
 
+    private void Start()
+    {
+        shake = GameObject.FindGameObjectWithTag("FXManager").GetComponent<ComboUIFX>();
+    }
     public void InitializeUI(List<KeyCode> combo, int comboIndex)
     {
         foreach (KeyCode key in combo)

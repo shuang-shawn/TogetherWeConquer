@@ -643,6 +643,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1037317699132644804, guid: 0ba2d7ceb5c4338478737e6faafbfa8b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1624193989433774667, guid: 0ba2d7ceb5c4338478737e6faafbfa8b,
         type: 3}
       propertyPath: shake
@@ -711,7 +716,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ba2d7ceb5c4338478737e6faafbfa8b, type: 3}
 --- !u!1 &832575517
@@ -758,6 +762,54 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &852698922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 852698924}
+  - component: {fileID: 852698923}
+  m_Layer: 0
+  m_Name: Duo Combo Manager
+  m_TagString: DuoComboManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &852698923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852698922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e26253eb431c4342a0fb02899fb65d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  startedCombo: {fileID: 0}
+  endingCombo: {fileID: 0}
+--- !u!4 &852698924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852698922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.0285535, y: 0.21066368, z: 1.4496751}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -899,6 +951,11 @@ PrefabInstance:
       propertyPath: shake
       value: 
       objectReference: {fileID: 29487621}
+    - target: {fileID: 8721881254856998211, guid: b4364024a6c88dc4187788636f53d3ed,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9102977279164715253, guid: b4364024a6c88dc4187788636f53d3ed,
         type: 3}
       propertyPath: m_Name
@@ -908,7 +965,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b4364024a6c88dc4187788636f53d3ed, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4364024a6c88dc4187788636f53d3ed, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -923,3 +979,4 @@ SceneRoots:
   - {fileID: 825068169}
   - {fileID: 207877570}
   - {fileID: 29487622}
+  - {fileID: 852698924}

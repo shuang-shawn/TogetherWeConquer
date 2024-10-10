@@ -9,6 +9,7 @@ TagManager:
   - BasicEnemy
   - Player2
   - DuoComboManager
+  - FXManager
   layers:
   - Default
   - TransparentFX
