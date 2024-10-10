@@ -13,6 +13,17 @@ public class DuoComboManager : MonoBehaviour
     {
         FindPlayers();
     }
+    public bool IsOtherPlayerInSoloCombo(GameObject player) 
+    {
+        if (player = player1)
+        {
+            return player2.GetComponentInChildren<ComboInput>().IsInSoloCombo();
+        }
+        else 
+        {
+            return player1.GetComponentInChildren<ComboInput>().IsInSoloCombo();
+        }
+    }
     public void StartDuoCombo(List<KeyCode> combo, GameObject player)
     {
         AssignPlayerOrder(player);
@@ -39,8 +50,6 @@ public class DuoComboManager : MonoBehaviour
         }
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
-        startedCombo.IsInDuoCombo(false);
-        endingCombo.IsInDuoCombo(false);
     }
     private void FindPlayers()
     {

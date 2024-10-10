@@ -59,6 +59,9 @@ public class ComboData : MonoBehaviour
     /** Toggle whether a player is in duo combo selection mode. **/
     public bool duoToggle = false;
 
+    /** Indicates whether a player is currently in a solo combo. **/
+    public bool isInSoloCombo;
+
     /** Indicates whether a player is currently in a duo combo state. **/
     public bool isInDuoCombo;
 
@@ -92,6 +95,8 @@ public class ComboData : MonoBehaviour
         mistakeOrder.Clear();
         timerVal = 0;
         isAbrupt = false;
-        
+        duoToggle = false;
+        isInSoloCombo = false;
+        isInDuoCombo = false;
     }
 }
