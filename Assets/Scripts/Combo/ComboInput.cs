@@ -19,8 +19,10 @@ public class ComboInput : MonoBehaviour
 
     private InputActionMap actionMap;
 
-    ComboData comboData;
+    private ComboData comboData;
+    private ComboList comboList;
     ComboUI comboUI;
+    private ComboWindowUI comboWindowUI;
     public GameObject timer;
     public float duoComboTime;
     public float comboTime;
@@ -38,9 +40,11 @@ public class ComboInput : MonoBehaviour
         cancel = actionMap.FindAction("Cancel");
         duoToggle = actionMap.FindAction("DuoToggle");
         comboData = GetComponent<ComboData>();
+        comboList = GetComponent<ComboList>();
         comboUI = GetComponent<ComboUI>();
 
         duoComboManager = GameObject.FindGameObjectWithTag("DuoComboManager")?.GetComponent<DuoComboManager>();
+        comboWindowUI = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
     }
     private void OnEnable()
     {
@@ -108,10 +112,12 @@ public class ComboInput : MonoBehaviour
         if (comboData.firstInput == KeyCode.None)
         {
             comboData.firstInput = inputKey;
+            comboWindowUI.FilterCombos(inputKey, 0);
         }
         else if (comboData.secondInput == KeyCode.None)
         {
             comboData.secondInput = inputKey;
+            comboWindowUI.FilterCombos(inputKey, 1);
             CheckComboList();
         }
     }
@@ -119,21 +125,21 @@ public class ComboInput : MonoBehaviour
     public void CheckComboList()
     {
         bool foundMatch = false;
-        var comboList = (comboData.duoToggle) ? comboData.duoComboList : comboData.comboList;
-        foreach (var combo in comboList)
+        var selectedComboList = (comboData.duoToggle) ? comboList.duoComboList : comboList.soloComboList;
+        foreach (var combo in selectedComboList)
         {
-            if (combo[0] == comboData.firstInput && combo[1] == comboData.secondInput)
+            if (combo.GetComboSequence()[0] == comboData.firstInput && combo.GetComboSequence()[1] == comboData.secondInput)
             {
                 UnityEngine.Debug.Log("Matching Combo" + string.Join(", ", combo));
                 if (comboData.duoToggle)
                 {
                     if (!duoComboManager.IsOtherPlayerInSoloCombo(transform.parent.gameObject)) {
-                        duoComboManager.StartDuoCombo(combo, transform.parent.gameObject);
+                        duoComboManager.StartDuoCombo(combo.GetComboSequence(), transform.parent.gameObject);
                     }
                     break;
                 } else
                 {
-                    StartCombo(combo, true);
+                    StartCombo(combo.GetComboSequence(), true);
                     comboData.isInSoloCombo = true;
                 }
                 foundMatch = true;
