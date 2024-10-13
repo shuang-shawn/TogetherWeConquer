@@ -15,7 +15,7 @@ public class DuoComboManager : MonoBehaviour
     }
     public bool IsOtherPlayerInSoloCombo(GameObject player) 
     {
-        if (player = player1)
+        if (player == player1)
         {
             return player2.GetComponentInChildren<ComboInput>().IsInSoloCombo();
         }

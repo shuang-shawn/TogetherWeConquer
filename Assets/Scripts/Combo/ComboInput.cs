@@ -82,7 +82,12 @@ public class ComboInput : MonoBehaviour
     // Toggles between whether a player wants to start duo combos
     private void ToggleDuo(InputAction.CallbackContext context)
     {
+        if (!comboData.isInputEnabled)
+        {
+            return;
+        }
         comboData.duoToggle = !comboData.duoToggle;
+        comboWindowUI.SwitchComboList(comboData.duoToggle, transform.parent.tag);
     }
 
     // Enable/Disables Input
@@ -112,12 +117,12 @@ public class ComboInput : MonoBehaviour
         if (comboData.firstInput == KeyCode.None)
         {
             comboData.firstInput = inputKey;
-            comboWindowUI.FilterCombos(inputKey, 0);
+            comboWindowUI.FilterCombos(inputKey, 0, comboData.duoToggle, transform.parent.tag);
         }
         else if (comboData.secondInput == KeyCode.None)
         {
             comboData.secondInput = inputKey;
-            comboWindowUI.FilterCombos(inputKey, 1);
+            comboWindowUI.FilterCombos(inputKey, 1, comboData.duoToggle, transform.parent.tag);
             CheckComboList();
         }
     }
@@ -130,7 +135,7 @@ public class ComboInput : MonoBehaviour
         {
             if (combo.GetComboSequence()[0] == comboData.firstInput && combo.GetComboSequence()[1] == comboData.secondInput)
             {
-                UnityEngine.Debug.Log("Matching Combo" + string.Join(", ", combo));
+                //UnityEngine.Debug.Log("Matching Combo" + string.Join(", ", combo));
                 if (comboData.duoToggle)
                 {
                     if (!duoComboManager.IsOtherPlayerInSoloCombo(transform.parent.gameObject)) {
@@ -202,6 +207,7 @@ public class ComboInput : MonoBehaviour
     {
         comboData.ResetData();
         comboUI.ResetUI();
+        comboWindowUI.ResetComboList(transform.parent.tag);
         StopAllCoroutines();
         up.performed -= ComboSequence;
         down.performed -= ComboSequence;
@@ -324,11 +330,11 @@ public class ComboInput : MonoBehaviour
     private void SetActionMap()
     {
         // Assigns different Action Map depending on player
-        if (transform.parent.gameObject.name.Equals("Player1"))
+        if (transform.parent.CompareTag("Player1"))
         {
             actionMap = playerControls.FindActionMap("ComboP1");
         }
-        else if (transform.parent.gameObject.name.Equals("Player2"))
+        else if (transform.parent.CompareTag("Player2"))
         {
             actionMap = playerControls.FindActionMap("ComboP2");
         }
