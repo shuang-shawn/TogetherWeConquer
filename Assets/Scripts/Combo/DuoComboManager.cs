@@ -13,6 +13,8 @@ public class DuoComboManager : MonoBehaviour
     {
         FindPlayers();
     }
+
+    // Checks if the other player is currently performing a solo combo
     public bool IsOtherPlayerInSoloCombo(GameObject player) 
     {
         if (player == player1)
@@ -24,6 +26,8 @@ public class DuoComboManager : MonoBehaviour
             return player1.GetComponentInChildren<ComboInput>().IsInSoloCombo();
         }
     }
+
+    // Handles logic for starting duo combos
     public void StartDuoCombo(List<KeyCode> combo, GameObject player)
     {
         AssignPlayerOrder(player);
@@ -35,28 +39,31 @@ public class DuoComboManager : MonoBehaviour
         endingCombo.StartCombo(secondHalf, false);
     }
 
+    // Handles logic for when either player completed their half of the duo combo
     public void CompletedHalf(GameObject player, float remainingTime, bool abrupt)
     {
-        if (player == startedCombo.transform.parent.gameObject && !abrupt)
+        if (player == startedCombo.transform.parent.gameObject && !abrupt)  // If initial player finishes, allow other player to begin
         {
             startedCombo.ToggleInput(false);
             endingCombo.ToggleInput(true);
             endingCombo.StartTimer(remainingTime);
             return;
         }
-        else if (player == startedCombo.transform.parent.gameObject && abrupt)
+        else if (player == startedCombo.transform.parent.gameObject && abrupt) // If initial players stops combo unexpecetedly, force other play to end combo
         {
             endingCombo.RestartCombo();
         }
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
     }
+
     private void FindPlayers()
     {
         player1 = GameObject.FindGameObjectWithTag("Player1");
         player2 = GameObject.FindGameObjectWithTag("Player2");
     }
-
+    
+    // Determines which player initiated the duo combo and which player is on the receiving end
     private void AssignPlayerOrder(GameObject player)
     {
         // Check which player initiated the combo
@@ -74,7 +81,7 @@ public class DuoComboManager : MonoBehaviour
         }
     }
 
-    // Utility function that splits combo into two halves
+    // Utility function that splits the combo into two halves
     private (List<KeyCode>, List<KeyCode>) SplitCombo(List<KeyCode> combo)
     {
         int midPoint = combo.Count / 2;

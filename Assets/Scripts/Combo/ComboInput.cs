@@ -10,6 +10,8 @@ public class ComboInput : MonoBehaviour
 {
     // Input System
     public InputActionAsset playerControls;
+    private InputActionMap actionMap;
+
     private InputAction up;
     private InputAction down;
     private InputAction left;
@@ -17,18 +19,20 @@ public class ComboInput : MonoBehaviour
     private InputAction cancel;
     private InputAction duoToggle;
 
-    private InputActionMap actionMap;
-
+    // Attatched combo data related scripts
     private ComboData comboData;
     private ComboList comboList;
-    ComboUI comboUI;
+
+    // UI
+    private ComboUI comboUI;
     private ComboWindowUI comboWindowUI;
     public GameObject timer;
     public float duoComboTime;
     public float comboTime;
 
-    //public GameObject otherPlayer;
     public DuoComboManager duoComboManager;
+
+    private string playerTag;
     private void Awake()
     {
         SetActionMap();
@@ -87,27 +91,12 @@ public class ComboInput : MonoBehaviour
             return;
         }
         comboData.duoToggle = !comboData.duoToggle;
-        comboWindowUI.SwitchComboList(comboData.duoToggle, transform.parent.tag);
+        ResetInitalInputs();
+       
     }
 
-    // Enable/Disables Input
-    public void ToggleInput(bool cond)
-    {
-        comboData.isInputEnabled = cond;
-    }
-
-    public void IsInDuoCombo(bool cond)
-    {
-        comboData.isInDuoCombo = cond;
-    }
-
-    public bool IsInSoloCombo()
-    {
-        return comboData.isInSoloCombo;
-    }
-
-    // Checks if first 2 inputs match any combos that start off with the 2 inputs
-    void CheckInitialInput(InputAction.CallbackContext context)
+    // Listens for players first two input keys
+    private void CheckInitialInput(InputAction.CallbackContext context)
     {
         if (!comboData.isInputEnabled)
         {
@@ -117,81 +106,77 @@ public class ComboInput : MonoBehaviour
         if (comboData.firstInput == KeyCode.None)
         {
             comboData.firstInput = inputKey;
-            comboWindowUI.FilterCombos(inputKey, 0, comboData.duoToggle, transform.parent.tag);
+            comboWindowUI.FilterCombos(inputKey, 0, comboData.duoToggle, playerTag);
         }
         else if (comboData.secondInput == KeyCode.None)
         {
             comboData.secondInput = inputKey;
-            comboWindowUI.FilterCombos(inputKey, 1, comboData.duoToggle, transform.parent.tag);
+            comboWindowUI.FilterCombos(inputKey, 1, comboData.duoToggle, playerTag);
             CheckComboList();
         }
     }
 
-    public void CheckComboList()
+    // Checks in either the solo or duo combo list based on the users first two inputs for matching combos
+    private void CheckComboList()
     {
-        bool foundMatch = false;
         var selectedComboList = (comboData.duoToggle) ? comboList.duoComboList : comboList.soloComboList;
-        foreach (var combo in selectedComboList)
+        var currentPlayer = transform.parent.gameObject;
+
+        foreach (Combo combo in selectedComboList)
         {
             if (combo.GetComboSequence()[0] == comboData.firstInput && combo.GetComboSequence()[1] == comboData.secondInput)
             {
-                //UnityEngine.Debug.Log("Matching Combo" + string.Join(", ", combo));
+                // For matching combos
                 if (comboData.duoToggle)
                 {
-                    if (!duoComboManager.IsOtherPlayerInSoloCombo(transform.parent.gameObject)) {
-                        duoComboManager.StartDuoCombo(combo.GetComboSequence(), transform.parent.gameObject);
+                    // Doesnt allow player to start duo combo while other player is currently in solo combo
+                    if (!duoComboManager.IsOtherPlayerInSoloCombo(currentPlayer)) { 
+                        duoComboManager.StartDuoCombo(combo.GetComboSequence(), currentPlayer);
+                    } else
+                    {
+                        UnityEngine.Debug.Log("Other player is busy");
+                        ResetInitalInputs();
                     }
-                    break;
+ 
                 } else
                 {
                     StartCombo(combo.GetComboSequence(), true);
-                    comboData.isInSoloCombo = true;
+                    comboData.isInSoloCombo = true;   
                 }
-                foundMatch = true;
-                break;
+                return;
             }
         }
-        if (!foundMatch)
-        {
-            comboData.firstInput = KeyCode.None;
-            comboData.secondInput = KeyCode.None;
-            UnityEngine.Debug.Log("No matching combo");
-        }
+        // For no matching combos
+        ResetInitalInputs();
+        UnityEngine.Debug.Log("No matching combo");
     }
 
+    private void ResetInitalInputs()
+    {
+        comboData.firstInput = KeyCode.None;
+        comboData.secondInput = KeyCode.None;
+        comboWindowUI.ResetComboList(comboData.duoToggle, playerTag);
+    }
+
+    // Logic for starting the combo
     public void StartCombo(List<KeyCode> combo, bool startedCombo)
     {
-        comboData.currentSequenceIndex = (startedCombo) ? 2 : 0;
+        comboData.currentSequenceIndex = (startedCombo) ? 2 : 0; // Make first two inputs in the combo as correct, based off initial inputs
         comboUI.InitializeUI(combo, comboData.currentSequenceIndex);
         comboData.currentCombo = combo;
-        comboData.initiatedCombo = true;
-        up.performed -= CheckInitialInput;
-        down.performed -= CheckInitialInput;
-        left.performed -= CheckInitialInput;
-        right.performed -= CheckInitialInput;
 
-        up.performed += ComboSequence;
-        down.performed += ComboSequence;
-        left.performed += ComboSequence;
-        right.performed += ComboSequence;
-        cancel.performed += CancelCombo;
+        UpdateComboInputCallbacks(true);
+
         if (startedCombo)
         {
             comboData.mistakeOrder.AddRange(new[] { "Correct", "Correct" });
-            if (comboData.isInDuoCombo)
-            {
-                StartTimer(duoComboTime);
-            }
-            else
-            {
-                StartTimer(comboTime);
-            }
+            StartTimer(comboData.isInDuoCombo ? duoComboTime : comboTime);
         } 
     }
 
     public void StartTimer(float remainingTime)
     {
-        UnityEngine.Debug.Log(comboData.isInDuoCombo);
+        //UnityEngine.Debug.Log(comboData.isInDuoCombo);
 
         if (comboData.isInDuoCombo)
         {
@@ -203,54 +188,49 @@ public class ComboInput : MonoBehaviour
         }
     }
 
+    // Logic for finish combo and resetting data
     public void RestartCombo()
     {
         comboData.ResetData();
         comboUI.ResetUI();
-        comboWindowUI.ResetComboList(transform.parent.tag);
+        comboWindowUI.ResetComboList(false, playerTag);
         StopAllCoroutines();
-        up.performed -= ComboSequence;
-        down.performed -= ComboSequence;
-        left.performed -= ComboSequence;
-        right.performed -= ComboSequence;
-        cancel.performed -= CancelCombo;
 
-        up.performed += CheckInitialInput;
-        down.performed += CheckInitialInput;
-        left.performed += CheckInitialInput;
-        right.performed += CheckInitialInput;
+        UpdateComboInputCallbacks(false);
     }
 
+    // Listens for inputs during the combo sequence
     private void ComboSequence(InputAction.CallbackContext context)
     {
         if (!comboData.isInputEnabled)
         {
             return;
         }
+
         // Determine the current input
         KeyCode inputKey = GetKeyFromContext(context);
-        UnityEngine.Debug.Log(inputKey);
         comboData.lastKeyPressed = inputKey;
+
+        // Checks if current input is correct or wrong
         if (comboData.currentSequenceIndex < comboData.currentCombo.Count)
         {
             if (inputKey == comboData.currentCombo[comboData.currentSequenceIndex])
             {
                 comboData.mistakeOrder.Add("Correct");
-                UnityEngine.Debug.Log("Correct Input");
                 comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
             }
             else
             {
-                UnityEngine.Debug.Log("Incorrect Input");
-                comboData.mistakeCount++;
-                comboData.mistakeKeysPressed.Add(inputKey);
                 comboData.mistakeOrder.Add("Incorrect");
+                comboData.mistakeKeysPressed.Add(inputKey);
+                comboData.mistakeCount++;
                 comboUI.UpdateArrow(comboData.currentSequenceIndex, false);
             }
         }
 
         comboData.currentSequenceIndex++;
 
+        // Check if full combo is done
         if (comboData.currentSequenceIndex == comboData.currentCombo.Count)
         {
             StartCoroutine(Scoring(true));
@@ -259,7 +239,6 @@ public class ComboInput : MonoBehaviour
                 duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
             }
         }
-
     }
 
     private IEnumerator Scoring(bool isComplete)
@@ -286,13 +265,13 @@ public class ComboInput : MonoBehaviour
         RestartCombo();
     }
 
+    // Handles logic for canceling a combo
     private void CancelCombo(InputAction.CallbackContext context)
     {
         if (!comboData.isInputEnabled)
         {
             return;
         }
-        UnityEngine.Debug.Log("Combo Canceled");
         comboData.isAbrupt = true;
         timer.GetComponent<ComboTimer>().ResetTimer();
         if (comboData.isInDuoCombo)
@@ -303,9 +282,9 @@ public class ComboInput : MonoBehaviour
         StartCoroutine(Scoring(false));
     }
 
+    // Handles logic for when a player runs out of time to finish their combo
     private void ComboTimerExpired()
     {
-        UnityEngine.Debug.Log("Ran out of time");
         comboData.isAbrupt = true;
         if (comboData.isInDuoCombo)
         {
@@ -313,7 +292,9 @@ public class ComboInput : MonoBehaviour
         }
         RestartCombo();
     }
-    public IEnumerator StartCountdown(float countdownValue, float remainingTime) // 7 seconds
+
+    // Logic for decreasing the combo timer
+    private IEnumerator StartCountdown(float countdownValue, float remainingTime) // 7 seconds
     {
         comboData.timerVal = countdownValue;
         timer.GetComponent<ComboTimer>().InitializeTimer(countdownValue, remainingTime);
@@ -324,6 +305,22 @@ public class ComboInput : MonoBehaviour
         }
         // If out of time
         ComboTimerExpired();
+    }
+
+    // Enable/Disables Input
+    public void ToggleInput(bool cond)
+    {
+        comboData.isInputEnabled = cond;
+    }
+
+    public void IsInDuoCombo(bool cond)
+    {
+        comboData.isInDuoCombo = cond;
+    }
+
+    public bool IsInSoloCombo()
+    {
+        return comboData.isInSoloCombo;
     }
 
     // Sets action map depending on which player
@@ -338,7 +335,39 @@ public class ComboInput : MonoBehaviour
         {
             actionMap = playerControls.FindActionMap("ComboP2");
         }
+        // Assigns player tag string
+        playerTag = transform.parent.tag; 
     }
+
+    private void UpdateComboInputCallbacks(bool startingCombo)
+    {
+        if (startingCombo)
+        {
+            up.performed -= CheckInitialInput;
+            down.performed -= CheckInitialInput;
+            left.performed -= CheckInitialInput;
+            right.performed -= CheckInitialInput;
+
+            up.performed += ComboSequence;
+            down.performed += ComboSequence;
+            left.performed += ComboSequence;
+            right.performed += ComboSequence;
+            cancel.performed += CancelCombo;
+        } else
+        {
+            up.performed -= ComboSequence;
+            down.performed -= ComboSequence;
+            left.performed -= ComboSequence;
+            right.performed -= ComboSequence;
+            cancel.performed -= CancelCombo;
+
+            up.performed += CheckInitialInput;
+            down.performed += CheckInitialInput;
+            left.performed += CheckInitialInput;
+            right.performed += CheckInitialInput;
+        }
+    }
+
     // Helper method to translate the InputAction context to KeyCode for identification
     private KeyCode GetKeyFromContext(InputAction.CallbackContext context)
     {

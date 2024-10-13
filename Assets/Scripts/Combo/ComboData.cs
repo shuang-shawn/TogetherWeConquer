@@ -9,9 +9,6 @@ public class ComboData : MonoBehaviour
     public KeyCode firstInput = KeyCode.None;
     public KeyCode secondInput = KeyCode.None;
 
-    /** Determines whether the combo is in listening or initiated phase. **/
-    public bool initiatedCombo = false;
-
     /** The current combo in play. **/
     public List<KeyCode> currentCombo;
 
@@ -48,27 +45,26 @@ public class ComboData : MonoBehaviour
     /** Enables whether a player can input combos keys.  **/
     public bool isInputEnabled = true;
 
-    void PrintSummary()
-    {
-        string summary = $"First Input: {firstInput}\n" +
-                         $"Second Input: {secondInput}\n" +
-                         $"Combo Selected: {string.Join(", ", currentCombo)}\n" +
-                         $"Total Mistake Count: {mistakeCount}\n" +
-                         $"Mistakes: {string.Join(", ", mistakeKeysPressed)}" +
-                         $"Order of wrong inputs: {string.Join(", ", mistakeOrder)}\n" +
-                         $"Remaining Time: {timerVal}s";
+    //void PrintSummary()
+    //{
+    //    string summary = $"First Input: {firstInput}\n" +
+    //                     $"Second Input: {secondInput}\n" +
+    //                     $"Combo Selected: {string.Join(", ", currentCombo)}\n" +
+    //                     $"Total Mistake Count: {mistakeCount}\n" +
+    //                     $"Mistakes: {string.Join(", ", mistakeKeysPressed)}" +
+    //                     $"Order of wrong inputs: {string.Join(", ", mistakeOrder)}\n" +
+    //                     $"Remaining Time: {timerVal}s";
 
-        Debug.Log("--Click to view summary--\n" + summary);
-    }
+    //    Debug.Log("--Click to view summary--\n" + summary);
+    //}
     public void ResetData()
     {
-        PrintSummary();
+        //PrintSummary();
 
         firstInput = KeyCode.None;
         secondInput = KeyCode.None;
-        initiatedCombo = false;
         currentCombo = new List<KeyCode>(); 
-        currentSequenceIndex = 2;
+        currentSequenceIndex = 0;
         lastKeyPressed = KeyCode.None;
         mistakeKeysPressed = new List<KeyCode>();
         mistakeCount = 0;
