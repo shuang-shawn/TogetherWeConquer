@@ -53,6 +53,7 @@ public class DuoComboManager : MonoBehaviour
         {
             endingCombo.RestartCombo();
         }
+        Debug.Log("Duo Skill ended with: " + player.gameObject.name);
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
     }

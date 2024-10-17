@@ -237,6 +237,9 @@ public class ComboInput : MonoBehaviour
             if (comboData.isInDuoCombo)
             {
                 duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
+            } else
+            {
+                UnityEngine.Debug.Log("Solo skill by: " + playerTag);
             }
         }
     }
