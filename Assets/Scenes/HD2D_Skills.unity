@@ -393,6 +393,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8884304629658650844, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 1497413575}
     - target: {fileID: 9102977279164715253, guid: b612d3ca49b9641438c108c6fb8a5b15,
         type: 3}
       propertyPath: m_Name
@@ -401,15 +406,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9102977279164715253, guid: b612d3ca49b9641438c108c6fb8a5b15,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1872261727}
-    - targetCorrespondingSourceObject: {fileID: 9102977279164715253, guid: b612d3ca49b9641438c108c6fb8a5b15,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1872261731}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b612d3ca49b9641438c108c6fb8a5b15, type: 3}
 --- !u!1 &330585543
 GameObject:
@@ -1868,45 +1865,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 260840236}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1872261727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872261723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63f547041b80dc4fa3f4b72f7475223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashDistance: 60
-  dashSpeed: 70
-  dashCooldown: 1
---- !u!145 &1872261731
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872261723}
-  m_ConnectedBody: {fileID: 1497413575}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  serializedVersion: 2
-  m_Spring: 500
-  m_Damper: 0
-  m_MinDistance: 0
-  m_MaxDistance: 10
-  m_Tolerance: 0.025
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 1
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &2030833162
 GameObject:
   m_ObjectHideFlags: 0
