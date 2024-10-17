@@ -28,6 +28,7 @@ public class ComboWindowUI : MonoBehaviour
     [SerializeField]
     private GameObject[] arrowImages;
 
+    private Color highlightColor = Color.yellow;
 
     // Cached instantiated P1 solo combo sequences
     private List<GameObject> p1SoloCombosCached = new List<GameObject>();
@@ -117,7 +118,7 @@ public class ComboWindowUI : MonoBehaviour
         {
             comboUIElement.SetActive(isInDuo);
         }
-        UpdateHeader(isInDuo, playerTag) ;
+        UpdateHeader(isInDuo, playerTag);
     }
 
     // Updates the header for either solo or duo combos
@@ -146,13 +147,33 @@ public class ComboWindowUI : MonoBehaviour
             if (inputKey != GetKeyFromImage(image))
             {
                 comboUIElement.SetActive(false);
+            } else
+            {
+                image.color = highlightColor;
             }
         }
     }
 
     public void ResetComboList(bool isInDuo, string playerTag)
     {
+        ResetHighlight(isInDuo, playerTag);
         SwitchComboList(isInDuo, playerTag);
+    }
+
+    private void ResetHighlight(bool isInDuo, string playerTag)
+    {
+        List<GameObject> soloCombosCached = playerTag.Equals(Player1Tag) ? p1SoloCombosCached : p2SoloCombosCached;
+        List<GameObject> duoCombosCached = playerTag.Equals(Player1Tag) ? p1DuoCombosCached : p2DuoCombosCached;
+
+        foreach (GameObject comboUIElement in (isInDuo) ? duoCombosCached : soloCombosCached)
+        {
+            Transform firstKey = comboUIElement.transform.GetChild(0);
+            Transform secondKey = comboUIElement.transform.GetChild(1);
+            Image first_image = firstKey.GetComponent<Image>();
+            Image second_image = secondKey.GetComponent<Image>();
+            first_image.color = Color.white;
+            second_image.color = Color.white;
+        }
     }
 
     private KeyCode GetKeyFromImage(Image image)
