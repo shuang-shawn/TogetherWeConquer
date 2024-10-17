@@ -27,15 +27,16 @@ public class Single_Skills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
-        // {
-        //     Debug.Log("dashing");
-        //     Dash();
-        // }
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
+        {
+            Debug.Log("dashing");
+            Dash();
+        }
     }
 
     public void Dash()
     {
+        Debug.Log("dash");
         // Set the dash state and apply the force
         isDashing = true;
         lastDashTime = Time.time;

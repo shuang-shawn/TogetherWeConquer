@@ -252,8 +252,8 @@ public class ComboInput : MonoBehaviour
     {
         if (isComplete)
         {
-            singleSkill.Dash(); // single combo triggers dash, internal testing only
-            // tether.tetherToggle = !tether.tetherToggle;
+            // singleSkill.Dash(); // single combo triggers dash, internal testing only
+            tether.tetherToggle = !tether.tetherToggle;
             comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
             UnityEngine.Debug.Log("Combo Completed");
         }
