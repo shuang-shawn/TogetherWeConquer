@@ -7,6 +7,7 @@ public class Single_Skills : MonoBehaviour
     public float dashDistance = 50f;      // The distance the character will dash
     public float dashSpeed = 60f;        // The speed at which the character dashes
     public float dashCooldown = 1f;      // Cooldown time between dashes
+    public GameObject player;
     private bool isDashing = false;      // Tracks if the character is currently dashing
     private float dashTime = 0.2f;       // Time duration for the dash
     private float lastDashTime = -1f;    // Time when the last dash was executed
@@ -18,22 +19,22 @@ public class Single_Skills : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        playerMovement = GetComponent<PlayerMovement>();
+        rb = player.GetComponent<Rigidbody>();
+        playerMovement = player.GetComponent<PlayerMovement>();
         currentMoveDirection = playerMovement.currentMoveDirection;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
-        {
-            Debug.Log("dashing");
-            Dash();
-        }
+        // if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
+        // {
+        //     Debug.Log("dashing");
+        //     Dash();
+        // }
     }
 
-        void Dash()
+    public void Dash()
     {
         // Set the dash state and apply the force
         isDashing = true;

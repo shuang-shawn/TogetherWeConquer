@@ -31,6 +31,9 @@ public class ComboInput : MonoBehaviour
     public float comboTime;
 
     public DuoComboManager duoComboManager;
+    public GameObject skillManager; // temp holder for skill system
+    private Tether tether;
+    private Single_Skills singleSkill;
 
     private string playerTag;
     private void Awake()
@@ -49,6 +52,10 @@ public class ComboInput : MonoBehaviour
 
         duoComboManager = GameObject.FindGameObjectWithTag("DuoComboManager")?.GetComponent<DuoComboManager>();
         comboWindowUI = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
+        //testing with skills
+        tether = skillManager.GetComponent<Tether>();
+        singleSkill = skillManager.GetComponent<Single_Skills>();
+        
     }
     private void OnEnable()
     {
@@ -245,6 +252,8 @@ public class ComboInput : MonoBehaviour
     {
         if (isComplete)
         {
+            singleSkill.Dash(); // single combo triggers dash, internal testing only
+            // tether.tetherToggle = !tether.tetherToggle;
             comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
             UnityEngine.Debug.Log("Combo Completed");
         }
