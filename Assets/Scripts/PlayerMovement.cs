@@ -11,6 +11,10 @@ public class PlayerMovement:MonoBehaviour
     private InputAction movement;
     public float movementSpeed = 5f;
     public int playerNo = 1;
+    public Vector3 currentMoveDirection = Vector3.zero;
+    public Vector3 lastDirectionX = Vector3.right;
+
+    public bool canMove = true;
 
     private SpriteRenderer sr;
     private Animator animator;
@@ -54,6 +58,10 @@ public class PlayerMovement:MonoBehaviour
     {
         Vector2 v2P1 = movement.ReadValue<Vector2>(); //extract 2d input data
         Vector3 v3P1 = new Vector3(v2P1.x, 0, v2P1.y); //convert to 3d space
+        currentMoveDirection = v3P1.normalized;
+        if (currentMoveDirection != Vector3.zero) {
+            lastDirectionX = new Vector3(currentMoveDirection.x, 0, 0).normalized;
+        }
 
         //transform.Translate(v3); //moves transform, ignoring physics
 
@@ -64,7 +72,9 @@ public class PlayerMovement:MonoBehaviour
         } else if (v3P1.x > 0) {
             sr.flipX = false;
         }
-        rb.velocity = v3P1 *movementSpeed;
+        if (canMove) {
+            rb.velocity = v3P1 *movementSpeed;
+        }
         // rb.AddForce(v3P1, ForceMode.VelocityChange); //apply instant physics force, ignoring mass
 
     }
