@@ -207,7 +207,7 @@ MonoBehaviour:
   m_CenterOnActivate: 1
   m_GroupFramingSize: 0.8
   m_FramingMode: 2
-  m_FrameDamping: 0
+  m_FrameDamping: 2
   m_AdjustmentMode: 0
   m_MaxDollyIn: 5000
   m_MaxDollyOut: 5000
@@ -401,11 +401,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9102977279164715253, guid: b612d3ca49b9641438c108c6fb8a5b15,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1872261727}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b612d3ca49b9641438c108c6fb8a5b15, type: 3}
 --- !u!1 &330585543
 GameObject:
@@ -596,56 +592,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &402933459
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 402933461}
-  - component: {fileID: 402933460}
-  m_Layer: 0
-  m_Name: DistanceLimiter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &402933460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402933459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ee85e54caa129a4d99f43b1a7dd7e0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1: {fileID: 1872261723}
-  player2: {fileID: 1497413572}
-  maxDistance: 10
-  pullBackForce: 150
-  SmoothPullBack: 1
-  TetherMode: 0
---- !u!4 &402933461
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402933459}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.04, y: 0.9463024, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,12 +1715,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1470013671}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1497413572 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3956200951847981751, guid: 29f6c96c16e14f04785699121b703c72,
-    type: 3}
-  m_PrefabInstance: {fileID: 1470013671}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1574659556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,27 +1792,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574659556}
   m_CullTransparentMesh: 1
---- !u!1 &1872261723 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9102977279164715253, guid: b612d3ca49b9641438c108c6fb8a5b15,
-    type: 3}
-  m_PrefabInstance: {fileID: 260840236}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1872261727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872261723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63f547041b80dc4fa3f4b72f7475223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashDistance: 60
-  dashSpeed: 70
-  dashCooldown: 1
 --- !u!1 &2030833162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,4 +1988,3 @@ SceneRoots:
   - {fileID: 2118647242}
   - {fileID: 1055241500}
   - {fileID: 1251522607}
-  - {fileID: 402933461}

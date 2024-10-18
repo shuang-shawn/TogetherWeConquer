@@ -418,7 +418,6 @@ MonoBehaviour:
   duoComboTime: 10
   comboTime: 5
   duoComboManager: {fileID: 0}
-  skillManager: {fileID: 0}
 --- !u!114 &2146291468075380449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstInput: 0
   secondInput: 0
+  initiatedCombo: 0
   currentCombo: 
   currentSequenceIndex: 0
   lastKeyPressed: 0
@@ -497,7 +497,6 @@ GameObject:
   - component: {fileID: 7774060786371891085}
   - component: {fileID: 8721881254856998211}
   - component: {fileID: 133246639862435295}
-  - component: {fileID: 7833881131649044315}
   m_Layer: 0
   m_Name: HD2D_Player_1
   m_TagString: Player1
@@ -564,9 +563,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   playerNo: 1
-  currentMoveDirection: {x: 0, y: 0, z: 0}
-  lastDirectionX: {x: 1, y: 0, z: 0}
-  canMove: 1
 --- !u!135 &133246639862435295
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -588,22 +584,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.124709755
   m_Center: {x: 0, y: 0.12, z: 0}
---- !u!114 &7833881131649044315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9102977279164715253}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63f547041b80dc4fa3f4b72f7475223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashDistance: 60
-  dashSpeed: 70
-  dashCooldown: 1
-  player: {fileID: 0}
 --- !u!1001 &2113284923608014499
 PrefabInstance:
   m_ObjectHideFlags: 0
