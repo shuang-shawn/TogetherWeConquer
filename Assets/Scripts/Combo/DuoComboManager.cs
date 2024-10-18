@@ -28,15 +28,15 @@ public class DuoComboManager : MonoBehaviour
     }
 
     // Handles logic for starting duo combos
-    public void StartDuoCombo(List<KeyCode> combo, GameObject player)
+    public void StartDuoCombo(Combo combo, GameObject player)
     {
         AssignPlayerOrder(player);
         startedCombo.IsInDuoCombo(true);
         endingCombo.IsInDuoCombo(true);
-        var (firstHalf, secondHalf) = SplitCombo(combo);
-        startedCombo.StartCombo(firstHalf, true);
+        var (firstHalf, secondHalf) = SplitCombo(combo.GetComboSequence());
+        startedCombo.StartCombo(combo, firstHalf, true);
         endingCombo.ToggleInput(false);
-        endingCombo.StartCombo(secondHalf, false);
+        endingCombo.StartCombo(combo, secondHalf, false);
     }
 
     // Handles logic for when either player completed their half of the duo combo

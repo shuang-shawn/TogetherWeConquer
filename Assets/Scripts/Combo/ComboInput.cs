@@ -53,8 +53,8 @@ public class ComboInput : MonoBehaviour
         duoComboManager = GameObject.FindGameObjectWithTag("DuoComboManager")?.GetComponent<DuoComboManager>();
         comboWindowUI = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
         //testing with skills
-        tether = skillManager.GetComponent<Tether>();
-        singleSkill = skillManager.GetComponent<Single_Skills>();
+        //tether = skillManager.GetComponent<Tether>();
+        //singleSkill = skillManager.GetComponent<Single_Skills>();
         
     }
     private void OnEnable()
@@ -138,7 +138,7 @@ public class ComboInput : MonoBehaviour
                 {
                     // Doesnt allow player to start duo combo while other player is currently in solo combo
                     if (!duoComboManager.IsOtherPlayerInSoloCombo(currentPlayer)) { 
-                        duoComboManager.StartDuoCombo(combo.GetComboSequence(), currentPlayer);
+                        duoComboManager.StartDuoCombo(combo, currentPlayer);
                     } else
                     {
                         UnityEngine.Debug.Log("Other player is busy");
@@ -147,7 +147,7 @@ public class ComboInput : MonoBehaviour
  
                 } else
                 {
-                    StartCombo(combo.GetComboSequence(), true);
+                    StartCombo(combo, combo.GetComboSequence(), true);
                     comboData.isInSoloCombo = true;   
                 }
                 return;
@@ -166,11 +166,12 @@ public class ComboInput : MonoBehaviour
     }
 
     // Logic for starting the combo
-    public void StartCombo(List<KeyCode> combo, bool startedCombo)
+    public void StartCombo(Combo combo, List<KeyCode> currentComboSequence, bool startedCombo)
     {
         comboData.currentSequenceIndex = (startedCombo) ? 2 : 0; // Make first two inputs in the combo as correct, based off initial inputs
-        comboUI.InitializeUI(combo, comboData.currentSequenceIndex);
-        comboData.currentCombo = combo;
+        comboUI.InitializeUI(currentComboSequence, comboData.currentSequenceIndex);
+        comboData.currentCombo = currentComboSequence;
+        comboData.currentComboObject = combo;
 
         UpdateComboInputCallbacks(true);
 
@@ -256,7 +257,7 @@ public class ComboInput : MonoBehaviour
         if (isComplete)
         {
             // singleSkill.Dash(); // single combo triggers dash, internal testing only
-            tether.tetherToggle = !tether.tetherToggle;
+            //tether.tetherToggle = !tether.tetherToggle;
             comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
             UnityEngine.Debug.Log("Combo Completed");
         }
