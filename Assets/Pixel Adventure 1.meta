@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Pixel Adventure 1.meta
 guid: 85fc2a39e550413488c8bda87c366abf
+========
+guid: e7fabf8f9d1b6f6499883b9c8ad15b65
+>>>>>>>> parent of 373d1db (Merge pull request #2 from shuang-shawn/SceneCreationRob):Assets/Pixel Adventure 1/Assets.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
