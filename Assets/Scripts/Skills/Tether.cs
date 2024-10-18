@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Net;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class Tether : MonoBehaviour
@@ -7,7 +10,10 @@ public class Tether : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
     public float offsetY = 0.2f;
-    
+
+    public ParticleSystem onHit;
+    public Material tetherMaterial;
+
     public float defaultSpringStrength = 500f;
     public float defaultMaxDistance = 10f;
     public float tetherSpringStrength = 200f; // Strength of the spring (tether)
@@ -30,7 +36,6 @@ public class Tether : MonoBehaviour
         defaultSpringJoint.spring = defaultSpringStrength;
         defaultSpringJoint.maxDistance = defaultMaxDistance;
 
-        
 
 
         
@@ -70,6 +75,12 @@ public class Tether : MonoBehaviour
         lineRenderer.startWidth = 0.1f; // Adjust width as needed
         lineRenderer.endWidth = 0.1f;
         lineRenderer.positionCount = 2; // Two points (start and end)
+
+        Material scroller = tetherMaterial;
+        lineRenderer.material = scroller;
+
+        lineRenderer.textureMode = LineTextureMode.Tile;
+        lineRenderer.numCapVertices = 4;
     }
 
     void CreateTether() {
@@ -95,6 +106,9 @@ public class Tether : MonoBehaviour
         // Update the line to connect player1 and player2
         lineRenderer.SetPosition(0, startPos + new Vector3(0, offsetY, 0));
         lineRenderer.SetPosition(1, endPos + new Vector3(0, offsetY, 0));
+
+        float distance = Vector3.Distance(startPos, endPos);
+        lineRenderer.material.mainTextureScale = new Vector3(distance, 1);
     }
 
     void ToggleTether(bool toggle) {
@@ -108,6 +122,20 @@ public class Tether : MonoBehaviour
             Destroy(boxCollider);
         }
     }
-        
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player1" || other.tag == "Player2")
+        {
+            return;
+        }
+
+        Vector3 hit = other.transform.position;
+        hit.y += 0.5f;
+
+        ParticleSystem newParticle = Instantiate(onHit, hit, Quaternion.identity);
+        newParticle.Play();
+
+        Destroy(newParticle.gameObject, newParticle.main.duration + newParticle.main.startLifetime.constantMax);
+    }
 }
