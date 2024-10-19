@@ -12,7 +12,9 @@ public class Combo
 {
     private List<KeyCode> comboSequence;
     private ComboType comboType;
-    // private ComboSkill comboSkill;
+
+    private string comboSkill;
+
 
     public Combo(ComboType comboType, List<KeyCode> comboSequence)
     {
@@ -27,5 +29,9 @@ public class Combo
 
     public ComboType GetComboType() {
         return comboType;
+    }
+
+    public string GetComboSkill() { 
+        return comboSkill;
     }
 }

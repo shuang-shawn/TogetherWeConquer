@@ -15,6 +15,9 @@ public class ComboData : MonoBehaviour
     /** The current sequence index in the combo list. **/
     public int currentSequenceIndex;
 
+    /** Current combo object. **/
+    public Combo currentComboObject;
+
     /** Last key pressed by the player. **/
     public KeyCode lastKeyPressed;
 
@@ -63,7 +66,8 @@ public class ComboData : MonoBehaviour
 
         firstInput = KeyCode.None;
         secondInput = KeyCode.None;
-        currentCombo = new List<KeyCode>(); 
+        currentCombo = new List<KeyCode>();
+        currentComboObject = null;
         currentSequenceIndex = 0;
         lastKeyPressed = KeyCode.None;
         mistakeKeysPressed = new List<KeyCode>();
