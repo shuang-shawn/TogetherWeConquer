@@ -264,6 +264,7 @@ MonoBehaviour:
   duoComboTime: 10
   comboTime: 5
   duoComboManager: {fileID: 0}
+  skillManager: {fileID: 0}
 --- !u!114 &2576427339415153587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +279,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstInput: 0
   secondInput: 0
-  initiatedCombo: 0
   currentCombo: 
   currentSequenceIndex: 0
   lastKeyPressed: 0
@@ -409,6 +409,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   playerNo: 2
+  currentMoveDirection: {x: 0, y: 0, z: 0}
+  lastDirectionX: {x: 1, y: 0, z: 0}
+  canMove: 1
 --- !u!135 &5927502893873281507
 SphereCollider:
   m_ObjectHideFlags: 0
