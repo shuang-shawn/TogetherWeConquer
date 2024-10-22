@@ -15,6 +15,8 @@ public class SlimeBoss : MonoBehaviour
     private bool jumpAttacking = false;
     private float jumpAttackHeight = 10f;
     float jumpAttackLandingTimer = 0f;
+    public int splitThreshold = 50;
+    public GameObject miniSlime;
 
 
  
@@ -40,6 +42,11 @@ public class SlimeBoss : MonoBehaviour
     // Takes in a single GameObject and returns a float representing the distance
     private float findDistance(GameObject targetObject){
         return Vector3.Distance(transform.position, targetObject.transform.position);
+    }
+
+    private void splitIntoTwo(){
+        //spawn 2 mini slimes
+        //destroy this gameobject?
     }
 
     private void controlHopping(){
