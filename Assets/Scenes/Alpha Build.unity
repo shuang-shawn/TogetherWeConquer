@@ -467,7 +467,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7833881131649044315, guid: b612d3ca49b9641438c108c6fb8a5b15, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -2293,7 +2294,7 @@ MonoBehaviour:
   dashDistance: 60
   dashSpeed: 70
   dashCooldown: 1
-  player: {fileID: 0}
+  player: {fileID: 1872261723}
 --- !u!1 &2003516135
 GameObject:
   m_ObjectHideFlags: 0
