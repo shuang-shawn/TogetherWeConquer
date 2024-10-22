@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class BasicAI : MonoBehaviour
 {
-    private GameObject playerObj = null;
-
     private GameObject closestPlayerObj = null;
-    private float speed = 2.0f;
+    public float speed = 2.0f;
     private float minDist = 1f;
 
     // Returns the distance between the object the script is attached to, and the targetObject
@@ -44,13 +42,20 @@ public class BasicAI : MonoBehaviour
         // Debug.Log(playerObj.transform.position);
         findClosestPlayer();
         
-        transform.LookAt(closestPlayerObj.transform);
+        // Trying without transform.LookAt
 
-        float distance = findDistance(closestPlayerObj);
+        Vector3 playerPosition = new Vector3(closestPlayerObj.transform.position.x, transform.position.y, closestPlayerObj.transform.position.z);
 
-        if(distance > minDist){
-            transform.position += transform.forward * speed * Time.deltaTime;
-        }
+        transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
+
+        
+        // transform.LookAt(closestPlayerObj.transform);
+
+        // float distance = findDistance(closestPlayerObj);
+
+        // if(distance > minDist){
+        //     transform.position += transform.forward * speed * Time.deltaTime;
+        // }
         // Debug.Log(transform.position);
     }
 }
