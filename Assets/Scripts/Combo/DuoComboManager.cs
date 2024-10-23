@@ -9,6 +9,8 @@ public class DuoComboManager : MonoBehaviour
     public ComboInput startedCombo;
     public ComboInput endingCombo;
 
+    public Combo currentCombo;
+
     private void Start()
     {
         FindPlayers();
@@ -30,6 +32,7 @@ public class DuoComboManager : MonoBehaviour
     // Handles logic for starting duo combos
     public void StartDuoCombo(Combo combo, GameObject player)
     {
+        currentCombo = combo;
         AssignPlayerOrder(player);
         startedCombo.IsInDuoCombo(true);
         endingCombo.IsInDuoCombo(true);
@@ -52,7 +55,11 @@ public class DuoComboManager : MonoBehaviour
         else if (player == startedCombo.transform.parent.gameObject && abrupt) // If initial players stops combo unexpecetedly, force other play to end combo
         {
             endingCombo.RestartCombo();
+            startedCombo.ToggleInput(true);
+            endingCombo.ToggleInput(true);
+            return;
         }
+        
         Debug.Log("Duo Skill ended with: " + player.gameObject.name);
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Single_Skills : MonoBehaviour
+public class SingleDash : MonoBehaviour
 {
     public float dashDistance = 50f;      // The distance the character will dash
     public float dashSpeed = 60f;        // The speed at which the character dashes
     public float dashCooldown = 1f;      // Cooldown time between dashes
-    public GameObject player;
+    private GameObject player1;
+    private GameObject player2;
+    private GameObject castingPlayer;
     public ParticleSystem dashParticlesPrefab;
     private bool isDashing = false;      // Tracks if the character is currently dashing
     private float dashTime = 0.2f;       // Time duration for the dash
@@ -20,23 +22,50 @@ public class Single_Skills : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = player.GetComponent<Rigidbody>();
-        playerMovement = player.GetComponent<PlayerMovement>();
-        currentMoveDirection = playerMovement.currentMoveDirection;
+        player1 = GameObject.FindWithTag("Player1");
+        player2 = GameObject.FindWithTag("Player2");
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
-        {
-            Debug.Log("dashing");
-            Dash();
-        }
+        // if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
+        // {
+        //     Debug.Log("dashing");
+        //     Dash();
+        // }
     }
 
-    public void Dash()
+    public void Dash(int playerNum)
     {
+        if (playerNum == 1) {
+            castingPlayer = player1;
+        } else if (playerNum == 2) {
+            castingPlayer = player2;
+        }
+        if (castingPlayer == null)
+        {
+            Debug.LogError("Player is not assigned in the inspector!");
+            return;
+        }
+
+        rb = castingPlayer.GetComponent<Rigidbody>();
+        playerMovement = castingPlayer.GetComponent<PlayerMovement>();
+
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody component is missing on the player!");
+        }
+        if (playerMovement == null)
+        {
+            Debug.LogError("PlayerMovement component is missing on the player!");
+        }
+        // rb = player.GetComponent<Rigidbody>();
+        // playerMovement = player.GetComponent<PlayerMovement>();
+        currentMoveDirection = playerMovement.currentMoveDirection;
+
         Debug.Log("dash");
         // Set the dash state and apply the force
         isDashing = true;
@@ -48,6 +77,7 @@ public class Single_Skills : MonoBehaviour
         Vector3 dashDirection = playerMovement.currentMoveDirection != Vector3.zero ? playerMovement.currentMoveDirection : playerMovement.lastDirectionX;
 
         SpawnDashParticles(dashDirection);
+
 
         // Push the player forward for a short time using a Coroutine to handle duration
         StartCoroutine(DashEffect(dashDirection));
@@ -76,13 +106,13 @@ public class Single_Skills : MonoBehaviour
 
     private void SpawnDashParticles(Vector3 dashDirection)
     {
-        ParticleSystem dashParticles = Instantiate(dashParticlesPrefab, player.transform.position, Quaternion.identity);
+        ParticleSystem dashParticles = Instantiate(dashParticlesPrefab, castingPlayer.transform.position, Quaternion.identity);
 
         Vector3 oppositeDirection = -dashDirection;
 
         dashParticles.transform.rotation = Quaternion.LookRotation(oppositeDirection, Vector3.up);
 
-        dashParticles.transform.SetParent(player.transform);
+        dashParticles.transform.SetParent(castingPlayer.transform);
 
         dashParticles.Play();
 

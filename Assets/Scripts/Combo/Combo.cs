@@ -16,10 +16,11 @@ public class Combo
     private string comboSkill;
 
 
-    public Combo(ComboType comboType, List<KeyCode> comboSequence)
+    public Combo(ComboType comboType, List<KeyCode> comboSequence, string skillName)
     {
         this.comboSequence = comboSequence;
         this.comboType = comboType;
+        this.comboSkill = skillName;
     }
 
     public List<KeyCode> GetComboSequence()

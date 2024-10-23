@@ -31,9 +31,10 @@ public class ComboInput : MonoBehaviour
     public float comboTime;
 
     public DuoComboManager duoComboManager;
-    public GameObject skillManager; // temp holder for skill system
-    private Tether tether;
-    private Single_Skills singleSkill;
+    public GameObject skillManagerObject; // temp holder for skill system
+    private SkillManager skillManager;
+    // private Tether tether;
+    // private Single_Skills singleSkill;
 
     private string playerTag;
     private void Awake()
@@ -52,7 +53,9 @@ public class ComboInput : MonoBehaviour
 
         duoComboManager = GameObject.FindGameObjectWithTag("DuoComboManager")?.GetComponent<DuoComboManager>();
         comboWindowUI = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
+        
         //testing with skills
+        skillManager = skillManagerObject.GetComponent<SkillManager>();
         //tether = skillManager.GetComponent<Tether>();
         //singleSkill = skillManager.GetComponent<Single_Skills>();
         
@@ -248,6 +251,12 @@ public class ComboInput : MonoBehaviour
             } else
             {
                 UnityEngine.Debug.Log("Solo skill by: " + playerTag);
+                string skillToCast = comboData.currentComboObject.GetComboSkill();
+                UnityEngine.Debug.Log("Casting solo skill: " + skillToCast);
+                skillManager.CastSkill(skillToCast, playerTag, comboData.currentComboObject.GetComboType());
+
+        
+
             }
         }
     }
