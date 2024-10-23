@@ -889,7 +889,8 @@ MonoBehaviour:
   dashParticlesPrefab: {fileID: 9091682058981745220, guid: f31ef6f054a7cad4f9c6ac0018a6c775,
     type: 3}
   tetherMaterial: {fileID: 2100000, guid: 50004141ea2d8f541ad29b4e6f1f19ca, type: 2}
-  onHit: {fileID: 0}
+  onHit: {fileID: 1836307080458256607, guid: d7404a2e002daed4782ae9491406eed3, type: 3}
+  fire: {fileID: 1366504390285116651, guid: dedb794fc3a18504eb36ab2929d9fd77, type: 3}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0

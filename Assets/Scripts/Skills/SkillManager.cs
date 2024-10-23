@@ -14,6 +14,7 @@ public class SkillManager : MonoBehaviour
     public ParticleSystem dashParticlesPrefab;
     public Material tetherMaterial;
     public ParticleSystem onHit;
+    public ParticleSystem fire;
 
 
     // private Dictionary<string, Delegate> skillDictionary;
