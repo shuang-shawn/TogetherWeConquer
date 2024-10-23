@@ -51,6 +51,10 @@ public class Tether : MonoBehaviour
             previousToggle = tetherToggle;
         }
         if (tetherToggle) {
+            if (player1 == null || player2 == null) {
+                ToggleTether(false);
+                return;
+            }
             UpdateLinePosition();
             UpdateTetherPosition();
         }
