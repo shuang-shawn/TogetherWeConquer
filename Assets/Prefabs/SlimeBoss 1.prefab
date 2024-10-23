@@ -124,6 +124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 0
+  maxHealth: 100
+  maxBossHealth: 250
+  currentHealth: 0
 --- !u!1001 &2837315593430942142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,6 +200,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4371178978762943201, guid: 5fec15aec05002d4e93430ce3a3a3fcd,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4371178978762943201, guid: 5fec15aec05002d4e93430ce3a3a3fcd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07e056809be8c5842935337f791e2e3e, type: 2}
     - target: {fileID: 4371178978762943203, guid: 5fec15aec05002d4e93430ce3a3a3fcd,
         type: 3}
       propertyPath: m_Name
