@@ -9,9 +9,15 @@ public class DuoComboManager : MonoBehaviour
     public ComboInput startedCombo;
     public ComboInput endingCombo;
 
+    public Combo currentCombo;
+    public GameObject skillManagerObject; // temp holder for skill system
+    private SkillManager skillManager;
+
     private void Start()
     {
         FindPlayers();
+        skillManager = skillManagerObject.GetComponent<SkillManager>();
+
     }
 
     // Checks if the other player is currently performing a solo combo
@@ -30,6 +36,7 @@ public class DuoComboManager : MonoBehaviour
     // Handles logic for starting duo combos
     public void StartDuoCombo(Combo combo, GameObject player)
     {
+        currentCombo = combo;
         AssignPlayerOrder(player);
         startedCombo.IsInDuoCombo(true);
         endingCombo.IsInDuoCombo(true);
@@ -52,8 +59,14 @@ public class DuoComboManager : MonoBehaviour
         else if (player == startedCombo.transform.parent.gameObject && abrupt) // If initial players stops combo unexpecetedly, force other play to end combo
         {
             endingCombo.RestartCombo();
+            startedCombo.ToggleInput(true);
+            endingCombo.ToggleInput(true);
+            return;
         }
+
         Debug.Log("Duo Skill ended with: " + player.gameObject.name);
+        skillManager.CastSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
+        currentCombo = null;
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
     }

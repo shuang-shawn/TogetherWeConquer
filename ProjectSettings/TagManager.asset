@@ -11,6 +11,10 @@ TagManager:
   - DuoComboManager
   - FXManager
   - ComboWindow
+  - boss
+  - mob
+  - skill
+  - Hidden
   - JumpAttackShadow
   - SlimeBoss
   layers:

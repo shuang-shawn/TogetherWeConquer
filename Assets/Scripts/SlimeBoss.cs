@@ -48,14 +48,23 @@ public class SlimeBoss : MonoBehaviour
     private void findClosestPlayer(){
         GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
         GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
+        float player1Distance = 9999f;
+        float player2Distance = 9999f;
+        if(player1 != null) {
 
-        float player1Distance = findDistance(player1);
-        float player2Distance = findDistance(player2);
+            player1Distance = findDistance(player1);
+        }
+        if(player2 != null) {
+
+            player2Distance = findDistance(player2);
+        }
 
         if(player2Distance > player1Distance){
             closestPlayerObj = player1;
-        } else {
+        } else if (player2Distance < player1Distance) {
             closestPlayerObj = player2;
+        } else {
+            closestPlayerObj = null;
         }
 
     }
@@ -69,6 +78,7 @@ public class SlimeBoss : MonoBehaviour
     private void controlHopping(){
         hopMotion = Mathf.Sin(Time.time * hopFrequency) * hopHeight;
     }
+
 
     //Timer coroutine stuf
     private void StartStopwatch(){
@@ -140,7 +150,9 @@ public class SlimeBoss : MonoBehaviour
 
     private void HopToPlayer(){
         controlHopping();
-            
+        if (closestPlayerObj == null) {
+            return;
+        }
         Vector3 playerPosition = new Vector3(closestPlayerObj.transform.position.x, startPosition.y, closestPlayerObj.transform.position.z);
 
         // While the sine value is greater than 0, move character

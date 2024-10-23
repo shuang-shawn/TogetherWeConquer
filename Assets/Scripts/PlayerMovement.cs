@@ -59,8 +59,11 @@ public class PlayerMovement:MonoBehaviour
         Vector2 v2P1 = movement.ReadValue<Vector2>(); //extract 2d input data
         Vector3 v3P1 = new Vector3(v2P1.x, 0, v2P1.y); //convert to 3d space
         currentMoveDirection = v3P1.normalized;
+        // save last facing direction for dashing while standing still
         if (currentMoveDirection != Vector3.zero) {
-            lastDirectionX = new Vector3(currentMoveDirection.x, 0, 0).normalized;
+            if (currentMoveDirection.x != 0) {
+                lastDirectionX = new Vector3(currentMoveDirection.x, 0, 0).normalized;
+            }
         }
 
         //transform.Translate(v3); //moves transform, ignoring physics
