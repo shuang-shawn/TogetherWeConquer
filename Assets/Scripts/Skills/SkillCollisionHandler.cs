@@ -5,6 +5,8 @@ using UnityEngine;
 public class SkillCollisionHandler : MonoBehaviour
 {
     public int skillDamage = 0;
+    public float slowFactor = 1f;
+    public float slowTime = 3f;
     // private List<string> enemyTags = new(){"boss", "mob"};
 
     
@@ -31,6 +33,7 @@ public class SkillCollisionHandler : MonoBehaviour
         EnemyManager target = other.gameObject.GetComponent<EnemyManager>();
         if (target != null) {
             target.TakeDamage(skillDamage);
+            target.Slow(slowFactor, slowTime);
         }
         
     }
