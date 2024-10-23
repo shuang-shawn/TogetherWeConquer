@@ -13,7 +13,10 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
-        gameObject.SetActive(false);
+        if (gameObject.tag == "Hidden")
+        {
+            gameObject.SetActive(false);
+        }
 
         shake = GameObject.FindGameObjectWithTag("FXManager").GetComponent<ComboUIFX>();
     }
@@ -22,9 +25,12 @@ public class HealthBar : MonoBehaviour
     {
         healthSlider.value = currentHealth / maxHealth; // Update slider value
 
-        gameObject.SetActive(true); // Show the health bar
+        if (gameObject.tag == "Hidden")
+        {
+            gameObject.SetActive(true); // Show the health bar
 
-        StartCoroutine(ShowHealthBar());
+            StartCoroutine(ShowHealthBar());
+        }
     }
 
     private IEnumerator ShowHealthBar()

@@ -8,6 +8,9 @@ public class EnemyManager : MonoBehaviour
     public int maxHealth = 100;
     public int maxBossHealth = 250;
     public int currentHealth = 0;
+
+    public HealthBar healthBar;
+    public ParticleSystem hurtParticlesPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,16 @@ public class EnemyManager : MonoBehaviour
         currentHealth -= damage;
         Debug.Log(gameObject.name + " took " + damage + " damage!");
 
+        if (gameObject.tag == "boss")
+        {
+            healthBar.UpdateHealthBar(currentHealth, maxBossHealth);
+        } else if (gameObject.tag == "mob")
+        {
+            healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        }
+
+        SpawnHurtParticles();
+
         if (currentHealth <= 0)
         {
             Die();
@@ -44,5 +57,18 @@ public class EnemyManager : MonoBehaviour
         Debug.Log(gameObject.name + " has died!");
         // Add death handling here (destroy, play animation, etc.)
         Destroy(gameObject);
+    }
+
+    private void SpawnHurtParticles()
+    {
+        ParticleSystem hurtParticles = Instantiate(hurtParticlesPrefab, gameObject.transform.position, Quaternion.identity);
+
+        hurtParticles.transform.SetParent(gameObject.transform);
+
+        hurtParticles.transform.Translate(new Vector3(0.0f, 1.0f, 0.0f));
+
+        hurtParticles.Play();
+
+        Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
     }
 }
