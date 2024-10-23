@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 861581474173627306}
   - component: {fileID: 8059511433047860936}
   - component: {fileID: 5927502893873281507}
+  - component: {fileID: 1493993848520596254}
   m_Layer: 0
   m_Name: HD2D_Player_2
   m_TagString: Player2
@@ -522,7 +523,21 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.124709755
-  m_Center: {x: 0, y: 0.12, z: 0}
+  m_Center: {x: 0, y: 0.135, z: 0}
+--- !u!114 &1493993848520596254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956200951847981751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e26144b8e7041947ab3cd37a5793c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1 &4136670822419442884
 GameObject:
   m_ObjectHideFlags: 0
