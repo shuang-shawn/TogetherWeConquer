@@ -10,6 +10,7 @@ public class SlimeBoss : MonoBehaviour
     public float speed = 2.0f;
     public float hopHeight = 3.0f;
     public float hopFrequency = 1f;
+    public float jumpSpeed = 20f;
     public float dropSpeed = 5f;
     private float hopMotion;
     private bool jumpAttacking = false;
@@ -97,7 +98,7 @@ public class SlimeBoss : MonoBehaviour
 
     private IEnumerator JumpAttackSequence(){
         //jump into air
-        yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, jumpAttackHeight, transform.position.y), dropSpeed));
+        yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, jumpAttackHeight, transform.position.y), jumpSpeed));
         GameObject instantiatedShadow = Instantiate(shadow, new Vector3(transform.position.x, 0.1f, transform.position.z), Quaternion.identity);
 
         //Track closest player for 5 seconds
