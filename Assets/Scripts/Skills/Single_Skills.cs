@@ -8,6 +8,7 @@ public class Single_Skills : MonoBehaviour
     public float dashSpeed = 60f;        // The speed at which the character dashes
     public float dashCooldown = 1f;      // Cooldown time between dashes
     public GameObject player;
+    public ParticleSystem dashParticlesPrefab;
     private bool isDashing = false;      // Tracks if the character is currently dashing
     private float dashTime = 0.2f;       // Time duration for the dash
     private float lastDashTime = -1f;    // Time when the last dash was executed
@@ -46,6 +47,8 @@ public class Single_Skills : MonoBehaviour
         // Calculate the dash direction based on the character's facing direction
         Vector3 dashDirection = playerMovement.currentMoveDirection != Vector3.zero ? playerMovement.currentMoveDirection : playerMovement.lastDirectionX;
 
+        SpawnDashParticles(dashDirection);
+
         // Push the player forward for a short time using a Coroutine to handle duration
         StartCoroutine(DashEffect(dashDirection));
     }
@@ -69,5 +72,20 @@ public class Single_Skills : MonoBehaviour
         rb.velocity = Vector3.zero;
         isDashing = false;
         playerMovement.canMove = true;
+    }
+
+    private void SpawnDashParticles(Vector3 dashDirection)
+    {
+        ParticleSystem dashParticles = Instantiate(dashParticlesPrefab, player.transform.position, Quaternion.identity);
+
+        Vector3 oppositeDirection = -dashDirection;
+
+        dashParticles.transform.rotation = Quaternion.LookRotation(oppositeDirection, Vector3.up);
+
+        dashParticles.transform.SetParent(player.transform);
+
+        dashParticles.Play();
+
+        Destroy(dashParticles.gameObject, dashParticles.main.duration + dashParticles.main.startLifetime.constantMax);
     }
 }

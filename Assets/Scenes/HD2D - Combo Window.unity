@@ -393,6 +393,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7833881131649044315, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1872261723}
+    - target: {fileID: 7833881131649044315, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833881131649044315, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
+      propertyPath: dashParticlesPrefab
+      value: 
+      objectReference: {fileID: 9091682058981745220, guid: f31ef6f054a7cad4f9c6ac0018a6c775,
+        type: 3}
     - target: {fileID: 9102977279164715253, guid: b612d3ca49b9641438c108c6fb8a5b15,
         type: 3}
       propertyPath: m_Name
@@ -2116,7 +2132,9 @@ MonoBehaviour:
   dashDistance: 60
   dashSpeed: 70
   dashCooldown: 1
-  player: {fileID: 0}
+  player: {fileID: 1872261723}
+  dashParticlesPrefab: {fileID: 9091682058981745220, guid: f31ef6f054a7cad4f9c6ac0018a6c775,
+    type: 3}
 --- !u!1 &2030833162
 GameObject:
   m_ObjectHideFlags: 0

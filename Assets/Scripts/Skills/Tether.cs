@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
+using System.Threading;
 using UnityEngine;
 
 public class Tether : MonoBehaviour
@@ -7,6 +10,11 @@ public class Tether : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
     public float offsetY = 0.2f;
+
+    public int frameCount = 6;
+    public float animationSpeed = 12.0f;
+    public ParticleSystem onHit;
+    public Material tetherMaterial;
     
     public float defaultSpringStrength = 500f;
     public float defaultMaxDistance = 10f;
@@ -70,6 +78,10 @@ public class Tether : MonoBehaviour
         lineRenderer.startWidth = 0.1f; // Adjust width as needed
         lineRenderer.endWidth = 0.1f;
         lineRenderer.positionCount = 2; // Two points (start and end)
+
+        lineRenderer.material = tetherMaterial;
+        tetherMaterial.SetFloat("_FrameCount", frameCount);
+        tetherMaterial.SetFloat("_AnimationSpeed", animationSpeed);
     }
 
     void CreateTether() {
@@ -95,6 +107,9 @@ public class Tether : MonoBehaviour
         // Update the line to connect player1 and player2
         lineRenderer.SetPosition(0, startPos + new Vector3(0, offsetY, 0));
         lineRenderer.SetPosition(1, endPos + new Vector3(0, offsetY, 0));
+
+        float distance = Vector3.Distance(startPos, endPos);
+        lineRenderer.material.mainTextureScale = new Vector3(distance, 1);
     }
 
     void ToggleTether(bool toggle) {
@@ -109,5 +124,17 @@ public class Tether : MonoBehaviour
         }
     }
         
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            Vector3 hit = other.transform.position;
+            hit.y += 0.5f;
+
+            ParticleSystem newParticle = Instantiate(onHit, hit, Quaternion.identity);
+            newParticle.Play();
+
+            Destroy(newParticle.gameObject, newParticle.main.duration + newParticle.main.startLifetime.constantMax);
+        }
+    }
 }
