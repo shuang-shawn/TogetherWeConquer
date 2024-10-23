@@ -19,7 +19,7 @@ public class Tether : MonoBehaviour
     public float defaultSpringStrength = 500f;
     public float defaultMaxDistance = 10f;
     public float tetherSpringStrength = 200f; // Strength of the spring (tether)
-    public float tetherMaxTetherDistance = 5f; // Maximum distance before tension
+    public float tetherMaxTetherDistance = 2f; // Maximum distance before tension
     private LineRenderer lineRenderer;
     private SpringJoint defaultSpringJoint;
     private SpringJoint tetherSpringJoint;
