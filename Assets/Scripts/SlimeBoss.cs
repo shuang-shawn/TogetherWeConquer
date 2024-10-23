@@ -21,6 +21,7 @@ public class SlimeBoss : MonoBehaviour
     private Coroutine stopwatchCoroutine;
     public int stayInAir = 5;
     public int damage = 20;
+    public int landingDelay = 2;
 
     //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
     //CURRENT IDEA FORMAT
@@ -78,7 +79,7 @@ public class SlimeBoss : MonoBehaviour
 
     private void StopStopwatch(){
         if(stopwatchCoroutine != null) {
-            StopCoroutine(StopwatchCoroutine());
+            StopCoroutine(stopwatchCoroutine);
             stopwatchCoroutine = null;
             jumpAttackLandingTimer = 0;
         }
@@ -102,6 +103,7 @@ public class SlimeBoss : MonoBehaviour
 
     private IEnumerator TrackPlayer(){
         Debug.Log("TrackPlayer started");
+        Debug.Log("Stopwatch value" + jumpAttackLandingTimer);
         StartStopwatch(); 
         while(jumpAttackLandingTimer < stayInAir) {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(closestPlayerObj.transform.position.x, jumpAttackHeight, closestPlayerObj.transform.position.z), speed * Time.deltaTime *2);
@@ -126,77 +128,16 @@ public class SlimeBoss : MonoBehaviour
         yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, 1, transform.position.z), dropSpeed));
         Destroy(instantiatedShadow);
         //Daze effect
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(landingDelay);
         jumpAttacking = false;
         
     }
 
     private void revisedJumpAttack(){
-        //jump into air
-        // Coroutine jumpIntoAir = StartCoroutine(MoveToPosition(new Vector3(transform.position.x, jumpAttackHeight, transform.position.y)));
-        //timer and lock into last player position
-        //draw shadow at last player position
-        //land
-
         StartCoroutine(JumpAttackSequence());
+        Debug.Log("End of Coroutine?");
     }
 
-    // private void jumpAttack(){
-    //     GameObject instantiatedShadow = GameObject.FindWithTag("JumpAttackShadow");
-
-    //     //Jump up into the sky
-    //     transform.position = new Vector3(transform.position.x, jumpAttackHeight, transform.position.z);
-    //     jumpAttackLandingTimer += Time.deltaTime;
-
-    //     if(transform.position.y <= 1) {
-    //         jumpAttacking = false;
-    //         jumpAttackLandingTimer = 0f;
-
-    //         //Destroy shadow
-    //         if(instantiatedShadow != null){
-    //                 Destroy(instantiatedShadow);
-    //                 // instantiatedShadow = null;
-    //             } else{
-    //                 Debug.Log("No shadow to destroy");
-    //             }
-    //     }
-
-    //     else if(jumpAttackLandingTimer > 5 && transform.position.y > 1){
-    //         //Stop jump attacking
-    //         // jumpAttacking = false;
-    //         // jumpAttackLandingTimer = 0f;
-            
-    //         Debug.Log("5 seconds passed");
-    //         Debug.Log(jumpAttacking);
-            
-    //         // transform.position = new Vector3(closestPlayerObj.transform.position.x, transform.position.y, closestPlayerObj.transform.position.z);
-    //         // Vector3 landingPoint = new Vector3(closestPlayerObj.transform.position.x, closestPlayerObj.transform.position.y, closestPlayerObj.transform.position.z);
-    //         Vector3 direction = (landingPoint - transform.position).normalized;
-
-    //         float drop = dropSpeed * Time.deltaTime;
-    //         transform.position += direction * drop;
-    //         // transform.position = Vector3.MoveTowards(transform.position, landingPoint, dropSpeed * Time.deltaTime);
-            
-
-    //         // Debug.Log(instantiatedShadow == null);
-    //     } else if (jumpAttackLandingTimer < 3) {
-
-    //         // Track position until timer = 3s
-
-    //         transform.position = new Vector3(closestPlayerObj.transform.position.x, transform.position.y, closestPlayerObj.transform.position.z);
-    //         landingPoint = new Vector3(closestPlayerObj.transform.position.x, closestPlayerObj.transform.position.y, closestPlayerObj.transform.position.z);
-    //     } else {
-    //         //do stuff between finish tracking and landing
-    //         //Draw circle
-    //         if(instantiatedShadow == null) {
-    //             Instantiate(shadow, new Vector3(landingPoint.x, 0, landingPoint.z), Quaternion.identity);
-    //         }
-    //     }
-
-    //     // Wait a few seconds OR
-    //     // Move towards closest player (faster than normal)
-    //     // Pause when above last player location, wait a bit, then slam down
-    // }
     private void HopToPlayer(){
         controlHopping();
             
