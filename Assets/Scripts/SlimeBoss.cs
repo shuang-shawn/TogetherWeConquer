@@ -10,13 +10,37 @@ public class SlimeBoss : MonoBehaviour
     public float speed = 2.0f;
     public float hopHeight = 3.0f;
     public float hopFrequency = 1f;
+    public float jumpSpeed = 20f;
     public float dropSpeed = 5f;
     private float hopMotion;
     private bool jumpAttacking = false;
     private float jumpAttackHeight = 10f;
     float jumpAttackLandingTimer = 0f;
+    public GameObject shadow;
+    private Vector3 landingPoint = new Vector3(0,0,0);
+    private Coroutine stopwatchCoroutine;
+    public int stayInAir = 5;
+    public int damage = 20;
+    public int landingDelay = 2;
 
+    //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
+    //CURRENT IDEA FORMAT
 
+    public void handleCollision(GameObject gameObject){
+        
+        // Enemy gets hit by a combo
+        if(gameObject.tag == "TestCombo"){
+            string hitMessage = "Hit by Combo";
+            Debug.Log(hitMessage);
+        }
+
+        // Enemy hits player
+        else if(gameObject.tag == "Player1"){
+            gameObject.GetComponent<PlayerStats>().playerGotHit(damage);
+
+            //Add gets knocked back a certain amount
+        }
+    }
  
 
     //Maybe put these two functions inside a class that is inherited by enemies?
@@ -55,33 +79,75 @@ public class SlimeBoss : MonoBehaviour
         hopMotion = Mathf.Sin(Time.time * hopFrequency) * hopHeight;
     }
 
-    private void jumpAttack(){
-        if (closestPlayerObj == null) {
-            return;
+
+    //Timer coroutine stuf
+    private void StartStopwatch(){
+        if(stopwatchCoroutine == null) {
+            stopwatchCoroutine = StartCoroutine(StopwatchCoroutine());
         }
-        //Jump up into the sky
-        transform.position = new Vector3(transform.position.x, jumpAttackHeight, transform.position.z);
-        jumpAttackLandingTimer += Time.deltaTime;
-
-        if(jumpAttackLandingTimer > 5){
-            jumpAttacking = false;
-            jumpAttackLandingTimer = 0f;
-            
-            Debug.Log("5 seconds passed");
-            Debug.Log(jumpAttacking);
-            
-            transform.position = new Vector3(closestPlayerObj.transform.position.x, transform.position.y, closestPlayerObj.transform.position.z);
-            Vector3 landingPoint = new Vector3(closestPlayerObj.transform.position.x, closestPlayerObj.transform.position.y, closestPlayerObj.transform.position.z);
-
-            transform.position = Vector3.MoveTowards(transform.position, landingPoint, dropSpeed * Time.deltaTime);
-
-
-        }
-
-        // Wait a few seconds OR
-        // Move towards closest player (faster than normal)
-        // Pause when above last player location, wait a bit, then slam down
     }
+
+    private void StopStopwatch(){
+        if(stopwatchCoroutine != null) {
+            StopCoroutine(stopwatchCoroutine);
+            stopwatchCoroutine = null;
+            jumpAttackLandingTimer = 0;
+        }
+    }
+    
+    private IEnumerator StopwatchCoroutine() {
+        while (true) {
+            jumpAttackLandingTimer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator MoveToPosition(Vector3 targetPoint, float moveSpeed){
+        while (Vector3.Distance(transform.position, targetPoint) > 0.1f) {
+            transform.position = Vector3.MoveTowards(transform.position, targetPoint, moveSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        transform.position = targetPoint;
+    }
+
+    private IEnumerator TrackPlayer(){
+        Debug.Log("TrackPlayer started");
+        Debug.Log("Stopwatch value" + jumpAttackLandingTimer);
+        StartStopwatch(); 
+        while(jumpAttackLandingTimer < stayInAir) {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(closestPlayerObj.transform.position.x, jumpAttackHeight, closestPlayerObj.transform.position.z), speed * Time.deltaTime *2);
+            yield return null;
+        }
+        
+        Debug.Log("5 seconds passed");
+        StopStopwatch();
+        
+        // yield return null;
+    }
+
+
+    private IEnumerator JumpAttackSequence(){
+        //jump into air
+        yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, jumpAttackHeight, transform.position.y), jumpSpeed));
+        GameObject instantiatedShadow = Instantiate(shadow, new Vector3(transform.position.x, 0.1f, transform.position.z), Quaternion.identity);
+
+        //Track closest player for 5 seconds
+        yield return StartCoroutine(TrackPlayer());
+        //Land
+        yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, 1, transform.position.z), dropSpeed));
+        Destroy(instantiatedShadow);
+        //Daze effect
+        yield return new WaitForSeconds(landingDelay);
+        jumpAttacking = false;
+        
+    }
+
+    private void revisedJumpAttack(){
+        StartCoroutine(JumpAttackSequence());
+        Debug.Log("End of Coroutine?");
+    }
+
     private void HopToPlayer(){
         controlHopping();
         if (closestPlayerObj == null) {
@@ -110,18 +176,24 @@ public class SlimeBoss : MonoBehaviour
     {
         findClosestPlayer();
         
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && !jumpAttacking){
             jumpAttacking = true;
 
             Debug.Log("Space pressed");
             Debug.Log(jumpAttacking);
+            // jumpAttack();
+            revisedJumpAttack();
         }
 
-        if(jumpAttacking){
-            jumpAttack();
-        } else {
+        if(!jumpAttacking) {
             HopToPlayer();
         }
+
+        // if(jumpAttacking){
+        //     jumpAttack();
+        // } else {
+        //     HopToPlayer();
+        // }
         
         
         
