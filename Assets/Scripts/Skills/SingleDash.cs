@@ -11,7 +11,7 @@ public class SingleDash : MonoBehaviour
     private GameObject player2;
     private GameObject castingPlayer;
     public ParticleSystem dashParticlesPrefab;
-    private bool isDashing = false;      // Tracks if the character is currently dashing
+    // private bool isDashing = false;      // Tracks if the character is currently dashing
     private float dashTime = 0.2f;       // Time duration for the dash
     private float lastDashTime = -1f;    // Time when the last dash was executed
     private Rigidbody rb;
@@ -68,7 +68,7 @@ public class SingleDash : MonoBehaviour
 
         Debug.Log("dash");
         // Set the dash state and apply the force
-        isDashing = true;
+        // isDashing = true;
         lastDashTime = Time.time;
         playerMovement.canMove = false;
 
@@ -100,7 +100,7 @@ public class SingleDash : MonoBehaviour
 
         // Reset the velocity after dashing
         rb.velocity = Vector3.zero;
-        isDashing = false;
+        // isDashing = false;
         playerMovement.canMove = true;
     }
 
