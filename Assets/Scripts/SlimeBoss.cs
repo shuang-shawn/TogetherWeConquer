@@ -21,6 +21,24 @@ public class SlimeBoss : MonoBehaviour
     private Coroutine stopwatchCoroutine;
     public int stayInAir = 5;
 
+    //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
+    //CURRENT IDEA FORMAT
+
+    public void handleCollision(GameObject gameObject){
+        
+        // Enemy gets hit by a combo
+        if(gameObject.tag == "TestCombo"){
+            string hitMessage = "Hit by Combo";
+            Debug.Log(hitMessage);
+        }
+
+        // Enemy hits player
+        else if(gameObject.tag == "Player1"){
+            gameObject.GetComponent<PlayerStats>().playerGotHit(damage);
+
+            //Add gets knocked back a certain amount
+        }
+    }
  
 
     //Maybe put these two functions inside a class that is inherited by enemies?
