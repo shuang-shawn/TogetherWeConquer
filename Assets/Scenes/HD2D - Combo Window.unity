@@ -1599,6 +1599,7 @@ MonoBehaviour:
   player2: {fileID: 0}
   startedCombo: {fileID: 0}
   endingCombo: {fileID: 0}
+  skillManagerObject: {fileID: 0}
 --- !u!4 &1055241500
 Transform:
   m_ObjectHideFlags: 0
@@ -3172,7 +3173,6 @@ MonoBehaviour:
   dashDistance: 60
   dashSpeed: 70
   dashCooldown: 1
-  player: {fileID: 1872261723}
   dashParticlesPrefab: {fileID: 9091682058981745220, guid: f31ef6f054a7cad4f9c6ac0018a6c775,
     type: 3}
 --- !u!1 &1889359014
