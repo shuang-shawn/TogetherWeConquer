@@ -11,6 +11,8 @@ TagManager:
   - DuoComboManager
   - FXManager
   - ComboWindow
+  - JumpAttackShadow
+  - SlimeBoss
   layers:
   - Default
   - TransparentFX
