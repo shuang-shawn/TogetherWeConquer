@@ -75,7 +75,7 @@ public class PlayerManager : MonoBehaviour
     {
         ParticleSystem hurtParticles = Instantiate(deathParticlesPrefab, gameObject.transform.position, Quaternion.identity);
 
-        hurtParticles.transform.Translate(new Vector3(0.0f, 0.75f, 0.0f));
+        hurtParticles.transform.Translate(new Vector3(0.0f, 2.0f, 0.0f));
 
         hurtParticles.Play();
 
