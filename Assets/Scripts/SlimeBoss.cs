@@ -18,6 +18,7 @@ public class SlimeBoss : MonoBehaviour
     public GameObject shadow;
     private Vector3 landingPoint = new Vector3(0,0,0);
     private Coroutine stopwatchCoroutine;
+    public int stayInAir = 5;
 
  
 
@@ -82,7 +83,7 @@ public class SlimeBoss : MonoBehaviour
     private IEnumerator TrackPlayer(){
         Debug.Log("TrackPlayer started");
         StartStopwatch(); 
-        while(jumpAttackLandingTimer < 5) {
+        while(jumpAttackLandingTimer < stayInAir) {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(closestPlayerObj.transform.position.x, jumpAttackHeight, closestPlayerObj.transform.position.z), speed * Time.deltaTime *2);
             yield return null;
         }
