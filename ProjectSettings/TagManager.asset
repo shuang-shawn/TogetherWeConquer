@@ -11,6 +11,8 @@ TagManager:
   - DuoComboManager
   - FXManager
   - ComboWindow
+  - boss
+  - mob
   layers:
   - Default
   - TransparentFX
