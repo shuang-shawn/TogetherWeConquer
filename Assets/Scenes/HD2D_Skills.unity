@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 582710432}
   m_Layer: 0
   m_Name: SkillManager
-  m_TagString: Untagged
+  m_TagString: skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2010,79 +2010,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030833162}
   m_CullTransparentMesh: 1
---- !u!1 &2106157642
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2106157644}
-  - component: {fileID: 2106157643}
-  - component: {fileID: 2106157645}
-  m_Layer: 0
-  m_Name: Tether
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2106157643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2106157642}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbe4e8d214cb054080508723e6f5503, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1: {fileID: 1872261723}
-  player2: {fileID: 1497413572}
-  offsetY: 0.03
-  frameCount: 6
-  animationSpeed: 12
-  onHit: {fileID: 0}
-  tetherMaterial: {fileID: 0}
-  defaultSpringStrength: 500
-  defaultMaxDistance: 10
-  tetherSpringStrength: 200
-  tetherMaxTetherDistance: 5
-  tetherToggle: 0
---- !u!4 &2106157644
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2106157642}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.603, y: 0.786, z: -0.398}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2106157645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2106157642}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63f547041b80dc4fa3f4b72f7475223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashDistance: 50
-  dashSpeed: 60
-  dashCooldown: 1
-  dashParticlesPrefab: {fileID: 0}
 --- !u!1 &2118647240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,6 +2137,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 254965586341864695, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762608085181753336, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2499925104895372974, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2285,7 +2222,6 @@ SceneRoots:
   - {fileID: 2118647242}
   - {fileID: 1055241500}
   - {fileID: 1251522607}
-  - {fileID: 2106157644}
   - {fileID: 1128646439}
   - {fileID: 582710433}
   - {fileID: 8090275679356346730}

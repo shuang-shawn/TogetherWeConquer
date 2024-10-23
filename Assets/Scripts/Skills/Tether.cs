@@ -28,6 +28,7 @@ public class Tether : MonoBehaviour
 
     public bool tetherToggle = false;
     private bool previousToggle = false;
+    private GameObject tetherSkillObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,13 +41,6 @@ public class Tether : MonoBehaviour
         defaultSpringJoint.spring = defaultSpringStrength;
         defaultSpringJoint.maxDistance = defaultMaxDistance;
 
-        
-
-
-        
-
-        
-        
     }
 
     // Update is called once per frame
@@ -70,17 +64,24 @@ public class Tether : MonoBehaviour
     {
 
         Vector3 midPoint = (player1.transform.position + player2.transform.position) / 2;
-        gameObject.transform.position = midPoint;
+        midPoint.y += 0.2f;
+        tetherSkillObject.transform.position = midPoint;
         Vector3 direction = player2.transform.position - player1.transform.position;
-        gameObject.transform.rotation = Quaternion.LookRotation(direction);
+        tetherSkillObject.transform.rotation = Quaternion.LookRotation(direction);
 
         float distance = Vector3.Distance(player1.transform.position, player2.transform.position);
         boxCollider.size = new Vector3(0.2f, 0.2f, distance); // Make it long enough to cover the distance
     }
+    void CreateTetherSkillObject() {
+        tetherSkillObject = new GameObject("TetherSkillObject");
+        SkillCollisionHandler skillCollisionHandler = tetherSkillObject.AddComponent<SkillCollisionHandler>();
+        skillCollisionHandler.skillDamage = 25;
+        
+    }
 
     void DrawLine() {
         // Draw line
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer = tetherSkillObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.1f; // Adjust width as needed
         lineRenderer.endWidth = 0.1f;
         lineRenderer.positionCount = 2; // Two points (start and end)
@@ -101,13 +102,12 @@ public class Tether : MonoBehaviour
 
     void CreateCollider() {
         // create collider
-        boxCollider = gameObject.AddComponent<BoxCollider>();
+        boxCollider = tetherSkillObject.AddComponent<BoxCollider>();
         boxCollider.isTrigger = true;
         boxCollider.center = new Vector3(0, 0, 0);
     }
 
     void UpdateLinePosition() {
-        Debug.Log("updating line position");
         Vector3 startPos = player1.transform.position;
         Vector3 endPos = player2.transform.position;
 
@@ -121,6 +121,7 @@ public class Tether : MonoBehaviour
 
     void ToggleTether(bool toggle) {
         if (toggle) {
+            CreateTetherSkillObject();
             DrawLine();
             CreateTether();
             CreateCollider();
@@ -128,6 +129,7 @@ public class Tether : MonoBehaviour
             Destroy(lineRenderer);
             Destroy(tetherSpringJoint);
             Destroy(boxCollider);
+            Destroy(tetherSkillObject);
         }
     }
         
