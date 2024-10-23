@@ -9,22 +9,27 @@ public class HealthBar : MonoBehaviour
     public float healthBarDisplayTime = 1.0f;
 
     public Slider healthSlider; // Assign your health slider in the inspector
+    public ComboUIFX shake;
 
     void Start()
     {
         gameObject.SetActive(false);
+
+        shake = GameObject.FindGameObjectWithTag("FXManager").GetComponent<ComboUIFX>();
     }
 
     public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
         healthSlider.value = currentHealth / maxHealth; // Update slider value
 
+        gameObject.SetActive(true); // Show the health bar
+
         StartCoroutine(ShowHealthBar());
     }
 
     private IEnumerator ShowHealthBar()
     {
-        gameObject.SetActive(true); // Show the health bar
+        shake.TriggerShake(healthSlider.GetComponent<Image>());
 
         yield return new WaitForSeconds(healthBarDisplayTime); // Wait for the specified duration
 

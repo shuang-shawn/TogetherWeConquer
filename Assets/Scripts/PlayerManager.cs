@@ -5,7 +5,12 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth; 
+    public int currentHealth;
+
+    public HealthBar healthBar;
+    public ParticleSystem hurtParticlesPrefab;
+    public ParticleSystem deathParticlesPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +39,10 @@ public class PlayerManager : MonoBehaviour
         currentHealth -= damage;
         Debug.Log(gameObject.name + " took " + damage + " damage!");
 
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
+
+        SpawnHurtParticles();
+
         if (currentHealth <= 0)
         {
             Die();
@@ -42,10 +51,34 @@ public class PlayerManager : MonoBehaviour
 
     void Die()
     {
+        SpawnDeathParticles();
+
         Debug.Log(gameObject.name + " has died!");
         // Add death handling here (destroy, play animation, etc.)
         Destroy(gameObject);
     }
 
+    private void SpawnHurtParticles()
+    {
+        ParticleSystem hurtParticles = Instantiate(hurtParticlesPrefab, gameObject.transform.position, Quaternion.identity);
 
+        hurtParticles.transform.SetParent(gameObject.transform);
+
+        hurtParticles.transform.Translate(new Vector3(0.0f, 1.0f, 0.0f));
+
+        hurtParticles.Play();
+
+        Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
+    }
+
+    private void SpawnDeathParticles()
+    {
+        ParticleSystem hurtParticles = Instantiate(deathParticlesPrefab, gameObject.transform.position, Quaternion.identity);
+
+        hurtParticles.transform.Translate(new Vector3(0.0f, 0.75f, 0.0f));
+
+        hurtParticles.Play();
+
+        Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
+    }
 }
