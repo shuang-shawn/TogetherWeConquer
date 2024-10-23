@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
 
     public HealthBar healthBar;
     public ParticleSystem hurtParticlesPrefab;
+    public Animator animator;
     
     // Start is called before the first frame update
     void Start()
@@ -60,20 +61,16 @@ public class EnemyManager : MonoBehaviour
     {
         UnityEngine.Debug.Log(gameObject.name + " has died!");
         // Add death handling here (destroy, play animation, etc.)
-        Destroy(gameObject);
+        animator.SetTrigger("Die");
     }
 
     private void SpawnHurtParticles()
     {
-        UnityEngine.Debug.Log("Spawning hurt particles!");
-
         ParticleSystem hurtParticles = Instantiate(hurtParticlesPrefab, gameObject.transform.position, Quaternion.identity);
 
         hurtParticles.transform.Translate(new Vector3(0.0f, 1.0f, 0.0f));
 
         hurtParticles.Play();
-
-        UnityEngine.Debug.Log("Hurt particles played!");
 
         Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
     }
