@@ -20,6 +20,7 @@ public class SlimeBoss : MonoBehaviour
     private Vector3 landingPoint = new Vector3(0,0,0);
     private Coroutine stopwatchCoroutine;
     public int stayInAir = 5;
+    public int damage = 20;
 
     //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
     //CURRENT IDEA FORMAT
