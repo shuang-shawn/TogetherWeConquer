@@ -10,13 +10,24 @@ public class SkillManager : MonoBehaviour
     public Tether tether;
     public SingleDash singleDash;
     public ParticleSystem dashParticlesPrefab;
-    private Dictionary<string, Action<GameObject>> skillDictionary;
+    public Material tetherMaterial;
+    public ParticleSystem onHit;
+
+
+    // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
     void Start()
     {
         singleDash = gameObject.AddComponent<SingleDash>();
         singleDash.dashParticlesPrefab = dashParticlesPrefab;
-        
+        tether = gameObject.AddComponent<Tether>();
+        tether.tetherMaterial = tetherMaterial;
+        tether.onHit = onHit;
+        // skillDictionary = new Dictionary<string, Delegate>
+        // {
+        //     {"dash", new Action<int>(singleDash.Dash)},
+        //     {"tether", new Action(tether.CastTether)},
+        // };
 
     }
 
@@ -33,8 +44,11 @@ public class SkillManager : MonoBehaviour
         } else if (playerTag == "Player2") {
             playerNum = 2;
         }
-        singleDash.Dash(playerNum);
-        
-       
+        switch (skillName) {
+            case "dash": singleDash.Dash(playerNum); break;
+            case "tether": tether.CastTether(); break;
+        }
     }
+
+    
 }

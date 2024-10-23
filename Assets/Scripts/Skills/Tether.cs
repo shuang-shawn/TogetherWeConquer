@@ -31,6 +31,8 @@ public class Tether : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player1 = GameObject.FindWithTag("Player1");
+        player2 = GameObject.FindWithTag("Player2");
         // Default distance limiter
         defaultSpringJoint = player1.AddComponent<SpringJoint>();
         defaultSpringJoint.autoConfigureConnectedAnchor = false;
@@ -58,6 +60,10 @@ public class Tether : MonoBehaviour
             UpdateLinePosition();
             UpdateTetherPosition();
         }
+    }
+    public void CastTether(){
+        Debug.Log("CASTING TETHER");
+        tetherToggle = !tetherToggle;
     }
 
      void UpdateTetherPosition()
@@ -101,6 +107,7 @@ public class Tether : MonoBehaviour
     }
 
     void UpdateLinePosition() {
+        Debug.Log("updating line position");
         Vector3 startPos = player1.transform.position;
         Vector3 endPos = player2.transform.position;
 
