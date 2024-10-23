@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -27,14 +28,17 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("space"))
+        {
+            TakeDamage(10);
+        }
     }
 
 
 
     public void TakeDamage(int damage) {
         currentHealth -= damage;
-        Debug.Log(gameObject.name + " took " + damage + " damage!");
+        UnityEngine.Debug.Log(gameObject.name + " took " + damage + " damage!");
 
         if (gameObject.tag == "boss")
         {
@@ -54,20 +58,22 @@ public class EnemyManager : MonoBehaviour
 
     void Die()
     {
-        Debug.Log(gameObject.name + " has died!");
+        UnityEngine.Debug.Log(gameObject.name + " has died!");
         // Add death handling here (destroy, play animation, etc.)
         Destroy(gameObject);
     }
 
     private void SpawnHurtParticles()
     {
-        ParticleSystem hurtParticles = Instantiate(hurtParticlesPrefab, gameObject.transform.position, Quaternion.identity);
+        UnityEngine.Debug.Log("Spawning hurt particles!");
 
-        hurtParticles.transform.SetParent(gameObject.transform);
+        ParticleSystem hurtParticles = Instantiate(hurtParticlesPrefab, gameObject.transform.position, Quaternion.identity);
 
         hurtParticles.transform.Translate(new Vector3(0.0f, 1.0f, 0.0f));
 
         hurtParticles.Play();
+
+        UnityEngine.Debug.Log("Hurt particles played!");
 
         Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
     }

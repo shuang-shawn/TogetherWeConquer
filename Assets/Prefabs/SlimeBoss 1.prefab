@@ -240,7 +240,7 @@ MonoBehaviour:
   maxBossHealth: 250
   currentHealth: 0
   healthBar: {fileID: 2226446011992917550}
-  hurtParticlesPrefab: {fileID: 8808789451600048245, guid: 2eb0bec55beb8154db3664e487d2c25b,
+  hurtParticlesPrefab: {fileID: 8806211054233520024, guid: c7a4790e5b1683043950ae30e5206018,
     type: 3}
 --- !u!1 &4284643696524085262
 GameObject:
