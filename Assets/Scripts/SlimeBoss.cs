@@ -129,13 +129,13 @@ public class SlimeBoss : MonoBehaviour
 
     private IEnumerator JumpAttackSequence(){
         //jump into air
-        yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, jumpAttackHeight, transform.position.y), jumpSpeed));
+        yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, jumpAttackHeight, transform.position.z), jumpSpeed));
         GameObject instantiatedShadow = Instantiate(shadow, new Vector3(transform.position.x, 0.1f, transform.position.z), Quaternion.identity);
 
         //Track closest player for 5 seconds
         yield return StartCoroutine(TrackPlayer());
         //Land
-        yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, 1, transform.position.z), dropSpeed));
+        yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, startPosition.y, transform.position.z), dropSpeed));
         Destroy(instantiatedShadow);
         //Daze effect
         yield return new WaitForSeconds(landingDelay);

@@ -8,7 +8,7 @@ public class ShadowFollowSlimeBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slimeBoss = GameObject.FindWithTag("SlimeBoss");
+        slimeBoss = GameObject.Find("SlimeBoss");
         // transform.localScale.x = slimeBoss.transform.localScale.x;
         // transform.localScale.z = slimeBoss.transform.localScale.z;
     }
