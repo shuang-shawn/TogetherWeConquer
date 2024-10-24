@@ -10,6 +10,7 @@ public class SkillManager : MonoBehaviour
     public Tether tether;
     public SingleDash singleDash1;
     public SingleDash singleDash2;
+    public SingleIceGround singleIceGround;
 
     public ParticleSystem dashParticlesPrefab;
     public Material tetherMaterial;
@@ -25,14 +26,16 @@ public class SkillManager : MonoBehaviour
         singleDash1.dashParticlesPrefab = dashParticlesPrefab;
         singleDash2 = gameObject.AddComponent<SingleDash>();
         singleDash2.dashParticlesPrefab = dashParticlesPrefab;
+
+
+        singleIceGround = gameObject.AddComponent<SingleIceGround>();
+
+
+
         tether = gameObject.AddComponent<Tether>();
         tether.tetherMaterial = tetherMaterial;
         tether.onHit = onHit;
-        // skillDictionary = new Dictionary<string, Delegate>
-        // {
-        //     {"dash", new Action<int>(singleDash.Dash)},
-        //     {"tether", new Action(tether.CastTether)},
-        // };
+
 
     }
 
@@ -56,6 +59,8 @@ public class SkillManager : MonoBehaviour
             } else if (playerNum == 2) {
                 singleDash2.Dash(playerNum);
             }
+                break;
+            case "iceground": singleIceGround.CastIceGround(playerNum);
                 break;
             case "tether": tether.CastTether(); break;
         }
