@@ -25,6 +25,8 @@ public class SlimeBoss : MonoBehaviour
     public int landingDelay = 2;
     public float speedPercent = 1.0f;
     public float previousSpeedPercent = 1.0f;
+    public float timePassed = 0f;
+    public float specialAttackInterval = 4f;
 
     //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
     //CURRENT IDEA FORMAT
@@ -115,15 +117,15 @@ public class SlimeBoss : MonoBehaviour
     }
 
     private IEnumerator TrackPlayer(){
-        Debug.Log("TrackPlayer started");
-        Debug.Log("Stopwatch value" + jumpAttackLandingTimer);
+        // Debug.Log("TrackPlayer started");
+        // Debug.Log("Stopwatch value" + jumpAttackLandingTimer);
         StartStopwatch(); 
         while(jumpAttackLandingTimer < stayInAir) {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(closestPlayerObj.transform.position.x, jumpAttackHeight, closestPlayerObj.transform.position.z), speed * Time.deltaTime *2);
             yield return null;
         }
         
-        Debug.Log("5 seconds passed");
+        // Debug.Log("5 seconds passed");
         StopStopwatch();
         
         // yield return null;
@@ -143,16 +145,16 @@ public class SlimeBoss : MonoBehaviour
         //Daze effect
         yield return new WaitForSeconds(landingDelay);
         jumpAttacking = false;
+        timePassed = 0f;
+
         
     }
 
     private void revisedJumpAttack(){
         StartCoroutine(JumpAttackSequence());
-        Debug.Log("End of Coroutine?");
     }
 
     private void HopToPlayer(){
-        controlHopping();
         if (closestPlayerObj == null) {
             return;
         }
@@ -190,6 +192,9 @@ public class SlimeBoss : MonoBehaviour
 
     void FixedUpdate()
     {
+        controlHopping();
+
+        timePassed += Time.deltaTime;
         if (previousSpeedPercent != speedPercent) {
             if (speedPercent == 1) {
                 ResetSpeed();
@@ -202,11 +207,11 @@ public class SlimeBoss : MonoBehaviour
         
         findClosestPlayer();
         
-        if(Input.GetKeyDown(KeyCode.Space) && !jumpAttacking){
+        if(timePassed >= specialAttackInterval && !jumpAttacking && hopMotion < -0.9f){
             jumpAttacking = true;
 
-            Debug.Log("Space pressed");
-            Debug.Log(jumpAttacking);
+            // Debug.Log("Space pressed");
+            // Debug.Log(jumpAttacking);
             // jumpAttack();
             revisedJumpAttack();
         }
