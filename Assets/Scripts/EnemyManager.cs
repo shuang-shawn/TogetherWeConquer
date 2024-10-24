@@ -66,6 +66,7 @@ public class EnemyManager : MonoBehaviour
     {
         UnityEngine.Debug.Log(gameObject.name + " has died!");
         // Add death handling here (destroy, play animation, etc.)
+        bossScript.IsDead = true;
         animator.SetTrigger("Die");
     }
 

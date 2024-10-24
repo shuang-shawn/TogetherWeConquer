@@ -27,6 +27,7 @@ public class SlimeBoss : MonoBehaviour
     public float previousSpeedPercent = 1.0f;
     public float timePassed = 0f;
     public float specialAttackInterval = 4f;
+    public bool IsDead = false;
 
     //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
     //CURRENT IDEA FORMAT
@@ -192,39 +193,42 @@ public class SlimeBoss : MonoBehaviour
 
     void FixedUpdate()
     {
-        controlHopping();
+        if (!IsDead) {
+            controlHopping();
 
-        timePassed += Time.deltaTime;
-        if (previousSpeedPercent != speedPercent) {
-            if (speedPercent == 1) {
-                ResetSpeed();
-            } else {
-                ResetSpeed();
-                updateSpeed(speedPercent);
+            timePassed += Time.deltaTime;
+            if (previousSpeedPercent != speedPercent) {
+                if (speedPercent == 1) {
+                    ResetSpeed();
+                } else {
+                    ResetSpeed();
+                    updateSpeed(speedPercent);
+                }
+                previousSpeedPercent = speedPercent;
             }
-            previousSpeedPercent = speedPercent;
-        }
-        
-        findClosestPlayer();
-        
-        if(timePassed >= specialAttackInterval && !jumpAttacking && hopMotion < -0.9f){
-            jumpAttacking = true;
+            
+            findClosestPlayer();
+            
+            if(timePassed >= specialAttackInterval && !jumpAttacking && hopMotion < -0.9f){
+                jumpAttacking = true;
 
-            // Debug.Log("Space pressed");
-            // Debug.Log(jumpAttacking);
-            // jumpAttack();
-            revisedJumpAttack();
-        }
+                // Debug.Log("Space pressed");
+                // Debug.Log(jumpAttacking);
+                // jumpAttack();
+                revisedJumpAttack();
+            }
 
-        if(!jumpAttacking) {
-            HopToPlayer();
-        }
+            if(!jumpAttacking) {
+                HopToPlayer();
+            }
 
-        // if(jumpAttacking){
-        //     jumpAttack();
-        // } else {
-        //     HopToPlayer();
-        // }
+            // if(jumpAttacking){
+            //     jumpAttack();
+            // } else {
+            //     HopToPlayer();
+            // }
+
+        }
         
         
         

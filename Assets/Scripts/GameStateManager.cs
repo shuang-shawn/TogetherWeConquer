@@ -26,9 +26,11 @@ public class GameStateManager : MonoBehaviour
         if (!hasEnded) {
             if (playerManager1.IsDead() && playerManager2.IsDead()) {
                 canvas.transform.Find("LoseWindow").gameObject.SetActive(true);
+                canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
                 hasEnded = true;
             } else if (bossManager.IsDead()) {
                 canvas.transform.Find("WinWindow").gameObject.SetActive(true);
+                canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
                 hasEnded = true;
             }
         }
