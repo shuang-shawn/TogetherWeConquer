@@ -16,6 +16,10 @@ public class ShadowFollowSlimeBoss : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (slimeBoss == null){
+            Destroy(gameObject);
+            return;
+        }
         transform.position = new Vector3(slimeBoss.transform.position.x, transform.position.y, slimeBoss.transform.position.z);
     }
 }

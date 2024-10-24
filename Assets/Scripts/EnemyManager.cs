@@ -37,7 +37,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            TakeDamage(10);
+            TakeDamage(100);
         }
     }
 
@@ -50,6 +50,9 @@ public class EnemyManager : MonoBehaviour
         if (gameObject.tag == "boss")
         {
             healthBar.UpdateHealthBar(currentHealth, maxBossHealth);
+            if (currentHealth / maxHealth < 0.5f) {
+                bossScript.speedPercent = 4;
+            }
         } else if (gameObject.tag == "mob")
         {
             healthBar.UpdateHealthBar(currentHealth, maxHealth);
@@ -67,7 +70,12 @@ public class EnemyManager : MonoBehaviour
     {
         UnityEngine.Debug.Log(gameObject.name + " has died!");
         // Add death handling here (destroy, play animation, etc.)
+        bossScript.IsDead = true;
         animator.SetTrigger("Die");
+    }
+
+    public bool IsDead() {
+        return currentHealth <= 0;
     }
 
     private void SpawnHurtParticles()

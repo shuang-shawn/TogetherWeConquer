@@ -55,7 +55,11 @@ public class PlayerManager : MonoBehaviour
 
         Debug.Log(gameObject.name + " has died!");
         // Add death handling here (destroy, play animation, etc.)
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+    public bool IsDead() {
+        return currentHealth <= 0;
     }
 
     private void SpawnHurtParticles()
