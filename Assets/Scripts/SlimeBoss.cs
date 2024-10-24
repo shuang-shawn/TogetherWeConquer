@@ -22,6 +22,7 @@ public class SlimeBoss : MonoBehaviour
     public int stayInAir = 5;
     public int damage = 20;
     public int landingDelay = 2;
+    public float speedPercent = 1.0f;
 
     //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
     //CURRENT IDEA FORMAT
@@ -172,8 +173,17 @@ public class SlimeBoss : MonoBehaviour
         startPosition = transform.position;
     }
 
+    private void updateSpeed(){
+        speed *= speedPercent;
+        hopHeight *= speedPercent;
+        hopFrequency *= speedPercent;
+        jumpSpeed *= speedPercent;
+        dropSpeed *= speedPercent;
+    }
+
     void FixedUpdate()
     {
+        updateSpeed();
         findClosestPlayer();
         
         if(Input.GetKeyDown(KeyCode.Space) && !jumpAttacking){
