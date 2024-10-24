@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Rebind.unity
     guid: f2ba16702f71a8e4081e763e8456c5a4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HD2D - Combo Window.unity
     guid: 12e1560e30c6ca24fb4e812d53596bc9
   - enabled: 1

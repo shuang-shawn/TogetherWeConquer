@@ -173,6 +173,7 @@ MonoBehaviour:
   duoComboTime: 0
   comboTime: 0
   duoComboManager: {fileID: 0}
+  skillManagerObject: {fileID: 0}
 --- !u!114 &91377676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstInput: 0
   secondInput: 0
-  initiatedCombo: 0
   currentCombo: 
   currentSequenceIndex: 0
   lastKeyPressed: 0
@@ -878,6 +878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c202bdb50bda374b96134c52e1ca0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!54 &859640874
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -914,7 +916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1113209942}
-  - component: {fileID: 1113209941}
+  - component: {fileID: 1113209943}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -922,20 +924,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1113209941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113209940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea1a2b886ad16c4f9acb0ff9bfee82a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BasicEnemy: {fileID: 2733880566037950031, guid: b8514945e5e11fe4e8ff47d1ca2aab0c,
-    type: 3}
 --- !u!4 &1113209942
 Transform:
   m_ObjectHideFlags: 0
@@ -951,6 +939,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1113209943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113209940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d1a7a1a9718c8468e6b81056f24536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BasicEnemy: {fileID: 1260390775947985471, guid: b68b0d4d42e01004ea08b84bea320b3d,
+    type: 3}
 --- !u!1 &1503563062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,6 +1074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c202bdb50bda374b96134c52e1ca0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!54 &1503563068
 Rigidbody:
   m_ObjectHideFlags: 0
