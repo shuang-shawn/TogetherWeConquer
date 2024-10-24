@@ -36,7 +36,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            TakeDamage(10);
+            TakeDamage(100);
         }
     }
 
