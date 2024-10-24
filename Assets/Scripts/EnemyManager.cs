@@ -49,6 +49,9 @@ public class EnemyManager : MonoBehaviour
         if (gameObject.tag == "boss")
         {
             healthBar.UpdateHealthBar(currentHealth, maxBossHealth);
+            if (currentHealth / maxHealth < 0.5f) {
+                bossScript.speedPercent = 4;
+            }
         } else if (gameObject.tag == "mob")
         {
             healthBar.UpdateHealthBar(currentHealth, maxHealth);
