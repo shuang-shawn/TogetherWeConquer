@@ -14,6 +14,9 @@ TagManager:
   - boss
   - mob
   - skill
+  - Hidden
+  - JumpAttackShadow
+  - SlimeBoss
   layers:
   - Default
   - TransparentFX

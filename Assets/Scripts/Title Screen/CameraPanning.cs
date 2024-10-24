@@ -105,6 +105,11 @@ public class CameraPanning : MonoBehaviour
         {
             Destroy(comboManagerTransform.gameObject);
         }
+        comboManagerTransform = player.transform.Find("Canvas");
+        if (comboManagerTransform != null)
+        {
+            Destroy(comboManagerTransform.gameObject);
+        }
     }
 
     void MovePlayers(float cameraSpeed)
