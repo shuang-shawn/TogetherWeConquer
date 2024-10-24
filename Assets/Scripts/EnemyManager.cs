@@ -76,7 +76,24 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void Slow(float slowFactor, float slowTime) {
-        
+        UnityEngine.Debug.Log("slowing down " + gameObject.name);
+        StartCoroutine(SlowDownForDuration(slowFactor, slowTime));
+
+    }
+
+    private IEnumerator SlowDownForDuration(float slowFactor, float slowTime)
+    {
+        // Store the original time scale
+        float originalTimeScale = Time.timeScale;
+
+        // Set the time scale to the slow factor
+        Time.timeScale = slowFactor;
+
+        // Wait for the specified duration
+        yield return new WaitForSecondsRealtime(slowTime); // Use WaitForSecondsRealtime to ignore the time scale
+
+        // Reset the time scale to the original value
+        Time.timeScale = originalTimeScale;
     }
 
 }

@@ -16,6 +16,7 @@ public class SkillManager : MonoBehaviour
     public Material tetherMaterial;
     public ParticleSystem onHit;
     public ParticleSystem fire;
+    public GameObject iceGroundPrefab;
 
 
     // private Dictionary<string, Delegate> skillDictionary;
@@ -29,6 +30,7 @@ public class SkillManager : MonoBehaviour
 
 
         singleIceGround = gameObject.AddComponent<SingleIceGround>();
+        singleIceGround.iceGroundPrefab = iceGroundPrefab; 
 
 
 

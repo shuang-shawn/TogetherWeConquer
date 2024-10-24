@@ -6,7 +6,8 @@ public class SkillCollisionHandler : MonoBehaviour
 {
     public int skillDamage = 0;
     public float slowFactor = 1f;
-    public float slowTime = 3f;
+    public float slowTime = 0f;
+    public bool oneTimeUse = false;
     // private List<string> enemyTags = new(){"boss", "mob"};
 
     
@@ -34,6 +35,11 @@ public class SkillCollisionHandler : MonoBehaviour
         if (target != null) {
             target.TakeDamage(skillDamage);
             target.Slow(slowFactor, slowTime);
+            if (oneTimeUse) {
+                GameObject rootParent = gameObject.transform.root.gameObject;
+                // Destroy the root parent object
+                Destroy(rootParent);
+            }
         }
         
     }
