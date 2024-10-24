@@ -74,26 +74,9 @@ public class EnemyManager : MonoBehaviour
 
         Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
     }
-<<<<<<< Updated upstream
-=======
 
     public void Slow(float slowFactor, float slowTime) {
         
     }
 
-    private void SpawnHurtParticles()
-    {
-        UnityEngine.Debug.Log("Spawning hurt particles!");
-
-        ParticleSystem hurtParticles = Instantiate(hurtParticlesPrefab, gameObject.transform.position, Quaternion.identity);
-
-        hurtParticles.transform.Translate(new Vector3(0.0f, 1.0f, 0.0f));
-
-        hurtParticles.Play();
-
-        UnityEngine.Debug.Log("Hurt particles played!");
-
-        Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
-    }
->>>>>>> Stashed changes
 }
