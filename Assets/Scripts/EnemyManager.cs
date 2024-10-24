@@ -69,6 +69,10 @@ public class EnemyManager : MonoBehaviour
         animator.SetTrigger("Die");
     }
 
+    public bool IsDead() {
+        return currentHealth <= 0;
+    }
+
     private void SpawnHurtParticles()
     {
         ParticleSystem hurtParticles = Instantiate(hurtParticlesPrefab, gameObject.transform.position, Quaternion.identity);
