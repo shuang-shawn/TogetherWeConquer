@@ -63,9 +63,13 @@ public class DuoComboManager : MonoBehaviour
             endingCombo.ToggleInput(true);
             return;
         }
-
-        Debug.Log("Duo Skill ended with: " + player.gameObject.name);
-        skillManager.CastSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
+        if (!abrupt)
+        {
+            Debug.Log("Duo Skill ended with: " + player.gameObject.name);
+            skillManager.CastSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
+        }
+     
+     
         currentCombo = null;
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
