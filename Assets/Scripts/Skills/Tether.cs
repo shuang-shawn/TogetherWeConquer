@@ -51,7 +51,7 @@ public class Tether : MonoBehaviour
             previousToggle = tetherToggle;
         }
         if (tetherToggle) {
-            if (player1 == null || player2 == null) {
+            if (!player1.activeInHierarchy || !player2.activeInHierarchy) {
                 ToggleTether(false);
                 return;
             }

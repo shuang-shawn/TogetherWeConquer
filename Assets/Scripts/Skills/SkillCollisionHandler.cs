@@ -34,7 +34,9 @@ public class SkillCollisionHandler : MonoBehaviour
         EnemyManager target = other.gameObject.GetComponent<EnemyManager>();
         if (target != null) {
             target.TakeDamage(skillDamage);
-            target.Slow(slowFactor, slowTime);
+            if (slowFactor != 1) {
+                target.Slow(slowFactor, slowTime);
+            }
             if (oneTimeUse) {
                 GameObject rootParent = gameObject.transform.root.gameObject;
                 // Destroy the root parent object
