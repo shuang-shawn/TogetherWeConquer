@@ -2162,7 +2162,7 @@ MonoBehaviour:
   playerManager1: {fileID: 0}
   playerManager2: {fileID: 0}
   bossManager: {fileID: 0}
-  canvas: {fileID: 0}
+  canvas: {fileID: 1251522603}
 --- !u!4 &1409611445
 Transform:
   m_ObjectHideFlags: 0
