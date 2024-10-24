@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SlimeBoss : MonoBehaviour
@@ -23,6 +24,7 @@ public class SlimeBoss : MonoBehaviour
     public int damage = 20;
     public int landingDelay = 2;
     public float speedPercent = 1.0f;
+    public float previousSpeedPercent = 1.0f;
 
     //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
     //CURRENT IDEA FORMAT
@@ -173,16 +175,31 @@ public class SlimeBoss : MonoBehaviour
         startPosition = transform.position;
     }
 
-    private void updateSpeed(){
-        speed *= speedPercent;
-        hopFrequency *= speedPercent;
-        jumpSpeed *= speedPercent;
-        dropSpeed *= speedPercent;
+    private void updateSpeed(float percent){
+        speed *= percent;
+        hopFrequency *= percent;
+        jumpSpeed *= percent;
+        dropSpeed *= percent;
+    }
+    void ResetSpeed() {
+        speed = 2.0f;
+        jumpSpeed = 20f;
+        dropSpeed = 20f;
+        hopFrequency = 5f;
     }
 
     void FixedUpdate()
     {
-        updateSpeed();
+        if (previousSpeedPercent != speedPercent) {
+            if (speedPercent == 1) {
+                ResetSpeed();
+            } else {
+                ResetSpeed();
+                updateSpeed(speedPercent);
+            }
+            previousSpeedPercent = speedPercent;
+        }
+        
         findClosestPlayer();
         
         if(Input.GetKeyDown(KeyCode.Space) && !jumpAttacking){

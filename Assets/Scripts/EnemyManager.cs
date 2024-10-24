@@ -13,6 +13,9 @@ public class EnemyManager : MonoBehaviour
     public HealthBar healthBar;
     public ParticleSystem hurtParticlesPrefab;
     public Animator animator;
+    public SlimeBoss bossScript;
+
+    public bool slowed = false;
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,8 @@ public class EnemyManager : MonoBehaviour
             damageAmount = 10;
             currentHealth = maxHealth;
         }
+
+        bossScript = GetComponent<SlimeBoss>();
     }
 
     // Update is called once per frame
@@ -83,17 +88,16 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator SlowDownForDuration(float slowFactor, float slowTime)
     {
-        // Store the original time scale
-        float originalTimeScale = Time.timeScale;
-
-        // Set the time scale to the slow factor
-        Time.timeScale = slowFactor;
+        float originalSpeed = bossScript.speedPercent;
+        bossScript.speedPercent = slowFactor;
+        slowed = true;
 
         // Wait for the specified duration
         yield return new WaitForSecondsRealtime(slowTime); // Use WaitForSecondsRealtime to ignore the time scale
 
         // Reset the time scale to the original value
-        Time.timeScale = originalTimeScale;
+        bossScript.speedPercent = originalSpeed;
+        slowed = false;
     }
 
 }
