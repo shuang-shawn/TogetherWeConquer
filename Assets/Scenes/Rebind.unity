@@ -303,7 +303,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: I/J/K/L
+      value: Up/Left/Down/Right
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -673,7 +673,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: Down [Keyboard]
+      value: ; [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -1090,7 +1090,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: Left [Keyboard]
+      value: G [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -1394,7 +1394,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: Up [Keyboard]
+      value: P [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -1564,7 +1564,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: Up [Keyboard]
+      value: Y [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -1823,7 +1823,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: E [Keyboard]
+      value: O [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -1996,6 +1996,7 @@ GameObject:
   - component: {fileID: 828845012}
   - component: {fileID: 828845016}
   - component: {fileID: 828845017}
+  - component: {fileID: 828845018}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2116,6 +2117,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 7dee962c77266344f9133841f616f6c3, type: 3}
+--- !u!114 &828845018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828845011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d54a6de6bf57b458f84a3d33833e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &998303462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,17 +2157,17 @@ RectTransform:
   m_GameObject: {fileID: 998303462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 556649849}
   m_Father: {fileID: 828845015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 129}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &998303464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2283,11 +2296,11 @@ RectTransform:
   - {fileID: 339860196}
   m_Father: {fileID: 828845015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 610, y: 129}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1149241556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2332,16 +2345,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 828845016}
-        m_TargetAssemblyTypeName: ResetDeviceBindings, Unity.InputSystem.RebindingUI
-        m_MethodName: StartGame
-        m_Mode: 1
+      - m_Target: {fileID: 828845018}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: HD2D_Skills
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1149241557
@@ -2393,7 +2406,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: Right [Keyboard]
+      value: ''' [Keyboard]'
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -2670,7 +2683,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: Left [Keyboard]
+      value: L [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -2840,7 +2853,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: Right [Keyboard]
+      value: J [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -3035,8 +3048,8 @@ Camera:
   m_GameObject: {fileID: 1590886730}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.42341578, g: 0.5188679, b: 0.43290532, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3317,7 +3330,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: Down [Keyboard]
+      value: H [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
@@ -3684,7 +3697,7 @@ PrefabInstance:
     - target: {fileID: 123786944660231385, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: Num 7 [Keyboard]
       objectReference: {fileID: 0}
     - target: {fileID: 4548144825709043450, guid: f25dcd618d3acd64795bf8bb32edb6c9,
         type: 3}

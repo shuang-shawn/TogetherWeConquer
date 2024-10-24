@@ -8,6 +8,8 @@ public class SpawnEnemy : MonoBehaviour
     public GameObject BasicEnemy;
     private static float minDistance = 10f;
     private static float maxDistance = 12f;
+    public static float spawnDelay = 2f;
+    private float spawnTimer = 0f;
     Vector3 cameraPointOnFloor;
 
     private Vector3 findRayPointOnFloor(Ray ray){
@@ -69,17 +71,32 @@ public class SpawnEnemy : MonoBehaviour
         return randomSpawnPoint;
     }
 
-    void Update()
+    void Start() {
+        cameraPointOnFloor = findCameraPointOnFloor();
+    }
+
+    void FixedUpdate()
     {
         cameraPointOnFloor = findCameraPointOnFloor();
 
+        //For Testing Purposes
+    //     if(Input.GetKeyDown(KeyCode.Space)){
 
-        if(Input.GetKeyDown(KeyCode.Space)){
+    //         Vector3 randomSpawnPoint = generateRandomSpawnPoint(cameraPointOnFloor);
 
+    //         // Vector3 randomSpawnPosition = new Vector3(Random.Range(-10, 11), 1, Random.Range(-10, 11));
+    //         Instantiate(BasicEnemy, randomSpawnPoint, Quaternion.identity);
+    //     }
+
+        spawnTimer += Time.deltaTime;
+
+        if(spawnTimer >= spawnDelay) {
+            spawnTimer = 0;
             Vector3 randomSpawnPoint = generateRandomSpawnPoint(cameraPointOnFloor);
-
-            // Vector3 randomSpawnPosition = new Vector3(Random.Range(-10, 11), 1, Random.Range(-10, 11));
+            Vector3 randomSpawnPosition = new Vector3(Random.Range(-10, 11), 1, Random.Range(-10, 11));
             Instantiate(BasicEnemy, randomSpawnPoint, Quaternion.identity);
         }
     }
+
+
 }
