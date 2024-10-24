@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
 
     public HealthBar healthBar;
     public ParticleSystem hurtParticlesPrefab;
+    public ParticleSystem slowParticlesPrefab;
     public Animator animator;
     public SlimeBoss bossScript;
 
@@ -92,6 +93,8 @@ public class EnemyManager : MonoBehaviour
         bossScript.speedPercent = slowFactor;
         slowed = true;
 
+        SlowParticles(slowTime);
+
         // Wait for the specified duration
         yield return new WaitForSecondsRealtime(slowTime); // Use WaitForSecondsRealtime to ignore the time scale
 
@@ -100,4 +103,27 @@ public class EnemyManager : MonoBehaviour
         slowed = false;
     }
 
+    private void SlowParticles(float duration)
+    {
+        ParticleSystem slowParticles = Instantiate(slowParticlesPrefab, gameObject.transform.position, Quaternion.identity);
+
+        slowParticles.transform.SetParent(gameObject.transform);
+
+        Vector3 collider = GetComponent<Collider>().bounds.size;
+        float size = Mathf.Max(collider.x, collider.y, collider.z);
+        float radius = size * 2f;
+
+        UnityEngine.Debug.Log("Size " + size);
+        UnityEngine.Debug.Log("Radius " + radius);
+
+        var slowMain = slowParticles.main;
+        var slowShape = slowParticles.shape;
+        slowMain.duration = duration;
+        slowMain.startSize = size;
+        slowShape.radius = radius;
+
+        slowParticles.Play();
+
+        Destroy(slowParticles.gameObject, slowParticles.main.duration + slowParticles.main.startLifetime.constantMax);
+    }
 }
