@@ -175,7 +175,6 @@ public class SlimeBoss : MonoBehaviour
 
     private void updateSpeed(){
         speed *= speedPercent;
-        hopHeight *= speedPercent;
         hopFrequency *= speedPercent;
         jumpSpeed *= speedPercent;
         dropSpeed *= speedPercent;
