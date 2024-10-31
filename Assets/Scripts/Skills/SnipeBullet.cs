@@ -5,19 +5,32 @@ using UnityEngine;
 public class SnipeBullet : MonoBehaviour
 {
     public int skillDamage = 50;
+    private Renderer objectRenderer;
+    private int framesToWait = 5;
     // private EnemyManager enemy;
     // private PlayerManager ally;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        objectRenderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (framesToWait > 0)
+        {
+            framesToWait--;
+            return;
+        }
+        if (!objectRenderer.isVisible)
+        {
+            Debug.Log($"{gameObject.name} is not visible in the current scene.");
+            Destroy(gameObject);
+
+            // Perform any action if the object is not visible
+        }
     }
 
     private void OnCollisionEnter(Collision other) {
