@@ -14,6 +14,9 @@ public class ShadowSkill : MonoBehaviour
     private GameObject currentP1Shadow;
     private GameObject currentP2Shadow;
 
+    public GameObject placeEffect;
+    public GameObject teleportEffect;
+
     private void Start()
     {
         player1 = GameObject.Find(P1_TAG);
@@ -27,6 +30,8 @@ public class ShadowSkill : MonoBehaviour
         if (currentShadow == null)
         {
             currentShadow = Instantiate(shadowPrefab, player.transform.position, Quaternion.identity);
+             GameObject currPlaceEffect = Instantiate(placeEffect, player.transform.position, Quaternion.identity);
+                Destroy(currPlaceEffect, 1f);
             if (playerTag == P1_TAG)
             {
                 currentP1Shadow = currentShadow;
@@ -42,10 +47,12 @@ public class ShadowSkill : MonoBehaviour
 
     private void TeleportToShadow(GameObject player, GameObject currentShadow, string playerTag)
     {
+        GameObject currTeleportEffect = Instantiate(teleportEffect, player.transform.position, Quaternion.identity);
         player.transform.position = currentShadow.transform.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         Physics.SyncTransforms();
         Destroy(currentShadow);
+        Destroy(currTeleportEffect, 1f);
         if (playerTag == P1_TAG)
         {
             currentP1Shadow = null;

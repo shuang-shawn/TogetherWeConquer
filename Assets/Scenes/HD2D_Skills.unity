@@ -1134,6 +1134,10 @@ MonoBehaviour:
   shadowSkill: {fileID: 0}
   shadowSkillPrefab: {fileID: 2803505663424749585, guid: b273de0d6e5818a4cb3195ce4f376ccb,
     type: 3}
+  shadowSkillPlaceEffect: {fileID: 7516425925663394198, guid: 3e4b9cd50fcaabd4eba6bc4c8be5e09b,
+    type: 3}
+  shadowSkillTeleportEffect: {fileID: 1645622845278563384, guid: 546bec032419ec14d81b1e7bd0af7191,
+    type: 3}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0

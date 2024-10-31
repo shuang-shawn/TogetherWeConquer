@@ -20,6 +20,8 @@ public class SkillManager : MonoBehaviour
 
     public ShadowSkill shadowSkill;
     public GameObject shadowSkillPrefab;
+    public GameObject shadowSkillPlaceEffect;
+    public GameObject shadowSkillTeleportEffect;
 
     // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
@@ -42,6 +44,8 @@ public class SkillManager : MonoBehaviour
 
         shadowSkill = gameObject.AddComponent<ShadowSkill>();
         shadowSkill.shadowPrefab = shadowSkillPrefab;
+        shadowSkill.placeEffect = shadowSkillPlaceEffect;
+        shadowSkill.teleportEffect = shadowSkillTeleportEffect;
     }
 
     // Update is called once per frame
