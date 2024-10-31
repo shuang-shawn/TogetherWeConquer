@@ -5,6 +5,7 @@ using UnityEngine;
 public class SnipeBullet : MonoBehaviour
 {
     public int skillDamage = 50;
+    public AudioController audioController;
     private Renderer objectRenderer;
     private int framesToWait = 5;
     // private EnemyManager enemy;
@@ -36,11 +37,13 @@ public class SnipeBullet : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.TryGetComponent<EnemyManager>(out EnemyManager target)) {
             target.TakeDamage(skillDamage);
+            audioController.PlayBossSnipeHit();
             Destroy(gameObject);
             return;
         }
         if (other.gameObject.TryGetComponent<PlayerManager>(out PlayerManager ally)) {
             ally.TakeDamage(skillDamage);
+            audioController.PlayBossSnipeHit();
             Destroy(gameObject);
             return;
         }

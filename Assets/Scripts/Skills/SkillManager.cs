@@ -19,6 +19,7 @@ public class SkillManager : MonoBehaviour
     public ParticleSystem fire;
     public GameObject iceGroundPrefab;
     public GameObject snipeBulletPrefab;
+    public AudioController audioController;
 
 
     // private Dictionary<string, Delegate> skillDictionary;
@@ -60,7 +61,10 @@ public class SkillManager : MonoBehaviour
             playerNum = 2;
         }
         switch (skillName) {
-            case "snipe": duoSnipe.CastSnipePrep(playerNum); break;
+            case "snipe": 
+            duoSnipe.CastSnipePrep(playerNum);
+            audioController.PlaySnipePrep();
+            break;
         }
     }
 
@@ -82,7 +86,10 @@ public class SkillManager : MonoBehaviour
             case "iceground": singleIceGround.CastIceGround(playerNum);
                 break;
             case "tether": tether.CastTether(); break;
-            case "snipe": duoSnipe.CastSnipe(playerNum); break;
+            case "snipe": 
+            duoSnipe.CastSnipe(playerNum); 
+            audioController.PlaySnipeFinish(); 
+            break;
         }
     }
 
