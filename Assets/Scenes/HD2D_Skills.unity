@@ -1131,6 +1131,9 @@ MonoBehaviour:
   fire: {fileID: 1366504390285116651, guid: dedb794fc3a18504eb36ab2929d9fd77, type: 3}
   iceGroundPrefab: {fileID: 7848673171473098260, guid: f0cdf41b3ae44214eac32631d5bf09d0,
     type: 3}
+  shadowSkill: {fileID: 0}
+  shadowSkillPrefab: {fileID: 2803505663424749585, guid: b273de0d6e5818a4cb3195ce4f376ccb,
+    type: 3}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0

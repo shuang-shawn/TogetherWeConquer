@@ -18,6 +18,8 @@ public class SkillManager : MonoBehaviour
     public ParticleSystem fire;
     public GameObject iceGroundPrefab;
 
+    public ShadowSkill shadowSkill;
+    public GameObject shadowSkillPrefab;
 
     // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
@@ -38,7 +40,8 @@ public class SkillManager : MonoBehaviour
         tether.tetherMaterial = tetherMaterial;
         tether.onHit = onHit;
 
-
+        shadowSkill = gameObject.AddComponent<ShadowSkill>();
+        shadowSkill.shadowPrefab = shadowSkillPrefab;
     }
 
     // Update is called once per frame
@@ -65,6 +68,12 @@ public class SkillManager : MonoBehaviour
             case "iceground": singleIceGround.CastIceGround(playerNum);
                 break;
             case "tether": tether.CastTether(); break;
+
+            case "shadow":
+                shadowSkill.CastShadow(playerTag);
+                break;
+            default:
+                break;
         }
     }
 
