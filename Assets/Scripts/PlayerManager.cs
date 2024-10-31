@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage) {
+    public void TakeDamage(int damage) {
         currentHealth -= damage;
         Debug.Log(gameObject.name + " took " + damage + " damage!");
 

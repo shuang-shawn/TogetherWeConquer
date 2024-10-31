@@ -11,12 +11,14 @@ public class SkillManager : MonoBehaviour
     public SingleDash singleDash1;
     public SingleDash singleDash2;
     public SingleIceGround singleIceGround;
+    public DuoSnipe duoSnipe;
 
     public ParticleSystem dashParticlesPrefab;
     public Material tetherMaterial;
     public ParticleSystem onHit;
     public ParticleSystem fire;
     public GameObject iceGroundPrefab;
+    public GameObject snipeBulletPrefab;
 
 
     // private Dictionary<string, Delegate> skillDictionary;
@@ -38,6 +40,9 @@ public class SkillManager : MonoBehaviour
         tether.tetherMaterial = tetherMaterial;
         tether.onHit = onHit;
 
+        duoSnipe = gameObject.AddComponent<DuoSnipe>();
+        duoSnipe.snipeBulletPrefab = snipeBulletPrefab;
+
 
     }
 
@@ -45,6 +50,18 @@ public class SkillManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void CastFirstHalfDuoSkill(string skillName, string playerTag, ComboType comboType) {
+        int playerNum = 0;
+        if (playerTag == "Player1") {
+            playerNum = 1;
+        } else if (playerTag == "Player2") {
+            playerNum = 2;
+        }
+        switch (skillName) {
+            case "snipe": duoSnipe.CastSnipePrep(playerNum); break;
+        }
     }
 
     public void CastSkill(string skillName, string playerTag, ComboType comboType) {
@@ -65,6 +82,7 @@ public class SkillManager : MonoBehaviour
             case "iceground": singleIceGround.CastIceGround(playerNum);
                 break;
             case "tether": tether.CastTether(); break;
+            case "snipe": duoSnipe.CastSnipe(playerNum); break;
         }
     }
 
