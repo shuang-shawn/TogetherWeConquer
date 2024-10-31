@@ -29,9 +29,10 @@ public class ShadowSkill : MonoBehaviour
         
         if (currentShadow == null)
         {
-            currentShadow = Instantiate(shadowPrefab, player.transform.position, Quaternion.identity);
-             GameObject currPlaceEffect = Instantiate(placeEffect, player.transform.position, Quaternion.identity);
-                Destroy(currPlaceEffect, 1f);
+            Vector3 shadowPosition = player.transform.position + new Vector3(0, 0, 0.001f);
+            currentShadow = Instantiate(shadowPrefab, shadowPosition, Quaternion.identity);
+            GameObject currPlaceEffect = Instantiate(placeEffect, player.transform.position, Quaternion.identity);
+            Destroy(currPlaceEffect, 1f);
             if (playerTag == P1_TAG)
             {
                 currentP1Shadow = currentShadow;

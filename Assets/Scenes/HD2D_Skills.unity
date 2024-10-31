@@ -1132,7 +1132,7 @@ MonoBehaviour:
   iceGroundPrefab: {fileID: 7848673171473098260, guid: f0cdf41b3ae44214eac32631d5bf09d0,
     type: 3}
   shadowSkill: {fileID: 0}
-  shadowSkillPrefab: {fileID: 2803505663424749585, guid: b273de0d6e5818a4cb3195ce4f376ccb,
+  shadowSkillPrefab: {fileID: 499058461318867708, guid: 60da8d98a4fad8c43abd3879d43e6043,
     type: 3}
   shadowSkillPlaceEffect: {fileID: 7516425925663394198, guid: 3e4b9cd50fcaabd4eba6bc4c8be5e09b,
     type: 3}
