@@ -8,7 +8,7 @@ public class DuoSnipe : MonoBehaviour
     public GameObject snipeBulletPrefab;
     private GameObject castingPlayer;
     private GameObject prepingPlayer;
-    public float shootForce = 15f;
+    public float shootForce = 25f;
     public float spawnOffset = 1f;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,11 @@ public class DuoSnipe : MonoBehaviour
     
     public void CastSnipePrep(int playerNum) {
         Debug.Log("player " + playerNum + " casting sniper prep");
+        prepingPlayer = GameObject.FindWithTag("Player" + playerNum);
+        if (prepingPlayer.TryGetComponent<PlayerManager>(out PlayerManager player)) {
+            player.crosshair.ToggleCrosshair();
+        }
+        
     }  
 
     public void CastSnipe(int playerNum) {
@@ -51,6 +56,9 @@ public class DuoSnipe : MonoBehaviour
         // Add force to the projectile to shoot it toward Player 1
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(direction * shootForce, ForceMode.VelocityChange);
+        if (prepingPlayer.TryGetComponent<PlayerManager>(out PlayerManager player)) {
+            player.crosshair.ToggleCrosshair();
+        }
 
 
 
