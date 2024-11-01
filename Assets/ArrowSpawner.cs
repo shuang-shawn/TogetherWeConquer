@@ -21,6 +21,10 @@ public class ArrowSpawner : MonoBehaviour
 
     public float arrowLifetime = 2f; // Time before each arrow is destroyed
 
+    public Vector3 currentArrowDirection = Vector3.right;
+
+    public bool spawnArrows = true;
+
     private void Start()
     {
         // Start the coroutine to spawn arrows at intervals
@@ -29,18 +33,30 @@ public class ArrowSpawner : MonoBehaviour
 
     private IEnumerator SpawnArrows()
     {
-        while (true)
+        while (spawnArrows)
         {
             // Instantiate the arrow GameObject at the spawner's position and with rotation
-             float randomHeight = Random.Range(minHeightOffset, minHeightOffset + maxHeightOffset);
-             GameObject arrow = Instantiate(arrowPrefab, new Vector3(transform.position.x, randomHeight, transform.position.z), Quaternion.identity, transform);
+            float randomHeight = Random.Range(minHeightOffset, minHeightOffset + maxHeightOffset);
 
+            Quaternion rotation = Quaternion.identity;
+
+            if (currentArrowDirection == Vector3.left) {
+
+                rotation = Quaternion.Euler(0, 180, 0);
+            }
+
+            GameObject arrow = Instantiate(arrowPrefab, new Vector3(transform.position.x, randomHeight, transform.position.z), rotation, transform);
             // Destroy the arrow after its lifetime expires
-             Destroy(arrow, arrowLifetime);
+            Destroy(arrow, arrowLifetime);
 
             float randomSpawnDelay = Random.Range(minSpawnRate, maxSpawnRate);
             // Wait for the next spawn interval
             yield return new WaitForSeconds(randomSpawnDelay);
         }
+    }
+
+    public void RotateDirection(Vector3 direction)
+    {
+        currentArrowDirection = direction;
     }
 }

@@ -22,7 +22,7 @@ public class PlayerMovement:MonoBehaviour
 
     Rigidbody rb;
 
-    public event Action<Vector3> OnDirectionChange;
+    public event Action<Vector3, string> OnDirectionChange;
 
     private void Awake()
     {
@@ -69,7 +69,7 @@ public class PlayerMovement:MonoBehaviour
                 // If direction changed, trigger the event
                 if (lastDirectionX != previousDirectionX && OnDirectionChange != null)
                 {
-                    OnDirectionChange?.Invoke(lastDirectionX); // Trigger event
+                    OnDirectionChange?.Invoke(lastDirectionX, gameObject.tag); // Trigger event
                     previousDirectionX = lastDirectionX; // Update previous direction
                 }
             }

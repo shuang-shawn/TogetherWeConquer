@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public float speed = 10f;  // Speed of the arrow
+    [SerializeField]
+    private float speed = 10f;  // Speed of the arrow
 
-    private void Update()
+    private void FixedUpdate()
     {
         // Move the arrow forward in a straight line
         transform.Translate(Vector3.right * speed * Time.deltaTime);

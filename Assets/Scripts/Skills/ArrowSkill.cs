@@ -12,8 +12,8 @@ public class ArrowSkill : MonoBehaviour
     private GameObject player1;
     private GameObject player2;
 
-    private GameObject player1ArrowSpawner;
-    private GameObject player2ArrowSpawner;
+    private ArrowSpawner player1ArrowSpawner;
+    private ArrowSpawner player2ArrowSpawner;
 
     private PlayerMovement player1Movement;
     private PlayerMovement player2Movement;
@@ -35,23 +35,31 @@ public class ArrowSkill : MonoBehaviour
     {
         player1Movement.OnDirectionChange += HandleDirection;
         player2Movement.OnDirectionChange += HandleDirection;
-        player1ArrowSpawner = Instantiate(arrowSpawnerPrefab, player1.transform.position, Quaternion.identity, player1.transform);
-        player2ArrowSpawner = Instantiate(arrowSpawnerPrefab, player2.transform.position, Quaternion.identity, player2.transform);
+        player1ArrowSpawner = Instantiate(arrowSpawnerPrefab, player1.transform.position, Quaternion.identity, player1.transform).GetComponent<ArrowSpawner>();
+        player2ArrowSpawner = Instantiate(arrowSpawnerPrefab, player2.transform.position, Quaternion.identity, player2.transform).GetComponent<ArrowSpawner>();
         StartCoroutine(EndArrowBarrage());
     }
 
     private IEnumerator EndArrowBarrage()
     {
         yield return new WaitForSeconds(skillDuration);
-        Destroy(player1ArrowSpawner);
-        Destroy(player2ArrowSpawner);
+        player1ArrowSpawner.spawnArrows = false;
+        player2ArrowSpawner.spawnArrows = false;
+        Destroy(player1ArrowSpawner, 2f);
+        Destroy(player2ArrowSpawner, 2f);
         player1Movement.OnDirectionChange -= HandleDirection;
         player2Movement.OnDirectionChange -= HandleDirection;
-
     }
 
-    private void HandleDirection(Vector3 vector)
+    private void HandleDirection(Vector3 vector, string playerTag)
     {
-        
+        ArrowSpawner currentArrowSpawner = (playerTag == P1_TAG) ? player1ArrowSpawner : player2ArrowSpawner; 
+        if (vector.x == 1)
+        {
+            currentArrowSpawner.RotateDirection(Vector3.right);
+        } else
+        {
+            currentArrowSpawner.RotateDirection(Vector3.left);
+        }
     }
 }
