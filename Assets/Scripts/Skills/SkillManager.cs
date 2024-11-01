@@ -23,6 +23,8 @@ public class SkillManager : MonoBehaviour
     public GameObject shadowSkillPlaceEffect;
     public GameObject shadowSkillTeleportEffect;
 
+    public ArrowSkill arrowSkill;
+    public GameObject arrowSpawnerPrefab;
     // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,9 @@ public class SkillManager : MonoBehaviour
         shadowSkill.shadowPrefab = shadowSkillPrefab;
         shadowSkill.placeEffect = shadowSkillPlaceEffect;
         shadowSkill.teleportEffect = shadowSkillTeleportEffect;
+
+        arrowSkill = gameObject.AddComponent<ArrowSkill>();
+        arrowSkill.arrowSpawnerPrefab = arrowSpawnerPrefab;
     }
 
     // Update is called once per frame
@@ -75,6 +80,9 @@ public class SkillManager : MonoBehaviour
 
             case "shadow":
                 shadowSkill.CastShadow(playerTag);
+                break;
+            case "arrow_barrage":
+                arrowSkill.CastArrowBarrage();
                 break;
             default:
                 break;

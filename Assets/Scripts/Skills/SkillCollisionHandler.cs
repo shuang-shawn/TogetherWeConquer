@@ -38,9 +38,7 @@ public class SkillCollisionHandler : MonoBehaviour
                 target.Slow(slowFactor, slowTime);
             }
             if (oneTimeUse) {
-                GameObject rootParent = gameObject.transform.root.gameObject;
-                // Destroy the root parent object
-                Destroy(rootParent);
+                Destroy(gameObject);
             }
         }
         

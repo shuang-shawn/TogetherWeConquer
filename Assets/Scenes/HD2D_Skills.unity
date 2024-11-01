@@ -1138,6 +1138,9 @@ MonoBehaviour:
     type: 3}
   shadowSkillTeleportEffect: {fileID: 1645622845278563384, guid: 546bec032419ec14d81b1e7bd0af7191,
     type: 3}
+  arrowSkill: {fileID: 0}
+  arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
+    type: 3}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0
