@@ -44,7 +44,7 @@ public class ComboWindowUI : MonoBehaviour
 
     void Start()
     {
-        comboList = GetComponent<ComboList>();
+        comboList = GameObject.FindGameObjectWithTag("ComboListManager").GetComponent<ComboList>();
         InitializeComboWindow(comboList.soloComboList, p1SoloCombosCached, p2SoloCombosCached, true); // Instantiates all solo combo gameobjects, set to visible by default 
         InitializeComboWindow(comboList.duoComboList, p1DuoCombosCached, p2DuoCombosCached, false);  // Instantiates all duo combo gameobjects, stored for later use
     }

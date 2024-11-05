@@ -20,7 +20,7 @@ public class ArrowSpawner : MonoBehaviour
     private float maxHeightOffset = 1f;
 
     [SerializeField]
-    private float arrowLifetime = 2f; // Time before each arrow is destroyed
+    private float arrowLifetime = 3f; // Time before each arrow is destroyed
 
     private Vector3 currentArrowDirection = Vector3.right;
 

@@ -48,9 +48,10 @@ public class ComboInput : MonoBehaviour
         cancel = actionMap.FindAction("Cancel");
         duoToggle = actionMap.FindAction("DuoToggle");
         comboData = GetComponent<ComboData>();
-        comboList = GetComponent<ComboList>();
+        
         comboUI = GetComponent<ComboUI>();
 
+        comboList = GameObject.FindGameObjectWithTag("ComboListManager").GetComponent<ComboList>();
         duoComboManager = GameObject.FindGameObjectWithTag("DuoComboManager")?.GetComponent<DuoComboManager>();
         comboWindowUI = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
         

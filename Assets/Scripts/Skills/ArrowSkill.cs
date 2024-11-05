@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ArrowSkill : MonoBehaviour
 {
@@ -23,6 +21,8 @@ public class ArrowSkill : MonoBehaviour
     [SerializeField]
     private float skillDuration = 10f;
 
+    [SerializeField]
+    private Coroutine currentBarrage;
     private void Start()
     {
         player1 = GameObject.Find(P1_TAG);
@@ -34,17 +34,25 @@ public class ArrowSkill : MonoBehaviour
 
     public void CastArrowBarrage()
     {
-        // Sets Handle Direction callback function
-        player1Movement.OnDirectionChange += HandleDirection;
-        player2Movement.OnDirectionChange += HandleDirection;
-        player1ArrowSpawner = Instantiate(arrowSpawnerPrefab, player1.transform.position, Quaternion.identity, player1.transform).GetComponent<ArrowSpawner>();
-        player2ArrowSpawner = Instantiate(arrowSpawnerPrefab, player2.transform.position, Quaternion.identity, player2.transform).GetComponent<ArrowSpawner>();
+        if (currentBarrage != null)
+        {
+            EndArrowBarrageEarly();
+        }
+        else
+        {
+            // Sets Handle Direction callback function
+            player1Movement.OnDirectionChange += HandleDirection;
+            player2Movement.OnDirectionChange += HandleDirection;
+            player1ArrowSpawner = Instantiate(arrowSpawnerPrefab, player1.transform.position, Quaternion.identity, player1.transform).GetComponent<ArrowSpawner>();
+            player2ArrowSpawner = Instantiate(arrowSpawnerPrefab, player2.transform.position, Quaternion.identity, player2.transform).GetComponent<ArrowSpawner>();
 
-        // Calls callback function right away for initial player direction
-        HandleDirection(player1Movement.lastDirectionX, P1_TAG);
-        HandleDirection(player2Movement.lastDirectionX, P2_TAG);
+            // Calls callback function right away for initial player direction
+            HandleDirection(player1Movement.lastDirectionX, P1_TAG);
+            HandleDirection(player2Movement.lastDirectionX, P2_TAG);
 
-        StartCoroutine(EndArrowBarrage());
+            currentBarrage = StartCoroutine(EndArrowBarrage());
+        }
+    
     }
 
     // Changes the direction of arrows fired depending on players direction
@@ -71,6 +79,23 @@ public class ArrowSkill : MonoBehaviour
         Destroy(player2ArrowSpawner.gameObject, 2f);
         player1Movement.OnDirectionChange -= HandleDirection;
         player2Movement.OnDirectionChange -= HandleDirection;
+        currentBarrage = null;
     }
+
+    // Forcefully ends the arrow barrage
+    private void EndArrowBarrageEarly()
+    {
+        StopCoroutine(currentBarrage);
+
+        player1ArrowSpawner.spawnArrows = false;
+        player2ArrowSpawner.spawnArrows = false;
+
+        Destroy(player1ArrowSpawner.gameObject, 2f);
+        Destroy(player2ArrowSpawner.gameObject, 2f);
+        player1Movement.OnDirectionChange -= HandleDirection;
+        player2Movement.OnDirectionChange -= HandleDirection;
+        currentBarrage = null;
+    }
+
 
 }
