@@ -19,18 +19,19 @@ public class ArrowSpawner : MonoBehaviour
     [SerializeField]
     private float maxHeightOffset = 1f;
 
-    public float arrowLifetime = 2f; // Time before each arrow is destroyed
+    [SerializeField]
+    private float arrowLifetime = 2f; // Time before each arrow is destroyed
 
-    public Vector3 currentArrowDirection = Vector3.right;
+    private Vector3 currentArrowDirection = Vector3.right;
 
     public bool spawnArrows = true;
 
     private void Start()
     {
-        // Start the coroutine to spawn arrows at intervals
         StartCoroutine(SpawnArrows());
     }
 
+    // Spawns the barrage of arrows in intervals
     private IEnumerator SpawnArrows()
     {
         while (spawnArrows)
@@ -50,6 +51,7 @@ public class ArrowSpawner : MonoBehaviour
             Destroy(arrow, arrowLifetime);
 
             float randomSpawnDelay = Random.Range(minSpawnRate, maxSpawnRate);
+
             // Wait for the next spawn interval
             yield return new WaitForSeconds(randomSpawnDelay);
         }

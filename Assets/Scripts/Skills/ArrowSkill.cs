@@ -20,7 +20,9 @@ public class ArrowSkill : MonoBehaviour
 
     public GameObject arrowSpawnerPrefab;
 
+    [SerializeField]
     private float skillDuration = 10f;
+
     private void Start()
     {
         player1 = GameObject.Find(P1_TAG);
@@ -30,36 +32,45 @@ public class ArrowSkill : MonoBehaviour
         player2Movement = player2.GetComponent<PlayerMovement>();
     }
 
-
     public void CastArrowBarrage()
     {
+        // Sets Handle Direction callback function
         player1Movement.OnDirectionChange += HandleDirection;
         player2Movement.OnDirectionChange += HandleDirection;
         player1ArrowSpawner = Instantiate(arrowSpawnerPrefab, player1.transform.position, Quaternion.identity, player1.transform).GetComponent<ArrowSpawner>();
         player2ArrowSpawner = Instantiate(arrowSpawnerPrefab, player2.transform.position, Quaternion.identity, player2.transform).GetComponent<ArrowSpawner>();
+
+        // Calls callback function right away for initial player direction
+        HandleDirection(player1Movement.lastDirectionX, P1_TAG);
+        HandleDirection(player2Movement.lastDirectionX, P2_TAG);
+
         StartCoroutine(EndArrowBarrage());
     }
 
+    // Changes the direction of arrows fired depending on players direction
+    private void HandleDirection(Vector3 vector, string playerTag)
+    {
+        ArrowSpawner currentArrowSpawner = (playerTag == P1_TAG) ? player1ArrowSpawner : player2ArrowSpawner;
+        if (vector.x == 1)
+        {
+            currentArrowSpawner.RotateDirection(Vector3.right);
+        }
+        else
+        {
+            currentArrowSpawner.RotateDirection(Vector3.left);
+        }
+    }
+
+    // Ends the arrow barrage after a period of time
     private IEnumerator EndArrowBarrage()
     {
         yield return new WaitForSeconds(skillDuration);
         player1ArrowSpawner.spawnArrows = false;
         player2ArrowSpawner.spawnArrows = false;
-        Destroy(player1ArrowSpawner, 2f);
-        Destroy(player2ArrowSpawner, 2f);
+        Destroy(player1ArrowSpawner.gameObject, 2f);
+        Destroy(player2ArrowSpawner.gameObject, 2f);
         player1Movement.OnDirectionChange -= HandleDirection;
         player2Movement.OnDirectionChange -= HandleDirection;
     }
 
-    private void HandleDirection(Vector3 vector, string playerTag)
-    {
-        ArrowSpawner currentArrowSpawner = (playerTag == P1_TAG) ? player1ArrowSpawner : player2ArrowSpawner; 
-        if (vector.x == 1)
-        {
-            currentArrowSpawner.RotateDirection(Vector3.right);
-        } else
-        {
-            currentArrowSpawner.RotateDirection(Vector3.left);
-        }
-    }
 }
