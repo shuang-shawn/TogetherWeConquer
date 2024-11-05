@@ -5,7 +5,7 @@ using UnityEngine;
 public class SnipeBullet : MonoBehaviour
 {
     public int skillDamage = 50;
-    public AudioController audioController;
+    private AudioController audioController;
     private Renderer objectRenderer;
     private int framesToWait = 5;
     // private EnemyManager enemy;
@@ -15,6 +15,7 @@ public class SnipeBullet : MonoBehaviour
     void Start()
     {
         objectRenderer = GetComponent<Renderer>();
+        audioController = AudioController.aCtrl;
     }
 
     // Update is called once per frame
