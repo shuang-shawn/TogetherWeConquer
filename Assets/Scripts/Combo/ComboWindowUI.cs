@@ -26,6 +26,8 @@ public class ComboWindowUI : MonoBehaviour
     [SerializeField]
     private Animator p1WindowAnimator;
 
+    [SerializeField]
+    private Animator p2WindowAnimator;
 
     [SerializeField]
     private GameObject comboSequencePrefab;
@@ -161,6 +163,7 @@ public class ComboWindowUI : MonoBehaviour
         else if (playerTag.Equals(Player2Tag))
         {
             p2Header.SetText(isInDuo ? "Duo Combos" : "Solo Combos");
+            p2WindowAnimator.SetTrigger(isInDuo ? "window_open" : "window_close");
         }
     }
 
