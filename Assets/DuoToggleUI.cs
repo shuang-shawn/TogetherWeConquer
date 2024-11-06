@@ -14,6 +14,9 @@ public class DuoToggleUI : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI p1DuoToggleText;
+
+    [SerializeField]
+    private TextMeshProUGUI p2DuoToggleText;
     private void Awake()
     {
         // Initialize the generated InputActions class
@@ -33,6 +36,6 @@ public class DuoToggleUI : MonoBehaviour
         string P1KeyBind = bindingPathP1.Replace("<Keyboard>/", "");
         string P2KeyBind = bindingPathP2.Replace("<Keyboard>/", "");
         p1DuoToggleText.text = P1KeyBind.ToUpper();
-        Debug.Log(P2KeyBind.ToUpper());
+        p2DuoToggleText.text = P2KeyBind.ToUpper();
     }
 }
