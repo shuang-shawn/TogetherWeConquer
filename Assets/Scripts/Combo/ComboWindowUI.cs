@@ -77,6 +77,13 @@ public class ComboWindowUI : MonoBehaviour
             p2ComboCache.Add(p2CurrentComboSequence);
             p2CurrentComboSequence.SetActive(setActive);
 
+
+            if (combo.HasIcon())
+            {
+                InstantiateIconAtFront(p1CurrentComboSequence, combo.GetComboIcon());
+                InstantiateIconAtFront(p2CurrentComboSequence, combo.GetComboIcon());
+            }
+
             foreach (KeyCode key in combo.GetComboSequence())
             {
                 switch (key)
@@ -102,6 +109,18 @@ public class ComboWindowUI : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void InstantiateIconAtFront(GameObject comboSequence, Sprite icon)
+    {
+        // Create a new UI image for the icon and set its sprite
+        GameObject iconObject = new GameObject("ComboIcon", typeof(Image));
+        iconObject.transform.SetParent(comboSequence.transform, false); // Add it as a child to the combo sequence
+
+        // Set the image component's sprite to the combo's icon
+        Image iconImage = iconObject.GetComponent<Image>();
+        iconImage.sprite = icon;
+        iconImage.preserveAspect = true; // Ensure the icon maintains its aspect ratio
     }
 
     // Alternatives between solo and duo combo lists for each player
