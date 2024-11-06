@@ -17,10 +17,16 @@ public class ComboWindowUI : MonoBehaviour
     private GameObject p1ComboListView;
     [SerializeField]
     private GameObject p2ComboListView;
+
     [SerializeField]
     private TextMeshProUGUI p1Header;
     [SerializeField]
     private TextMeshProUGUI p2Header;
+
+    [SerializeField]
+    private Animator p1WindowAnimator;
+
+
     [SerializeField]
     private GameObject comboSequencePrefab;
 
@@ -115,6 +121,9 @@ public class ComboWindowUI : MonoBehaviour
     {
         // Create a new UI image for the icon and set its sprite
         GameObject iconObject = new GameObject("ComboIcon", typeof(Image));
+       
+        RectTransform rectTransform = iconObject.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(50, 50);
         iconObject.transform.SetParent(comboSequence.transform, false); // Add it as a child to the combo sequence
 
         // Set the image component's sprite to the combo's icon
@@ -132,6 +141,7 @@ public class ComboWindowUI : MonoBehaviour
         foreach (GameObject comboUIElement in soloCombosCached)
         {
             comboUIElement.SetActive(!isInDuo);
+         
         }
         foreach (GameObject comboUIElement in duoCombosCached)
         {
@@ -146,6 +156,7 @@ public class ComboWindowUI : MonoBehaviour
         if (playerTag.Equals(Player1Tag))
         {
             p1Header.SetText(isInDuo ? "Duo Combos" : "Solo Combos");
+            p1WindowAnimator.SetTrigger(isInDuo ? "window_open" : "window_close");
         }
         else if (playerTag.Equals(Player2Tag))
         {
