@@ -11,6 +11,7 @@ public class SkillManager : MonoBehaviour
     public SingleDash singleDash1;
     public SingleDash singleDash2;
     public SingleIceGround singleIceGround;
+    public HelpingHand singleHelpingHand;
 
     public ParticleSystem dashParticlesPrefab;
     public Material tetherMaterial;
@@ -38,7 +39,7 @@ public class SkillManager : MonoBehaviour
         tether.tetherMaterial = tetherMaterial;
         tether.onHit = onHit;
 
-
+        singleHelpingHand = gameObject.AddComponent<HelpingHand>();
     }
 
     // Update is called once per frame
@@ -64,7 +65,10 @@ public class SkillManager : MonoBehaviour
                 break;
             case "iceground": singleIceGround.CastIceGround(playerNum);
                 break;
-            case "tether": tether.CastTether(); break;
+            case "tether": tether.CastTether(); 
+                break;
+            case "helpinghand": singleHelpingHand.CastHelpingHand((playerNum == 1) ? 2 : 1);
+                break;
         }
     }
 
