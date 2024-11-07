@@ -18,6 +18,9 @@ TagManager:
   - JumpAttackShadow
   - SlimeBoss
   - Canvas
+  - LoseWindow
+  - WinWindow
+  - LevelUpWindow
   layers:
   - Default
   - TransparentFX

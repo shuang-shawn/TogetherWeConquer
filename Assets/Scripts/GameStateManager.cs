@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.UI;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -9,7 +10,11 @@ public class GameStateManager : MonoBehaviour
     public PlayerManager playerManager2;
     public EnemyManager bossManager;
     public GameObject canvas;
+
+    private int level = 1;
     private bool hasEnded = false;
+    public bool levelUp = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +22,6 @@ public class GameStateManager : MonoBehaviour
         playerManager2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerManager>();
         bossManager = GameObject.FindGameObjectWithTag("boss").GetComponent<EnemyManager>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        
     }
 
     // Update is called once per frame
@@ -34,5 +38,22 @@ public class GameStateManager : MonoBehaviour
                 hasEnded = true;
             }
         }
+
+        if (Input.GetKeyDown("return") && !levelUp)
+        {
+            LevelUp();
+        }
+
+        if (levelUp)
+        {
+            level += 1;
+
+            canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
+        }
+    }
+
+    public void LevelUp()
+    {
+        levelUp = !levelUp;
     }
 }
