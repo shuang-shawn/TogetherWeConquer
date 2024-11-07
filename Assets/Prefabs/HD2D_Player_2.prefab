@@ -329,9 +329,8 @@ GameObject:
   - component: {fileID: 6002784111076324084}
   - component: {fileID: 2576427339415153587}
   - component: {fileID: 7025390470527531552}
-  - component: {fileID: 7154094946709371476}
   m_Layer: 0
-  m_Name: Combo Manager
+  m_Name: Player Combo Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,18 +424,6 @@ MonoBehaviour:
   correctColor: {r: 0, g: 1, b: 0, a: 1}
   incorrectColor: {r: 1, g: 0, b: 0, a: 1}
   currentComboUI: []
---- !u!114 &7154094946709371476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3207342413033887120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d5c734b3ff8d4b409fc5af09d1513d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3956200951847981751
 GameObject:
   m_ObjectHideFlags: 0

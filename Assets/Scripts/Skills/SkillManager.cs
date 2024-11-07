@@ -19,7 +19,13 @@ public class SkillManager : MonoBehaviour
     public ParticleSystem fire;
     public GameObject iceGroundPrefab;
 
+    public ShadowSkill shadowSkill;
+    public GameObject shadowSkillPrefab;
+    public GameObject shadowSkillPlaceEffect;
+    public GameObject shadowSkillTeleportEffect;
 
+    public ArrowSkill arrowSkill;
+    public GameObject arrowSpawnerPrefab;
     // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
     void Start()
@@ -34,12 +40,22 @@ public class SkillManager : MonoBehaviour
         singleIceGround.iceGroundPrefab = iceGroundPrefab; 
 
 
-
         tether = gameObject.AddComponent<Tether>();
         tether.tetherMaterial = tetherMaterial;
         tether.onHit = onHit;
 
+
         singleHelpingHand = gameObject.AddComponent<HelpingHand>();
+
+
+        shadowSkill = gameObject.AddComponent<ShadowSkill>();
+        shadowSkill.shadowPrefab = shadowSkillPrefab;
+        shadowSkill.placeEffect = shadowSkillPlaceEffect;
+        shadowSkill.teleportEffect = shadowSkillTeleportEffect;
+
+
+        arrowSkill = gameObject.AddComponent<ArrowSkill>();
+        arrowSkill.arrowSpawnerPrefab = arrowSpawnerPrefab;
     }
 
     // Update is called once per frame
@@ -63,11 +79,22 @@ public class SkillManager : MonoBehaviour
                 singleDash2.Dash(playerNum);
             }
                 break;
-            case "iceground": singleIceGround.CastIceGround(playerNum);
+            case "iceground": 
+                singleIceGround.CastIceGround(playerNum);
                 break;
-            case "tether": tether.CastTether(); 
+            case "tether": 
+                tether.CastTether(); 
                 break;
-            case "helpinghand": singleHelpingHand.CastHelpingHand((playerNum == 1) ? 2 : 1);
+            case "helpinghand": 
+                singleHelpingHand.CastHelpingHand((playerNum == 1) ? 2 : 1);
+                break;
+            case "shadow":
+                shadowSkill.CastShadow(playerTag);
+                break;
+            case "arrow_barrage":
+                arrowSkill.CastArrowBarrage();
+                break;
+            default:
                 break;
         }
     }
