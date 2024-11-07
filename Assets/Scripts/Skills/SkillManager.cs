@@ -15,8 +15,11 @@ public class SkillManager : MonoBehaviour
     public ParticleSystem dashParticlesPrefab;
     public Material tetherMaterial;
     public ParticleSystem onHit;
-    public ParticleSystem fire;
     public GameObject iceGroundPrefab;
+
+    public FireRing fireRing;
+    public ParticleSystem fireRingPrefab;
+
 
 
     // private Dictionary<string, Delegate> skillDictionary;
@@ -38,7 +41,8 @@ public class SkillManager : MonoBehaviour
         tether.tetherMaterial = tetherMaterial;
         tether.onHit = onHit;
 
-
+        fireRing = gameObject.AddComponent<FireRing>();
+        fireRing.fireRingPrefab = fireRingPrefab;
     }
 
     // Update is called once per frame
@@ -65,6 +69,7 @@ public class SkillManager : MonoBehaviour
             case "iceground": singleIceGround.CastIceGround(playerNum);
                 break;
             case "tether": tether.CastTether(); break;
+            case "fireRing": fireRing.CastFireRing(); break;
         }
     }
 

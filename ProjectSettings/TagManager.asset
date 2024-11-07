@@ -18,6 +18,8 @@ TagManager:
   - JumpAttackShadow
   - SlimeBoss
   - Canvas
+  - LoseWindow
+  - WinWindow
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Mobs
   - 
   - 
   - 

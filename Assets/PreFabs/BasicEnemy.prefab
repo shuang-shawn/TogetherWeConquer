@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1408216916731570716}
   - component: {fileID: 254677220688372496}
   - component: {fileID: 7080510810843153328}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BasicEnemy
   m_TagString: mob
   m_Icon: {fileID: 0}
