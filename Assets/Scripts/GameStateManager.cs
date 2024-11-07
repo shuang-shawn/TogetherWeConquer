@@ -22,6 +22,8 @@ public class GameStateManager : MonoBehaviour
         playerManager2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerManager>();
         bossManager = GameObject.FindGameObjectWithTag("boss").GetComponent<EnemyManager>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
+
+        HandleLevelUp();
     }
 
     // Update is called once per frame
@@ -41,19 +43,21 @@ public class GameStateManager : MonoBehaviour
 
         if (Input.GetKeyDown("return") && !levelUp)
         {
-            LevelUp();
-        }
-
-        if (levelUp)
-        {
             level += 1;
 
-            canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
+            HandleLevelUp();
         }
     }
 
     public void LevelUp()
     {
         levelUp = !levelUp;
+    }
+
+    private void HandleLevelUp()
+    {
+        LevelUp();
+
+        canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
     }
 }
