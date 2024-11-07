@@ -54,6 +54,7 @@ public class DuoComboManager : MonoBehaviour
             startedCombo.ToggleInput(false);
             endingCombo.ToggleInput(true);
             endingCombo.StartTimer(remainingTime);
+            skillManager.CastFirstHalfDuoSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
             return;
         }
         else if (player == startedCombo.transform.parent.gameObject && abrupt) // If initial players stops combo unexpecetedly, force other play to end combo

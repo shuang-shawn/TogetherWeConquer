@@ -35,10 +35,10 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            TakeDamage(100);
-        }
+        // if (Input.GetKeyDown("space"))
+        // {
+        //     TakeDamage(100);
+        // }
     }
 
 

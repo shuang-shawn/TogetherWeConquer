@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     public HealthBar healthBar;
     public ParticleSystem hurtParticlesPrefab;
     public ParticleSystem deathParticlesPrefab;
+    public Crosshair crosshair;
 
     // Start is called before the first frame update
     void Start()
