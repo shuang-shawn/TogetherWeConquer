@@ -1125,6 +1125,7 @@ MonoBehaviour:
   singleDash2: {fileID: 0}
   singleIceGround: {fileID: 0}
   duoSnipe: {fileID: 0}
+  singleStone: {fileID: 0}
   dashParticlesPrefab: {fileID: 9091682058981745220, guid: f31ef6f054a7cad4f9c6ac0018a6c775,
     type: 3}
   tetherMaterial: {fileID: 2100000, guid: 50004141ea2d8f541ad29b4e6f1f19ca, type: 2}
@@ -1135,6 +1136,7 @@ MonoBehaviour:
   snipeBulletPrefab: {fileID: 2860286268713890895, guid: 99afb97767026f7468b5dea6539c119e,
     type: 3}
   audioController: {fileID: 928071834}
+  singleStonePrefab: {fileID: 0}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0
@@ -3449,6 +3451,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3094855334516133620, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 575735202}
+    - target: {fileID: 3094855334516133620, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 1470013672}
     - target: {fileID: 3528172597860773568, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: m_Name
