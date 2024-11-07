@@ -70,7 +70,7 @@ public class SkillManager : MonoBehaviour
         
     }
 
-    public void CastFirstHalfDuoSkill(string skillName, string playerTag, ComboType comboType) {
+    public void CastFirstHalfDuoSkill(string skillName, string playerTag, ComboType comboType=ComboType.Duo) {
         int playerNum = 0;
         if (playerTag == "Player1") {
             playerNum = 1;
@@ -85,7 +85,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    public void CastSkill(string skillName, string playerTag, ComboType comboType) {
+    public void CastSkill(string skillName, string playerTag, ComboType comboType=ComboType.Solo) {
         int playerNum = 0;
         if (playerTag == "Player1") {
             playerNum = 1;
