@@ -38,11 +38,19 @@ public class ExpandRing : MonoBehaviour
 
     void OnParticleCollision(GameObject other) {
         // Debug.Log("Particle hit: " + other.name);
+        Debug.Log("Hashset Size: " + objectsHit.Count);
 
         if (objectsHit.Contains(other)) {
+            Debug.Log("Contains this object");
             return;
-        } else {
+        } 
+        else {
             Debug.Log("Particle hit: " + other.name);
+            bool addedSuccessfully = objectsHit.Add(other);
+        
+            Debug.Log(addedSuccessfully 
+            ? "Added successfully: " + other 
+            : "Failed to add: " + other);
 
             // Temporary do damage
             EnemyManager target = other.gameObject.GetComponent<EnemyManager>();
@@ -54,6 +62,11 @@ public class ExpandRing : MonoBehaviour
 
         }
 
-        objectsHit.Add(other);
+        // objectsHit.Add(other);
+        // bool addedSuccessfully = objectsHit.Add(other);
+        
+        // Debug.Log(addedSuccessfully 
+        // ? "Added successfully: " + other 
+        // : "Failed to add: " + other);
     }
 }

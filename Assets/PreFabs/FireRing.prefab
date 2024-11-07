@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7499282855852818826}
   - component: {fileID: 8483642194577002910}
   - component: {fileID: 5754363709491005358}
-  - component: {fileID: 7390577889287257539}
+  - component: {fileID: 90967696110839918}
   m_Layer: 0
   m_Name: FireRing
   m_TagString: Untagged
@@ -4831,7 +4831,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7390577889287257539
+--- !u!114 &90967696110839918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
