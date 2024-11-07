@@ -207,6 +207,9 @@ MonoBehaviour:
   landingDelay: 2
   speedPercent: 1
   previousSpeedPercent: 1
+  timePassed: 0
+  specialAttackInterval: 4
+  IsDead: 0
 --- !u!136 &7405595219816766885
 CapsuleCollider:
   m_ObjectHideFlags: 0
