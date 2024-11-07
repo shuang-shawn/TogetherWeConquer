@@ -33,8 +33,6 @@ public class ComboInput : MonoBehaviour
     public DuoComboManager duoComboManager;
     public GameObject skillManagerObject; // temp holder for skill system
     private SkillManager skillManager;
-    // private Tether tether;
-    // private Single_Skills singleSkill;
 
     private string playerTag;
     private void Awake()
@@ -48,16 +46,14 @@ public class ComboInput : MonoBehaviour
         cancel = actionMap.FindAction("Cancel");
         duoToggle = actionMap.FindAction("DuoToggle");
         comboData = GetComponent<ComboData>();
-        comboList = GetComponent<ComboList>();
+        
         comboUI = GetComponent<ComboUI>();
 
+        comboList = GameObject.FindGameObjectWithTag("ComboListManager").GetComponent<ComboList>();
         duoComboManager = GameObject.FindGameObjectWithTag("DuoComboManager")?.GetComponent<DuoComboManager>();
         comboWindowUI = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
         
-        //testing with skills
         skillManager = skillManagerObject.GetComponent<SkillManager>();
-        //tether = skillManager.GetComponent<Tether>();
-        //singleSkill = skillManager.GetComponent<Single_Skills>();
         
     }
     private void OnEnable()
@@ -187,8 +183,6 @@ public class ComboInput : MonoBehaviour
 
     public void StartTimer(float remainingTime)
     {
-        //UnityEngine.Debug.Log(comboData.isInDuoCombo);
-
         if (comboData.isInDuoCombo)
         {
             StartCoroutine(StartCountdown(duoComboTime, remainingTime));
@@ -255,8 +249,6 @@ public class ComboInput : MonoBehaviour
                 UnityEngine.Debug.Log("Casting solo skill: " + skillToCast);
                 skillManager.CastSkill(skillToCast, playerTag, comboData.currentComboObject.GetComboType());
 
-        
-
             }
         }
     }
@@ -265,8 +257,6 @@ public class ComboInput : MonoBehaviour
     {
         if (isComplete)
         {
-            // singleSkill.Dash(); // single combo triggers dash, internal testing only
-            //tether.tetherToggle = !tether.tetherToggle;
             comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
             UnityEngine.Debug.Log("Combo Completed");
         }
@@ -294,6 +284,7 @@ public class ComboInput : MonoBehaviour
         {
             return;
         }
+        cancel.performed -= CancelCombo;
         comboData.isAbrupt = true;
         timer.GetComponent<ComboTimer>().ResetTimer();
         if (comboData.isInDuoCombo)

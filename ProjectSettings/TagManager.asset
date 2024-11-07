@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Player1
-  - Player2
   - BasicEnemy
   - Player2
   - DuoComboManager
@@ -18,6 +17,10 @@ TagManager:
   - JumpAttackShadow
   - SlimeBoss
   - Canvas
+  - LoseWindow
+  - WinWindow
+  - ComboListManager
+  - Player2
   layers:
   - Default
   - TransparentFX

@@ -23,7 +23,13 @@ public class SkillManager : MonoBehaviour
     public AudioController audioController;
     public GameObject singleStonePrefab;
 
+    public ShadowSkill shadowSkill;
+    public GameObject shadowSkillPrefab;
+    public GameObject shadowSkillPlaceEffect;
+    public GameObject shadowSkillTeleportEffect;
 
+    public ArrowSkill arrowSkill;
+    public GameObject arrowSpawnerPrefab;
     // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
     void Start()
@@ -49,7 +55,13 @@ public class SkillManager : MonoBehaviour
         singleStone = gameObject.AddComponent<SingleStone>();
         singleStone.singleStonePrefab = singleStonePrefab;
 
+        shadowSkill = gameObject.AddComponent<ShadowSkill>();
+        shadowSkill.shadowPrefab = shadowSkillPrefab;
+        shadowSkill.placeEffect = shadowSkillPlaceEffect;
+        shadowSkill.teleportEffect = shadowSkillTeleportEffect;
 
+        arrowSkill = gameObject.AddComponent<ArrowSkill>();
+        arrowSkill.arrowSpawnerPrefab = arrowSpawnerPrefab;
     }
 
     // Update is called once per frame
@@ -95,6 +107,15 @@ public class SkillManager : MonoBehaviour
             audioController.PlaySnipeFinish(); 
             break;
             case "stone": singleStone.CastStone(playerNum); break;
+
+            case "shadow":
+                shadowSkill.CastShadow(playerTag);
+                break;
+            case "arrow_barrage":
+                arrowSkill.CastArrowBarrage();
+                break;
+            default:
+                break;
         }
     }
 

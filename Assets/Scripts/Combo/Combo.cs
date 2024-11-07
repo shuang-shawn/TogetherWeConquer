@@ -12,15 +12,15 @@ public class Combo
 {
     private List<KeyCode> comboSequence;
     private ComboType comboType;
-
     private string comboSkill;
+    private Sprite comboIcon;
 
-
-    public Combo(ComboType comboType, List<KeyCode> comboSequence, string skillName)
+    public Combo(ComboType comboType, List<KeyCode> comboSequence, string skillName, Sprite skillIcon = null)
     {
         this.comboSequence = comboSequence;
         this.comboType = comboType;
-        this.comboSkill = skillName;
+        comboSkill = skillName;
+        comboIcon = skillIcon;
     }
 
     public List<KeyCode> GetComboSequence()
@@ -34,5 +34,14 @@ public class Combo
 
     public string GetComboSkill() { 
         return comboSkill;
+    }
+    public Sprite GetComboIcon()
+    {
+        return comboIcon;
+    }
+
+    public bool HasIcon()
+    {
+        return comboIcon != null;
     }
 }
