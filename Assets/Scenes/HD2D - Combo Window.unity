@@ -393,6 +393,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7596085908208304534, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596085908208304534, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7833881131649044315, guid: b612d3ca49b9641438c108c6fb8a5b15,
         type: 3}
       propertyPath: player
@@ -1859,7 +1869,17 @@ MonoBehaviour:
   speed: 2
   hopHeight: 1
   hopFrequency: 5
+  jumpSpeed: 20
   dropSpeed: 5
+  shadow: {fileID: 0}
+  stayInAir: 5
+  damage: 20
+  landingDelay: 2
+  speedPercent: 1
+  previousSpeedPercent: 1
+  timePassed: 0
+  specialAttackInterval: 4
+  IsDead: 0
 --- !u!54 &1146802771
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2910,6 +2930,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 992644752319287507, guid: 29f6c96c16e14f04785699121b703c72,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 992644752319287507, guid: 29f6c96c16e14f04785699121b703c72,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3956200951847981751, guid: 29f6c96c16e14f04785699121b703c72,
         type: 3}
       propertyPath: m_Name
