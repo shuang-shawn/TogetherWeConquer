@@ -491,16 +491,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95a1779aa926c643b1e63d161b037c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTag: 
   playerControls: {fileID: -944628639613478452, guid: 7dee962c77266344f9133841f616f6c3,
     type: 3}
-  actionMap:
-    m_Name: Action Map
-    m_Id: 4664e9fa-1cf8-4c86-8b70-bff862564a01
-    m_Asset: {fileID: 0}
-    m_Actions: []
-    m_Bindings: []
-  maxComboSequence: 5
+  maxComboSequence: 3
   currentCombo: 
 --- !u!114 &3668172810237922322
 MonoBehaviour:

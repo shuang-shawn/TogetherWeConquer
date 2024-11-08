@@ -23,7 +23,6 @@ public class ReviveLogic : MonoBehaviour
 
     private ComboUI comboUI;
 
-    [SerializeField]
     private int maxComboSequence = 5;
     private int currentSequenceIndex = 0;
     private int currentComboLoop = 0;
@@ -33,6 +32,8 @@ public class ReviveLogic : MonoBehaviour
     
     [SerializeField]
     private List<KeyCode> currentCombo;
+
+    private bool preventDisable = false;
 
     private System.Random random = new System.Random();
     private void Start()
@@ -69,18 +70,22 @@ public class ReviveLogic : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!preventDisable)
+        {
+            preventDisable = true;
             up.Disable();
             down.Disable();
             left.Disable();
             right.Disable();
             duoToggle.Disable();
 
-        // Removing callback from each input key
-        up.performed -= ComboSequence;
-        down.performed -= ComboSequence;
-        left.performed -= ComboSequence;
-        right.performed -= ComboSequence;
-        duoToggle.performed -= StartReviveCombo;
+            // Removing callback from each input key
+            up.performed -= ComboSequence;
+            down.performed -= ComboSequence;
+            left.performed -= ComboSequence;
+            right.performed -= ComboSequence;
+            duoToggle.performed -= StartReviveCombo;
+        }
     }
 
     private void StartReviveCombo(InputAction.CallbackContext context)
