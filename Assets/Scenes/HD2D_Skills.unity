@@ -587,6 +587,12 @@ PrefabInstance:
       propertyPath: skillManagerObject
       value: 
       objectReference: {fileID: 582710431}
+    - target: {fileID: 829766636043835359, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
+      propertyPath: tombstone
+      value: 
+      objectReference: {fileID: 6667328446845882700, guid: d7774f3ffa8950140afe279cdc4e4daf,
+        type: 3}
     - target: {fileID: 4088919656228118061, guid: b612d3ca49b9641438c108c6fb8a5b15,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1945,6 +1951,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d54a6de6bf57b458f84a3d33833e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1251868468 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4901654503483230871, guid: e0f4b1d998dc4488ca56f2413d44e52d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1935884211797760652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1251868469 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5550288348667333774, guid: e0f4b1d998dc4488ca56f2413d44e52d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1935884211797760652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1296188596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,18 +2096,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296188596}
   m_CullTransparentMesh: 1
---- !u!82 &1251868468 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4901654503483230871, guid: e0f4b1d998dc4488ca56f2413d44e52d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1935884211797760652}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1251868469 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5550288348667333774, guid: e0f4b1d998dc4488ca56f2413d44e52d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1935884211797760652}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1309259052
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,6 +2632,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1493993848520596254, guid: 29f6c96c16e14f04785699121b703c72,
+        type: 3}
+      propertyPath: tombstone
+      value: 
+      objectReference: {fileID: 6667328446845882700, guid: d7774f3ffa8950140afe279cdc4e4daf,
+        type: 3}
     - target: {fileID: 3956200951847981751, guid: 29f6c96c16e14f04785699121b703c72,
         type: 3}
       propertyPath: m_Name
