@@ -595,6 +595,7 @@ MonoBehaviour:
   currentMoveDirection: {x: 0, y: 0, z: 0}
   lastDirectionX: {x: 1, y: 0, z: 0}
   canMove: 1
+  skillManagerObject: {fileID: 0}
 --- !u!135 &5927502893873281507
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -636,6 +637,8 @@ MonoBehaviour:
   deathParticlesPrefab: {fileID: 6555381002103090657, guid: e5212976a99ce114abb6c7d3d26b32f1,
     type: 3}
   crosshair: {fileID: 4664265123319435124}
+  tombstone: {fileID: 6667328446845882700, guid: d7774f3ffa8950140afe279cdc4e4daf,
+    type: 3}
 --- !u!1 &4136670822419442884
 GameObject:
   m_ObjectHideFlags: 0

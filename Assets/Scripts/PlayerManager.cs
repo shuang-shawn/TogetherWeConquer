@@ -40,6 +40,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void Heal(int healGain)
+    {
+        healthBar.UpdateHealthBar(healGain, maxHealth);
+    }
+
     public void TakeDamage(int damage) {
         currentHealth -= damage;
         Debug.Log(gameObject.name + " took " + damage + " damage!");

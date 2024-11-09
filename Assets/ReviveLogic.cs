@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,6 +24,15 @@ public class ReviveLogic : MonoBehaviour
 
     private ComboUI comboUI;
 
+    [SerializeField]
+    private GameObject timer;
+
+    [SerializeField]
+    private float timeLimit = 15f;
+
+    [SerializeField]
+    private TextMeshProUGUI reviveHeader;
+
     private int maxComboSequence = 5;
     private int currentSequenceIndex = 0;
     private int currentComboLoop = 0;
@@ -36,6 +46,7 @@ public class ReviveLogic : MonoBehaviour
     private bool preventDisable = false;
 
     private System.Random random = new System.Random();
+
     private void Start()
     {
         comboUI = GetComponent<ComboUI>();
@@ -56,6 +67,7 @@ public class ReviveLogic : MonoBehaviour
         left = actionMap.FindAction("Left");
         right = actionMap.FindAction("Right");
         duoToggle = actionMap.FindAction("DuoToggle");
+        SetHeader();
     }
 
     private void OnEnable()
@@ -90,7 +102,9 @@ public class ReviveLogic : MonoBehaviour
 
     private void StartReviveCombo(InputAction.CallbackContext context)
     {
+        reviveHeader.gameObject.SetActive(false);
         duoToggle.Disable();
+        StartTimer();
         StartComboLoop();
         up.performed += ComboSequence;
         down.performed += ComboSequence;
@@ -105,6 +119,7 @@ public class ReviveLogic : MonoBehaviour
             ResetSequence();
             OnDisable();
             playerInstance.SetActive(true);
+            playerInstance.GetComponent<PlayerManager>().Heal(100);
             Destroy(gameObject);
         } else
         {
@@ -138,6 +153,7 @@ public class ReviveLogic : MonoBehaviour
         }
     }
 
+    
     private IEnumerator Scoring(bool mistake, float delay)
     {
         if (mistake)
@@ -151,7 +167,6 @@ public class ReviveLogic : MonoBehaviour
             currentComboLoop++;
         }
         yield return new WaitForSeconds(delay);
-
         ResetSequence();
         StartComboLoop();
     }
@@ -161,6 +176,35 @@ public class ReviveLogic : MonoBehaviour
         comboUI.ResetUI();
         currentSequenceIndex = 0;
         actionMap.Enable();
+    }
+
+    private void StartTimer()
+    {
+        StartCoroutine(StartCountdown(timeLimit));
+    }
+
+    private IEnumerator StartCountdown(float countdownValue) 
+    {
+        timer.GetComponent<ComboTimer>().InitializeTimer(countdownValue, countdownValue);
+        while (countdownValue > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            countdownValue--;
+        }
+        EndReviveCombo();
+    }
+
+    private void EndReviveCombo()
+    {
+        StopAllCoroutines();
+        currentComboLoop = 0;
+        ResetSequence();
+        duoToggle.Enable();
+        up.performed -= ComboSequence;
+        down.performed -= ComboSequence;
+        left.performed -= ComboSequence;
+        right.performed -= ComboSequence;
+        reviveHeader.gameObject.SetActive(true);
     }
 
     private List<KeyCode> GenerateRandomCombo()
@@ -186,5 +230,13 @@ public class ReviveLogic : MonoBehaviour
         if (context.action == right) return KeyCode.RightArrow;
 
         return KeyCode.None;
+    }
+
+    private void SetHeader()
+    {
+        string bindingPath = duoToggle.bindings[0].effectivePath;
+        string keyBind = bindingPath.Replace("<Keyboard>/", "");
+       
+        reviveHeader.text = "Revive " + keyBind.ToUpper();
     }
 }
