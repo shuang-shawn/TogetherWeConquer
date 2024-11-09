@@ -22,7 +22,10 @@ public class TurtleBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            GetComponent<ProjectileRingAttack>().ExecuteProjectileRingAttack();
+        }  
     }
 
         // Coroutine to handle the rage state cycle
