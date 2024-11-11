@@ -454,6 +454,12 @@ PrefabInstance:
       propertyPath: skillManagerObject
       value: 
       objectReference: {fileID: 582710431}
+    - target: {fileID: 3368975903149292326, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 3466fd2b696d1574e9c468b4d2b0c490,
+        type: 3}
     - target: {fileID: 4088919656228118061, guid: b612d3ca49b9641438c108c6fb8a5b15,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -659,6 +665,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269190137}
   m_CullTransparentMesh: 1
+--- !u!114 &310848353 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 254965586341864695, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8090275679356346730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f08601900ea3ce46b3838ba38c5dc65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2486601, y: 0.012095348, z: -0.0031054197, w: 0.9685103}
+  m_LocalRotation: {x: 0.2486601, y: 0.012095347, z: -0.0031054192, w: 0.9685103}
   m_LocalPosition: {x: 1.1437624, y: 8.1, z: -14.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1020,6 +1038,9 @@ MonoBehaviour:
   shadowSkillPlaceEffect: {fileID: 7516425925663394198, guid: 3e4b9cd50fcaabd4eba6bc4c8be5e09b,
     type: 3}
   shadowSkillTeleportEffect: {fileID: 1645622845278563384, guid: 546bec032419ec14d81b1e7bd0af7191,
+    type: 3}
+  forceFieldSkill: {fileID: 0}
+  forceFieldSkillPrefab: {fileID: 4916345392937658091, guid: 1babb4918fd8e0a4182b1c3ebc1fd018,
     type: 3}
   arrowSkill: {fileID: 0}
   arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
@@ -1928,9 +1949,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f2391918cd3a14695e1de5f7db2501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager1: {fileID: 0}
-  playerManager2: {fileID: 0}
-  bossManager: {fileID: 0}
+  playerManager1: {fileID: 1872261724}
+  playerManager2: {fileID: 1497413573}
+  bossManager: {fileID: 310848353}
   canvas: {fileID: 1251522603}
 --- !u!4 &1409611445
 Transform:
@@ -2145,7 +2166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425622809}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24866012, y: 0.012095348, z: -0.003105419, w: 0.9685103}
+  m_LocalRotation: {x: 0.24866012, y: 0.012095347, z: -0.0031054192, w: 0.9685103}
   m_LocalPosition: {x: 1.1437624, y: 8.1, z: -14.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2243,6 +2264,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9176574251884195194, guid: 29f6c96c16e14f04785699121b703c72,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 3466fd2b696d1574e9c468b4d2b0c490,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2260,6 +2287,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1470013671}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1497413573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1493993848520596254, guid: 29f6c96c16e14f04785699121b703c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 1470013671}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497413572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e26144b8e7041947ab3cd37a5793c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1567429228
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,6 +2517,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 260840236}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1872261724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 829766636043835359, guid: b612d3ca49b9641438c108c6fb8a5b15,
+    type: 3}
+  m_PrefabInstance: {fileID: 260840236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872261723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e26144b8e7041947ab3cd37a5793c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2118647240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2650,6 +2701,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2002315544278149983, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 3466fd2b696d1574e9c468b4d2b0c490,
+        type: 3}
     - target: {fileID: 2226446011992917550, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: shake

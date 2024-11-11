@@ -23,6 +23,9 @@ public class SkillManager : MonoBehaviour
     public GameObject shadowSkillPlaceEffect;
     public GameObject shadowSkillTeleportEffect;
 
+    public ForceField forceFieldSkill;
+    public GameObject forceFieldSkillPrefab;
+
     public ArrowSkill arrowSkill;
     public GameObject arrowSpawnerPrefab;
     // private Dictionary<string, Delegate> skillDictionary;
@@ -51,6 +54,10 @@ public class SkillManager : MonoBehaviour
 
         arrowSkill = gameObject.AddComponent<ArrowSkill>();
         arrowSkill.arrowSpawnerPrefab = arrowSpawnerPrefab;
+
+        forceFieldSkill = gameObject.AddComponent<ForceField>();
+        forceFieldSkill.forceFieldPrefab = forceFieldSkillPrefab;
+
     }
 
     // Update is called once per frame
@@ -83,6 +90,9 @@ public class SkillManager : MonoBehaviour
                 break;
             case "arrow_barrage":
                 arrowSkill.CastArrowBarrage();
+                break;
+            case "forceField":
+                forceFieldSkill.CastForceField(playerNum);
                 break;
             default:
                 break;
