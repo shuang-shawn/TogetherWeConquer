@@ -1045,6 +1045,9 @@ MonoBehaviour:
   arrowSkill: {fileID: 0}
   arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
     type: 3}
+  sawbladeSkill: {fileID: 0}
+  sawbladePrefab: {fileID: 2913987475986010122, guid: 7af4f5411b07d3943a1ac22f1fa9d660,
+    type: 3}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0

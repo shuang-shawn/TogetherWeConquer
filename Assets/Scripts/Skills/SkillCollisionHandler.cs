@@ -15,12 +15,7 @@ public class SkillCollisionHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Find the ForceField script in the parent or the current GameObject
-        forceField = GetComponentInParent<ForceField>(); 
-        if (forceField == null) 
-        { 
-            forceField = GetComponent<ForceField>();
-        }
+
     }
 
     // Update is called once per frame
@@ -56,7 +51,7 @@ public class SkillCollisionHandler : MonoBehaviour
                     Debug.Log("Forcefield destroyed.");
                 }
             } 
-        } 
+        }
     }
 }
 

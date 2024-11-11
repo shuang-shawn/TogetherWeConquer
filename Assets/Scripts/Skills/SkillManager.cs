@@ -28,8 +28,10 @@ public class SkillManager : MonoBehaviour
 
     public ArrowSkill arrowSkill;
     public GameObject arrowSpawnerPrefab;
-    // private Dictionary<string, Delegate> skillDictionary;
-    // Start is called before the first frame update
+
+    public Sawblade sawbladeSkill;
+    public GameObject sawbladePrefab;
+
     void Start()
     {
         singleDash1 = gameObject.AddComponent<SingleDash>();
@@ -37,11 +39,8 @@ public class SkillManager : MonoBehaviour
         singleDash2 = gameObject.AddComponent<SingleDash>();
         singleDash2.dashParticlesPrefab = dashParticlesPrefab;
 
-
         singleIceGround = gameObject.AddComponent<SingleIceGround>();
-        singleIceGround.iceGroundPrefab = iceGroundPrefab; 
-
-
+        singleIceGround.iceGroundPrefab = iceGroundPrefab;
 
         tether = gameObject.AddComponent<Tether>();
         tether.tetherMaterial = tetherMaterial;
@@ -58,33 +57,44 @@ public class SkillManager : MonoBehaviour
         forceFieldSkill = gameObject.AddComponent<ForceField>();
         forceFieldSkill.forceFieldPrefab = forceFieldSkillPrefab;
 
+        sawbladeSkill = gameObject.AddComponent<Sawblade>();
+        sawbladeSkill.sawbladePrefab = sawbladePrefab;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void CastSkill(string skillName, string playerTag, ComboType comboType) {
+    public void CastSkill(string skillName, string playerTag, ComboType comboType)
+    {
         int playerNum = 0;
-        if (playerTag == "Player1") {
+        if (playerTag == "Player1")
+        {
             playerNum = 1;
-        } else if (playerTag == "Player2") {
+        }
+        else if (playerTag == "Player2")
+        {
             playerNum = 2;
         }
-        switch (skillName) {
-            case "dash": 
-            if(playerNum == 1) {
-                singleDash1.Dash(playerNum); 
-            } else if (playerNum == 2) {
-                singleDash2.Dash(playerNum);
-            }
+        switch (skillName)
+        {
+            case "dash":
+                if (playerNum == 1)
+                {
+                    singleDash1.Dash(playerNum);
+                }
+                else if (playerNum == 2)
+                {
+                    singleDash2.Dash(playerNum);
+                }
                 break;
-            case "iceground": singleIceGround.CastIceGround(playerNum);
+            case "iceground":
+                singleIceGround.CastIceGround(playerNum);
                 break;
-            case "tether": tether.CastTether(); break;
-
+            case "tether":
+                tether.CastTether();
+                break;
             case "shadow":
                 shadowSkill.CastShadow(playerTag);
                 break;
@@ -94,12 +104,11 @@ public class SkillManager : MonoBehaviour
             case "forceField":
                 forceFieldSkill.CastForceField(playerNum);
                 break;
+            case "sawblades":
+                sawbladeSkill.SpawnSawblades();
+                break;
             default:
                 break;
         }
     }
-
-
-
-    
 }
