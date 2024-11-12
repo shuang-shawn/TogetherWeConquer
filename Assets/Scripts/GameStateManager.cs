@@ -11,6 +11,8 @@ public class GameStateManager : MonoBehaviour
     public EnemyManager bossManager;
     public GameObject canvas;
 
+    private int currXP;
+    private int nextLevel = 100;
     private int level = 1;
     private bool hasEnded = false;
     public bool levelUp = false;
@@ -41,11 +43,18 @@ public class GameStateManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown("return") && !levelUp)
+        if (currXP > nextLevel)
         {
             level += 1;
+            currXP %= nextLevel;
+            nextLevel += 25;
 
             HandleLevelUp();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            AddXP(nextLevel + 5);
         }
     }
 
@@ -54,8 +63,15 @@ public class GameStateManager : MonoBehaviour
         levelUp = !levelUp;
     }
 
+    public void AddXP(int xp)
+    {
+        currXP += xp;
+    }
+
     private void HandleLevelUp()
     {
+        UnityEngine.Debug.Log("Level: " + level + "\nCurrXP: " + currXP + "\nNextLevel: " + nextLevel);
+
         LevelUp();
 
         canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);

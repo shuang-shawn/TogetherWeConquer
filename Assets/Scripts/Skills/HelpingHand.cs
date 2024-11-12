@@ -14,23 +14,10 @@ public class HelpingHand : MonoBehaviour
     private GameObject player;
     private SpriteRenderer spriteRenderer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void CastHelpingHand(int playerNum)
     {
         player = GameObject.FindWithTag("Player" +  playerNum);
         spriteRenderer = player.GetComponentInChildren<SpriteRenderer>();
-        spriteRenderer.material = new Material(Shader.Find("Sprites/Default"));
 
         if (player == null)
         {
@@ -74,10 +61,6 @@ public class HelpingHand : MonoBehaviour
 
     private void SetAlpha(float alpha)
     {
-        Color color = spriteRenderer.color;
-        color.a = alpha;
-        spriteRenderer.color = color;
-
-        spriteRenderer.material.color = color;
+        spriteRenderer.material.SetFloat("_Transparency", alpha);
     }
 }
