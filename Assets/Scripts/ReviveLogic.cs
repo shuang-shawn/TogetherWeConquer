@@ -28,10 +28,14 @@ public class ReviveLogic : MonoBehaviour
     private GameObject timer;
 
     [SerializeField]
-    private float timeLimit = 15f;
+    private float timeLimit;
 
     [SerializeField]
     private TextMeshProUGUI reviveHeader;
+    [SerializeField]
+    private TextMeshProUGUI progressHeader;
+    [SerializeField]
+    private Animator progressHeaderSuccess;
 
     private int maxComboSequence = 5;
     private int currentSequenceIndex = 0;
@@ -44,6 +48,8 @@ public class ReviveLogic : MonoBehaviour
     private List<KeyCode> currentCombo;
 
     private bool preventDisable = false;
+
+    private Coroutine currentTimer;
 
     private System.Random random = new System.Random();
 
@@ -103,8 +109,10 @@ public class ReviveLogic : MonoBehaviour
     private void StartReviveCombo(InputAction.CallbackContext context)
     {
         reviveHeader.gameObject.SetActive(false);
+        progressHeader.gameObject.SetActive(true);
+        UpdateProgressUI();
         duoToggle.Disable();
-        StartTimer();
+     
         StartComboLoop();
         up.performed += ComboSequence;
         down.performed += ComboSequence;
@@ -125,6 +133,7 @@ public class ReviveLogic : MonoBehaviour
         {
             currentCombo = GenerateRandomCombo();
             comboUI.InitializeUI(currentCombo, 0);
+            StartTimer();
         }
     }
 
@@ -152,20 +161,26 @@ public class ReviveLogic : MonoBehaviour
             StartCoroutine(Scoring(false, 0.5f));
         }
     }
-
     
     private IEnumerator Scoring(bool mistake, float delay)
     {
+        StopCoroutine(currentTimer);
+        currentTimer = null;
+        timer.GetComponent<ComboTimer>().ResetTimer();
         if (mistake)
         {
             comboUI.ShowScore(1, 1);
             currentComboLoop = 0;
+            progressHeaderSuccess.SetTrigger("Fail");
         }
         else
         {
             comboUI.ShowScore(0, 0);
             currentComboLoop++;
+            progressHeaderSuccess.SetTrigger("Success");
         }
+       
+        UpdateProgressUI();
         yield return new WaitForSeconds(delay);
         ResetSequence();
         StartComboLoop();
@@ -180,7 +195,7 @@ public class ReviveLogic : MonoBehaviour
 
     private void StartTimer()
     {
-        StartCoroutine(StartCountdown(timeLimit));
+        currentTimer = StartCoroutine(StartCountdown(timeLimit));
     }
 
     private IEnumerator StartCountdown(float countdownValue) 
@@ -196,6 +211,8 @@ public class ReviveLogic : MonoBehaviour
 
     private void EndReviveCombo()
     {
+        currentTimer = null;
+        timer.GetComponent<ComboTimer>().ResetTimer();
         StopAllCoroutines();
         currentComboLoop = 0;
         ResetSequence();
@@ -205,6 +222,7 @@ public class ReviveLogic : MonoBehaviour
         left.performed -= ComboSequence;
         right.performed -= ComboSequence;
         reviveHeader.gameObject.SetActive(true);
+        progressHeader.gameObject.SetActive(false);
     }
 
     private List<KeyCode> GenerateRandomCombo()
@@ -238,5 +256,10 @@ public class ReviveLogic : MonoBehaviour
         string keyBind = bindingPath.Replace("<Keyboard>/", "");
        
         reviveHeader.text = "Revive " + keyBind.ToUpper();
+    }
+
+    private void UpdateProgressUI()
+    {
+        progressHeader.text = currentComboLoop + "/" + maxComboLoop;
     }
 }
