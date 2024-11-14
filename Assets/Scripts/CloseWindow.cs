@@ -7,6 +7,8 @@ public class CloseWindow : MonoBehaviour
 {
     private Button closeButton;
     private GameStateManager gameStateManager;
+    [SerializeField]
+    private OptionSelector optionSelector;
 
     void Start()
     {
@@ -24,8 +26,8 @@ public class CloseWindow : MonoBehaviour
         closeButton.onClick.RemoveAllListeners();
 
         // Add a new listener to disable the window
+        closeButton.onClick.AddListener(AcceptCombo);
         closeButton.onClick.AddListener(CloseImage);
-
         //Pause game
         Time.timeScale = 0;
     }
@@ -40,5 +42,10 @@ public class CloseWindow : MonoBehaviour
 
         // Set Window inactive
         transform.parent.gameObject.SetActive(false);
+    }
+
+    private void AcceptCombo()
+    {
+        optionSelector.AcceptOption();
     }
 }

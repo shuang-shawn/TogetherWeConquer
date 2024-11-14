@@ -31,6 +31,9 @@ public class SkillManager : MonoBehaviour
 
     public ArrowSkill arrowSkill;
     public GameObject arrowSpawnerPrefab;
+
+    public Drain drainSkill;
+    public GameObject drainCirclePrefab;
     // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
     void Start()
@@ -62,6 +65,9 @@ public class SkillManager : MonoBehaviour
 
         arrowSkill = gameObject.AddComponent<ArrowSkill>();
         arrowSkill.arrowSpawnerPrefab = arrowSpawnerPrefab;
+
+        drainSkill = gameObject.AddComponent<Drain>();
+        drainSkill.drainCirclePrefab = drainCirclePrefab;
     }
 
     // Update is called once per frame
@@ -121,6 +127,9 @@ public class SkillManager : MonoBehaviour
                 break;
             case "arrow_barrage":
                 arrowSkill.CastArrowBarrage();
+                break;
+            case "drain":
+                drainSkill.CastDrain();
                 break;
             default:
                 break;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -22,12 +23,6 @@ public class PlayerManager : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("collision detected");
@@ -38,11 +33,6 @@ public class PlayerManager : MonoBehaviour
         {
             TakeDamage(attacker.damageAmount); // Apply damage based on the attacker's damage
         }
-    }
-
-    public void Heal(int healGain)
-    {
-        healthBar.UpdateHealthBar(healGain, maxHealth);
     }
 
     public void TakeDamage(int damage) {
@@ -56,6 +46,19 @@ public class PlayerManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    public void Heal(int healing)
+    {
+        UnityEngine.Debug.Log(healing);
+        UnityEngine.Debug.Log(Math.Min(currentHealth + healing, maxHealth));
+
+        if (currentHealth != maxHealth)
+        {
+            currentHealth = Math.Min(currentHealth + healing, maxHealth);
+
+            healthBar.UpdateHealthBar(currentHealth, maxHealth);
         }
     }
 

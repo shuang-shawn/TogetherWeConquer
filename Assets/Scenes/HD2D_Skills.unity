@@ -977,6 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5f763b790ecae4cbe584a880b7a6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionSelector: {fileID: 0}
 --- !u!1001 &260840236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1669,6 +1670,9 @@ MonoBehaviour:
     type: 3}
   arrowSkill: {fileID: 0}
   arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
+    type: 3}
+  drainSkill: {fileID: 0}
+  drainCirclePrefab: {fileID: 7675356780023035042, guid: 09b66baa2b0ebd4488f032d005bb54b6,
     type: 3}
 --- !u!4 &582710433
 Transform:
@@ -2572,6 +2576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5f763b790ecae4cbe584a880b7a6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionSelector: {fileID: 273552807}
 --- !u!114 &1296188599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4312,6 +4317,6 @@ SceneRoots:
   - {fileID: 8090275679356346730}
   - {fileID: 1409611445}
   - {fileID: 1173098471}
-  - {fileID: 202963681}
   - {fileID: 928071835}
   - {fileID: 754416477919392887}
+  - {fileID: 202963681}
