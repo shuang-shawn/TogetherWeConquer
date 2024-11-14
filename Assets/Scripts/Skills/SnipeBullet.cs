@@ -37,7 +37,9 @@ public class SnipeBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.TryGetComponent<EnemyManager>(out EnemyManager target)) {
-            target.TakeDamage(skillDamage);
+            Vector3 hitPosition = other.contacts[0].point;
+
+            target.TakeDamage(skillDamage, hitPosition);
             audioController.PlayBossSnipeHit();
             Destroy(gameObject);
             return;

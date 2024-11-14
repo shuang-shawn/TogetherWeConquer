@@ -49,13 +49,56 @@ public class TurtleBoss : MonoBehaviour
     {
         animator.SetTrigger("spike_out");
         isSpikeOut = true;
-        Debug.Log("Boss has entered spike mode!");
+        // Debug.Log("Boss has entered spike mode!");
     }
 
     private void ExitSpikeMode()
     {
         animator.SetTrigger("spike_in");
         isSpikeOut = false;
-        Debug.Log("Boss has exited spike mode.");
+        // Debug.Log("Boss has exited spike mode.");
+    }
+
+    public float CalculateDamageFactor(Vector3 hitPosition) {
+                // Calculate the direction vector from boss to hit position
+        Vector3 hitDirection = hitPosition - transform.position;
+        hitDirection.y = 0; // Ignore vertical difference to focus on 2D plane
+        hitDirection.Normalize();
+
+        // Determine the angle between the forward direction of the boss and the hit direction
+        float angle = Vector3.SignedAngle(transform.forward, hitDirection, Vector3.up);
+        Debug.Log("angle from turtle is: " + angle);    
+
+        // Determine which direction (front, back, left, right) the hit came from
+        if (angle >= -45 && angle <= 45)
+        {
+            // ReactToBackHit(damage);
+            Debug.Log("back");
+
+            return 2.0f;
+        }
+        else if (angle > 45 && angle <= 135)
+        {
+            // ReactToRightHit(damage);
+            Debug.Log("right");
+
+            return 1.0f;
+        }
+        else if (angle < -45 && angle >= -135)
+        {
+        
+            // ReactToLeftHit(damage);
+            Debug.Log("left");
+
+            return 1.0f;
+        }
+        else
+        {
+            
+
+            // ReactToFrontHit(damage);
+            Debug.Log("front");
+            return -1.0f;
+        }
     }
 }
