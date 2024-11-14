@@ -13,6 +13,7 @@ public class OptionSelector : MonoBehaviour
     public GameObject comboListManager;
     private ComboList comboList;
 
+    private List<Combo> newCombos;
     private int selectedOption = -1; // No option selected initially
 
     private void OnEnable()
@@ -50,7 +51,7 @@ public class OptionSelector : MonoBehaviour
         Image button2Image = option2Button.GetComponent<Image>();
         Image button3Image = option3Button.GetComponent<Image>();
 
-        List<Combo> newCombos = GetRandomCombos(comboList.soloComboList);
+        newCombos = GetRandomCombos(comboList.soloComboList);
 
         button1Image.sprite = newCombos[0].GetComboIcon();
         button2Image.sprite = newCombos[1].GetComboIcon();
@@ -96,7 +97,6 @@ public class OptionSelector : MonoBehaviour
         Debug.Log("Selected Option: " + selectedOption);
 
         confirmButton.gameObject.SetActive(true);
-
         // Update button visuals based on selection
         UpdateButtonColors();
     }
@@ -127,6 +127,11 @@ public class OptionSelector : MonoBehaviour
         option1Button.GetComponent<Image>().color = Color.white;
         option2Button.GetComponent<Image>().color = Color.white;
         option3Button.GetComponent<Image>().color = Color.white;
+    }
+
+    public void AcceptOption()
+    {
+        comboList.AddToCurrentList(newCombos[selectedOption - 1]);
     }
 
     IEnumerator WaitTwo()

@@ -11,9 +11,11 @@ public class ComboList : MonoBehaviour
     // Static Duo Combo List
     public List<Combo> duoComboList = new List<Combo>();
 
+    public List<Combo> currentP1ComboList = new List<Combo>();
+    public List<Combo> currentP2ComboList = new List<Combo>();
+
     void Awake()
     {
-        // Load sprites here instead of in the constructor
         soloComboList = new List<Combo>()
         {
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "dash"), 
@@ -32,5 +34,11 @@ public class ComboList : MonoBehaviour
             new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow }, "tether", Resources.Load<Sprite>("Skill Icons/tether")),
             new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "snipe", Resources.Load<Sprite>("Skill Icons/snipe"))
         };
+    }
+
+    public void AddToCurrentList(Combo combo)
+    {
+        currentP1ComboList.Add(combo);
+        currentP2ComboList.Add(combo);
     }
 }
