@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7876459702649465449}
   - component: {fileID: 3856333730859415724}
   - component: {fileID: 3504065104449804480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TurtleBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}

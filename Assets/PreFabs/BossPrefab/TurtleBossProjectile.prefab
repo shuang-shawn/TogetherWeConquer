@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.905456, y: 2.3560383, z: -2.74}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,3 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   damageAmount: 25
+  rightSprite: {fileID: -1744042260, guid: a3437fd6f47bb1e43a242a1839d690e6, type: 3}
+  leftSprite: {fileID: -281224838, guid: a3437fd6f47bb1e43a242a1839d690e6, type: 3}
+  upSprite: {fileID: -519017129, guid: a3437fd6f47bb1e43a242a1839d690e6, type: 3}
+  upRightSprite: {fileID: -1996902344, guid: a3437fd6f47bb1e43a242a1839d690e6, type: 3}
+  upLeftSprite: {fileID: -1694182652, guid: a3437fd6f47bb1e43a242a1839d690e6, type: 3}

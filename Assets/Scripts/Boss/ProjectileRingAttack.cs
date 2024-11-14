@@ -29,7 +29,7 @@ public class ProjectileRingAttack : MonoBehaviour
             Vector3 spawnPosition = transform.position + new Vector3(0, yOffset, 0);
 
         
-            GameObject proj = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity, transform);
+            GameObject proj = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
             proj.GetComponent<TurtleProjectile>().SetDirection(projectileDirection);
             proj.GetComponent<TurtleProjectile>().speed = burstSpeed;
 
