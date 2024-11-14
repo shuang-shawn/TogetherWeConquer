@@ -965,6 +965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5f763b790ecae4cbe584a880b7a6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionSelector: {fileID: 0}
 --- !u!1001 &260840236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2541,6 +2542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5f763b790ecae4cbe584a880b7a6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionSelector: {fileID: 273552807}
 --- !u!114 &1296188599
 MonoBehaviour:
   m_ObjectHideFlags: 0
