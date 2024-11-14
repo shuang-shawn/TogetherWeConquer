@@ -1659,6 +1659,9 @@ MonoBehaviour:
   arrowSkill: {fileID: 0}
   arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
     type: 3}
+  drainSkill: {fileID: 0}
+  drainCirclePrefab: {fileID: 7675356780023035042, guid: 09b66baa2b0ebd4488f032d005bb54b6,
+    type: 3}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0
@@ -4269,6 +4272,5 @@ SceneRoots:
   - {fileID: 8090275679356346730}
   - {fileID: 1409611445}
   - {fileID: 1173098471}
-  - {fileID: 202963681}
   - {fileID: 928071835}
   - {fileID: 754416477919392887}
