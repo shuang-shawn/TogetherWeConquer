@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+
 
 public class ComboInput : MonoBehaviour
 {
@@ -58,6 +58,7 @@ public class ComboInput : MonoBehaviour
     }
     private void OnEnable()
     {
+        actionMap.Enable();
         up.Enable();
         down.Enable();
         left.Enable();

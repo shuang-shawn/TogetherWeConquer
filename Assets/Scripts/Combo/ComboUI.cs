@@ -66,7 +66,7 @@ public class ComboUI : MonoBehaviour
             currentComboUI[currentSequenceIndex].GetComponent<Image>().color = incorrectColor; // If Wrong Input
         }
 
-        shake.TriggerShake(currentComboUI[currentSequenceIndex].GetComponent<Image>());
+        shake?.TriggerShake(currentComboUI[currentSequenceIndex].GetComponent<Image>());
     }
 
     public void ShowScore(int mistakeCount, int totalKeys)
