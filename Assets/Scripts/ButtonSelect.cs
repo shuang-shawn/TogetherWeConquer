@@ -131,7 +131,8 @@ public class OptionSelector : MonoBehaviour
 
     public void AcceptOption()
     {
-        comboList.AddToCurrentList(newCombos[selectedOption - 1]);
+        // Add Here
+        //comboList.AddToCurrentList(newCombos[selectedOption - 1]);
     }
 
     IEnumerator WaitTwo()

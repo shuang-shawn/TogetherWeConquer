@@ -37,7 +37,17 @@ public class ComboList : MonoBehaviour
         };
     }
 
-    public void AddToCurrentList(Combo combo)
+    public void AddP1SoloSkill(Combo combo)
+    {
+        currentP1ComboList.Add(combo);
+    }
+
+    public void AddP2SoloSkill(Combo combo)
+    {
+        currentP2ComboList.Add(combo);
+    }
+
+    public void AddDuoSkill(Combo combo)
     {
         currentP1ComboList.Add(combo);
         currentP2ComboList.Add(combo);

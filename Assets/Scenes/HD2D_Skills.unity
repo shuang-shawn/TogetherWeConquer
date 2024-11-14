@@ -4216,6 +4216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlimeBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 3528172597860773568, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6939755734162188339, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: m_AnchorMax.x
