@@ -11,6 +11,7 @@ public class SkillManager : MonoBehaviour
     public SingleDash singleDash1;
     public SingleDash singleDash2;
     public SingleIceGround singleIceGround;
+    public HelpingHand singleHelpingHand;
     public DuoSnipe duoSnipe;
     public SingleStone singleStone;
 
@@ -39,15 +40,14 @@ public class SkillManager : MonoBehaviour
         singleDash2 = gameObject.AddComponent<SingleDash>();
         singleDash2.dashParticlesPrefab = dashParticlesPrefab;
 
-
         singleIceGround = gameObject.AddComponent<SingleIceGround>();
         singleIceGround.iceGroundPrefab = iceGroundPrefab; 
-
-
 
         tether = gameObject.AddComponent<Tether>();
         tether.tetherMaterial = tetherMaterial;
         tether.onHit = onHit;
+
+        singleHelpingHand = gameObject.AddComponent<HelpingHand>();
 
         duoSnipe = gameObject.AddComponent<DuoSnipe>();
         duoSnipe.snipeBulletPrefab = snipeBulletPrefab;
@@ -100,14 +100,22 @@ public class SkillManager : MonoBehaviour
                 singleDash2.Dash(playerNum);
             }
                 break;
-            case "iceground": singleIceGround.CastIceGround(playerNum); break;
-            case "tether": tether.CastTether(); break;
+            case "iceground": 
+                singleIceGround.CastIceGround(playerNum);
+                break;
+            case "tether": 
+                tether.CastTether(); 
+                break;
+            case "helpinghand": 
+                singleHelpingHand.CastHelpingHand((playerNum == 1) ? 2 : 1);
+                break;
             case "snipe": 
-            duoSnipe.CastSnipe(playerNum); 
-            audioController.PlaySnipeFinish(); 
-            break;
-            case "stone": singleStone.CastStone(playerNum); break;
-
+                duoSnipe.CastSnipe(playerNum); 
+                audioController.PlaySnipeFinish(); 
+                break;
+            case "stone": 
+                singleStone.CastStone(playerNum); 
+                break;
             case "shadow":
                 shadowSkill.CastShadow(playerTag);
                 break;

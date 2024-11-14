@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 1762608085181753336}
   - component: {fileID: 7405595219816766885}
   - component: {fileID: 254965586341864695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SlimeBoss 1
   m_TagString: boss
   m_Icon: {fileID: 0}
@@ -255,7 +255,6 @@ MonoBehaviour:
   slowParticlesPrefab: {fileID: 4802142671950701617, guid: 60834733287faa246af9c68a667e8195,
     type: 3}
   animator: {fileID: 2002315544278149980}
-  bossScript: {fileID: 0}
   slowed: 0
 --- !u!1 &4284643696524085262
 GameObject:

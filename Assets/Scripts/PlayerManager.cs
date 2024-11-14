@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -11,6 +12,9 @@ public class PlayerManager : MonoBehaviour
     public ParticleSystem hurtParticlesPrefab;
     public ParticleSystem deathParticlesPrefab;
     public Crosshair crosshair;
+
+    [SerializeField]
+    private GameObject tombstone;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +40,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void Heal(int healGain)
+    {
+        healthBar.UpdateHealthBar(healGain, maxHealth);
+    }
+
     public void TakeDamage(int damage) {
         currentHealth -= damage;
         Debug.Log(gameObject.name + " took " + damage + " damage!");
@@ -53,11 +62,14 @@ public class PlayerManager : MonoBehaviour
     void Die()
     {
         SpawnDeathParticles();
-
+      
         Debug.Log(gameObject.name + " has died!");
+
         // Add death handling here (destroy, play animation, etc.)
         // Destroy(gameObject);
+        
         gameObject.SetActive(false);
+        SpawnTombstone();
     }
     public bool IsDead() {
         return currentHealth <= 0;
@@ -85,5 +97,15 @@ public class PlayerManager : MonoBehaviour
         hurtParticles.Play();
 
         Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
+    }
+
+    private void SpawnTombstone()
+    {
+        GameObject spawnedTombstone = Instantiate(tombstone, gameObject.transform.position, Quaternion.identity);
+        Vector3 position = spawnedTombstone.transform.position;
+        position.y -= 0.33f;
+        spawnedTombstone.transform.position = position;
+        spawnedTombstone.GetComponent<ReviveLogic>().SetPlayerInfo(gameObject.tag, gameObject);
+        spawnedTombstone.GetComponent<ReviveLogic>().enabled = true;
     }
 }
