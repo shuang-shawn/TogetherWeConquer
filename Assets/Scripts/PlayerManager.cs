@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +17,6 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnCollisionEnter(Collision collision)
@@ -47,6 +42,19 @@ public class PlayerManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    public void Heal(int healing)
+    {
+        UnityEngine.Debug.Log(healing);
+        UnityEngine.Debug.Log(Math.Min(currentHealth + healing, maxHealth));
+
+        if (currentHealth != maxHealth)
+        {
+            currentHealth = Math.Min(currentHealth + healing, maxHealth);
+
+            healthBar.UpdateHealthBar(currentHealth, maxHealth);
         }
     }
 
