@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class TurtleBoss : MonoBehaviour
@@ -7,8 +8,10 @@ public class TurtleBoss : MonoBehaviour
     [Header("Rage Settings")]
     public float rageDuration = 5f; // Duration in seconds for the rage state
     public float chillDuration = 5f;
+    public GameObject directionCanvas;
     private Animator animator;
     private bool isSpikeOut = false;
+    private ProjectileRingAttack projectileRingAttack;
 
 
 
@@ -17,6 +20,8 @@ public class TurtleBoss : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         StartCoroutine(SpikeCycle());
+        directionCanvas.SetActive(false);
+        projectileRingAttack = GetComponent<ProjectileRingAttack>();
     }
 
     // Update is called once per frame
@@ -24,7 +29,7 @@ public class TurtleBoss : MonoBehaviour
     {
       if(Input.GetKeyDown(KeyCode.Escape))
         {
-            GetComponent<ProjectileRingAttack>().ExecuteProjectileRingAttack();
+            projectileRingAttack.ExecuteProjectileRingAttack();
         }  
     }
 
@@ -36,10 +41,13 @@ public class TurtleBoss : MonoBehaviour
             yield return new WaitForSeconds(chillDuration); // Optional delay before entering rage mode
 
             EnterSpikeMode();
+            directionCanvas.SetActive(true);
 
             yield return new WaitForSeconds(rageDuration); // Wait for the rage duration
 
             ExitSpikeMode();
+            directionCanvas.SetActive(false);
+
 
             
         }
@@ -74,17 +82,16 @@ public class TurtleBoss : MonoBehaviour
         {
             // ReactToBackHit(damage);
             Debug.Log("back");
-
             return 2.0f;
         }
-        else if (angle > 45 && angle <= 135)
+        else if (angle > 45 && angle <= 110)
         {
             // ReactToRightHit(damage);
             Debug.Log("right");
 
             return 1.0f;
         }
-        else if (angle < -45 && angle >= -135)
+        else if (angle < -45 && angle >= -110)
         {
         
             // ReactToLeftHit(damage);
@@ -94,11 +101,24 @@ public class TurtleBoss : MonoBehaviour
         }
         else
         {
-            
-
             // ReactToFrontHit(damage);
             Debug.Log("front");
+            StartCoroutine(SpikeCounterAttack());
             return -1.0f;
         }
     }
+
+        private IEnumerator SpikeCounterAttack()
+    {
+        Debug.Log("counter attack");
+        int count = 0;
+        while (count < 10)
+        {
+            projectileRingAttack.ExecuteProjectileRingAttack();
+            count ++;
+            yield return new WaitForSeconds(0.1f); 
+
+        }
+    }
+
 }
