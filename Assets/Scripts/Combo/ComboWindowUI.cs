@@ -59,54 +59,69 @@ public class ComboWindowUI : MonoBehaviour
     void Start()
     {
         comboList = GameObject.FindGameObjectWithTag("ComboListManager").GetComponent<ComboList>();
-        InitializeComboWindow(comboList.soloComboList, p1SoloCombosCached, p2SoloCombosCached, true); // Instantiates all solo combo gameobjects, set to visible by default 
-        InitializeComboWindow(comboList.duoComboList, p1DuoCombosCached, p2DuoCombosCached, false);  // Instantiates all duo combo gameobjects, stored for later use
+        InitializeComboWindow(comboList.currentP1ComboList, p1SoloCombosCached, p1DuoCombosCached, p1ComboListView); // Instantiates all solo combo gameobjects, set to visible by default 
+        InitializeComboWindow(comboList.currentP2ComboList, p2SoloCombosCached, p2DuoCombosCached, p2ComboListView);  // Instantiates all duo combo gameobjects, stored for later use
     }
 
     // Instantiates all combo sequences for each player and caches them for later use
-    private void InitializeComboWindow(List<Combo> comboList, List<GameObject> p1ComboCache, List<GameObject> p2ComboCache, bool setActive)
+    private void InitializeComboWindow(List<Combo> comboList, List<GameObject> soloComboCache, List<GameObject> duoComboCache, GameObject comboListView)
     {
         foreach (Combo combo in comboList)
         {
-            GameObject p1CurrentComboSequence = Instantiate(comboSequencePrefab, p1ComboListView.transform);
-            p1ComboCache.Add(p1CurrentComboSequence);
-            p1CurrentComboSequence.SetActive(setActive);
+            AddComboToWindow(combo, soloComboCache, duoComboCache, comboListView);
+        }
+    }
 
-            GameObject p2CurrentComboSequence = Instantiate(comboSequencePrefab, p2ComboListView.transform);
+    public void AddNewCombo(string playerTag, Combo newCombo)
+    {
+        switch (playerTag)
+        {
+            case Player1Tag:
+                AddComboToWindow(newCombo, p1SoloCombosCached, p1DuoCombosCached, p1ComboListView);
+                break;
+            case Player2Tag:
+                AddComboToWindow(newCombo, p2SoloCombosCached, p2DuoCombosCached, p2ComboListView);
+                break;
+        }
+    }
 
-            p2ComboCache.Add(p2CurrentComboSequence);
-            p2CurrentComboSequence.SetActive(setActive);
+    private void AddComboToWindow(Combo combo, List<GameObject> soloComboCache, List<GameObject> duoComboCache, GameObject comboListView)
+    {
+        GameObject currentComboSequence = Instantiate(comboSequencePrefab, comboListView.transform);
+        if (combo.GetComboType() == ComboType.Solo)
+        {
+            currentComboSequence.SetActive(true);
+            soloComboCache.Add(currentComboSequence);
+        }
+        else if (combo.GetComboType() == ComboType.Duo)
+        {
+            currentComboSequence.SetActive(false);
+            duoComboCache.Add(currentComboSequence);
+        }
 
+        if (combo.HasIcon())
+        {
+            InstantiateIconAtFront(currentComboSequence, combo.GetComboIcon());
+        }
 
-            if (combo.HasIcon())
+        foreach (KeyCode key in combo.GetComboSequence())
+        {
+            switch (key)
             {
-                InstantiateIconAtFront(p1CurrentComboSequence, combo.GetComboIcon());
-                InstantiateIconAtFront(p2CurrentComboSequence, combo.GetComboIcon());
-            }
-
-            foreach (KeyCode key in combo.GetComboSequence())
-            {
-                switch (key)
-                {
-                    case KeyCode.UpArrow:
-                        Instantiate(arrowImages[0], p1CurrentComboSequence.transform);
-                        Instantiate(arrowImages[0], p2CurrentComboSequence.transform);
-                        break;
-                    case KeyCode.DownArrow:
-                        Instantiate(arrowImages[1], p1CurrentComboSequence.transform);
-                        Instantiate(arrowImages[1], p2CurrentComboSequence.transform);
-                        break;
-                    case KeyCode.LeftArrow:
-                        Instantiate(arrowImages[2], p1CurrentComboSequence.transform);
-                        Instantiate(arrowImages[2], p2CurrentComboSequence.transform);
-                        break;
-                    case KeyCode.RightArrow:
-                        Instantiate(arrowImages[3], p1CurrentComboSequence.transform);
-                        Instantiate(arrowImages[3], p2CurrentComboSequence.transform);
-                        break;
-                    default:
-                        break;
-                }
+                case KeyCode.UpArrow:
+                    Instantiate(arrowImages[0], currentComboSequence.transform);
+                    break;
+                case KeyCode.DownArrow:
+                    Instantiate(arrowImages[1], currentComboSequence.transform);
+                    break;
+                case KeyCode.LeftArrow:
+                    Instantiate(arrowImages[2], currentComboSequence.transform);
+                    break;
+                case KeyCode.RightArrow:
+                    Instantiate(arrowImages[3], currentComboSequence.transform);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -125,6 +140,8 @@ public class ComboWindowUI : MonoBehaviour
         iconImage.sprite = icon;
         iconImage.preserveAspect = true; // Ensure the icon maintains its aspect ratio
     }
+
+
 
     // Alternatives between solo and duo combo lists for each player
     public void SwitchComboList(bool isInDuo, string playerTag)
