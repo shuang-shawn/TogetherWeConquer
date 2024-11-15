@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,9 @@ public class ComboWindowUI : MonoBehaviour
     private TextMeshProUGUI p1Header;
     [SerializeField]
     private TextMeshProUGUI p2Header;
+
+    private bool p1IsInDuoView = false;
+    private bool p2IsInDuoView = false;
 
     [SerializeField]
     private Animator p1WindowAnimator;
@@ -77,25 +81,25 @@ public class ComboWindowUI : MonoBehaviour
         switch (playerTag)
         {
             case Player1Tag:
-                AddComboToWindow(newCombo, p1SoloCombosCached, p1DuoCombosCached, p1ComboListView);
+                AddComboToWindow(newCombo, p1SoloCombosCached, p1DuoCombosCached, p1ComboListView, p1IsInDuoView);
                 break;
             case Player2Tag:
-                AddComboToWindow(newCombo, p2SoloCombosCached, p2DuoCombosCached, p2ComboListView);
+                AddComboToWindow(newCombo, p2SoloCombosCached, p2DuoCombosCached, p2ComboListView, p2IsInDuoView);
                 break;
         }
     }
 
-    private void AddComboToWindow(Combo combo, List<GameObject> soloComboCache, List<GameObject> duoComboCache, GameObject comboListView)
+    private void AddComboToWindow(Combo combo, List<GameObject> soloComboCache, List<GameObject> duoComboCache, GameObject comboListView, bool isInDuo = false)
     {
         GameObject currentComboSequence = Instantiate(comboSequencePrefab, comboListView.transform);
         if (combo.GetComboType() == ComboType.Solo)
         {
-            currentComboSequence.SetActive(true);
+            currentComboSequence.SetActive(!isInDuo);
             soloComboCache.Add(currentComboSequence);
         }
         else if (combo.GetComboType() == ComboType.Duo)
         {
-            currentComboSequence.SetActive(false);
+            currentComboSequence.SetActive(isInDuo);
             duoComboCache.Add(currentComboSequence);
         }
 
@@ -148,7 +152,9 @@ public class ComboWindowUI : MonoBehaviour
     { 
         List<GameObject> soloCombosCached = playerTag.Equals(Player1Tag) ? p1SoloCombosCached : p2SoloCombosCached;
         List<GameObject> duoCombosCached = playerTag.Equals(Player1Tag) ? p1DuoCombosCached : p2DuoCombosCached;
-
+        bool isPlayer1 = playerTag.Equals(Player1Tag);
+        p1IsInDuoView = isPlayer1 ? isInDuo : p1IsInDuoView;
+        p2IsInDuoView = isPlayer1 ? p2IsInDuoView : isInDuo;
         foreach (GameObject comboUIElement in soloCombosCached)
         {
             comboUIElement.SetActive(!isInDuo);
