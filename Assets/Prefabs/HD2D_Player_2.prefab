@@ -639,6 +639,7 @@ MonoBehaviour:
   crosshair: {fileID: 4664265123319435124}
   tombstone: {fileID: 6667328446845882700, guid: d7774f3ffa8950140afe279cdc4e4daf,
     type: 3}
+  timer: {fileID: 6996653337582462802}
 --- !u!1 &4136670822419442884
 GameObject:
   m_ObjectHideFlags: 0

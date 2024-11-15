@@ -979,6 +979,7 @@ MonoBehaviour:
   crosshair: {fileID: 7336105137177031557}
   tombstone: {fileID: 6667328446845882700, guid: d7774f3ffa8950140afe279cdc4e4daf,
     type: 3}
+  timer: {fileID: 4755752813063710339}
 --- !u!1001 &2113284923608014499
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -77,11 +77,24 @@ public class DuoComboManager : MonoBehaviour
             skillManager.CastSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
         }
      
-     
         currentCombo = null;
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
     }
+
+    public void ForceResetDuoCombo()
+    {
+        if (startedCombo != null && endingCombo != null)
+        {
+            startedCombo.RestartCombo();
+            endingCombo.RestartCombo();
+            currentCombo = null;
+            startedCombo.ToggleInput(true);
+            endingCombo.ToggleInput(true);
+        }
+    }
+
+
 
     private void FindPlayers()
     {
