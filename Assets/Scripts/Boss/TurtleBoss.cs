@@ -78,32 +78,34 @@ public class TurtleBoss : MonoBehaviour
         Debug.Log("angle from turtle is: " + angle);    
 
         // Determine which direction (front, back, left, right) the hit came from
-        if (angle >= -45 && angle <= 45)
+        if (angle >= -90 && angle <= 90)
         {
             // ReactToBackHit(damage);
             Debug.Log("back");
             return 2.0f;
         }
-        else if (angle > 45 && angle <= 110)
-        {
-            // ReactToRightHit(damage);
-            Debug.Log("right");
+        // else if (angle > 45 && angle <= 110)
+        // {
+        //     // ReactToRightHit(damage);
+        //     Debug.Log("right");
 
-            return 1.0f;
-        }
-        else if (angle < -45 && angle >= -110)
-        {
+        //     return 1.0f;
+        // }
+        // else if (angle < -45 && angle >= -110)
+        // {
         
-            // ReactToLeftHit(damage);
-            Debug.Log("left");
+        //     // ReactToLeftHit(damage);
+        //     Debug.Log("left");
 
-            return 1.0f;
-        }
+        //     return 1.0f;
+        // }
         else
         {
             // ReactToFrontHit(damage);
             Debug.Log("front");
-            StartCoroutine(SpikeCounterAttack());
+            if (isSpikeOut) {
+                StartCoroutine(SpikeCounterAttack());
+            }
             return -1.0f;
         }
     }
