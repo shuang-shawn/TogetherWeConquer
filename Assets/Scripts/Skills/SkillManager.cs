@@ -18,7 +18,6 @@ public class SkillManager : MonoBehaviour
     public ParticleSystem dashParticlesPrefab;
     public Material tetherMaterial;
     public ParticleSystem onHit;
-    public ParticleSystem fire;
     public GameObject iceGroundPrefab;
     public GameObject snipeBulletPrefab;
     public AudioController audioController;
@@ -28,6 +27,11 @@ public class SkillManager : MonoBehaviour
     public GameObject shadowSkillPrefab;
     public GameObject shadowSkillPlaceEffect;
     public GameObject shadowSkillTeleportEffect;
+    public FireRing fireRing;
+    public ParticleSystem fireRingPrefab;
+
+    public Swap swap;
+
 
     public ArrowSkill arrowSkill;
     public GameObject arrowSpawnerPrefab;
@@ -68,6 +72,10 @@ public class SkillManager : MonoBehaviour
 
         drainSkill = gameObject.AddComponent<Drain>();
         drainSkill.drainCirclePrefab = drainCirclePrefab;
+        fireRing = gameObject.AddComponent<FireRing>();
+        fireRing.fireRingPrefab = fireRingPrefab;
+
+        swap = gameObject.AddComponent<Swap>();
     }
 
     // Update is called once per frame
@@ -130,6 +138,12 @@ public class SkillManager : MonoBehaviour
                 break;
             case "drain":
                 drainSkill.CastDrain();
+                break;
+            case "fireRing":
+                fireRing.CastFireRing();
+                break;
+            case "swap":
+                swap.CastSwap();
                 break;
             default:
                 break;

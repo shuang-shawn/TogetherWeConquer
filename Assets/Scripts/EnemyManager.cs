@@ -80,9 +80,14 @@ public class EnemyManager : MonoBehaviour
     void Die()
     {
         UnityEngine.Debug.Log(gameObject.name + " has died!");
-        // Add death handling here (destroy, play animation, etc.)
-        slimeBoss.IsDead = true;
-        animator.SetTrigger("Die");
+        //Destroy this mob
+        if(gameObject.tag == "mob") {
+            Destroy(gameObject);
+        } else {
+            // Add death handling here (destroy, play animation, etc.)
+            bossScript.IsDead = true;
+            animator.SetTrigger("Die");
+        }
     }
 
     public bool IsDead() {
