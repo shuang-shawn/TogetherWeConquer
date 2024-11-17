@@ -1133,6 +1133,7 @@ MonoBehaviour:
   fireRing: {fileID: 0}
   fireRingPrefab: {fileID: 8483642194577002910, guid: badf2a9f719627c4cb1759aefffbe373,
     type: 3}
+  swap: {fileID: 0}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0
@@ -3483,6 +3484,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2002315544278149983, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2226446011992917550, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: shake

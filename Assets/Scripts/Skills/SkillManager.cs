@@ -21,6 +21,8 @@ public class SkillManager : MonoBehaviour
     public ParticleSystem fireRingPrefab;
 
 
+    public Swap swap;
+
 
     // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
@@ -43,6 +45,8 @@ public class SkillManager : MonoBehaviour
 
         fireRing = gameObject.AddComponent<FireRing>();
         fireRing.fireRingPrefab = fireRingPrefab;
+
+        swap = gameObject.AddComponent<Swap>();
     }
 
     // Update is called once per frame
@@ -70,6 +74,7 @@ public class SkillManager : MonoBehaviour
                 break;
             case "tether": tether.CastTether(); break;
             case "fireRing": fireRing.CastFireRing(); break;
+            case "swap": swap.CastSwap(); break;
         }
     }
 
