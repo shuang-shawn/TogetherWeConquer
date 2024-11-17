@@ -85,7 +85,7 @@ public class EnemyManager : MonoBehaviour
             Destroy(gameObject);
         } else {
             // Add death handling here (destroy, play animation, etc.)
-            bossScript.IsDead = true;
+            // bossScript.IsDead = true;
             animator.SetTrigger("Die");
         }
     }
