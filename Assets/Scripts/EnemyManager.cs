@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -14,9 +15,10 @@ public class EnemyManager : MonoBehaviour
     public ParticleSystem hurtParticlesPrefab;
     public ParticleSystem slowParticlesPrefab;
     public Animator animator;
-    public SlimeBoss bossScript;
 
     public bool slowed = false;
+    private SlimeBoss slimeBoss;
+    private TurtleBoss turtleBoss;
     
     // Start is called before the first frame update
     void Start()
@@ -29,29 +31,38 @@ public class EnemyManager : MonoBehaviour
             currentHealth = maxHealth;
         }
 
-        bossScript = GetComponent<SlimeBoss>();
+        slimeBoss = GetComponent<SlimeBoss>();
+        turtleBoss = GetComponent<TurtleBoss>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            TakeDamage(100);
-        }
+        // if (Input.GetKeyDown("space"))
+        // {
+        //     TakeDamage(100);
+        // }
     }
 
 
 
-    public void TakeDamage(int damage) {
-        currentHealth -= damage;
-        UnityEngine.Debug.Log(gameObject.name + " took " + damage + " damage!");
+    public void TakeDamage(int damage, Vector3 hitPosition=default) {
+        if (turtleBoss && hitPosition != default) {
+            UnityEngine.Debug.Log("this is a turtle");
+            float damageFactor = turtleBoss.CalculateDamageFactor(hitPosition);
+            currentHealth -=  Mathf.FloorToInt(damageFactor * damage);
+            UnityEngine.Debug.Log(gameObject.name + " took " + damageFactor * damage + " modified damage!");
+
+        } else {
+            currentHealth -= damage;
+            UnityEngine.Debug.Log(gameObject.name + " took " + damage + " damage!");
+        }
 
         if (gameObject.tag == "boss")
         {
             healthBar.UpdateHealthBar(currentHealth, maxBossHealth);
-            if (currentHealth / maxHealth < 0.5f) {
-                bossScript.speedPercent = 4;
+            if (currentHealth / maxHealth < 0.5f && slimeBoss != null) {
+                slimeBoss.speedPercent = 4;
             }
         } else if (gameObject.tag == "mob")
         {
@@ -69,7 +80,6 @@ public class EnemyManager : MonoBehaviour
     void Die()
     {
         UnityEngine.Debug.Log(gameObject.name + " has died!");
-
         //Destroy this mob
         if(gameObject.tag == "mob") {
             Destroy(gameObject);
@@ -103,8 +113,8 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator SlowDownForDuration(float slowFactor, float slowTime)
     {
-        float originalSpeed = bossScript.speedPercent;
-        bossScript.speedPercent = slowFactor;
+        float originalSpeed = slimeBoss.speedPercent;
+        slimeBoss.speedPercent = slowFactor;
         slowed = true;
 
         SlowParticles(slowTime);
@@ -113,7 +123,7 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(slowTime); // Use WaitForSecondsRealtime to ignore the time scale
 
         // Reset the time scale to the original value
-        bossScript.speedPercent = originalSpeed;
+        slimeBoss.speedPercent = originalSpeed;
         slowed = false;
     }
 

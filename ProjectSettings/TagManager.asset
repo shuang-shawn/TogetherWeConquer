@@ -5,9 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Player1
-  - Player2
   - BasicEnemy
-  - Player2
   - DuoComboManager
   - FXManager
   - ComboWindow
@@ -20,6 +18,10 @@ TagManager:
   - Canvas
   - LoseWindow
   - WinWindow
+  - LevelUpWindow
+  - ComboListManager
+  - Player2
+
   layers:
   - Default
   - TransparentFX
@@ -27,6 +29,7 @@ TagManager:
   - 
   - Water
   - UI
+  - Enemy
   - Mobs
   - 
   - 
