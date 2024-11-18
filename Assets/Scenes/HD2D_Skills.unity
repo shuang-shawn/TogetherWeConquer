@@ -2765,6 +2765,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2558522864259471691, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      propertyPath: portalPrefab
+      value: 
+      objectReference: {fileID: 2932592181133159701, guid: 0916d7cbc858c3442b748ab0f2aa7ba0,
+        type: 3}
     - target: {fileID: 3528172597860773568, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: m_Name

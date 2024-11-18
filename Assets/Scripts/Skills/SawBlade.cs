@@ -13,7 +13,7 @@ public class Sawblade : MonoBehaviour
     public float heightOffset = 1.5f; // Adjust this value to raise the sawblade
     public float distanceOffset = 5f; // Adjust this value to control the radius
 
-    public float rotationSpeed = 10f; // Further reduced speed for slower rotation
+    public float rotationSpeed = 8f; // Further reduced speed for slower rotation
     public float duration = 5f;
     public int damage = 5;
 
