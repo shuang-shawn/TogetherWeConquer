@@ -17,10 +17,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private GameObject tombstone;
 
+    private GameObject duoComboManager;
+    [SerializeField]
+    private GameObject timer;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        duoComboManager = GameObject.FindGameObjectWithTag("DuoComboManager");
     }
 
     void OnCollisionEnter(Collision collision)
@@ -64,6 +68,7 @@ public class PlayerManager : MonoBehaviour
 
     void Die()
     {
+        ExitComboLoop();
         SpawnDeathParticles();
       
         Debug.Log(gameObject.name + " has died!");
@@ -100,6 +105,13 @@ public class PlayerManager : MonoBehaviour
         hurtParticles.Play();
 
         Destroy(hurtParticles.gameObject, hurtParticles.main.duration + hurtParticles.main.startLifetime.constantMax);
+    }
+
+    private void ExitComboLoop()
+    {
+        duoComboManager.GetComponent<DuoComboManager>()?.ForceResetDuoCombo();
+        GetComponentInChildren<ComboInput>()?.RestartCombo();
+        timer?.GetComponent<ComboTimer>().ResetTimer();
     }
 
     private void SpawnTombstone()

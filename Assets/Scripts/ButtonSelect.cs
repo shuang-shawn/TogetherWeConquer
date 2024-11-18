@@ -12,6 +12,7 @@ public class OptionSelector : MonoBehaviour
 
     public GameObject comboListManager;
     private ComboList comboList;
+    public GameStateManager stateManager;
 
     private List<Combo> newCombos;
     private int selectedOption = -1; // No option selected initially
@@ -51,7 +52,14 @@ public class OptionSelector : MonoBehaviour
         Image button2Image = option2Button.GetComponent<Image>();
         Image button3Image = option3Button.GetComponent<Image>();
 
-        newCombos = GetRandomCombos(comboList.soloComboList);
+        if (!stateManager.duoLevel)
+        {
+            newCombos = GetRandomCombos(comboList.soloComboList);
+        }
+        else
+        {
+            newCombos = GetRandomCombos(comboList.duoComboList);
+        }
 
         button1Image.sprite = newCombos[0].GetComboIcon();
         button2Image.sprite = newCombos[1].GetComboIcon();
@@ -74,7 +82,7 @@ public class OptionSelector : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            randomCombos.Add(comboList.soloComboList[numbers[i]]);
+            randomCombos.Add(typeList[numbers[i]]);
         }
 
         return randomCombos;
@@ -131,7 +139,22 @@ public class OptionSelector : MonoBehaviour
 
     public void AcceptOption()
     {
-        comboList.AddToCurrentList(newCombos[selectedOption - 1]);
+        if (!stateManager.duoLevel)
+        {
+            if (stateManager.isPlayer1Level)
+            {
+                comboList.AddP1SoloSkill(newCombos[selectedOption - 1]);
+            }
+            else
+            {
+                comboList.AddP2SoloSkill(newCombos[selectedOption - 1]);
+            }
+        }
+        else
+        {
+            comboList.AddP1SoloSkill(newCombos[selectedOption - 1]);
+            comboList.AddP2SoloSkill(newCombos[selectedOption - 1]);
+        }
     }
 
     IEnumerator WaitTwo()

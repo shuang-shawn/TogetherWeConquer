@@ -20,7 +20,7 @@ public class SpawnEnemy : MonoBehaviour
         Vector3 intersection = new Vector3(0, 0, 0);
         Camera cam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
-        GameObject floor = GameObject.Find("Floor");
+        GameObject floor = GameObject.Find("SpawnPlane");
         Plane plane = new Plane(floor.transform.up, floor.transform.position);
 
         Vector3 cameraPosition = cam.transform.position;
