@@ -1298,6 +1298,7 @@ MonoBehaviour:
   option3Button: {fileID: 1581650518}
   confirmButton: {fileID: 1296188599}
   comboListManager: {fileID: 1309259052}
+  stateManager: {fileID: 1409611444}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1654,6 @@ MonoBehaviour:
     type: 3}
   tetherMaterial: {fileID: 2100000, guid: 50004141ea2d8f541ad29b4e6f1f19ca, type: 2}
   onHit: {fileID: 1836307080458256607, guid: d7404a2e002daed4782ae9491406eed3, type: 3}
-  fire: {fileID: 1366504390285116651, guid: dedb794fc3a18504eb36ab2929d9fd77, type: 3}
   iceGroundPrefab: {fileID: 7848673171473098260, guid: f0cdf41b3ae44214eac32631d5bf09d0,
     type: 3}
   snipeBulletPrefab: {fileID: 2860286268713890895, guid: 99afb97767026f7468b5dea6539c119e,
@@ -1668,6 +1668,9 @@ MonoBehaviour:
     type: 3}
   shadowSkillTeleportEffect: {fileID: 1645622845278563384, guid: 546bec032419ec14d81b1e7bd0af7191,
     type: 3}
+  fireRing: {fileID: 0}
+  fireRingPrefab: {fileID: 0}
+  swap: {fileID: 0}
   arrowSkill: {fileID: 0}
   arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
     type: 3}
@@ -2943,7 +2946,11 @@ MonoBehaviour:
   playerManager2: {fileID: 0}
   bossManager: {fileID: 0}
   canvas: {fileID: 1251522603}
+  moveTutorial: {fileID: 0}
+  comboTutorial: {fileID: 0}
   levelUp: 0
+  isPlayer1Level: 1
+  duoLevel: 0
 --- !u!4 &1409611445
 Transform:
   m_ObjectHideFlags: 0

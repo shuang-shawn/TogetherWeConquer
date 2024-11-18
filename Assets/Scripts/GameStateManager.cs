@@ -10,11 +10,14 @@ public class GameStateManager : MonoBehaviour
     public PlayerManager playerManager2;
     public EnemyManager bossManager;
     public GameObject canvas;
+    public MovementTutorial moveTutorial;
+    public ComboTutorial comboTutorial;
 
     private int currXP;
     private int nextLevel = 100;
     private int level = 1;
     private bool hasEnded = false;
+    private bool tutorial = false;
     public bool levelUp = false;
     public bool isPlayer1Level = true;
     public bool duoLevel = false;
@@ -24,10 +27,33 @@ public class GameStateManager : MonoBehaviour
     {
         playerManager1 = GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerManager>();
         playerManager2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerManager>();
-        bossManager = GameObject.FindGameObjectWithTag("boss").GetComponent<EnemyManager>();
+        moveTutorial = null;
+        if(GameObject.FindGameObjectWithTag("moveTutorial"))
+        {
+            moveTutorial = GameObject.FindGameObjectWithTag("moveTutorial").GetComponent<MovementTutorial>();
+            GameObject.FindGameObjectWithTag("moveTutorial").SetActive(false);
+        }
+        comboTutorial = null;
+        if (GameObject.FindGameObjectWithTag("comboTutorial"))
+        {
+            comboTutorial = GameObject.FindGameObjectWithTag("comboTutorial").GetComponent<ComboTutorial>();
+            GameObject.FindGameObjectWithTag("comboTutorial").SetActive(false);
+        }
+        bossManager = null;
+        if (GameObject.FindGameObjectWithTag("boss"))
+        {
+            bossManager = GameObject.FindGameObjectWithTag("boss").GetComponent<EnemyManager>();
+        }
         canvas = GameObject.FindGameObjectWithTag("Canvas");
 
-        StartCoroutine(HandleStart());
+        if (!tutorial)
+        {
+            StartCoroutine(HandleStart());
+        }
+        else
+        {
+            StartCoroutine(Tutorial());
+        }
     }
 
     private IEnumerator HandleStart()
@@ -61,6 +87,10 @@ public class GameStateManager : MonoBehaviour
                     canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
                     hasEnded = true;
                 }
+            }
+            else if (GameObject.FindGameObjectWithTag("boss"))
+            {
+                bossManager = GameObject.FindGameObjectWithTag("boss").GetComponent<EnemyManager>();
             }
         }
 
@@ -120,5 +150,28 @@ public class GameStateManager : MonoBehaviour
         }
 
         duoLevel = false;
+    }
+
+    private IEnumerator Tutorial()
+    {
+        Time.timeScale = 1.0f;
+
+        moveTutorial.Play();
+
+        while (canvas.transform.Find("MoveTutorialWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        UnityEngine.Debug.Log("Done Movement Tutorial");
+
+        comboTutorial.Play();
+
+        while (canvas.transform.Find("Dim").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        tutorial = false;
     }
 }
