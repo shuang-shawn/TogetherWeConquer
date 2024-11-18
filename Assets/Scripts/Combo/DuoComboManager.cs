@@ -23,14 +23,21 @@ public class DuoComboManager : MonoBehaviour
     // Checks if the other player is currently performing a solo combo
     public bool IsOtherPlayerInSoloCombo(GameObject player) 
     {
-        if (player == player1)
+        GameObject otherPlayer = (player == player1) ? player2 : player1;
+        if (otherPlayer.activeInHierarchy) {
+            if (player == player1)
+            {
+                return player2.GetComponentInChildren<ComboInput>().IsInSoloCombo();
+            }
+            else
+            {
+                return player1.GetComponentInChildren<ComboInput>().IsInSoloCombo();
+            }
+        } else
         {
-            return player2.GetComponentInChildren<ComboInput>().IsInSoloCombo();
+            return true;
         }
-        else 
-        {
-            return player1.GetComponentInChildren<ComboInput>().IsInSoloCombo();
-        }
+      
     }
 
     // Handles logic for starting duo combos
@@ -54,6 +61,7 @@ public class DuoComboManager : MonoBehaviour
             startedCombo.ToggleInput(false);
             endingCombo.ToggleInput(true);
             endingCombo.StartTimer(remainingTime);
+            skillManager.CastFirstHalfDuoSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
             return;
         }
         else if (player == startedCombo.transform.parent.gameObject && abrupt) // If initial players stops combo unexpecetedly, force other play to end combo
@@ -69,11 +77,24 @@ public class DuoComboManager : MonoBehaviour
             skillManager.CastSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
         }
      
-     
         currentCombo = null;
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
     }
+
+    public void ForceResetDuoCombo()
+    {
+        if (startedCombo != null && endingCombo != null)
+        {
+            startedCombo.RestartCombo();
+            endingCombo.RestartCombo();
+            currentCombo = null;
+            startedCombo.ToggleInput(true);
+            endingCombo.ToggleInput(true);
+        }
+    }
+
+
 
     private void FindPlayers()
     {

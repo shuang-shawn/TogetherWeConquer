@@ -44,4 +44,12 @@ public class Combo
     {
         return comboIcon != null;
     }
+
+    public override string ToString()
+    {
+        // Build a string representation of the Combo object
+        string comboSequenceStr = string.Join(", ", comboSequence);  // Converts the KeyCode list to a string
+        string iconInfo = HasIcon() ? comboIcon.name : "No Icon";  // Checks if Combo has an icon
+        return $"Combo Skill: {comboSkill}, Type: {comboType}, Sequence: [{comboSequenceStr}], Icon: {iconInfo}";
+    }
 }

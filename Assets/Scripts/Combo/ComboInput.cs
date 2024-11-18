@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+
 
 public class ComboInput : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class ComboInput : MonoBehaviour
     }
     private void OnEnable()
     {
+        actionMap.Enable();
         up.Enable();
         down.Enable();
         left.Enable();
@@ -125,7 +127,10 @@ public class ComboInput : MonoBehaviour
     // Checks in either the solo or duo combo list based on the users first two inputs for matching combos
     private void CheckComboList()
     {
-        var selectedComboList = (comboData.duoToggle) ? comboList.duoComboList : comboList.soloComboList;
+        var selectedComboList = (transform.parent.gameObject.tag == "Player1") ? comboList.currentP1ComboList : comboList.currentP2ComboList;
+        selectedComboList = selectedComboList
+        .Where(combo => combo.GetComboType() == (comboData.duoToggle ? ComboType.Duo : ComboType.Solo))
+        .ToList();
         var currentPlayer = transform.parent.gameObject;
 
         foreach (Combo combo in selectedComboList)

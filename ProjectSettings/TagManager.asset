@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Player1
   - BasicEnemy
-  - Player2
   - DuoComboManager
   - FXManager
   - ComboWindow
@@ -19,8 +18,10 @@ TagManager:
   - Canvas
   - LoseWindow
   - WinWindow
+  - LevelUpWindow
   - ComboListManager
   - Player2
+
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Enemy
+  - Mobs
   - 
   - 
   - 
