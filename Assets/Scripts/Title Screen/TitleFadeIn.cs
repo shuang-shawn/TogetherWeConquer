@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ButtonFadeIn : MonoBehaviour
 {
     [SerializeField] private Button startButton;
+    [SerializeField] private Button tutorialButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private TextMeshProUGUI title;
@@ -14,6 +15,7 @@ public class ButtonFadeIn : MonoBehaviour
     void Start()
     {
         StartCoroutine(FadeInButton(startButton, 0.5f));
+        StartCoroutine(FadeInButton(tutorialButton, 0.5f));
         StartCoroutine(FadeInButton(settingsButton, 1f));
         StartCoroutine(FadeInButton(quitButton, 1.5f));
 

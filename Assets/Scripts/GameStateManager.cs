@@ -16,6 +16,8 @@ public class GameStateManager : MonoBehaviour
     private int level = 1;
     private bool hasEnded = false;
     public bool levelUp = false;
+    public bool isPlayer1Level = true;
+    public bool duoLevel = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,21 +27,40 @@ public class GameStateManager : MonoBehaviour
         bossManager = GameObject.FindGameObjectWithTag("boss").GetComponent<EnemyManager>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
 
-        HandleLevelUp();
+        StartCoroutine(HandleStart());
+    }
+
+    private IEnumerator HandleStart()
+    {
+        StartCoroutine(HandleLevelUp());
+        while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
+        {
+            yield return null;
+        }
+        UnityEngine.Debug.Log("Duo level");
+        duoLevel = true;
+        StartCoroutine(HandleLevelUp());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!hasEnded) {
-            if (playerManager1.IsDead() && playerManager2.IsDead()) {
+        if (!hasEnded) 
+        {
+            if (playerManager1.IsDead() && playerManager2.IsDead())
+            {
                 canvas.transform.Find("LoseWindow").gameObject.SetActive(true);
                 canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
                 hasEnded = true;
-            } else if (bossManager.IsDead()) {
-                canvas.transform.Find("WinWindow").gameObject.SetActive(true);
-                canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
-                hasEnded = true;
+            }
+            if (bossManager != null)
+            {
+                if (bossManager.IsDead())
+                {
+                    canvas.transform.Find("WinWindow").gameObject.SetActive(true);
+                    canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
+                    hasEnded = true;
+                }
             }
         }
 
@@ -49,7 +70,7 @@ public class GameStateManager : MonoBehaviour
             currXP %= nextLevel;
             nextLevel += 25;
 
-            HandleLevelUp();
+            StartCoroutine(HandleLevelUp());
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
@@ -68,12 +89,36 @@ public class GameStateManager : MonoBehaviour
         currXP += xp;
     }
 
-    private void HandleLevelUp()
+    private IEnumerator HandleLevelUp()
     {
         UnityEngine.Debug.Log("Level: " + level + "\nCurrXP: " + currXP + "\nNextLevel: " + nextLevel);
+        UnityEngine.Debug.Log(duoLevel);
 
         LevelUp();
 
-        canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
+        if (!duoLevel)
+        {
+            UnityEngine.Debug.Log("Level up player 1");
+            canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
+            isPlayer1Level = false;
+            while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
+            {
+                yield return null; // Wait for the next frame
+            }
+            UnityEngine.Debug.Log("Level up player 2");
+            canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
+            isPlayer1Level = true;
+        }
+        else
+        {
+            canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
+        }
+
+        while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
+        {
+            yield return null;
+        }
+
+        duoLevel = false;
     }
 }
