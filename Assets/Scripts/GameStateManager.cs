@@ -16,6 +16,7 @@ public class GameStateManager : MonoBehaviour
     public LevelUpTutorial levelUpTutorial;
     public ComboTutorial comboTutorial;
     public DuoComboTutorial duoComboTutorial;
+    public DeathTutorial deathTutorial;
 
     public int currXP;
     public int nextLevel = 100;
@@ -63,6 +64,12 @@ public class GameStateManager : MonoBehaviour
         {
             duoComboTutorial = GameObject.FindGameObjectWithTag("duoComboTutorial").GetComponent<DuoComboTutorial>();
             GameObject.FindGameObjectWithTag("duoComboTutorial").SetActive(false);
+        }
+        deathTutorial = null;
+        if (GameObject.FindGameObjectWithTag("deathTutorial"))
+        {
+            deathTutorial = GameObject.FindGameObjectWithTag("deathTutorial").GetComponent<DeathTutorial>();
+            GameObject.FindGameObjectWithTag("deathTutorial").SetActive(false);
         }
 
         bossManager = null;
@@ -243,12 +250,25 @@ public class GameStateManager : MonoBehaviour
 
         duoComboTutorial.Play();
 
-        while (canvas.transform.Find("ComboTutorialWindow").gameObject.activeSelf)
+        while (canvas.transform.Find("DuoComboTutorialWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        UnityEngine.Debug.Log("Done Duo Combo Tutorial");
+
+        playerManager1.TakeDamage(100);
+
+        deathTutorial.Play();
+
+        while (canvas.transform.Find("DeathTutorialWindow").gameObject.activeSelf)
         {
             yield return null; // Wait for the next frame
         }
 
         tutorial = false;
+
+        SceneManager.LoadScene("Title Screen");
     }
 
 
