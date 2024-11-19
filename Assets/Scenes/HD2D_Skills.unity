@@ -2948,6 +2948,7 @@ MonoBehaviour:
   canvas: {fileID: 1251522603}
   moveTutorial: {fileID: 0}
   comboTutorial: {fileID: 0}
+  levelUpTutorial: {fileID: 0}
   levelUp: 0
   isPlayer1Level: 1
   duoLevel: 0
@@ -3950,6 +3951,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurtleBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 7907816645856648354, guid: 785b5d4d8cbd0e44687761ea18d87eef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4236,17 +4242,17 @@ PrefabInstance:
     - target: {fileID: 3528172597860773568, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6939755734162188339, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6939755734162188339, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

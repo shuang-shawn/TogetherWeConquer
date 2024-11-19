@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class ComboTutorial : MonoBehaviour
 {
-    public GameObject tutorialPanel;          // The UI Panel object
+    public GameObject tutorialPanel;            // The UI Panel object
+    public ComboList ComboList;                 // The combo list to get each player's combo
     public TextMeshProUGUI instructionsTextP1;  // The main instructions text
     public TextMeshProUGUI keyStatusTextP1;     // The text showing key status
     public TextMeshProUGUI instructionsTextP2;  // The main instructions text

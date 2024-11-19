@@ -12,12 +12,13 @@ public class GameStateManager : MonoBehaviour
     public GameObject canvas;
     public MovementTutorial moveTutorial;
     public ComboTutorial comboTutorial;
+    public LevelUpTutorial levelUpTutorial;
 
     private int currXP;
     private int nextLevel = 100;
     private int level = 1;
     private bool hasEnded = false;
-    private bool tutorial = false;
+    private bool tutorial = true;
     public bool levelUp = false;
     public bool isPlayer1Level = true;
     public bool duoLevel = false;
@@ -27,11 +28,18 @@ public class GameStateManager : MonoBehaviour
     {
         playerManager1 = GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerManager>();
         playerManager2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerManager>();
+
         moveTutorial = null;
         if(GameObject.FindGameObjectWithTag("moveTutorial"))
         {
             moveTutorial = GameObject.FindGameObjectWithTag("moveTutorial").GetComponent<MovementTutorial>();
             GameObject.FindGameObjectWithTag("moveTutorial").SetActive(false);
+        }
+        levelUpTutorial = null;
+        if (GameObject.FindGameObjectWithTag("levelUpTutorial"))
+        {
+            levelUpTutorial = GameObject.FindGameObjectWithTag("levelUpTutorial").GetComponent<LevelUpTutorial>();
+            GameObject.FindGameObjectWithTag("levelUpTutorial").SetActive(false);
         }
         comboTutorial = null;
         if (GameObject.FindGameObjectWithTag("comboTutorial"))
@@ -39,6 +47,7 @@ public class GameStateManager : MonoBehaviour
             comboTutorial = GameObject.FindGameObjectWithTag("comboTutorial").GetComponent<ComboTutorial>();
             GameObject.FindGameObjectWithTag("comboTutorial").SetActive(false);
         }
+
         bossManager = null;
         if (GameObject.FindGameObjectWithTag("boss"))
         {
@@ -125,19 +134,19 @@ public class GameStateManager : MonoBehaviour
         UnityEngine.Debug.Log(duoLevel);
 
         LevelUp();
+        UnityEngine.Debug.Log(levelUp);
 
         if (!duoLevel)
         {
             UnityEngine.Debug.Log("Level up player 1");
             canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
-            isPlayer1Level = false;
             while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
             {
                 yield return null; // Wait for the next frame
             }
+            isPlayer1Level = false;
             UnityEngine.Debug.Log("Level up player 2");
             canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
-            isPlayer1Level = true;
         }
         else
         {
@@ -148,6 +157,11 @@ public class GameStateManager : MonoBehaviour
         {
             yield return null;
         }
+
+        isPlayer1Level = true;
+
+        LevelUp();
+        UnityEngine.Debug.Log(levelUp);
 
         duoLevel = false;
     }
@@ -165,12 +179,25 @@ public class GameStateManager : MonoBehaviour
 
         UnityEngine.Debug.Log("Done Movement Tutorial");
 
-        comboTutorial.Play();
+        StartCoroutine(HandleLevelUp());
 
-        while (canvas.transform.Find("Dim").gameObject.activeSelf)
+        levelUpTutorial.Play();
+
+        while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
         {
             yield return null; // Wait for the next frame
         }
+
+        comboTutorial.Play();
+
+        while (canvas.transform.Find("ComboTutorialWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        duoLevel = true;
+
+        UnityEngine.Debug.Log("Done Combo Tutorial");
 
         tutorial = false;
     }

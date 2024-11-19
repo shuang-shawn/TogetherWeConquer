@@ -14,13 +14,19 @@ public class Combo
     private ComboType comboType;
     private string comboSkill;
     private Sprite comboIcon;
+    private string description;
+    private bool learnedP1;
+    private bool learnedP2;
 
-    public Combo(ComboType comboType, List<KeyCode> comboSequence, string skillName, Sprite skillIcon = null)
+    public Combo(ComboType comboType, List<KeyCode> comboSequence, string skillName, Sprite skillIcon = null, string skillDescription = "")
     {
         this.comboSequence = comboSequence;
         this.comboType = comboType;
         comboSkill = skillName;
         comboIcon = skillIcon;
+        description = skillDescription;
+        learnedP1 = false;
+        learnedP2 = false;
     }
 
     public List<KeyCode> GetComboSequence()
@@ -43,6 +49,31 @@ public class Combo
     public bool HasIcon()
     {
         return comboIcon != null;
+    }
+
+    public string GetDescription()
+    {
+        return description;
+    }
+
+    public void LearnedP1()
+    {
+        learnedP1 = true;
+    }
+
+    public bool GetLearnedP1()
+    {
+        return learnedP1;
+    }
+
+    public void LearnedP2()
+    {
+        learnedP2 = true;
+    }
+
+    public bool GetLearnedP2()
+    {
+        return learnedP2;
     }
 
     public override string ToString()
