@@ -41,26 +41,6 @@ public class ComboList : MonoBehaviour
         comboWindowUI = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
     }
 
-    // For testing purposes, will remove later
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            // Pick a random solo combo
-            Combo randomSoloCombo = soloComboList[Random.Range(0, soloComboList.Count)];
-
-            // Pick a random duo combo
-            Combo randomDuoCombo = duoComboList[Random.Range(0, duoComboList.Count)];
-
-            // Test the three functions
-            AddP1SoloSkill(randomSoloCombo);
-            AddP2SoloSkill(randomSoloCombo);
-            AddDuoSkill(randomDuoCombo);
-
-            Debug.Log("Random solo and duo combos added to Player 1 and Player 2.");
-        }
-    }
-
     public void AddP1SoloSkill(Combo newCombo)
     {
         currentP1ComboList.Add(newCombo);

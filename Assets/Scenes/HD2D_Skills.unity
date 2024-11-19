@@ -2944,11 +2944,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager1: {fileID: 0}
   playerManager2: {fileID: 0}
-  bossManager: {fileID: 0}
   canvas: {fileID: 1251522603}
+  mobSpawner: {fileID: 0}
   moveTutorial: {fileID: 0}
   comboTutorial: {fileID: 0}
   levelUpTutorial: {fileID: 0}
+  currXP: 0
+  nextLevel: 100
+  level: 1
   levelUp: 0
   isPlayer1Level: 1
   duoLevel: 0

@@ -19,7 +19,7 @@ public class GameStateManager : MonoBehaviour
     public int nextLevel = 100;
     public int level = 1;
     private bool hasEnded = false;
-    private bool tutorial = true;
+    private bool tutorial = false;
     public bool levelUp = false;
     public bool isPlayer1Level = true;
     public bool duoLevel = false;
