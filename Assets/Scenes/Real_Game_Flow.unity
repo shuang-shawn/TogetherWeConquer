@@ -2837,6 +2837,11 @@ MonoBehaviour:
   playerManager2: {fileID: 0}
   canvas: {fileID: 1251522603}
   mobSpawner: {fileID: 1363938929}
+  moveTutorial: {fileID: 0}
+  levelUpTutorial: {fileID: 0}
+  comboTutorial: {fileID: 0}
+  duoComboTutorial: {fileID: 0}
+  deathTutorial: {fileID: 0}
   currXP: 0
   nextLevel: 50
   level: 1

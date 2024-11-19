@@ -129,12 +129,21 @@ public class ReviveLogic : MonoBehaviour
             playerInstance.SetActive(true);
             playerInstance.GetComponent<PlayerManager>().Heal(100);
             Destroy(gameObject);
+
+            playerInstance.GetComponentInChildren<ComboData>().revived = true;
+            StartCoroutine(ResetRevivedFlag());
         } else
         {
             currentCombo = GenerateRandomCombo();
             comboUI.InitializeUI(currentCombo, 0);
             StartTimer();
         }
+    }
+
+    private IEnumerator ResetRevivedFlag()
+    {
+        yield return null;
+        playerInstance.GetComponentInChildren<ComboData>().revived = false;    
     }
 
     private void ComboSequence(InputAction.CallbackContext context)

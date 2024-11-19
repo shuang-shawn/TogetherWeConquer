@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using Unity.UI;
 
 public class GameStateManager : MonoBehaviour
@@ -12,8 +13,10 @@ public class GameStateManager : MonoBehaviour
     public GameObject canvas;
     public MobSpawner mobSpawner;
     public MovementTutorial moveTutorial;
-    public ComboTutorial comboTutorial;
     public LevelUpTutorial levelUpTutorial;
+    public ComboTutorial comboTutorial;
+    public DuoComboTutorial duoComboTutorial;
+    public DeathTutorial deathTutorial;
 
     public int currXP;
     public int nextLevel = 100;
@@ -30,6 +33,11 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            tutorial = true;
+        }
+
         playerManager1 = GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerManager>();
         playerManager2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerManager>();
 
@@ -50,6 +58,18 @@ public class GameStateManager : MonoBehaviour
         {
             comboTutorial = GameObject.FindGameObjectWithTag("comboTutorial").GetComponent<ComboTutorial>();
             GameObject.FindGameObjectWithTag("comboTutorial").SetActive(false);
+        }
+        duoComboTutorial = null;
+        if (GameObject.FindGameObjectWithTag("duoComboTutorial"))
+        {
+            duoComboTutorial = GameObject.FindGameObjectWithTag("duoComboTutorial").GetComponent<DuoComboTutorial>();
+            GameObject.FindGameObjectWithTag("duoComboTutorial").SetActive(false);
+        }
+        deathTutorial = null;
+        if (GameObject.FindGameObjectWithTag("deathTutorial"))
+        {
+            deathTutorial = GameObject.FindGameObjectWithTag("deathTutorial").GetComponent<DeathTutorial>();
+            GameObject.FindGameObjectWithTag("deathTutorial").SetActive(false);
         }
 
         bossManager = null;
@@ -215,11 +235,40 @@ public class GameStateManager : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        duoLevel = true;
-
         UnityEngine.Debug.Log("Done Combo Tutorial");
 
+        duoLevel = true;
+
+        StartCoroutine(HandleLevelUp());
+
+        levelUpTutorial.Play();
+
+        while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        duoComboTutorial.Play();
+
+        while (canvas.transform.Find("DuoComboTutorialWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        UnityEngine.Debug.Log("Done Duo Combo Tutorial");
+
+        playerManager1.TakeDamage(100);
+
+        deathTutorial.Play();
+
+        while (canvas.transform.Find("DeathTutorialWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
         tutorial = false;
+
+        SceneManager.LoadScene("Title Screen");
     }
 
 

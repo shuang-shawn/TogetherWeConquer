@@ -208,7 +208,16 @@ public class ComboInput : MonoBehaviour
         comboWindowUI.ResetComboList(false, playerTag);
         StopAllCoroutines();
 
+        comboData.finishedCombo = true;
+        StartCoroutine(ResetCompleteFlag());
+
         UpdateComboInputCallbacks(false);
+    }
+
+    private IEnumerator ResetCompleteFlag()
+    {
+        yield return null;
+        comboData.finishedCombo = false;
     }
 
     // Listens for inputs during the combo sequence
