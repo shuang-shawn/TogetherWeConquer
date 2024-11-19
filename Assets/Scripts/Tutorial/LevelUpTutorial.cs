@@ -6,7 +6,6 @@ using UnityEngine;
 public class LevelUpTutorial : MonoBehaviour
 {
     public GameStateManager gameStateManager;   // The GameStateManager
-
     public GameObject tutorialPanel;            // The UI Panel object
     public TextMeshProUGUI instructionsText;    // The main instructions text
 

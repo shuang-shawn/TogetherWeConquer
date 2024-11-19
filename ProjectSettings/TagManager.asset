@@ -24,6 +24,7 @@ TagManager:
   - moveTutorial
   - comboTutorial
   - levelUpTutorial
+  - duoComboTutorial
   layers:
   - Default
   - TransparentFX

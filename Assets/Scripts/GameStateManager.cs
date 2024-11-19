@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using Unity.UI;
 
 public class GameStateManager : MonoBehaviour
@@ -11,14 +12,15 @@ public class GameStateManager : MonoBehaviour
     public EnemyManager bossManager;
     public GameObject canvas;
     public MovementTutorial moveTutorial;
-    public ComboTutorial comboTutorial;
     public LevelUpTutorial levelUpTutorial;
+    public ComboTutorial comboTutorial;
+    public DuoComboTutorial duoComboTutorial;
 
     private int currXP;
     private int nextLevel = 100;
     private int level = 1;
     private bool hasEnded = false;
-    private bool tutorial = true;
+    private bool tutorial = false;
     public bool levelUp = false;
     public bool isPlayer1Level = true;
     public bool duoLevel = false;
@@ -26,6 +28,11 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            tutorial = true;
+        }
+
         playerManager1 = GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerManager>();
         playerManager2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerManager>();
 
@@ -46,6 +53,12 @@ public class GameStateManager : MonoBehaviour
         {
             comboTutorial = GameObject.FindGameObjectWithTag("comboTutorial").GetComponent<ComboTutorial>();
             GameObject.FindGameObjectWithTag("comboTutorial").SetActive(false);
+        }
+        duoComboTutorial = null;
+        if (GameObject.FindGameObjectWithTag("duoComboTutorial"))
+        {
+            duoComboTutorial = GameObject.FindGameObjectWithTag("duoComboTutorial").GetComponent<DuoComboTutorial>();
+            GameObject.FindGameObjectWithTag("duoComboTutorial").SetActive(false);
         }
 
         bossManager = null;
@@ -195,9 +208,25 @@ public class GameStateManager : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
+        UnityEngine.Debug.Log("Done Combo Tutorial");
+
         duoLevel = true;
 
-        UnityEngine.Debug.Log("Done Combo Tutorial");
+        StartCoroutine(HandleLevelUp());
+
+        levelUpTutorial.Play();
+
+        while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        duoComboTutorial.Play();
+
+        while (canvas.transform.Find("ComboTutorialWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
 
         tutorial = false;
     }
