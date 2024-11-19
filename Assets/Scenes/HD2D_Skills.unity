@@ -2946,6 +2946,8 @@ MonoBehaviour:
   playerManager2: {fileID: 0}
   bossManager: {fileID: 0}
   canvas: {fileID: 1251522603}
+  moveTutorial: {fileID: 0}
+  comboTutorial: {fileID: 0}
   levelUp: 0
   isPlayer1Level: 1
   duoLevel: 0
