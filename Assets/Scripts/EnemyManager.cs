@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
     public int maxHealth = 100;
     public int maxBossHealth = 250;
     public int currentHealth = 0;
+    public int mobExp = 50;
 
     public HealthBar healthBar;
     public ParticleSystem hurtParticlesPrefab;
@@ -19,6 +20,7 @@ public class EnemyManager : MonoBehaviour
     public bool slowed = false;
     private SlimeBoss slimeBoss;
     private TurtleBoss turtleBoss;
+    private GameStateManager gameStateManager;
     
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,7 @@ public class EnemyManager : MonoBehaviour
 
         slimeBoss = GetComponent<SlimeBoss>();
         turtleBoss = GetComponent<TurtleBoss>();
+        gameStateManager = GameObject.Find("GameStateManager")?.GetComponent<GameStateManager>();
     }
 
     // Update is called once per frame
@@ -73,6 +76,8 @@ public class EnemyManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            UnityEngine.Debug.Log(gameObject.name + " has died!");
+            
             Die();
         }
     }
@@ -82,11 +87,17 @@ public class EnemyManager : MonoBehaviour
         UnityEngine.Debug.Log(gameObject.name + " has died!");
         //Destroy this mob
         if(gameObject.tag == "mob") {
+            UnityEngine.Debug.Log("gainning exp");
+            gameStateManager.AddXP(mobExp);
             Destroy(gameObject);
         } else {
             // Add death handling here (destroy, play animation, etc.)
             // bossScript.IsDead = true;
-            animator.SetTrigger("Die");
+            // animator.SetTrigger("Die");
+            gameStateManager.duoLevel = true;
+            gameStateManager.HandleBossDeath();
+            Destroy(gameObject);
+
         }
     }
 

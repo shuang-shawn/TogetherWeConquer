@@ -8,23 +8,27 @@ public class GameStateManager : MonoBehaviour
 {
     public PlayerManager playerManager1;
     public PlayerManager playerManager2;
-    public EnemyManager bossManager;
+    private EnemyManager bossManager;
     public GameObject canvas;
+    public MobSpawner mobSpawner;
 
-    private int currXP;
-    private int nextLevel = 100;
-    private int level = 1;
+    public int currXP;
+    public int nextLevel = 100;
+    public int level = 1;
     private bool hasEnded = false;
     public bool levelUp = false;
     public bool isPlayer1Level = true;
     public bool duoLevel = false;
+    private GameObject lastBoss = null;
+    private bool lastBossSpawned = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         playerManager1 = GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerManager>();
         playerManager2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerManager>();
-        bossManager = GameObject.FindGameObjectWithTag("boss").GetComponent<EnemyManager>();
+        // bossManager = GameObject.FindGameObjectWithTag("boss").GetComponent<EnemyManager>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
 
         StartCoroutine(HandleStart());
@@ -40,6 +44,7 @@ public class GameStateManager : MonoBehaviour
         UnityEngine.Debug.Log("Duo level");
         duoLevel = true;
         StartCoroutine(HandleLevelUp());
+        mobSpawner.SpawnMobs();
     }
 
     // Update is called once per frame
@@ -53,24 +58,35 @@ public class GameStateManager : MonoBehaviour
                 canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
                 hasEnded = true;
             }
-            if (bossManager != null)
+            // bossManager = GameObject.FindGameObjectWithTag("boss")?.GetComponent<EnemyManager>();
+            if (lastBossSpawned && lastBoss == null)
             {
-                if (bossManager.IsDead())
-                {
-                    canvas.transform.Find("WinWindow").gameObject.SetActive(true);
-                    canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
-                    hasEnded = true;
-                }
+                canvas.transform.Find("WinWindow").gameObject.SetActive(true);
+                canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
+                canvas.transform.Find("LevelUpWindow").gameObject.SetActive(false);
+                hasEnded = true;
+                
             }
         }
 
-        if (currXP > nextLevel)
+        if (currXP >= nextLevel)
         {
             level += 1;
             currXP %= nextLevel;
             nextLevel += 25;
 
             StartCoroutine(HandleLevelUp());
+            if (level % 2 == 0) {
+
+                GameObject boss = mobSpawner.SpawnBoss();
+                if (mobSpawner.isLastBoss() && boss != null) {
+                    lastBossSpawned = true;
+                    lastBoss = boss;
+
+                }
+            } else {
+                mobSpawner.SpawnMobs();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
@@ -81,12 +97,17 @@ public class GameStateManager : MonoBehaviour
 
     public void LevelUp()
     {
+
         levelUp = !levelUp;
     }
 
     public void AddXP(int xp)
     {
         currXP += xp;
+    }
+    public void HandleBossDeath() {
+        StartCoroutine(HandleLevelUp());
+        mobSpawner.SpawnMobs();
     }
 
     private IEnumerator HandleLevelUp()
@@ -120,5 +141,9 @@ public class GameStateManager : MonoBehaviour
         }
 
         duoLevel = false;
+     
+        
     }
+
+
 }

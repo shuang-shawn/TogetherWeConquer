@@ -18,7 +18,7 @@ public class PlayerMovement:MonoBehaviour
     private Vector3 previousDirectionX = Vector3.right;
 
     public bool canMove = true;
-    public GameObject skillManagerObject; // temp holder for skill system
+    // public GameObject skillManagerObject; // temp holder for skill system
     private SkillManager skillManager;
 
     private SpriteRenderer sr;
@@ -34,7 +34,7 @@ public class PlayerMovement:MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>(); //get rigidbody, responsible for enabling collision with other colliders
         inputActions = new InputActions(); //create new InputActions
-        skillManager = skillManagerObject.GetComponent<SkillManager>();
+        skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
 
     }
 
