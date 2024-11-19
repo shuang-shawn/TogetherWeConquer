@@ -2924,12 +2924,6 @@ MonoBehaviour:
   currXP: 0
   nextLevel: 100
   level: 1
-  currXP: 0
-  nextLevel: 100
-  level: 1
-  currXP: 0
-  nextLevel: 100
-  level: 1
   levelUp: 0
   isPlayer1Level: 1
   duoLevel: 0

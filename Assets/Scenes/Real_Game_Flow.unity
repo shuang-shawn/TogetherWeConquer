@@ -1524,8 +1524,6 @@ MonoBehaviour:
     type: 3}
   fireRing: {fileID: 0}
   fireRingPrefab: {fileID: 0}
-  fireRingPrefab: {fileID: 8483642194577002910, guid: badf2a9f719627c4cb1759aefffbe373,
-    type: 3}
   swap: {fileID: 0}
   arrowSkill: {fileID: 0}
   arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
@@ -2843,8 +2841,7 @@ MonoBehaviour:
   levelUpTutorial: {fileID: 0}
   comboTutorial: {fileID: 0}
   duoComboTutorial: {fileID: 0}
-  moveTutorial: {fileID: 0}
-  comboTutorial: {fileID: 0}
+  deathTutorial: {fileID: 0}
   currXP: 0
   nextLevel: 50
   level: 1
