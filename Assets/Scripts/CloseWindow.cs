@@ -37,9 +37,6 @@ public class CloseWindow : MonoBehaviour
         // Resume game
         Time.timeScale = 1;
 
-        // Toggle levelUp in GameStateManager
-        gameStateManager.LevelUp();
-
         // Set Window inactive
         transform.parent.gameObject.SetActive(false);
     }

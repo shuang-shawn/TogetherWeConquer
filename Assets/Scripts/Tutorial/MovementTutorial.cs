@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MovementTutorial : MonoBehaviour
 {
-    public GameObject tutorialPanel;          // The UI Panel object
+    public GameObject tutorialPanel;            // The UI Panel object
     public TextMeshProUGUI instructionsTextP1;  // The main instructions text
     public TextMeshProUGUI keyStatusTextP1;     // The text showing key status
     public TextMeshProUGUI instructionsTextP2;  // The main instructions text
