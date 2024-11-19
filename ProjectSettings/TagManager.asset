@@ -23,6 +23,8 @@ TagManager:
   - Player2
   - moveTutorial
   - comboTutorial
+  - levelUpTutorial
+  - duoComboTutorial
   layers:
   - Default
   - TransparentFX

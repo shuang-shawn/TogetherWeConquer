@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,6 +53,10 @@ public class OptionSelector : MonoBehaviour
         Image button2Image = option2Button.GetComponent<Image>();
         Image button3Image = option3Button.GetComponent<Image>();
 
+        TextMeshProUGUI button1Description = option1Button.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI button2Description = option2Button.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI button3Description = option3Button.GetComponentInChildren<TextMeshProUGUI>();
+
         if (!stateManager.duoLevel)
         {
             newCombos = GetRandomCombos(comboList.soloComboList);
@@ -64,13 +69,35 @@ public class OptionSelector : MonoBehaviour
         button1Image.sprite = newCombos[0].GetComboIcon();
         button2Image.sprite = newCombos[1].GetComboIcon();
         button3Image.sprite = newCombos[2].GetComboIcon();
+
+        UnityEngine.Debug.Log(newCombos[0].GetDescription());
+
+        button1Description.text = newCombos[0].GetDescription();
+        button2Description.text = newCombos[1].GetDescription();
+        button3Description.text = newCombos[2].GetDescription();
     }
 
     private List<Combo> GetRandomCombos(List<Combo> typeList)
     {
+        List<Combo> unlearnedCombos = new List<Combo>();
+
+        foreach (Combo combo in typeList) 
+        {
+            if (stateManager.isPlayer1Level && !combo.GetLearnedP1())
+            {
+                unlearnedCombos.Add(combo);
+            }
+            else if (!stateManager.isPlayer1Level && !combo.GetLearnedP2())
+            {
+                unlearnedCombos.Add(combo);
+            }
+        }
+
+        UnityEngine.Debug.Log(unlearnedCombos.Count);
+
         // Make a list of numbers to draw from so no duplicates
         List<int> numbers = new List<int>();
-        for (int i = 0; i < typeList.Count; i++)
+        for (int i = 0; i < unlearnedCombos.Count; i++)
         {
             numbers.Add(i);
         }
@@ -82,7 +109,7 @@ public class OptionSelector : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            randomCombos.Add(typeList[numbers[i]]);
+            randomCombos.Add(unlearnedCombos[numbers[i]]);
         }
 
         return randomCombos;

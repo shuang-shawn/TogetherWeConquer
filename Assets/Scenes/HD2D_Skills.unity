@@ -2917,6 +2917,10 @@ MonoBehaviour:
   mobSpawner: {fileID: 0}
   moveTutorial: {fileID: 0}
   comboTutorial: {fileID: 0}
+  levelUpTutorial: {fileID: 0}
+  currXP: 0
+  nextLevel: 100
+  level: 1
   currXP: 0
   nextLevel: 100
   level: 1
@@ -4004,6 +4008,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TurtleBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907816645856648354, guid: 785b5d4d8cbd0e44687761ea18d87eef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
