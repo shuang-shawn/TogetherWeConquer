@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 7047974403628165305}
   - component: {fileID: 7081546629415420228}
   - component: {fileID: 5092343734645717284}
+  - component: {fileID: 8907144740358407275}
   m_Layer: 6
   m_Name: TurtleBoss
   m_TagString: boss
@@ -780,6 +781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 0
   maxHealth: 100
+  maxMobHealth: 100
   maxBossHealth: 250
   currentHealth: 0
   mobExp: 50
@@ -856,12 +858,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7907816645856648354}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66f9f57547c862c43920c43d72563ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  rageSpeed: 4
+  normalSpeed: 2
 --- !u!54 &5092343734645717284
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -889,6 +893,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &8907144740358407275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7907816645856648354}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f9f57547c862c43920c43d72563ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  rageSpeed: 4
+  normalSpeed: 2
 --- !u!1 &8578586869120017823
 GameObject:
   m_ObjectHideFlags: 0

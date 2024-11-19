@@ -7,7 +7,8 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public int damageAmount = 0;
-    public int maxHealth = 100;
+    public int maxHealth = 0;
+    public int maxMobHealth = 100;
     public int maxBossHealth = 250;
     public int currentHealth = 0;
     public int mobExp = 50;
@@ -21,6 +22,7 @@ public class EnemyManager : MonoBehaviour
     private SlimeBoss slimeBoss;
     private TurtleBoss turtleBoss;
     private GameStateManager gameStateManager;
+    private BasicAI enemyMovementAI;
     
     // Start is called before the first frame update
     void Start()
@@ -28,23 +30,28 @@ public class EnemyManager : MonoBehaviour
         if (gameObject.tag == "boss"){
             damageAmount = 25;
             currentHealth = maxBossHealth;
+            maxHealth = maxBossHealth;
         } else if (gameObject.tag == "mob") {
             damageAmount = 10;
             currentHealth = maxHealth;
+            maxHealth = maxMobHealth;
         }
 
         slimeBoss = GetComponent<SlimeBoss>();
         turtleBoss = GetComponent<TurtleBoss>();
         gameStateManager = GameObject.Find("GameStateManager")?.GetComponent<GameStateManager>();
+        enemyMovementAI = GetComponent<BasicAI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (Input.GetKeyDown("space"))
-        // {
-        //     TakeDamage(100);
-        // }
+        if (maxHealth > 0 && ((float)currentHealth / maxHealth) < 0.5f) {
+            // UnityEngine.Debug.Log("current percentage: " + currentHealth / maxHealth);
+            enemyMovementAI.speed = enemyMovementAI.rageSpeed;
+        } else {
+            enemyMovementAI.speed = enemyMovementAI.normalSpeed;
+        }
     }
 
 
@@ -63,8 +70,8 @@ public class EnemyManager : MonoBehaviour
 
         if (gameObject.tag == "boss")
         {
-            healthBar.UpdateHealthBar(currentHealth, maxBossHealth);
-            if (currentHealth / maxHealth < 0.5f && slimeBoss != null) {
+            healthBar.UpdateHealthBar((float)currentHealth, (float)maxBossHealth);
+            if ((float)currentHealth / maxHealth < 0.5f && slimeBoss != null) {
                 slimeBoss.speedPercent = 4;
             }
         } else if (gameObject.tag == "mob")
