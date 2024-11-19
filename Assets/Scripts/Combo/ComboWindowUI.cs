@@ -199,12 +199,29 @@ public class ComboWindowUI : MonoBehaviour
             if (inputKey != GetKeyFromImage(image))
             {
                 comboUIElement.SetActive(false);
-            } else
-            {
-                image.color = highlightColor;
-            }
+            } 
         }
     }
+
+    // This function highlights the keys after the first two, sequentially based on input order
+    public void HighlightSequentialKeys(KeyCode inputKey, int inputOrder, bool isInDuo, string playerTag)
+    {
+        List<GameObject> soloCombosCached = playerTag.Equals(Player1Tag) ? p1SoloCombosCached : p2SoloCombosCached;
+        List<GameObject> duoCombosCached = playerTag.Equals(Player1Tag) ? p1DuoCombosCached : p2DuoCombosCached;
+
+        foreach (GameObject comboUIElement in (isInDuo) ? duoCombosCached : soloCombosCached)
+        {
+            Transform firstKey = comboUIElement?.transform.GetChild(inputOrder+1);
+            Image image = firstKey.GetComponent<Image>();
+            if (inputKey == GetKeyFromImage(image))
+            {
+                image.color = highlightColor;
+                return;
+            }
+        }
+
+    }
+
 
     public void ResetComboList(bool isInDuo, string playerTag)
     {
@@ -219,12 +236,15 @@ public class ComboWindowUI : MonoBehaviour
 
         foreach (GameObject comboUIElement in (isInDuo) ? duoCombosCached : soloCombosCached)
         {
-            Transform firstKey = comboUIElement.transform.GetChild(1);
-            Transform secondKey = comboUIElement.transform.GetChild(2);
-            Image first_image = firstKey.GetComponent<Image>();
-            Image second_image = secondKey.GetComponent<Image>();
-            first_image.color = Color.white;
-            second_image.color = Color.white;
+            for (int i = 1; i < comboUIElement.transform.childCount; i++)  // Start loop at index 1
+            {
+                Transform key = comboUIElement.transform.GetChild(i);
+                Image image = key.GetComponent<Image>();
+                if (image != null)
+                {
+                    image.color = Color.white; // Reset to white
+                }
+            }
         }
     }
 

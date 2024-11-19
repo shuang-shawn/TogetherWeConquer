@@ -115,11 +115,13 @@ public class ComboInput : MonoBehaviour
         {
             comboData.firstInput = inputKey;
             comboWindowUI.FilterCombos(inputKey, 0, comboData.duoToggle, playerTag);
+            comboWindowUI.HighlightSequentialKeys(inputKey, 0, comboData.duoToggle, playerTag);
         }
         else if (comboData.secondInput == KeyCode.None)
         {
             comboData.secondInput = inputKey;
             comboWindowUI.FilterCombos(inputKey, 1, comboData.duoToggle, playerTag);
+            comboWindowUI.HighlightSequentialKeys(inputKey, 1, comboData.duoToggle, playerTag);
             CheckComboList();
         }
     }
@@ -228,6 +230,7 @@ public class ComboInput : MonoBehaviour
             {
                 comboData.mistakeOrder.Add("Correct");
                 comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
+                comboWindowUI.HighlightSequentialKeys(inputKey, comboData.currentSequenceIndex, comboData.isInDuoCombo, playerTag);
             }
             else
             {

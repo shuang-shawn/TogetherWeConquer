@@ -13,6 +13,11 @@ public class DuoComboManager : MonoBehaviour
     public GameObject skillManagerObject; // temp holder for skill system
     private SkillManager skillManager;
 
+    [SerializeField]
+    private GameObject p1ComboWindow;
+    [SerializeField]
+    private GameObject p2ComboWindow;
+
     private void Start()
     {
         FindPlayers();
@@ -47,6 +52,13 @@ public class DuoComboManager : MonoBehaviour
         AssignPlayerOrder(player);
         startedCombo.IsInDuoCombo(true);
         endingCombo.IsInDuoCombo(true);
+        //if (player == player1)
+        //{
+        //    p2ComboWindow.SetActive(false);
+        //} else
+        //{
+        //    p1ComboWindow.SetActive(false);
+        //}
         var (firstHalf, secondHalf) = SplitCombo(combo.GetComboSequence());
         startedCombo.StartCombo(combo, firstHalf, true);
         endingCombo.ToggleInput(false);
@@ -69,6 +81,8 @@ public class DuoComboManager : MonoBehaviour
             endingCombo.RestartCombo();
             startedCombo.ToggleInput(true);
             endingCombo.ToggleInput(true);
+            //p1ComboWindow.SetActive(true);
+            //p2ComboWindow.SetActive(true);
             return;
         }
         if (!abrupt)
@@ -76,10 +90,12 @@ public class DuoComboManager : MonoBehaviour
             Debug.Log("Duo Skill ended with: " + player.gameObject.name);
             skillManager.CastSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
         }
-     
+        
         currentCombo = null;
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
+        //p1ComboWindow.SetActive(true);
+        //p2ComboWindow.SetActive(true);
     }
 
     public void ForceResetDuoCombo()
