@@ -832,18 +832,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146257660}
   m_CullTransparentMesh: 1
---- !u!114 &185251357 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2226446011992917550, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
-    type: 3}
-  m_PrefabInstance: {fileID: 8090275679356346730}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 258fe0e6c73ce2a48926c135eebe5b5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &202963680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,7 +1657,8 @@ MonoBehaviour:
   shadowSkillTeleportEffect: {fileID: 1645622845278563384, guid: 546bec032419ec14d81b1e7bd0af7191,
     type: 3}
   fireRing: {fileID: 0}
-  fireRingPrefab: {fileID: 0}
+  fireRingPrefab: {fileID: 8483642194577002910, guid: badf2a9f719627c4cb1759aefffbe373,
+    type: 3}
   swap: {fileID: 0}
   arrowSkill: {fileID: 0}
   arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
@@ -1807,6 +1796,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8799531623086894738}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &880058845 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7907816645856648354, guid: 785b5d4d8cbd0e44687761ea18d87eef,
@@ -1826,6 +1816,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+=======
+>>>>>>> Stashed changes
 --- !u!1 &928071833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2947,8 +2939,16 @@ MonoBehaviour:
   bossManager: {fileID: 0}
   canvas: {fileID: 1251522603}
   moveTutorial: {fileID: 0}
-  comboTutorial: {fileID: 0}
   levelUpTutorial: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+  comboTutorial: {fileID: 0}
+  duoComboTutorial: {fileID: 0}
+  deathTutorial: {fileID: 0}
+  currXP: 0
+  nextLevel: 100
+  level: 1
+>>>>>>> Stashed changes
   levelUp: 0
   isPlayer1Level: 1
   duoLevel: 0
@@ -3881,11 +3881,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1862310462081199824, guid: 785b5d4d8cbd0e44687761ea18d87eef,
+    - target: {fileID: 3875930849299698051, guid: 785b5d4d8cbd0e44687761ea18d87eef,
         type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 185251357}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875930849299698051, guid: 785b5d4d8cbd0e44687761ea18d87eef,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4441627033477061707, guid: 785b5d4d8cbd0e44687761ea18d87eef,
         type: 3}
       propertyPath: player1
@@ -3951,19 +3956,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurtleBoss
       objectReference: {fileID: 0}
-    - target: {fileID: 7907816645856648354, guid: 785b5d4d8cbd0e44687761ea18d87eef,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6746210499029085746, guid: 785b5d4d8cbd0e44687761ea18d87eef, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7907816645856648354, guid: 785b5d4d8cbd0e44687761ea18d87eef,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 880058850}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 785b5d4d8cbd0e44687761ea18d87eef, type: 3}
 --- !u!1001 &1935884211797760652
 PrefabInstance:

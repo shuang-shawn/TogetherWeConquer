@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
@@ -51,6 +52,9 @@ public class ComboData : MonoBehaviour
     /** Flag for player completing a combo **/
     public bool finishedCombo = false;
 
+    /** Flag for player reviving **/
+    public bool revived = false;
+
     //void PrintSummary()
     //{
     //    string summary = $"First Input: {firstInput}\n" +
@@ -82,5 +86,6 @@ public class ComboData : MonoBehaviour
         isInSoloCombo = false;
         isInDuoCombo = false;
         finishedCombo = false;
+        revived = false;
     }
 }
