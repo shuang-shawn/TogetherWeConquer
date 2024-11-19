@@ -1796,9 +1796,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8799531623086894738}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
 --- !u!1 &928071833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,15 +2918,12 @@ MonoBehaviour:
   mobSpawner: {fileID: 0}
   moveTutorial: {fileID: 0}
   levelUpTutorial: {fileID: 0}
-<<<<<<< Updated upstream
-=======
   comboTutorial: {fileID: 0}
   duoComboTutorial: {fileID: 0}
   deathTutorial: {fileID: 0}
   currXP: 0
   nextLevel: 100
   level: 1
->>>>>>> Stashed changes
   currXP: 0
   nextLevel: 100
   level: 1
