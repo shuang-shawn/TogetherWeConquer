@@ -9,6 +9,8 @@ public class CloseWindow : MonoBehaviour
     private GameStateManager gameStateManager;
     [SerializeField]
     private OptionSelector optionSelector;
+    private GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
+    private GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
 
     void Start()
     {
@@ -32,8 +34,8 @@ public class CloseWindow : MonoBehaviour
         Time.timeScale = 0;
 
         // Restrict Player Inputs
-        GameObject.FindGameObjectWithTag("Player1").GetComponentInChildren<ComboInput>()?.ToggleInput(false);
-        GameObject.FindGameObjectWithTag("Player2").GetComponentInChildren<ComboInput>()?.ToggleInput(false);
+        player1?.GetComponentInChildren<ComboInput>()?.ToggleInput(false);
+        player2?.GetComponentInChildren<ComboInput>()?.ToggleInput(false);
     }
 
     void CloseImage()
@@ -42,8 +44,8 @@ public class CloseWindow : MonoBehaviour
         Time.timeScale = 1;
 
         // Allow Player Inputs
-        GameObject.FindGameObjectWithTag("Player1").GetComponentInChildren<ComboInput>()?.ToggleInput(true);
-        GameObject.FindGameObjectWithTag("Player2").GetComponentInChildren<ComboInput>()?.ToggleInput(true);
+        player1?.GetComponentInChildren<ComboInput>()?.ToggleInput(true);
+        player2?.GetComponentInChildren<ComboInput>()?.ToggleInput(true);
         // Set Window inactive
         transform.parent.gameObject.SetActive(false);
     }
