@@ -23,6 +23,7 @@ public class DuoComboManager : MonoBehaviour
     {
         FindPlayers();
         skillManager = skillManagerObject.GetComponent<SkillManager>();
+        comboWindow = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
 
     }
 
