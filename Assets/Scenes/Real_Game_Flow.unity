@@ -2091,6 +2091,7 @@ MonoBehaviour:
   startedCombo: {fileID: 0}
   endingCombo: {fileID: 0}
   skillManagerObject: {fileID: 582710431}
+  comboWindow: {fileID: 0}
 --- !u!4 &1055241500
 Transform:
   m_ObjectHideFlags: 0

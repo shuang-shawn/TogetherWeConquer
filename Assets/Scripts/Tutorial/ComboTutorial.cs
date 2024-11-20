@@ -51,8 +51,8 @@ public class ComboTutorial : MonoBehaviour
         comboDataP1 = player1.GetComponentInChildren<ComboData>();
         comboDataP2 = player2.GetComponentInChildren<ComboData>();
 
-        instructionsTextP1.text = "Press Y, G, H, and J to activate a solo combo.";
-        instructionsTextP2.text = "Press P, L, ;, and ' to activate a solo combo.";
+        instructionsTextP1.text = "Press Y(↑), G(←), H(↓), and J(→) to activate a solo combo.";
+        instructionsTextP2.text = "Press P(↑), L(←), ;(↓), and '(→) to activate a solo combo.";
         UpdateStatus();
     }
 
