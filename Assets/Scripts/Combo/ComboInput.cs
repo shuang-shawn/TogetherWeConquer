@@ -147,7 +147,7 @@ public class ComboInput : MonoBehaviour
                         duoComboManager.StartDuoCombo(combo, currentPlayer);
                     } else
                     {
-                        UnityEngine.Debug.Log("Other player is busy");
+                        // Other player is busy
                         ResetInitalInputs();
                     }
  
@@ -161,7 +161,6 @@ public class ComboInput : MonoBehaviour
         }
         // For no matching combos
         ResetInitalInputs();
-        UnityEngine.Debug.Log("No matching combo");
     }
 
     private void ResetInitalInputs()
@@ -275,14 +274,14 @@ public class ComboInput : MonoBehaviour
         if (isComplete)
         {
             comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
-            UnityEngine.Debug.Log("Combo Completed");
+            // Combo Completed
         }
         else
         {
             comboUI.comboUIParent.SetActive(false);
 
             comboUI.ShowCancel();
-            UnityEngine.Debug.Log("Combo Cancelled");
+            // Combo Canceled
         }
 
         timer.GetComponent<ComboTimer>().ResetTimer();

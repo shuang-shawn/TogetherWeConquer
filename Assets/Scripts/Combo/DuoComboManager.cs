@@ -102,6 +102,8 @@ public class DuoComboManager : MonoBehaviour
             currentCombo = null;
             startedCombo.ToggleInput(true);
             endingCombo.ToggleInput(true);
+            comboWindow.GetComboWindow(Player1Tag).SetActive(true);
+            comboWindow.GetComboWindow(Player2Tag).SetActive(true);
         }
     }
 
