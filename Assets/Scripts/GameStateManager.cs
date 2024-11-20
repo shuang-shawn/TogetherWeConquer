@@ -71,6 +71,10 @@ public class GameStateManager : MonoBehaviour
             deathTutorial = GameObject.FindGameObjectWithTag("deathTutorial").GetComponent<DeathTutorial>();
             GameObject.FindGameObjectWithTag("deathTutorial").SetActive(false);
         }
+        if (GameObject.FindGameObjectWithTag("completeTutorial"))
+        {
+            GameObject.FindGameObjectWithTag("completeTutorial").SetActive(false);
+        }
 
         bossManager = null;
         if (GameObject.FindGameObjectWithTag("boss"))
@@ -266,10 +270,24 @@ public class GameStateManager : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
+        StartCoroutine(CompleteTutorial());
+
+        while (canvas.transform.Find("CompleteTutorialWindow").gameObject.activeSelf)
+        {
+            yield return null; // Wait for the next frame
+        }
+
         tutorial = false;
 
         SceneManager.LoadScene("Title Screen");
     }
 
+    private IEnumerator CompleteTutorial()
+    {
+        canvas.transform.Find("CompleteTutorialWindow").gameObject.SetActive(true);
 
+        yield return new WaitForSeconds(2.0f);
+
+        canvas.transform.Find("CompleteTutorialWindow").gameObject.SetActive(false);
+    }
 }

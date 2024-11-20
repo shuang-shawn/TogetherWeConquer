@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,8 +29,8 @@ public class DuoComboTutorial : MonoBehaviour
         {
             if (windowOpen)
             {
-                instructionsTextP1.text = "Press Y, G, H, and J to activate half of a duo combo.";
-                instructionsTextP2.text = "Press P, L, ;, and ' to activate half of a duo combo.";
+                instructionsTextP1.text = "Press Y(↑), G(←), H(↓), and J(→) to activate half of a duo combo.";
+                instructionsTextP2.text = "Press P(↑), L(←), ;(↓), and '(→) to activate half of a duo combo.";
 
                 if (comboDataP1.finishedCombo)
                 {

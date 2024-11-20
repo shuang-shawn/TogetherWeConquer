@@ -40,7 +40,10 @@ public class DrainCircle : MonoBehaviour
         {
             foreach (var enemy in enemyTracker)
             {
-                enemy.GetComponent<EnemyManager>()?.TakeDamage(damage);
+                if (enemy != null)
+                {
+                    enemy.GetComponent<EnemyManager>()?.TakeDamage(damage);
+                }
             }
 
             if (enemyTracker.Count > 0)
