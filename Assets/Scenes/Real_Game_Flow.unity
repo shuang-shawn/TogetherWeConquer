@@ -1788,7 +1788,8 @@ MonoBehaviour:
     type: 3}
   swap: {fileID: 0}
   forceFieldSkill: {fileID: 0}
-  forceFieldSkillPrefab: {fileID: 0}
+  forceFieldSkillPrefab: {fileID: 4916345392937658091, guid: 1babb4918fd8e0a4182b1c3ebc1fd018,
+    type: 3}
   arrowSkill: {fileID: 0}
   arrowSpawnerPrefab: {fileID: 3507590848332760435, guid: f41a057d03cc1d749b76394dd12810bc,
     type: 3}
@@ -1796,7 +1797,8 @@ MonoBehaviour:
   drainCirclePrefab: {fileID: 7675356780023035042, guid: 09b66baa2b0ebd4488f032d005bb54b6,
     type: 3}
   sawbladeSkill: {fileID: 0}
-  sawbladePrefab: {fileID: 0}
+  sawbladePrefab: {fileID: 2913987475986010122, guid: 7af4f5411b07d3943a1ac22f1fa9d660,
+    type: 3}
 --- !u!4 &582710433
 Transform:
   m_ObjectHideFlags: 0

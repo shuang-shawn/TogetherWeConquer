@@ -23,7 +23,7 @@ public class SkillCollisionHandler : MonoBehaviour
         Debug.Log("Collision detected with: " + other.gameObject.name);
 
         // Ensure the collision is with an enemy
-        if (other.gameObject.CompareTag("boss")) // or "mob"
+        if (other.gameObject.CompareTag("boss") || other.gameObject.CompareTag("mob")) // or "mob"
         {
             EnemyManager target = other.gameObject.GetComponent<EnemyManager>();
             if (target != null && !other.isTrigger)
@@ -57,28 +57,3 @@ public class SkillCollisionHandler : MonoBehaviour
         }
     }
 }
-
-
-
-
-
-/// <summary>
-/// OnCollisionEnter is called when this collider/rigidbody has begun
-/// touching another rigidbody/collider.
-/// </summary>
-/// <param name="other">The Collision data associated with this collision.</param>
-//    private void OnTriggerEnter(Collider other)
-//    {
-//        EnemyManager target = other.gameObject.GetComponent<EnemyManager>();
-//        if (target != null) {
-//            target.TakeDamage(skillDamage);
-//            if (slowFactor != 1) {
-//                target.Slow(slowFactor, slowTime);
-//            }
-//            if (oneTimeUse) {
-//                Destroy(gameObject);
-//            }
-//        }
-
-//    }
-//}
