@@ -33,6 +33,9 @@ public class SkillManager : MonoBehaviour
     public Swap swap;
 
 
+    public ForceField forceFieldSkill;
+    public GameObject forceFieldSkillPrefab;
+
     public ArrowSkill arrowSkill;
     public GameObject arrowSpawnerPrefab;
 
@@ -40,6 +43,9 @@ public class SkillManager : MonoBehaviour
     public GameObject drainCirclePrefab;
     // private Dictionary<string, Delegate> skillDictionary;
     // Start is called before the first frame update
+    public Sawblade sawbladeSkill;
+    public GameObject sawbladePrefab;
+
     void Start()
     {
         singleDash1 = gameObject.AddComponent<SingleDash>();
@@ -48,7 +54,7 @@ public class SkillManager : MonoBehaviour
         singleDash2.dashParticlesPrefab = dashParticlesPrefab;
 
         singleIceGround = gameObject.AddComponent<SingleIceGround>();
-        singleIceGround.iceGroundPrefab = iceGroundPrefab; 
+        singleIceGround.iceGroundPrefab = iceGroundPrefab;
 
         tether = gameObject.AddComponent<Tether>();
         tether.tetherMaterial = tetherMaterial;
@@ -76,59 +82,83 @@ public class SkillManager : MonoBehaviour
         fireRing.fireRingPrefab = fireRingPrefab;
 
         swap = gameObject.AddComponent<Swap>();
+        forceFieldSkill = gameObject.AddComponent<ForceField>();
+        forceFieldSkill.forceFieldPrefab = forceFieldSkillPrefab;
+
+        sawbladeSkill = gameObject.AddComponent<Sawblade>();
+        sawbladeSkill.sawbladePrefab = sawbladePrefab;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void CastFirstHalfDuoSkill(string skillName, string playerTag, ComboType comboType=ComboType.Duo) {
+    public void CastFirstHalfDuoSkill(string skillName, string playerTag, ComboType comboType = ComboType.Duo)
+    {
         int playerNum = 0;
-        if (playerTag == "Player1") {
+        if (playerTag == "Player1")
+        {
             playerNum = 1;
-        } else if (playerTag == "Player2") {
+        }
+        else if (playerTag == "Player2")
+        {
             playerNum = 2;
         }
-        switch (skillName) {
-            case "snipe": 
-            duoSnipe.CastSnipePrep(playerNum);
-            audioController.PlaySnipePrep();
-            break;
-        }
-    }
-
-    public void CastSkill(string skillName, string playerTag, ComboType comboType=ComboType.Solo) {
-        int playerNum = 0;
-        if (playerTag == "Player1") {
-            playerNum = 1;
-        } else if (playerTag == "Player2") {
-            playerNum = 2;
-        }
-        switch (skillName) {
-            case "dash": 
-            if(playerNum == 1) {
-                singleDash1.Dash(playerNum); 
-            } else if (playerNum == 2) {
-                singleDash2.Dash(playerNum);
-            }
+        switch (skillName)
+        {
+            case "snipe":
+                duoSnipe.CastSnipePrep(playerNum);
+                audioController.PlaySnipePrep();
                 break;
-            case "iceground": 
+        }
+    }
+
+    public void CastSkill(string skillName, string playerTag, ComboType comboType = ComboType.Solo)
+    {
+    public void CastSkill(string skillName, string playerTag, ComboType comboType)
+    {
+        int playerNum = 0;
+        if (playerTag == "Player1")
+        {
+            playerNum = 1;
+        }
+        else if (playerTag == "Player2")
+        {
+            playerNum = 2;
+        }
+        switch (skillName)
+        {
+            case "dash":
+                if (playerNum == 1)
+                {
+                    singleDash1.Dash(playerNum);
+                }
+                else if (playerNum == 2)
+                {
+                    singleDash2.Dash(playerNum);
+                }
+                break;
+            case "iceground":
                 singleIceGround.CastIceGround(playerNum);
                 break;
-            case "tether": 
-                tether.CastTether(); 
+            case "tether":
+                tether.CastTether();
                 break;
-            case "helpinghand": 
+            case "helpinghand":
                 singleHelpingHand.CastHelpingHand((playerNum == 1) ? 2 : 1);
                 break;
-            case "snipe": 
-                duoSnipe.CastSnipe(playerNum); 
-                audioController.PlaySnipeFinish(); 
+            case "snipe":
+                duoSnipe.CastSnipe(playerNum);
+                audioController.PlaySnipeFinish();
                 break;
-            case "stone": 
-                singleStone.CastStone(playerNum); 
+            case "stone":
+                singleStone.CastStone(playerNum);
+            case "iceground":
+                singleIceGround.CastIceGround(playerNum);
+                break;
+            case "tether":
+                tether.CastTether();
                 break;
             case "shadow":
                 shadowSkill.CastShadow(playerTag);
@@ -144,13 +174,14 @@ public class SkillManager : MonoBehaviour
                 break;
             case "swap":
                 swap.CastSwap();
+            case "forceField":
+                forceFieldSkill.CastForceField(playerNum);
+                break;
+            case "sawblades":
+                sawbladeSkill.SpawnSawblades();
                 break;
             default:
                 break;
         }
     }
-
-
-
-    
 }
