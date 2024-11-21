@@ -28,7 +28,7 @@ public class ComboList : MonoBehaviour
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "helpinghand", Resources.Load<Sprite>("Skill Icons/InvisSkillIcon"), "Invis Skill"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "iceground", Resources.Load<Sprite>("Skill Icons/ice"), "Ice Skill"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.DownArrow}, "swap", Resources.Load<Sprite>("Skill Icons/swap"), "Swap Skill"),
-             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow }, "forceField")
+             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow }, "forceField", Resources.Load<Sprite>("Skill Icons/ForcefieldSkill"))
 
         };
 
@@ -68,7 +68,7 @@ public class ComboList : MonoBehaviour
         new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "tether");
             new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow }, "tether");
         new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "tether");
-        new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.UpArrow }, "sawblades");
+        new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.UpArrow }, "sawblades", Resources.Load<Sprite>("Skill Icons/SawSkill"));
 
         }
 }
