@@ -51,10 +51,24 @@ public class EnemyManager : MonoBehaviour
             enemyMovementAI.speed = enemyMovementAI.rageSpeed;
         } else {
             enemyMovementAI.speed = enemyMovementAI.normalSpeed;
+        
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            TakeDamage(100);
         }
     }
 
+    // Needed for slime split mechanic
+    public void setMaxHealth(int newMaxHealth){
+        // maxHealth = newMaxHealth;
+        currentHealth = newMaxHealth;
+    }
 
+    public int getMaxBossHealth(){
+        return maxBossHealth;
+    }
 
     public void TakeDamage(int damage, Vector3 hitPosition=default) {
         if (turtleBoss && hitPosition != default) {
@@ -97,7 +111,12 @@ public class EnemyManager : MonoBehaviour
             UnityEngine.Debug.Log("gainning exp");
             gameStateManager.AddXP(mobExp);
             Destroy(gameObject);
-        } else {
+        } else {            
+
+            if(gameObject.name == "SlimeBoss") {
+                slimeBoss.IsDead = true;
+                // Destroy(gameObject);
+            }
             // Add death handling here (destroy, play animation, etc.)
             // bossScript.IsDead = true;
             // animator.SetTrigger("Die");

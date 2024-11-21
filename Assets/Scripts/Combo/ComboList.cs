@@ -23,17 +23,18 @@ public class ComboList : MonoBehaviour
     {
         soloComboList = new List<Combo>()
         {
-            new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "shadow", Resources.Load<Sprite>("Skill Icons/shadow"), "Shadow Skill"),
+            new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "shadow", Resources.Load<Sprite>("Skill Icons/shadow"), "Places a shadow that you can teleport back to"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "stone", Resources.Load<Sprite>("Skill Icons/stone"), "Stone Skill"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "helpinghand", Resources.Load<Sprite>("Skill Icons/InvisSkillIcon"), "Invis Skill"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "iceground", Resources.Load<Sprite>("Skill Icons/ice"), "Ice Skill"),
-            new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.DownArrow}, "swap", Resources.Load<Sprite>("Skill Icons/swap"), "Swap Skill")
+            new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.DownArrow}, "swap", Resources.Load<Sprite>("Skill Icons/swap"), "Swap Skill")
+
         };
 
         duoComboList = new List<Combo>()
         {
             new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "tether", Resources.Load<Sprite>("Skill Icons/tether"), "Tether Skill"),
-            new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "arrow_barrage",  Resources.Load<Sprite>("Skill Icons/Arrow_0"), "Arrow Skill"),
+            new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "arrowbarrage",  Resources.Load<Sprite>("Skill Icons/Arrow_0"), "Fires a barrage of arrows"),
             new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "snipe", Resources.Load<Sprite>("Skill Icons/snipe"), "Snipe Skill"),
             new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.DownArrow }, "drain", Resources.Load<Sprite>("Skill Icons/drain"), "Drain Skill"),
             new Combo(ComboType.Duo, new List<KeyCode> { KeyCode.LeftArrow, KeyCode.LeftArrow, KeyCode.LeftArrow, KeyCode.LeftArrow, KeyCode.LeftArrow, KeyCode.LeftArrow }, "fireRing", Resources.Load<Sprite>("Skill Icons/fireRing"), "Fire Ring Skill")

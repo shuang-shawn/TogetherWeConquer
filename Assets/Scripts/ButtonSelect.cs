@@ -45,6 +45,11 @@ public class OptionSelector : MonoBehaviour
         option1Button.onClick.AddListener(() => SelectOption(1));
         option2Button.onClick.AddListener(() => SelectOption(2));
         option3Button.onClick.AddListener(() => SelectOption(3));
+
+        if (newCombos[0].IsDummy() && newCombos[1].IsDummy() && newCombos[2].IsDummy())
+        {
+            confirmButton.gameObject.SetActive(true);
+        }
     }
 
     private void ChooseImages()
@@ -107,12 +112,24 @@ public class OptionSelector : MonoBehaviour
 
         List<Combo> randomCombos = new List<Combo>();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < Mathf.Min(3, unlearnedCombos.Count); i++)
         {
             randomCombos.Add(unlearnedCombos[numbers[i]]);
         }
 
+        // Fill remaining slots with dummy combos
+        while (randomCombos.Count < 3)
+        {
+            randomCombos.Add(CreateDummyCombo());
+        }
+
         return randomCombos;
+    }
+
+    private Combo CreateDummyCombo()
+    {
+        Combo dummy = new Combo(ComboType.Solo, new List<KeyCode>(), "No Combo", Resources.Load<Sprite>("Skill Icons/noSkill"), "No combo available", true);
+        return dummy;
     }
 
     private void Shuffle(List<int> list)
@@ -128,6 +145,12 @@ public class OptionSelector : MonoBehaviour
 
     void SelectOption(int option)
     {
+        if (newCombos[option - 1].IsDummy())
+        {
+            Debug.Log("Cannot select a dummy combo.");
+            return; // Ignore the selection
+        }
+
         selectedOption = option;
         Debug.Log("Selected Option: " + selectedOption);
 
@@ -166,6 +189,11 @@ public class OptionSelector : MonoBehaviour
 
     public void AcceptOption()
     {
+        if (newCombos[selectedOption - 1].IsDummy())
+        {
+            return;
+        }
+
         if (!stateManager.duoLevel)
         {
             if (stateManager.isPlayer1Level)

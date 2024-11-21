@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DuoComboManager : MonoBehaviour
 {
+    private const string Player1Tag = "Player1";
+    private const string Player2Tag = "Player2";
+
     public GameObject player1;
     public GameObject player2;
     public ComboInput startedCombo;
@@ -14,14 +17,13 @@ public class DuoComboManager : MonoBehaviour
     private SkillManager skillManager;
 
     [SerializeField]
-    private GameObject p1ComboWindow;
-    [SerializeField]
-    private GameObject p2ComboWindow;
+    private ComboWindowUI comboWindow;
 
     private void Start()
     {
         FindPlayers();
         skillManager = skillManagerObject.GetComponent<SkillManager>();
+        comboWindow = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
 
     }
 
@@ -52,13 +54,6 @@ public class DuoComboManager : MonoBehaviour
         AssignPlayerOrder(player);
         startedCombo.IsInDuoCombo(true);
         endingCombo.IsInDuoCombo(true);
-        //if (player == player1)
-        //{
-        //    p2ComboWindow.SetActive(false);
-        //} else
-        //{
-        //    p1ComboWindow.SetActive(false);
-        //}
         var (firstHalf, secondHalf) = SplitCombo(combo.GetComboSequence());
         startedCombo.StartCombo(combo, firstHalf, true);
         endingCombo.ToggleInput(false);
@@ -81,8 +76,8 @@ public class DuoComboManager : MonoBehaviour
             endingCombo.RestartCombo();
             startedCombo.ToggleInput(true);
             endingCombo.ToggleInput(true);
-            //p1ComboWindow.SetActive(true);
-            //p2ComboWindow.SetActive(true);
+            comboWindow.GetComboWindow(Player1Tag).SetActive(true);
+            comboWindow.GetComboWindow(Player2Tag).SetActive(true);
             return;
         }
         if (!abrupt)
@@ -94,8 +89,8 @@ public class DuoComboManager : MonoBehaviour
         currentCombo = null;
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
-        //p1ComboWindow.SetActive(true);
-        //p2ComboWindow.SetActive(true);
+        comboWindow.GetComboWindow(Player1Tag).SetActive(true);
+        comboWindow.GetComboWindow(Player2Tag).SetActive(true);
     }
 
     public void ForceResetDuoCombo()
@@ -107,6 +102,8 @@ public class DuoComboManager : MonoBehaviour
             currentCombo = null;
             startedCombo.ToggleInput(true);
             endingCombo.ToggleInput(true);
+            comboWindow.GetComboWindow(Player1Tag).SetActive(true);
+            comboWindow.GetComboWindow(Player2Tag).SetActive(true);
         }
     }
 
@@ -126,15 +123,25 @@ public class DuoComboManager : MonoBehaviour
         {
             startedCombo = player1?.GetComponentInChildren<ComboInput>();
             endingCombo = player2?.GetComponentInChildren<ComboInput>();
-            Debug.Log("Player 1 initiated the combo!");
+            comboWindow.ResetComboList(false, Player2Tag);
+            StartCoroutine(DisableComboWindow(comboWindow.GetComboWindow(Player2Tag)));
         }
         else if (player == player2)
         {
             startedCombo = player2?.GetComponentInChildren<ComboInput>();
             endingCombo = player1?.GetComponentInChildren<ComboInput>();
-            Debug.Log("Player 2 initiated the combo!");
+            comboWindow.ResetComboList(false, Player1Tag);
+            StartCoroutine(DisableComboWindow(comboWindow.GetComboWindow(Player1Tag)));
         }
     }
+
+    private IEnumerator DisableComboWindow(GameObject comboWindow)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        comboWindow.SetActive(false); 
+    }
+
 
     // Utility function that splits the combo into two halves
     private (List<KeyCode>, List<KeyCode>) SplitCombo(List<KeyCode> combo)

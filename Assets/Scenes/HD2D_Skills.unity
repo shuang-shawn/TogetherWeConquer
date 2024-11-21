@@ -1476,12 +1476,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &388576921 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 434197086483773768, guid: 078944cd08322284596a3c846c62f73b,
-    type: 3}
-  m_PrefabInstance: {fileID: 5496664064544379275}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,8 +2226,7 @@ MonoBehaviour:
   startedCombo: {fileID: 0}
   endingCombo: {fileID: 0}
   skillManagerObject: {fileID: 582710431}
-  p1ComboWindow: {fileID: 1364114283}
-  p2ComboWindow: {fileID: 388576921}
+  comboWindow: {fileID: 5496664064544379276}
 --- !u!4 &1055241500
 Transform:
   m_ObjectHideFlags: 0
@@ -2684,12 +2677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5c734b3ff8d4b409fc5af09d1513d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1364114283 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4617625597260233659, guid: 078944cd08322284596a3c846c62f73b,
-    type: 3}
-  m_PrefabInstance: {fileID: 5496664064544379275}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1365175423
 GameObject:
   m_ObjectHideFlags: 0
@@ -4225,6 +4212,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 078944cd08322284596a3c846c62f73b, type: 3}
+--- !u!114 &5496664064544379276 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1066707282748876802, guid: 078944cd08322284596a3c846c62f73b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5496664064544379275}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531f12b428a037f43800583466088c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8090275679356346730
 PrefabInstance:
   m_ObjectHideFlags: 0

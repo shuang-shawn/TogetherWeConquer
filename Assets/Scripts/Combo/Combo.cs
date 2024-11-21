@@ -17,8 +17,9 @@ public class Combo
     private string description;
     private bool learnedP1;
     private bool learnedP2;
+    private bool dummy;
 
-    public Combo(ComboType comboType, List<KeyCode> comboSequence, string skillName, Sprite skillIcon = null, string skillDescription = "")
+    public Combo(ComboType comboType, List<KeyCode> comboSequence, string skillName, Sprite skillIcon = null, string skillDescription = "", bool dummy = false)
     {
         this.comboSequence = comboSequence;
         this.comboType = comboType;
@@ -27,6 +28,7 @@ public class Combo
         description = skillDescription;
         learnedP1 = false;
         learnedP2 = false;
+        this.dummy = dummy;
     }
 
     public List<KeyCode> GetComboSequence()
@@ -74,6 +76,11 @@ public class Combo
     public bool GetLearnedP2()
     {
         return learnedP2;
+    }
+
+    public bool IsDummy()
+    {
+        return dummy;
     }
 
     public override string ToString()

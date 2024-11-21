@@ -66,50 +66,13 @@ public class CameraPanning : MonoBehaviour
 
     void CreatePlayers()
     {
-        instantiatedPlayer1 = Instantiate(player1, p1OriginalPos, Quaternion.identity);
-        RemoveComponents(instantiatedPlayer1);
+        instantiatedPlayer1 = Instantiate(player1, p1OriginalPos, Quaternion.identity);  
         instantiatedPlayer2 = Instantiate(player2, p2OriginalPos, Quaternion.identity);
-        RemoveComponents(instantiatedPlayer2);
 
         // Initialize Animator from instantiated players
         animator = instantiatedPlayer1.GetComponentInChildren<Animator>();
         animator2 = instantiatedPlayer2.GetComponentInChildren<Animator>();
 
-    }
-
-    void RemoveComponents(GameObject player)
-    {
-
-        // Remove Rigidbody if it exists
-        Rigidbody rb = player.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            Destroy(rb);
-        }
-
-        // Remove Collider if it exists
-        Collider collider = player.GetComponent<Collider>();
-        if (collider != null)
-        {
-            Destroy(collider);
-        }
-
-        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-        if (playerMovement != null)
-        {
-            Destroy(playerMovement);
-        }
-
-        Transform comboManagerTransform = player.transform.Find("Combo Manager");
-        if (comboManagerTransform != null)
-        {
-            Destroy(comboManagerTransform.gameObject);
-        }
-        comboManagerTransform = player.transform.Find("Canvas");
-        if (comboManagerTransform != null)
-        {
-            Destroy(comboManagerTransform.gameObject);
-        }
     }
 
     void MovePlayers(float cameraSpeed)

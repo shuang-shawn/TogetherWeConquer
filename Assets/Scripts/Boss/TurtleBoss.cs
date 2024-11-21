@@ -24,15 +24,6 @@ public class TurtleBoss : MonoBehaviour
         projectileRingAttack = GetComponent<ProjectileRingAttack>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-      if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            projectileRingAttack.ExecuteProjectileRingAttack();
-        }  
-    }
-
         // Coroutine to handle the rage state cycle
     private IEnumerator SpikeCycle()
     {

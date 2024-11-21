@@ -111,8 +111,7 @@ public class ReviveLogic : MonoBehaviour
         reviveHeader.gameObject.SetActive(false);
         progressHeader.gameObject.SetActive(true);
         UpdateProgressUI();
-        duoToggle.Disable();
-     
+        
         StartComboLoop();
         up.performed += ComboSequence;
         down.performed += ComboSequence;
@@ -137,6 +136,7 @@ public class ReviveLogic : MonoBehaviour
             currentCombo = GenerateRandomCombo();
             comboUI.InitializeUI(currentCombo, 0);
             StartTimer();
+            duoToggle.Disable();
         }
     }
 
