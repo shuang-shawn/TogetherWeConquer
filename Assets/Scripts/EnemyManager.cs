@@ -51,9 +51,12 @@ public class EnemyManager : MonoBehaviour
             enemyMovementAI.speed = enemyMovementAI.rageSpeed;
         } else {
             enemyMovementAI.speed = enemyMovementAI.normalSpeed;
-//         if (Input.GetKeyDown("space"))
-//         {
-//             TakeDamage(100);
+        
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            TakeDamage(100);
         }
     }
 
@@ -112,7 +115,7 @@ public class EnemyManager : MonoBehaviour
 
             if(gameObject.name == "SlimeBoss") {
                 slimeBoss.IsDead = true;
-                Destroy(gameObject);
+                // Destroy(gameObject);
             }
             // Add death handling here (destroy, play animation, etc.)
             // bossScript.IsDead = true;

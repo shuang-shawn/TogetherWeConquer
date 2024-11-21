@@ -21,7 +21,6 @@ public class SlimeBoss : MonoBehaviour
     private Vector3 landingPoint = new Vector3(0,0,0);
     private Coroutine stopwatchCoroutine;
     public int stayInAir = 5;
-    public int damage = 20;
     public int landingDelay = 2;
     public float speedPercent = 1.0f;
     public float previousSpeedPercent = 1.0f;
@@ -206,8 +205,8 @@ public class SlimeBoss : MonoBehaviour
         GameObject tempSlime = Instantiate(slimeBossPrefab, gameObject.transform.position, Quaternion.identity);
         tempSlime.GetComponent<SlimeBoss>().updateMaxHealth(currentSlimeMaxHealth / 2);
 
-        Debug.Log(tempSlime.GetComponent<SlimeBoss>().currentSlimeMaxHealth);
-        Debug.Log(tempSlime.GetComponent<EnemyManager>().currentHealth);
+        Debug.Log("What did i set currentSlimeMaxHealth to: " + tempSlime.GetComponent<SlimeBoss>().currentSlimeMaxHealth);
+        Debug.Log("What is my current hp: " + tempSlime.GetComponent<EnemyManager>().currentHealth);
 
         tempSlime.transform.localScale = gameObject.transform.localScale * 0.5f;
         // tempSlime.GetComponent<EnemyManager>().setMaxHealth(maxHealth / 2)
@@ -257,6 +256,7 @@ public class SlimeBoss : MonoBehaviour
 
         } else if (slimeID < maxSplitSlimes) {
             splitSlime();
+            Destroy(gameObject);
         }
         
         

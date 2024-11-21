@@ -21,13 +21,6 @@ TagManager:
   - LevelUpWindow
   - ComboListManager
   - Player2
-  - moveTutorial
-  - comboTutorial
-  - levelUpTutorial
-  - duoComboTutorial
-  - deathTutorial
-  - completeTutorial
-
   layers:
   - Default
   - TransparentFX
@@ -35,7 +28,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 
