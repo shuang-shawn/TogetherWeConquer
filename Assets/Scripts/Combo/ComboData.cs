@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
@@ -48,6 +49,12 @@ public class ComboData : MonoBehaviour
     /** Enables whether a player can input combos keys.  **/
     public bool isInputEnabled = true;
 
+    /** Flag for player completing a combo **/
+    public bool finishedCombo = false;
+
+    /** Flag for player reviving **/
+    public bool revived = false;
+
     //void PrintSummary()
     //{
     //    string summary = $"First Input: {firstInput}\n" +
@@ -78,5 +85,7 @@ public class ComboData : MonoBehaviour
         duoToggle = false;
         isInSoloCombo = false;
         isInDuoCombo = false;
+        finishedCombo = false;
+        revived = false;
     }
 }

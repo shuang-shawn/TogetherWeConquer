@@ -115,11 +115,13 @@ public class ComboInput : MonoBehaviour
         {
             comboData.firstInput = inputKey;
             comboWindowUI.FilterCombos(inputKey, 0, comboData.duoToggle, playerTag);
+            comboWindowUI.HighlightSequentialKeys(inputKey, 0, comboData.duoToggle, playerTag);
         }
         else if (comboData.secondInput == KeyCode.None)
         {
             comboData.secondInput = inputKey;
             comboWindowUI.FilterCombos(inputKey, 1, comboData.duoToggle, playerTag);
+            comboWindowUI.HighlightSequentialKeys(inputKey, 1, comboData.duoToggle, playerTag);
             CheckComboList();
         }
     }
@@ -145,7 +147,7 @@ public class ComboInput : MonoBehaviour
                         duoComboManager.StartDuoCombo(combo, currentPlayer);
                     } else
                     {
-                        UnityEngine.Debug.Log("Other player is busy");
+                        // Other player is busy
                         ResetInitalInputs();
                     }
  
@@ -159,7 +161,6 @@ public class ComboInput : MonoBehaviour
         }
         // For no matching combos
         ResetInitalInputs();
-        UnityEngine.Debug.Log("No matching combo");
     }
 
     private void ResetInitalInputs()
@@ -206,7 +207,16 @@ public class ComboInput : MonoBehaviour
         comboWindowUI.ResetComboList(false, playerTag);
         StopAllCoroutines();
 
+        comboData.finishedCombo = true;
+        StartCoroutine(ResetCompleteFlag());
+
         UpdateComboInputCallbacks(false);
+    }
+
+    private IEnumerator ResetCompleteFlag()
+    {
+        yield return null;
+        comboData.finishedCombo = false;
     }
 
     // Listens for inputs during the combo sequence
@@ -228,6 +238,7 @@ public class ComboInput : MonoBehaviour
             {
                 comboData.mistakeOrder.Add("Correct");
                 comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
+                comboWindowUI.HighlightSequentialKeys(inputKey, comboData.currentSequenceIndex, comboData.isInDuoCombo, playerTag);
             }
             else
             {
@@ -263,14 +274,14 @@ public class ComboInput : MonoBehaviour
         if (isComplete)
         {
             comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
-            UnityEngine.Debug.Log("Combo Completed");
+            // Combo Completed
         }
         else
         {
             comboUI.comboUIParent.SetActive(false);
 
             comboUI.ShowCancel();
-            UnityEngine.Debug.Log("Combo Cancelled");
+            // Combo Canceled
         }
 
         timer.GetComponent<ComboTimer>().ResetTimer();

@@ -9,6 +9,8 @@ public class CloseWindow : MonoBehaviour
     private GameStateManager gameStateManager;
     [SerializeField]
     private OptionSelector optionSelector;
+    private GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
+    private GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
 
     void Start()
     {
@@ -30,6 +32,10 @@ public class CloseWindow : MonoBehaviour
         closeButton.onClick.AddListener(CloseImage);
         //Pause game
         Time.timeScale = 0;
+
+        // Restrict Player Inputs
+        player1?.GetComponentInChildren<ComboInput>()?.ToggleInput(false);
+        player2?.GetComponentInChildren<ComboInput>()?.ToggleInput(false);
     }
 
     void CloseImage()
@@ -37,9 +43,9 @@ public class CloseWindow : MonoBehaviour
         // Resume game
         Time.timeScale = 1;
 
-        // Toggle levelUp in GameStateManager
-        gameStateManager.LevelUp();
-
+        // Allow Player Inputs
+        player1?.GetComponentInChildren<ComboInput>()?.ToggleInput(true);
+        player2?.GetComponentInChildren<ComboInput>()?.ToggleInput(true);
         // Set Window inactive
         transform.parent.gameObject.SetActive(false);
     }

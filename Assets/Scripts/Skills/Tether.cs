@@ -139,7 +139,7 @@ public class Tether : MonoBehaviour
         
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "boss" || other.tag == "mob")
+        if((other.tag == "boss" || other.tag == "mob") && !other.isTrigger)
         {
             Vector3 hit = other.transform.position;
             hit.y += 0.5f;
