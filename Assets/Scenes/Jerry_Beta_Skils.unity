@@ -181,6 +181,7 @@ MonoBehaviour:
   option3Button: {fileID: 180779188}
   confirmButton: {fileID: 995917388}
   comboListManager: {fileID: 341787959}
+  stateManager: {fileID: 0}
 --- !u!114 &56597481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1359,35 +1360,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1 &531227215 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3528172597860773568, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
-    type: 3}
-  m_PrefabInstance: {fileID: 8090275679356346730}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &531227221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531227215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f08601900ea3ce46b3838ba38c5dc65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 0
-  maxHealth: 100
-  maxBossHealth: 250
-  currentHealth: 0
-  healthBar: {fileID: 0}
-  hurtParticlesPrefab: {fileID: 8806211054233520024, guid: c7a4790e5b1683043950ae30e5206018,
-    type: 3}
-  slowParticlesPrefab: {fileID: 4802142671950701617, guid: 60834733287faa246af9c68a667e8195,
-    type: 3}
-  animator: {fileID: 0}
-  slowed: 0
 --- !u!1 &559600664
 GameObject:
   m_ObjectHideFlags: 0
@@ -4083,9 +4055,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager1: {fileID: 0}
   playerManager2: {fileID: 0}
-  bossManager: {fileID: 0}
   canvas: {fileID: 1251522603}
+  mobSpawner: {fileID: 0}
+  moveTutorial: {fileID: 0}
+  levelUpTutorial: {fileID: 0}
+  comboTutorial: {fileID: 0}
+  duoComboTutorial: {fileID: 0}
+  deathTutorial: {fileID: 0}
+  currXP: 0
+  nextLevel: 100
+  level: 1
   levelUp: 0
+  isPlayer1Level: 1
+  duoLevel: 0
 --- !u!4 &1409611445
 Transform:
   m_ObjectHideFlags: 0
@@ -4624,6 +4606,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BasicEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260390775947985471, guid: caf3136a74e61f642a208bb18653c4fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6330276935957830364, guid: caf3136a74e61f642a208bb18653c4fc,
         type: 3}
@@ -5294,6 +5281,7 @@ MonoBehaviour:
   startedCombo: {fileID: 0}
   endingCombo: {fileID: 0}
   skillManagerObject: {fileID: 582710431}
+  comboWindow: {fileID: 0}
 --- !u!1 &1872261723 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9102977279164715253, guid: b612d3ca49b9641438c108c6fb8a5b15,
@@ -6091,6 +6079,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1762608085181753336, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762608085181753336, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
       propertyPath: hopFrequency
       value: 5
       objectReference: {fileID: 0}
@@ -6118,7 +6111,7 @@ PrefabInstance:
     - target: {fileID: 2499925104895372974, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2499925104895372974, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
         type: 3}
@@ -6183,11 +6176,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3528172597860773568, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 531227221}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
