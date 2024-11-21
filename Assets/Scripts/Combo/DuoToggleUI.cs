@@ -35,7 +35,19 @@ public class DuoToggleUI : MonoBehaviour
         // Extract only the key part from the binding path
         string P1KeyBind = bindingPathP1.Replace("<Keyboard>/", "");
         string P2KeyBind = bindingPathP2.Replace("<Keyboard>/", "");
-        p1DuoToggleText.text = P1KeyBind.ToUpper();
-        p2DuoToggleText.text = P2KeyBind.ToUpper();
+        p1DuoToggleText.text = FormatKeyBind(P1KeyBind);
+        p2DuoToggleText.text = FormatKeyBind(P2KeyBind);
+    }
+
+    string FormatKeyBind(string bindingPath)
+    {
+        string keyBind = bindingPath.Replace("<Keyboard>/", "");
+
+        if (keyBind.StartsWith("numpad"))
+        {
+            keyBind = keyBind.Substring(6);
+        }
+
+        return keyBind.ToUpper();
     }
 }

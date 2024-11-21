@@ -9,6 +9,8 @@ public class PlayerMovement:MonoBehaviour
     //create private internal references
     private InputActions inputActions;
     private InputAction movement;
+    private InputAction dash;
+
     public float movementSpeed = 5f;
     public int playerNo = 1;
     public Vector3 currentMoveDirection = Vector3.zero;
@@ -16,6 +18,8 @@ public class PlayerMovement:MonoBehaviour
     private Vector3 previousDirectionX = Vector3.right;
 
     public bool canMove = true;
+    // public GameObject skillManagerObject; // temp holder for skill system
+    private SkillManager skillManager;
 
     private SpriteRenderer sr;
     private Animator animator;
@@ -30,6 +34,8 @@ public class PlayerMovement:MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>(); //get rigidbody, responsible for enabling collision with other colliders
         inputActions = new InputActions(); //create new InputActions
+        skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
+
     }
 
     //called when script enabled
@@ -38,13 +44,18 @@ public class PlayerMovement:MonoBehaviour
         if (playerNo == 1)
         {
             movement = inputActions.Player1.Movement; //get reference to movement action
+            dash = inputActions.Player1.Dash;
         }
         else if (playerNo == 2)
             {
             movement = inputActions.Player2.Movement; //get reference to movement action
+            dash = inputActions.Player2.Dash;
         }
 
         movement.Enable();
+        dash.Enable();
+
+        dash.performed += OnDashPerformed;
 
 
     }
@@ -53,6 +64,9 @@ public class PlayerMovement:MonoBehaviour
     private void OnDisable()
     {
         movement.Disable();
+        dash.Disable();
+
+        dash.performed -= OnDashPerformed;
 
     }
 
@@ -89,6 +103,11 @@ public class PlayerMovement:MonoBehaviour
         }
         // rb.AddForce(v3P1, ForceMode.VelocityChange); //apply instant physics force, ignoring mass
 
+    }
+
+    private void OnDashPerformed(InputAction.CallbackContext context)
+    {
+        skillManager.CastSkill("dash", "Player" + playerNo);
     }
 
 

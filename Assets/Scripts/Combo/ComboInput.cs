@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+
 
 public class ComboInput : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class ComboInput : MonoBehaviour
     }
     private void OnEnable()
     {
+        actionMap.Enable();
         up.Enable();
         down.Enable();
         left.Enable();
@@ -113,11 +115,13 @@ public class ComboInput : MonoBehaviour
         {
             comboData.firstInput = inputKey;
             comboWindowUI.FilterCombos(inputKey, 0, comboData.duoToggle, playerTag);
+            comboWindowUI.HighlightSequentialKeys(inputKey, 0, comboData.duoToggle, playerTag);
         }
         else if (comboData.secondInput == KeyCode.None)
         {
             comboData.secondInput = inputKey;
             comboWindowUI.FilterCombos(inputKey, 1, comboData.duoToggle, playerTag);
+            comboWindowUI.HighlightSequentialKeys(inputKey, 1, comboData.duoToggle, playerTag);
             CheckComboList();
         }
     }
@@ -125,7 +129,10 @@ public class ComboInput : MonoBehaviour
     // Checks in either the solo or duo combo list based on the users first two inputs for matching combos
     private void CheckComboList()
     {
-        var selectedComboList = (comboData.duoToggle) ? comboList.duoComboList : comboList.soloComboList;
+        var selectedComboList = (transform.parent.gameObject.tag == "Player1") ? comboList.currentP1ComboList : comboList.currentP2ComboList;
+        selectedComboList = selectedComboList
+        .Where(combo => combo.GetComboType() == (comboData.duoToggle ? ComboType.Duo : ComboType.Solo))
+        .ToList();
         var currentPlayer = transform.parent.gameObject;
 
         foreach (Combo combo in selectedComboList)
@@ -140,7 +147,7 @@ public class ComboInput : MonoBehaviour
                         duoComboManager.StartDuoCombo(combo, currentPlayer);
                     } else
                     {
-                        UnityEngine.Debug.Log("Other player is busy");
+                        // Other player is busy
                         ResetInitalInputs();
                     }
  
@@ -154,7 +161,6 @@ public class ComboInput : MonoBehaviour
         }
         // For no matching combos
         ResetInitalInputs();
-        UnityEngine.Debug.Log("No matching combo");
     }
 
     private void ResetInitalInputs()
@@ -201,7 +207,16 @@ public class ComboInput : MonoBehaviour
         comboWindowUI.ResetComboList(false, playerTag);
         StopAllCoroutines();
 
+        comboData.finishedCombo = true;
+        StartCoroutine(ResetCompleteFlag());
+
         UpdateComboInputCallbacks(false);
+    }
+
+    private IEnumerator ResetCompleteFlag()
+    {
+        yield return null;
+        comboData.finishedCombo = false;
     }
 
     // Listens for inputs during the combo sequence
@@ -223,6 +238,7 @@ public class ComboInput : MonoBehaviour
             {
                 comboData.mistakeOrder.Add("Correct");
                 comboUI.UpdateArrow(comboData.currentSequenceIndex, true);
+                comboWindowUI.HighlightSequentialKeys(inputKey, comboData.currentSequenceIndex, comboData.isInDuoCombo, playerTag);
             }
             else
             {
@@ -258,14 +274,14 @@ public class ComboInput : MonoBehaviour
         if (isComplete)
         {
             comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
-            UnityEngine.Debug.Log("Combo Completed");
+            // Combo Completed
         }
         else
         {
             comboUI.comboUIParent.SetActive(false);
 
             comboUI.ShowCancel();
-            UnityEngine.Debug.Log("Combo Cancelled");
+            // Combo Canceled
         }
 
         timer.GetComponent<ComboTimer>().ResetTimer();

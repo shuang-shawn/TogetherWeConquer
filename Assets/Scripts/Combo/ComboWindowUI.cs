@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,9 @@ public class ComboWindowUI : MonoBehaviour
     private TextMeshProUGUI p1Header;
     [SerializeField]
     private TextMeshProUGUI p2Header;
+
+    private bool p1IsInDuoView = false;
+    private bool p2IsInDuoView = false;
 
     [SerializeField]
     private Animator p1WindowAnimator;
@@ -59,54 +63,69 @@ public class ComboWindowUI : MonoBehaviour
     void Start()
     {
         comboList = GameObject.FindGameObjectWithTag("ComboListManager").GetComponent<ComboList>();
-        InitializeComboWindow(comboList.soloComboList, p1SoloCombosCached, p2SoloCombosCached, true); // Instantiates all solo combo gameobjects, set to visible by default 
-        InitializeComboWindow(comboList.duoComboList, p1DuoCombosCached, p2DuoCombosCached, false);  // Instantiates all duo combo gameobjects, stored for later use
+        InitializeComboWindow(comboList.currentP1ComboList, p1SoloCombosCached, p1DuoCombosCached, p1ComboListView); // Instantiates all solo combo gameobjects, set to visible by default 
+        InitializeComboWindow(comboList.currentP2ComboList, p2SoloCombosCached, p2DuoCombosCached, p2ComboListView);  // Instantiates all duo combo gameobjects, stored for later use
     }
 
     // Instantiates all combo sequences for each player and caches them for later use
-    private void InitializeComboWindow(List<Combo> comboList, List<GameObject> p1ComboCache, List<GameObject> p2ComboCache, bool setActive)
+    private void InitializeComboWindow(List<Combo> comboList, List<GameObject> soloComboCache, List<GameObject> duoComboCache, GameObject comboListView)
     {
         foreach (Combo combo in comboList)
         {
-            GameObject p1CurrentComboSequence = Instantiate(comboSequencePrefab, p1ComboListView.transform);
-            p1ComboCache.Add(p1CurrentComboSequence);
-            p1CurrentComboSequence.SetActive(setActive);
+            AddComboToWindow(combo, soloComboCache, duoComboCache, comboListView);
+        }
+    }
 
-            GameObject p2CurrentComboSequence = Instantiate(comboSequencePrefab, p2ComboListView.transform);
+    public void AddNewCombo(string playerTag, Combo newCombo)
+    {
+        switch (playerTag)
+        {
+            case Player1Tag:
+                AddComboToWindow(newCombo, p1SoloCombosCached, p1DuoCombosCached, p1ComboListView, p1IsInDuoView);
+                break;
+            case Player2Tag:
+                AddComboToWindow(newCombo, p2SoloCombosCached, p2DuoCombosCached, p2ComboListView, p2IsInDuoView);
+                break;
+        }
+    }
 
-            p2ComboCache.Add(p2CurrentComboSequence);
-            p2CurrentComboSequence.SetActive(setActive);
+    private void AddComboToWindow(Combo combo, List<GameObject> soloComboCache, List<GameObject> duoComboCache, GameObject comboListView, bool isInDuo = false)
+    {
+        GameObject currentComboSequence = Instantiate(comboSequencePrefab, comboListView.transform);
+        if (combo.GetComboType() == ComboType.Solo)
+        {
+            currentComboSequence.SetActive(!isInDuo);
+            soloComboCache.Add(currentComboSequence);
+        }
+        else if (combo.GetComboType() == ComboType.Duo)
+        {
+            currentComboSequence.SetActive(isInDuo);
+            duoComboCache.Add(currentComboSequence);
+        }
 
+        if (combo.HasIcon())
+        {
+            InstantiateIconAtFront(currentComboSequence, combo.GetComboIcon());
+        }
 
-            if (combo.HasIcon())
+        foreach (KeyCode key in combo.GetComboSequence())
+        {
+            switch (key)
             {
-                InstantiateIconAtFront(p1CurrentComboSequence, combo.GetComboIcon());
-                InstantiateIconAtFront(p2CurrentComboSequence, combo.GetComboIcon());
-            }
-
-            foreach (KeyCode key in combo.GetComboSequence())
-            {
-                switch (key)
-                {
-                    case KeyCode.UpArrow:
-                        Instantiate(arrowImages[0], p1CurrentComboSequence.transform);
-                        Instantiate(arrowImages[0], p2CurrentComboSequence.transform);
-                        break;
-                    case KeyCode.DownArrow:
-                        Instantiate(arrowImages[1], p1CurrentComboSequence.transform);
-                        Instantiate(arrowImages[1], p2CurrentComboSequence.transform);
-                        break;
-                    case KeyCode.LeftArrow:
-                        Instantiate(arrowImages[2], p1CurrentComboSequence.transform);
-                        Instantiate(arrowImages[2], p2CurrentComboSequence.transform);
-                        break;
-                    case KeyCode.RightArrow:
-                        Instantiate(arrowImages[3], p1CurrentComboSequence.transform);
-                        Instantiate(arrowImages[3], p2CurrentComboSequence.transform);
-                        break;
-                    default:
-                        break;
-                }
+                case KeyCode.UpArrow:
+                    Instantiate(arrowImages[0], currentComboSequence.transform);
+                    break;
+                case KeyCode.DownArrow:
+                    Instantiate(arrowImages[1], currentComboSequence.transform);
+                    break;
+                case KeyCode.LeftArrow:
+                    Instantiate(arrowImages[2], currentComboSequence.transform);
+                    break;
+                case KeyCode.RightArrow:
+                    Instantiate(arrowImages[3], currentComboSequence.transform);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -126,12 +145,16 @@ public class ComboWindowUI : MonoBehaviour
         iconImage.preserveAspect = true; // Ensure the icon maintains its aspect ratio
     }
 
+
+
     // Alternatives between solo and duo combo lists for each player
     public void SwitchComboList(bool isInDuo, string playerTag)
     { 
         List<GameObject> soloCombosCached = playerTag.Equals(Player1Tag) ? p1SoloCombosCached : p2SoloCombosCached;
         List<GameObject> duoCombosCached = playerTag.Equals(Player1Tag) ? p1DuoCombosCached : p2DuoCombosCached;
-
+        bool isPlayer1 = playerTag.Equals(Player1Tag);
+        p1IsInDuoView = isPlayer1 ? isInDuo : p1IsInDuoView;
+        p2IsInDuoView = isPlayer1 ? p2IsInDuoView : isInDuo;
         foreach (GameObject comboUIElement in soloCombosCached)
         {
             comboUIElement.SetActive(!isInDuo);
@@ -176,12 +199,29 @@ public class ComboWindowUI : MonoBehaviour
             if (inputKey != GetKeyFromImage(image))
             {
                 comboUIElement.SetActive(false);
-            } else
-            {
-                image.color = highlightColor;
-            }
+            } 
         }
     }
+
+    // This function highlights the keys after the first two, sequentially based on input order
+    public void HighlightSequentialKeys(KeyCode inputKey, int inputOrder, bool isInDuo, string playerTag)
+    {
+        List<GameObject> soloCombosCached = playerTag.Equals(Player1Tag) ? p1SoloCombosCached : p2SoloCombosCached;
+        List<GameObject> duoCombosCached = playerTag.Equals(Player1Tag) ? p1DuoCombosCached : p2DuoCombosCached;
+
+        foreach (GameObject comboUIElement in (isInDuo) ? duoCombosCached : soloCombosCached)
+        {
+            Transform firstKey = comboUIElement?.transform.GetChild(inputOrder+1);
+            Image image = firstKey.GetComponent<Image>();
+            if (inputKey == GetKeyFromImage(image))
+            {
+                image.color = highlightColor;
+                return;
+            }
+        }
+
+    }
+
 
     public void ResetComboList(bool isInDuo, string playerTag)
     {
@@ -196,12 +236,15 @@ public class ComboWindowUI : MonoBehaviour
 
         foreach (GameObject comboUIElement in (isInDuo) ? duoCombosCached : soloCombosCached)
         {
-            Transform firstKey = comboUIElement.transform.GetChild(1);
-            Transform secondKey = comboUIElement.transform.GetChild(2);
-            Image first_image = firstKey.GetComponent<Image>();
-            Image second_image = secondKey.GetComponent<Image>();
-            first_image.color = Color.white;
-            second_image.color = Color.white;
+            for (int i = 1; i < comboUIElement.transform.childCount; i++)  // Start loop at index 1
+            {
+                Transform key = comboUIElement.transform.GetChild(i);
+                Image image = key.GetComponent<Image>();
+                if (image != null)
+                {
+                    image.color = Color.white; // Reset to white
+                }
+            }
         }
     }
 

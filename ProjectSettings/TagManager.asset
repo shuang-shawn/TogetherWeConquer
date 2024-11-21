@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Player1
   - BasicEnemy
-  - Player2
   - DuoComboManager
   - FXManager
   - ComboWindow
@@ -19,41 +18,42 @@ TagManager:
   - Canvas
   - LoseWindow
   - WinWindow
+  - LevelUpWindow
   - ComboListManager
   - Player2
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - ForceField
+  - ForceFieldEnemy
   - SawBlades
   - SnowParticles
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0

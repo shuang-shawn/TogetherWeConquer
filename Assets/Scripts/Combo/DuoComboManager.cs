@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DuoComboManager : MonoBehaviour
 {
+    private const string Player1Tag = "Player1";
+    private const string Player2Tag = "Player2";
+
     public GameObject player1;
     public GameObject player2;
     public ComboInput startedCombo;
@@ -13,24 +16,35 @@ public class DuoComboManager : MonoBehaviour
     public GameObject skillManagerObject; // temp holder for skill system
     private SkillManager skillManager;
 
+    [SerializeField]
+    private ComboWindowUI comboWindow;
+
     private void Start()
     {
         FindPlayers();
         skillManager = skillManagerObject.GetComponent<SkillManager>();
+        comboWindow = GameObject.FindGameObjectWithTag("ComboWindow")?.GetComponent<ComboWindowUI>();
 
     }
 
     // Checks if the other player is currently performing a solo combo
     public bool IsOtherPlayerInSoloCombo(GameObject player) 
     {
-        if (player == player1)
+        GameObject otherPlayer = (player == player1) ? player2 : player1;
+        if (otherPlayer.activeInHierarchy) {
+            if (player == player1)
+            {
+                return player2.GetComponentInChildren<ComboInput>().IsInSoloCombo();
+            }
+            else
+            {
+                return player1.GetComponentInChildren<ComboInput>().IsInSoloCombo();
+            }
+        } else
         {
-            return player2.GetComponentInChildren<ComboInput>().IsInSoloCombo();
+            return true;
         }
-        else 
-        {
-            return player1.GetComponentInChildren<ComboInput>().IsInSoloCombo();
-        }
+      
     }
 
     // Handles logic for starting duo combos
@@ -54,6 +68,7 @@ public class DuoComboManager : MonoBehaviour
             startedCombo.ToggleInput(false);
             endingCombo.ToggleInput(true);
             endingCombo.StartTimer(remainingTime);
+            skillManager.CastFirstHalfDuoSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
             return;
         }
         else if (player == startedCombo.transform.parent.gameObject && abrupt) // If initial players stops combo unexpecetedly, force other play to end combo
@@ -61,6 +76,8 @@ public class DuoComboManager : MonoBehaviour
             endingCombo.RestartCombo();
             startedCombo.ToggleInput(true);
             endingCombo.ToggleInput(true);
+            comboWindow.GetComboWindow(Player1Tag).SetActive(true);
+            comboWindow.GetComboWindow(Player2Tag).SetActive(true);
             return;
         }
         if (!abrupt)
@@ -68,12 +85,29 @@ public class DuoComboManager : MonoBehaviour
             Debug.Log("Duo Skill ended with: " + player.gameObject.name);
             skillManager.CastSkill(currentCombo.GetComboSkill(), player.tag, currentCombo.GetComboType());
         }
-     
-     
+        
         currentCombo = null;
         startedCombo.ToggleInput(true);
         endingCombo.ToggleInput(true);
+        comboWindow.GetComboWindow(Player1Tag).SetActive(true);
+        comboWindow.GetComboWindow(Player2Tag).SetActive(true);
     }
+
+    public void ForceResetDuoCombo()
+    {
+        if (startedCombo != null && endingCombo != null)
+        {
+            startedCombo.RestartCombo();
+            endingCombo.RestartCombo();
+            currentCombo = null;
+            startedCombo.ToggleInput(true);
+            endingCombo.ToggleInput(true);
+            comboWindow.GetComboWindow(Player1Tag).SetActive(true);
+            comboWindow.GetComboWindow(Player2Tag).SetActive(true);
+        }
+    }
+
+
 
     private void FindPlayers()
     {
@@ -89,15 +123,25 @@ public class DuoComboManager : MonoBehaviour
         {
             startedCombo = player1?.GetComponentInChildren<ComboInput>();
             endingCombo = player2?.GetComponentInChildren<ComboInput>();
-            Debug.Log("Player 1 initiated the combo!");
+            comboWindow.ResetComboList(false, Player2Tag);
+            StartCoroutine(DisableComboWindow(comboWindow.GetComboWindow(Player2Tag)));
         }
         else if (player == player2)
         {
             startedCombo = player2?.GetComponentInChildren<ComboInput>();
             endingCombo = player1?.GetComponentInChildren<ComboInput>();
-            Debug.Log("Player 2 initiated the combo!");
+            comboWindow.ResetComboList(false, Player1Tag);
+            StartCoroutine(DisableComboWindow(comboWindow.GetComboWindow(Player1Tag)));
         }
     }
+
+    private IEnumerator DisableComboWindow(GameObject comboWindow)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        comboWindow.SetActive(false); 
+    }
+
 
     // Utility function that splits the combo into two halves
     private (List<KeyCode>, List<KeyCode>) SplitCombo(List<KeyCode> combo)

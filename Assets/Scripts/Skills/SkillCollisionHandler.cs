@@ -26,11 +26,12 @@ public class SkillCollisionHandler : MonoBehaviour
         if (other.gameObject.CompareTag("boss")) // or "mob"
         {
             EnemyManager target = other.gameObject.GetComponent<EnemyManager>();
-            if (target != null)
+            if (target != null && !other.isTrigger)
             {
-                // Log enemy hit 
+                // Log enemy hit
                 Debug.Log("Enemy hit! Taking damage.");
-                target.TakeDamage(skillDamage);
+                Vector3 hitPosition = other.ClosestPoint(transform.position);
+                target.TakeDamage(skillDamage, hitPosition);
 
                 if (slowFactor != 1)
                 {

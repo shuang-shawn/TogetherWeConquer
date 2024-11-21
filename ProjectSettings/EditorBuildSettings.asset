@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/HD2D - Combo Window.unity
-    guid: 12e1560e30c6ca24fb4e812d53596bc9
   - enabled: 1
     path: Assets/Scenes/Title Screen.unity
     guid: b0c132a1a187a9e42b70f72a0949b861
@@ -17,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Rebind.unity
     guid: f2ba16702f71a8e4081e763e8456c5a4
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 294aefcf927828641a1fdf969b78a51f
+  - enabled: 1
+    path: Assets/Scenes/Codex.unity
+    guid: efef11d050b370e47b8122f9b106ad1a
   m_configObjects: {}
