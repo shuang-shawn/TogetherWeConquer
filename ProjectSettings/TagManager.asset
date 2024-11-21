@@ -27,11 +27,12 @@ TagManager:
   - duoComboTutorial
   - deathTutorial
   - completeTutorial
+
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 

@@ -28,26 +28,14 @@ public class SlimeBoss : MonoBehaviour
     public float timePassed = 0f;
     public float specialAttackInterval = 4f;
     public bool IsDead = false;
+    public ParticleSystem shockwavePrefab;
 
-    //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
-    //CURRENT IDEA FORMAT
+    // For slime splitting
 
-    public void handleCollision(GameObject gameObject){
-        
-        // Enemy gets hit by a combo
-        if(gameObject.tag == "TestCombo"){
-            string hitMessage = "Hit by Combo";
-            Debug.Log(hitMessage);
-        }
-
-        // Enemy hits player
-        else if(gameObject.tag == "Player1"){
-            gameObject.GetComponent<PlayerStats>().playerGotHit(damage);
-
-            //Add gets knocked back a certain amount
-        }
-    }
- 
+    private static int slimeID = 1;
+    public GameObject slimeBossPrefab;
+    private int maxSplitSlimes = 3;
+    public int currentSlimeMaxHealth;
 
     //Maybe put these two functions inside a class that is inherited by enemies?
     
@@ -143,12 +131,24 @@ public class SlimeBoss : MonoBehaviour
         //Land
         yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, startPosition.y, transform.position.z), dropSpeed));
         Destroy(instantiatedShadow);
+        //Play shockwave
+        playShockwave();
+
         //Daze effect
         yield return new WaitForSeconds(landingDelay);
         jumpAttacking = false;
         timePassed = 0f;
 
         
+    }
+
+    private void playShockwave(){
+
+        Vector3 slimePosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
+
+        ParticleSystem shockwaveEffect = Instantiate(shockwavePrefab, slimePosition, shockwavePrefab.transform.rotation);
+        shockwaveEffect.Play();
+        Destroy(shockwaveEffect.gameObject, shockwaveEffect.main.duration);
     }
 
     private void revisedJumpAttack(){
@@ -176,6 +176,9 @@ public class SlimeBoss : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
+        if(slimeID == 1) {
+            currentSlimeMaxHealth = gameObject.GetComponent<EnemyManager>().getMaxBossHealth();
+        }
     }
 
     private void updateSpeed(float percent){
@@ -189,6 +192,30 @@ public class SlimeBoss : MonoBehaviour
         jumpSpeed = 20f;
         dropSpeed = 20f;
         hopFrequency = 5f;
+    }
+
+    // For slime splitting mechanic
+    private void splitSlime(){
+        spawnSlime();
+        spawnSlime();
+        
+    }
+
+    private void spawnSlime(){
+        slimeID++;
+        GameObject tempSlime = Instantiate(slimeBossPrefab, gameObject.transform.position, Quaternion.identity);
+        tempSlime.GetComponent<SlimeBoss>().updateMaxHealth(currentSlimeMaxHealth / 2);
+
+        Debug.Log(tempSlime.GetComponent<SlimeBoss>().currentSlimeMaxHealth);
+        Debug.Log(tempSlime.GetComponent<EnemyManager>().currentHealth);
+
+        tempSlime.transform.localScale = gameObject.transform.localScale * 0.5f;
+        // tempSlime.GetComponent<EnemyManager>().setMaxHealth(maxHealth / 2)
+    }
+
+    public void updateMaxHealth(int newMaxHealth) {
+        currentSlimeMaxHealth = newMaxHealth;
+        gameObject.GetComponent<EnemyManager>().setMaxHealth(currentSlimeMaxHealth);
     }
 
     void FixedUpdate()
@@ -228,10 +255,14 @@ public class SlimeBoss : MonoBehaviour
             //     HopToPlayer();
             // }
 
+        } else if (slimeID < maxSplitSlimes) {
+            splitSlime();
         }
         
         
-        
+        // if(Input.GetKey(KeyCode.Space)) {
+            
+        // }
 
 
     }

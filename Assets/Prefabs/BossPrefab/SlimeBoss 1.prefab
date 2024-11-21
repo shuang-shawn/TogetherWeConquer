@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 8519952002102609461}
   - component: {fileID: 4717189569164651073}
   - component: {fileID: 3563281027736785799}
+  - component: {fileID: 4549026563716223033}
   m_Layer: 6
   m_Name: SlimeBoss 1
   m_TagString: boss
@@ -205,6 +206,9 @@ MonoBehaviour:
   timePassed: 0
   specialAttackInterval: 4
   IsDead: 0
+  shockwavePrefab: {fileID: 8483642194577002910, guid: fececd49876f5ea4b95f4d218333469b,
+    type: 3}
+  slimeBossPrefab: {fileID: 3528172597860773568}
 --- !u!136 &7405595219816766885
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -242,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
 --- !u!114 &4823274046356388705
+
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,6 +265,7 @@ MonoBehaviour:
   mobExp: 50
   healthBar: {fileID: 2226446011992917550}
   hurtParticlesPrefab: {fileID: 8808789451600048245, guid: 2eb0bec55beb8154db3664e487d2c25b,
+
     type: 3}
   slowParticlesPrefab: {fileID: 4802142671950701617, guid: 60834733287faa246af9c68a667e8195,
     type: 3}
@@ -375,6 +381,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.15, y: 1.31, z: 0.94}
   m_Center: {x: 0, y: 0.63, z: 0.49}
+
 --- !u!1 &4284643696524085262
 GameObject:
   m_ObjectHideFlags: 0

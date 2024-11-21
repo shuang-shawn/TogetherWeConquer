@@ -27,7 +27,8 @@ public class ComboList : MonoBehaviour
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "stone", Resources.Load<Sprite>("Skill Icons/stone"), "Stone Skill"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "helpinghand", Resources.Load<Sprite>("Skill Icons/InvisSkillIcon"), "Invis Skill"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "iceground", Resources.Load<Sprite>("Skill Icons/ice"), "Ice Skill"),
-            new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.DownArrow, KeyCode.DownArrow}, "swap", Resources.Load<Sprite>("Skill Icons/swap"), "Swap Skill")
+            new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.LeftArrow KeyCode.DownArrow, KeyCode.DownArrow}, "swap", Resources.Load<Sprite>("Skill Icons/swap"), "Swap Skill")
+
         };
 
         duoComboList = new List<Combo>()
