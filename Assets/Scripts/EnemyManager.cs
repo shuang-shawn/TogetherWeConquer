@@ -112,6 +112,7 @@ public class EnemyManager : MonoBehaviour
 
             if(gameObject.name == "SlimeBoss") {
                 slimeBoss.IsDead = true;
+                Destroy(gameObject);
             }
             // Add death handling here (destroy, play animation, etc.)
             // bossScript.IsDead = true;
