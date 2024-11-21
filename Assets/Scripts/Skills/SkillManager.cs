@@ -117,72 +117,69 @@ public class SkillManager : MonoBehaviour
 
     public void CastSkill(string skillName, string playerTag, ComboType comboType = ComboType.Solo)
     {
-    public void CastSkill(string skillName, string playerTag, ComboType comboType)
-    {
-        int playerNum = 0;
-        if (playerTag == "Player1")
-        {
-            playerNum = 1;
-        }
-        else if (playerTag == "Player2")
-        {
-            playerNum = 2;
-        }
-        switch (skillName)
-        {
-            case "dash":
-                if (playerNum == 1)
-                {
-                    singleDash1.Dash(playerNum);
-                }
-                else if (playerNum == 2)
-                {
-                    singleDash2.Dash(playerNum);
-                }
-                break;
-            case "iceground":
 
-                singleIceGround.CastIceGround(playerNum);
-                break;
-            case "tether":
-                tether.CastTether();
-                break;
-            case "helpinghand":
-                singleHelpingHand.CastHelpingHand((playerNum == 1) ? 2 : 1);
-                break;
-            case "snipe":
-                duoSnipe.CastSnipe(playerNum);
-                audioController.PlaySnipeFinish();
-                break;
-            case "stone":
-                singleStone.CastStone(playerNum);
-                break;
-            case "tether":
-                tether.CastTether();
-                break;
-            case "shadow":
-                shadowSkill.CastShadow(playerTag);
-                break;
-            case "arrowbarrage":
-                arrowSkill.CastArrowBarrage();
-                break;
-            case "drain":
-                drainSkill.CastDrain();
-                break;
-            case "fireRing":
-                fireRing.CastFireRing();
-                break;
-            case "swap":
-                swap.CastSwap();
-                break;
-            case "forceField":
-                forceFieldSkill.CastForceField(playerNum);
-                break;
-            case "sawblades":
-                sawbladeSkill.SpawnSawblades();
-                break;
-            default:
-                break;
+            int playerNum = 0;
+            if (playerTag == "Player1")
+            {
+                playerNum = 1;
+            }
+            else if (playerTag == "Player2")
+            {
+                playerNum = 2;
+            }
+            switch (skillName)
+            {
+                case "dash":
+                    if (playerNum == 1)
+                    {
+                        singleDash1.Dash(playerNum);
+                    }
+                    else if (playerNum == 2)
+                    {
+                        singleDash2.Dash(playerNum);
+                    }
+                    break;
+                case "iceground":
+
+                    singleIceGround.CastIceGround(playerNum);
+                    break;
+                case "tether":
+                    tether.CastTether();
+                    break;
+                case "helpinghand":
+                    singleHelpingHand.CastHelpingHand((playerNum == 1) ? 2 : 1);
+                    break;
+                case "snipe":
+                    duoSnipe.CastSnipe(playerNum);
+                    audioController.PlaySnipeFinish();
+                    break;
+                case "stone":
+                    singleStone.CastStone(playerNum);
+                    break;
+                case "shadow":
+                    shadowSkill.CastShadow(playerTag);
+                    break;
+                case "arrowbarrage":
+                    arrowSkill.CastArrowBarrage();
+                    break;
+                case "drain":
+                    drainSkill.CastDrain();
+                    break;
+                case "fireRing":
+                    fireRing.CastFireRing();
+                    break;
+                case "swap":
+                    swap.CastSwap();
+                    break;
+                case "forceField":
+                    forceFieldSkill.CastForceField(playerNum);
+                    break;
+                case "sawblades":
+                    sawbladeSkill.SpawnSawblades();
+                    break;
+                default:
+                    break;
+            }
         }
     }
-}
+

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SlimeBoss : MonoBehaviour
 {
-
     private Vector3 startPosition;
     private GameObject closestPlayerObj = null;
     public float speed = 2.0f;
@@ -30,13 +29,13 @@ public class SlimeBoss : MonoBehaviour
     public ParticleSystem shockwavePrefab;
 
     // For slime splitting
-
     private static int slimeID = 1;
     public GameObject slimeBossPrefab;
     private int maxSplitSlimes = 3;
     public int currentSlimeMaxHealth;
 
-    //Maybe put these two functions inside a class that is inherited by enemies?
+    // Pause and Resume state
+    private bool isPaused = false;
 
     private void findClosestPlayer()
     {
@@ -46,12 +45,10 @@ public class SlimeBoss : MonoBehaviour
         float player2Distance = 9999f;
         if (player1 != null)
         {
-
             player1Distance = findDistance(player1);
         }
         if (player2 != null)
         {
-
             player2Distance = findDistance(player2);
         }
 
@@ -67,11 +64,8 @@ public class SlimeBoss : MonoBehaviour
         {
             closestPlayerObj = null;
         }
-
     }
 
-    // Returns the distance between the object the script is attached to, and the targetObject
-    // Takes in a single GameObject and returns a float representing the distance
     private float findDistance(GameObject targetObject)
     {
         return Vector3.Distance(transform.position, targetObject.transform.position);
@@ -82,8 +76,6 @@ public class SlimeBoss : MonoBehaviour
         hopMotion = Mathf.Sin(Time.time * hopFrequency) * hopHeight;
     }
 
-
-    //Timer coroutine stuf
     private void StartStopwatch()
     {
         if (stopwatchCoroutine == null)
@@ -124,49 +116,33 @@ public class SlimeBoss : MonoBehaviour
 
     private IEnumerator TrackPlayer()
     {
-        // Debug.Log("TrackPlayer started");
-        // Debug.Log("Stopwatch value" + jumpAttackLandingTimer);
         StartStopwatch();
         while (jumpAttackLandingTimer < stayInAir)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(closestPlayerObj.transform.position.x, jumpAttackHeight, closestPlayerObj.transform.position.z), speed * Time.deltaTime * 2);
             yield return null;
         }
-
-        // Debug.Log("5 seconds passed");
         StopStopwatch();
-
-        // yield return null;
     }
-
 
     private IEnumerator JumpAttackSequence()
     {
-        //jump into air
         yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, jumpAttackHeight, transform.position.z), jumpSpeed));
         GameObject instantiatedShadow = Instantiate(shadow, new Vector3(transform.position.x, 0.1f, transform.position.z), Quaternion.identity);
 
-        //Track closest player for 5 seconds
         yield return StartCoroutine(TrackPlayer());
-        //Land
         yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, startPosition.y, transform.position.z), dropSpeed));
         Destroy(instantiatedShadow);
-        //Play shockwave
         playShockwave();
 
-        //Daze effect
         yield return new WaitForSeconds(landingDelay);
         jumpAttacking = false;
         timePassed = 0f;
-
-
     }
 
     private void playShockwave()
     {
-
         Vector3 slimePosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
-
         ParticleSystem shockwaveEffect = Instantiate(shockwavePrefab, slimePosition, shockwavePrefab.transform.rotation);
         shockwaveEffect.Play();
         Destroy(shockwaveEffect.gameObject, shockwaveEffect.main.duration);
@@ -184,20 +160,13 @@ public class SlimeBoss : MonoBehaviour
             return;
         }
         Vector3 playerPosition = new Vector3(closestPlayerObj.transform.position.x, startPosition.y, closestPlayerObj.transform.position.z);
-
-        // While the sine value is greater than 0, move character
-        // Simulates jump, pause, jump
         if (hopMotion > 0)
         {
-            //move enemy
-
-            // Move towards the player
             transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
-
-            // Simulate the hopping motion
             transform.position = new Vector3(transform.position.x, startPosition.y + hopMotion, transform.position.z);
         }
     }
+
     void Start()
     {
         startPosition = transform.position;
@@ -214,6 +183,7 @@ public class SlimeBoss : MonoBehaviour
         jumpSpeed *= percent;
         dropSpeed *= percent;
     }
+
     void ResetSpeed()
     {
         speed = 2.0f;
@@ -222,12 +192,10 @@ public class SlimeBoss : MonoBehaviour
         hopFrequency = 5f;
     }
 
-    // For slime splitting mechanic
     private void splitSlime()
     {
         spawnSlime();
         spawnSlime();
-
     }
 
     private void spawnSlime()
@@ -235,12 +203,7 @@ public class SlimeBoss : MonoBehaviour
         slimeID++;
         GameObject tempSlime = Instantiate(slimeBossPrefab, gameObject.transform.position, Quaternion.identity);
         tempSlime.GetComponent<SlimeBoss>().updateMaxHealth(currentSlimeMaxHealth / 2);
-
-        Debug.Log("What did i set currentSlimeMaxHealth to: " + tempSlime.GetComponent<SlimeBoss>().currentSlimeMaxHealth);
-        Debug.Log("What is my current hp: " + tempSlime.GetComponent<EnemyManager>().currentHealth);
-
         tempSlime.transform.localScale = gameObject.transform.localScale * 0.5f;
-        // tempSlime.GetComponent<EnemyManager>().setMaxHealth(maxHealth / 2)
     }
 
     public void updateMaxHealth(int newMaxHealth)
@@ -249,12 +212,28 @@ public class SlimeBoss : MonoBehaviour
         gameObject.GetComponent<EnemyManager>().setMaxHealth(currentSlimeMaxHealth);
     }
 
+    public void Pause()
+    {
+        isPaused = true;
+        Debug.Log("SlimeBoss is paused.");
+    }
+
+    public void Resume()
+    {
+        isPaused = false;
+        Debug.Log("SlimeBoss is resumed.");
+    }
+
     void FixedUpdate()
     {
+        if (isPaused)
+        {
+            return;
+        }
+
         if (!IsDead)
         {
             controlHopping();
-
             timePassed += Time.deltaTime;
             if (previousSpeedPercent != speedPercent)
             {
@@ -275,10 +254,6 @@ public class SlimeBoss : MonoBehaviour
             if (timePassed >= specialAttackInterval && !jumpAttacking && hopMotion < -0.9f)
             {
                 jumpAttacking = true;
-
-                // Debug.Log("Space pressed");
-                // Debug.Log(jumpAttacking);
-                // jumpAttack();
                 revisedJumpAttack();
             }
 
@@ -286,26 +261,11 @@ public class SlimeBoss : MonoBehaviour
             {
                 HopToPlayer();
             }
-
-            // if(jumpAttacking){
-            //     jumpAttack();
-            // } else {
-            //     HopToPlayer();
-            // }
-
         }
         else if (slimeID < maxSplitSlimes)
         {
             splitSlime();
             Destroy(gameObject);
         }
-
-
-        // if(Input.GetKey(KeyCode.Space)) {
-
-        // }
-
-
     }
 }
-
