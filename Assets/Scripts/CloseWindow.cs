@@ -9,12 +9,14 @@ public class CloseWindow : MonoBehaviour
     private GameStateManager gameStateManager;
     [SerializeField]
     private OptionSelector optionSelector;
-    private GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
-    private GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
+    private GameObject player1;
+    private GameObject player2;
 
     void Start()
     {
         gameStateManager = FindObjectOfType<GameStateManager>();
+        player1 = GameObject.FindGameObjectWithTag("Player1");
+        player2 = GameObject.FindGameObjectWithTag("Player2");
     }
 
     void Awake()
