@@ -187,7 +187,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3528172597860773568}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc16c339204a21647b6782241d6c0687, type: 3}
   m_Name: 
@@ -239,12 +239,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3528172597860773568}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66f9f57547c862c43920c43d72563ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  rageSpeed: 4
+  normalSpeed: 2
 --- !u!114 &4823274046356388705
 
 MonoBehaviour:
@@ -260,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 0
   maxHealth: 100
+  maxMobHealth: 100
   maxBossHealth: 250
   currentHealth: 0
   mobExp: 50
