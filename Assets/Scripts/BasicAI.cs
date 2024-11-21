@@ -20,6 +20,15 @@ public class BasicAI : MonoBehaviour
     private void findClosestPlayer(){
         GameObject player1 = GameObject.FindGameObjectWithTag("Player1");
         GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
+        if(player1 == null){
+            closestPlayerObj = player2;
+            if (player2 == null) {
+                closestPlayerObj = null;
+                return;
+            }
+            return;
+        }
+        
 
         float player1Distance = findDistance(player1);
         float player2Distance = findDistance(player2);
