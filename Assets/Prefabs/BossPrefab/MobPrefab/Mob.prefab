@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7533656394060683319}
   - component: {fileID: 4162155578307980892}
   - component: {fileID: 6273027785845534323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mob
   m_TagString: mob
   m_Icon: {fileID: 0}
@@ -248,8 +248,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 5
   maxHealth: 50
+  maxMobHealth: 100
   maxBossHealth: 250
   currentHealth: 0
+  mobExp: 50
   healthBar: {fileID: 8367031523316655862}
   hurtParticlesPrefab: {fileID: 8808789451600048245, guid: 2eb0bec55beb8154db3664e487d2c25b,
     type: 3}
@@ -269,6 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  rageSpeed: 4
+  normalSpeed: 2
 --- !u!1 &4133495669508471398
 GameObject:
   m_ObjectHideFlags: 0
