@@ -32,7 +32,7 @@ public class SkillCollisionHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         EnemyManager target = other.gameObject.GetComponent<EnemyManager>();
-        if (target != null) {
+        if (target != null && !other.isTrigger) {
             Vector3 hitPosition = other.ClosestPoint(transform.position);
             target.TakeDamage(skillDamage, hitPosition);
             if (slowFactor != 1) {

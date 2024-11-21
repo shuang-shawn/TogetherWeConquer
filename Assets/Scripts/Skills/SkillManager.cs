@@ -133,7 +133,7 @@ public class SkillManager : MonoBehaviour
             case "shadow":
                 shadowSkill.CastShadow(playerTag);
                 break;
-            case "arrow_barrage":
+            case "arrowbarrage":
                 arrowSkill.CastArrowBarrage();
                 break;
             case "drain":

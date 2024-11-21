@@ -23,6 +23,10 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
+        UnityEngine.Debug.Log(currentHealth);
+        UnityEngine.Debug.Log(maxHealth);
+        UnityEngine.Debug.Log(currentHealth / maxHealth);
+
         healthSlider.value = currentHealth / maxHealth; // Update slider value
 
         if (gameObject.tag == "Hidden")

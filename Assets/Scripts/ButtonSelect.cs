@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class OptionSelector : MonoBehaviour
 
     public GameObject comboListManager;
     private ComboList comboList;
+    public GameStateManager stateManager;
 
     private List<Combo> newCombos;
     private int selectedOption = -1; // No option selected initially
@@ -43,6 +45,11 @@ public class OptionSelector : MonoBehaviour
         option1Button.onClick.AddListener(() => SelectOption(1));
         option2Button.onClick.AddListener(() => SelectOption(2));
         option3Button.onClick.AddListener(() => SelectOption(3));
+
+        if (newCombos[0].IsDummy() && newCombos[1].IsDummy() && newCombos[2].IsDummy())
+        {
+            confirmButton.gameObject.SetActive(true);
+        }
     }
 
     private void ChooseImages()
@@ -51,18 +58,51 @@ public class OptionSelector : MonoBehaviour
         Image button2Image = option2Button.GetComponent<Image>();
         Image button3Image = option3Button.GetComponent<Image>();
 
-        newCombos = GetRandomCombos(comboList.soloComboList);
+        TextMeshProUGUI button1Description = option1Button.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI button2Description = option2Button.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI button3Description = option3Button.GetComponentInChildren<TextMeshProUGUI>();
+
+        if (!stateManager.duoLevel)
+        {
+            newCombos = GetRandomCombos(comboList.soloComboList);
+        }
+        else
+        {
+            newCombos = GetRandomCombos(comboList.duoComboList);
+        }
 
         button1Image.sprite = newCombos[0].GetComboIcon();
         button2Image.sprite = newCombos[1].GetComboIcon();
         button3Image.sprite = newCombos[2].GetComboIcon();
+
+        UnityEngine.Debug.Log(newCombos[0].GetDescription());
+
+        button1Description.text = newCombos[0].GetDescription();
+        button2Description.text = newCombos[1].GetDescription();
+        button3Description.text = newCombos[2].GetDescription();
     }
 
     private List<Combo> GetRandomCombos(List<Combo> typeList)
     {
+        List<Combo> unlearnedCombos = new List<Combo>();
+
+        foreach (Combo combo in typeList) 
+        {
+            if (stateManager.isPlayer1Level && !combo.GetLearnedP1())
+            {
+                unlearnedCombos.Add(combo);
+            }
+            else if (!stateManager.isPlayer1Level && !combo.GetLearnedP2())
+            {
+                unlearnedCombos.Add(combo);
+            }
+        }
+
+        UnityEngine.Debug.Log(unlearnedCombos.Count);
+
         // Make a list of numbers to draw from so no duplicates
         List<int> numbers = new List<int>();
-        for (int i = 0; i < typeList.Count; i++)
+        for (int i = 0; i < unlearnedCombos.Count; i++)
         {
             numbers.Add(i);
         }
@@ -72,12 +112,24 @@ public class OptionSelector : MonoBehaviour
 
         List<Combo> randomCombos = new List<Combo>();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < Mathf.Min(3, unlearnedCombos.Count); i++)
         {
-            randomCombos.Add(comboList.soloComboList[numbers[i]]);
+            randomCombos.Add(unlearnedCombos[numbers[i]]);
+        }
+
+        // Fill remaining slots with dummy combos
+        while (randomCombos.Count < 3)
+        {
+            randomCombos.Add(CreateDummyCombo());
         }
 
         return randomCombos;
+    }
+
+    private Combo CreateDummyCombo()
+    {
+        Combo dummy = new Combo(ComboType.Solo, new List<KeyCode>(), "No Combo", Resources.Load<Sprite>("Skill Icons/noSkill"), "No combo available", true);
+        return dummy;
     }
 
     private void Shuffle(List<int> list)
@@ -93,6 +145,12 @@ public class OptionSelector : MonoBehaviour
 
     void SelectOption(int option)
     {
+        if (newCombos[option - 1].IsDummy())
+        {
+            Debug.Log("Cannot select a dummy combo.");
+            return; // Ignore the selection
+        }
+
         selectedOption = option;
         Debug.Log("Selected Option: " + selectedOption);
 
@@ -131,8 +189,27 @@ public class OptionSelector : MonoBehaviour
 
     public void AcceptOption()
     {
-        // Add Here
-        //comboList.AddToCurrentList(newCombos[selectedOption - 1]);
+        if (newCombos[selectedOption - 1].IsDummy())
+        {
+            return;
+        }
+
+        if (!stateManager.duoLevel)
+        {
+            if (stateManager.isPlayer1Level)
+            {
+                comboList.AddP1SoloSkill(newCombos[selectedOption - 1]);
+            }
+            else
+            {
+                comboList.AddP2SoloSkill(newCombos[selectedOption - 1]);
+            }
+        }
+        else
+        {
+            comboList.AddP1SoloSkill(newCombos[selectedOption - 1]);
+            comboList.AddP2SoloSkill(newCombos[selectedOption - 1]);
+        }
     }
 
     IEnumerator WaitTwo()

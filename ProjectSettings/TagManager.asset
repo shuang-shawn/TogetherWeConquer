@@ -21,16 +21,14 @@ TagManager:
   - LevelUpWindow
   - ComboListManager
   - Player2
-
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Enemy
-  - Mobs
   - 
   - 
   - 

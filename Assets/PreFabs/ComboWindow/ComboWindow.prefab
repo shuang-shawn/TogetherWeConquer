@@ -323,11 +323,11 @@ RectTransform:
   - {fileID: 8642823948576613222}
   m_Father: {fileID: 8415731781454232144}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -67.8, y: -42}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 30, y: -9.8}
   m_SizeDelta: {x: 60.372986, y: 28.455017}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 1, y: 0}
 --- !u!222 &2037381612862440964
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1053,11 +1053,11 @@ RectTransform:
   - {fileID: 3006772900172221887}
   m_Father: {fileID: 4318138518534921855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 67.8, y: -42}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -30, y: -9.8}
   m_SizeDelta: {x: 60.373, y: 28.455002}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &6190803144557056776
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1396,7 +1396,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.2, y: 0.53848267}
+  m_AnchoredPosition: {x: 10.200012, y: 0.53848267}
   m_SizeDelta: {x: -31.85, y: -3.4701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3721836542091799626
@@ -1471,7 +1471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -6.7, y: -0}
+  m_AnchoredPosition: {x: -6.700012, y: 0}
   m_SizeDelta: {x: 18.241, y: 14.8}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &243433189958169569
@@ -2159,6 +2159,7 @@ GameObject:
   - component: {fileID: 1337966000731012019}
   - component: {fileID: 7483948801508871529}
   - component: {fileID: 2269632627465805431}
+  - component: {fileID: 3356458709846873082}
   m_Layer: 5
   m_Name: ComboWindow
   m_TagString: ComboWindow
@@ -2258,6 +2259,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1CancelText: {fileID: 1841759300840541632}
   p2CancelText: {fileID: 1944885692728763205}
+--- !u!114 &3356458709846873082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8309692277124035632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d127bd881bbdf604a809e3ebe395c942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p1ComboContent: {fileID: 2012749410173790004}
+  p2ComboContent: {fileID: 9092417758598504965}
+  temporaryGameObject: {fileID: 4608141895512848508, guid: 8464e2d35b99f5740a7d45c9ef922208,
+    type: 3}
 --- !u!1 &8748472167576445319
 GameObject:
   m_ObjectHideFlags: 0
