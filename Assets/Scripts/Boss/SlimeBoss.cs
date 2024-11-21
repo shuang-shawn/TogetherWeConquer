@@ -28,26 +28,7 @@ public class SlimeBoss : MonoBehaviour
     public float timePassed = 0f;
     public float specialAttackInterval = 4f;
     public bool IsDead = false;
-
-    //FOR COLLISION STUFF TO BE IMPLEMENTED LATER
-    //CURRENT IDEA FORMAT
-
-    public void handleCollision(GameObject gameObject){
-        
-        // Enemy gets hit by a combo
-        if(gameObject.tag == "TestCombo"){
-            string hitMessage = "Hit by Combo";
-            Debug.Log(hitMessage);
-        }
-
-        // Enemy hits player
-        else if(gameObject.tag == "Player1"){
-            gameObject.GetComponent<PlayerStats>().playerGotHit(damage);
-
-            //Add gets knocked back a certain amount
-        }
-    }
- 
+    public ParticleSystem shockwavePrefab; 
 
     //Maybe put these two functions inside a class that is inherited by enemies?
     
@@ -143,12 +124,24 @@ public class SlimeBoss : MonoBehaviour
         //Land
         yield return StartCoroutine(MoveToPosition(new Vector3(transform.position.x, startPosition.y, transform.position.z), dropSpeed));
         Destroy(instantiatedShadow);
+        //Play shockwave
+        playShockwave();
+
         //Daze effect
         yield return new WaitForSeconds(landingDelay);
         jumpAttacking = false;
         timePassed = 0f;
 
         
+    }
+
+    private void playShockwave(){
+
+        Vector3 slimePosition = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
+
+        ParticleSystem shockwaveEffect = Instantiate(shockwavePrefab, slimePosition, shockwavePrefab.transform.rotation);
+        shockwaveEffect.Play();
+        Destroy(shockwaveEffect.gameObject, shockwaveEffect.main.duration);
     }
 
     private void revisedJumpAttack(){
