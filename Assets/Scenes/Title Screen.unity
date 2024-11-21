@@ -826,8 +826,8 @@ MonoBehaviour:
   startPosition: {x: 298, y: 9.4, z: 220}
   endPosition: {x: 298, y: 9.4, z: 508.4}
   playerStartPosition: 250
-  player1: {fileID: 9102977279164715253, guid: b612d3ca49b9641438c108c6fb8a5b15, type: 3}
-  player2: {fileID: 3956200951847981751, guid: 29f6c96c16e14f04785699121b703c72, type: 3}
+  player1: {fileID: 9102977279164715253, guid: 501c5b8a98e381640a929ce63f4c7238, type: 3}
+  player2: {fileID: 3956200951847981751, guid: 3c034bbd18e485c4393efb62429a35b5, type: 3}
   duration: 100
 --- !u!114 &698416186
 MonoBehaviour:
