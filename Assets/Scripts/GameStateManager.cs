@@ -116,6 +116,7 @@ public class GameStateManager : MonoBehaviour
                 canvas.transform.Find("LoseWindow").gameObject.SetActive(true);
                 canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
                 hasEnded = true;
+                Time.timeScale = 1.0f;
             }
             // bossManager = GameObject.FindGameObjectWithTag("boss")?.GetComponent<EnemyManager>();
             if (lastBossSpawned && lastBoss == null)
@@ -124,7 +125,7 @@ public class GameStateManager : MonoBehaviour
                 canvas.transform.Find("ComboWindow").gameObject.SetActive(false);
                 canvas.transform.Find("LevelUpWindow").gameObject.SetActive(false);
                 hasEnded = true;
-                
+                Time.timeScale = 1.0f;
             }
             
         }
