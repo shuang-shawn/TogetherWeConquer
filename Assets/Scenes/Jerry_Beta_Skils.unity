@@ -1359,6 +1359,35 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &531227215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3528172597860773568, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8090275679356346730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &531227221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531227215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f08601900ea3ce46b3838ba38c5dc65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 0
+  maxHealth: 100
+  maxBossHealth: 250
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  hurtParticlesPrefab: {fileID: 8806211054233520024, guid: c7a4790e5b1683043950ae30e5206018,
+    type: 3}
+  slowParticlesPrefab: {fileID: 4802142671950701617, guid: 60834733287faa246af9c68a667e8195,
+    type: 3}
+  animator: {fileID: 0}
+  slowed: 0
 --- !u!1 &559600664
 GameObject:
   m_ObjectHideFlags: 0
@@ -6154,7 +6183,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3528172597860773568, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 531227221}
   m_SourcePrefab: {fileID: 100100000, guid: 9ef8cd39b4cfaf04c8eafca92bed9bbc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

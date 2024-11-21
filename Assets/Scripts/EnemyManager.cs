@@ -38,13 +38,21 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (Input.GetKeyDown("space"))
-        // {
-        //     TakeDamage(100);
-        // }
+        if (Input.GetKeyDown("space"))
+        {
+            TakeDamage(100);
+        }
     }
 
+    // Needed for slime split mechanic
+    public void setMaxHealth(int newMaxHealth){
+        // maxHealth = newMaxHealth;
+        currentHealth = newMaxHealth;
+    }
 
+    public int getMaxBossHealth(){
+        return maxBossHealth;
+    }
 
     public void TakeDamage(int damage, Vector3 hitPosition=default) {
         if (turtleBoss && hitPosition != default) {
@@ -83,7 +91,11 @@ public class EnemyManager : MonoBehaviour
         //Destroy this mob
         if(gameObject.tag == "mob") {
             Destroy(gameObject);
-        } else {
+        } else {            
+
+            if(gameObject.name == "SlimeBoss") {
+                slimeBoss.IsDead = true;
+            }
             // Add death handling here (destroy, play animation, etc.)
             // bossScript.IsDead = true;
             animator.SetTrigger("Die");

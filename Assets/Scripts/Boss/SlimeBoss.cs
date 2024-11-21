@@ -28,7 +28,14 @@ public class SlimeBoss : MonoBehaviour
     public float timePassed = 0f;
     public float specialAttackInterval = 4f;
     public bool IsDead = false;
-    public ParticleSystem shockwavePrefab; 
+    public ParticleSystem shockwavePrefab;
+
+    // For slime splitting
+
+    private static int slimeID = 1;
+    public GameObject slimeBossPrefab;
+    private int maxSplitSlimes = 3;
+    public int currentSlimeMaxHealth;
 
     //Maybe put these two functions inside a class that is inherited by enemies?
     
@@ -169,6 +176,9 @@ public class SlimeBoss : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
+        if(slimeID == 1) {
+            currentSlimeMaxHealth = gameObject.GetComponent<EnemyManager>().getMaxBossHealth();
+        }
     }
 
     private void updateSpeed(float percent){
@@ -182,6 +192,30 @@ public class SlimeBoss : MonoBehaviour
         jumpSpeed = 20f;
         dropSpeed = 20f;
         hopFrequency = 5f;
+    }
+
+    // For slime splitting mechanic
+    private void splitSlime(){
+        spawnSlime();
+        spawnSlime();
+        
+    }
+
+    private void spawnSlime(){
+        slimeID++;
+        GameObject tempSlime = Instantiate(slimeBossPrefab, gameObject.transform.position, Quaternion.identity);
+        tempSlime.GetComponent<SlimeBoss>().updateMaxHealth(currentSlimeMaxHealth / 2);
+
+        Debug.Log(tempSlime.GetComponent<SlimeBoss>().currentSlimeMaxHealth);
+        Debug.Log(tempSlime.GetComponent<EnemyManager>().currentHealth);
+
+        tempSlime.transform.localScale = gameObject.transform.localScale * 0.5f;
+        // tempSlime.GetComponent<EnemyManager>().setMaxHealth(maxHealth / 2)
+    }
+
+    public void updateMaxHealth(int newMaxHealth) {
+        currentSlimeMaxHealth = newMaxHealth;
+        gameObject.GetComponent<EnemyManager>().setMaxHealth(currentSlimeMaxHealth);
     }
 
     void FixedUpdate()
@@ -221,10 +255,14 @@ public class SlimeBoss : MonoBehaviour
             //     HopToPlayer();
             // }
 
+        } else if (slimeID < maxSplitSlimes) {
+            splitSlime();
         }
         
         
-        
+        // if(Input.GetKey(KeyCode.Space)) {
+            
+        // }
 
 
     }

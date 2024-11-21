@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1792635658414350030}
   - component: {fileID: 1762608085181753336}
   - component: {fileID: 7405595219816766885}
+  - component: {fileID: 4549026563716223033}
   m_Layer: 6
   m_Name: SlimeBoss 1
   m_TagString: boss
@@ -209,6 +210,9 @@ MonoBehaviour:
   timePassed: 0
   specialAttackInterval: 4
   IsDead: 0
+  shockwavePrefab: {fileID: 8483642194577002910, guid: fececd49876f5ea4b95f4d218333469b,
+    type: 3}
+  slimeBossPrefab: {fileID: 3528172597860773568}
 --- !u!136 &7405595219816766885
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -232,6 +236,29 @@ CapsuleCollider:
   m_Height: 1.21
   m_Direction: 0
   m_Center: {x: 0, y: -0.27, z: 0.09}
+--- !u!114 &4549026563716223033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528172597860773568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f08601900ea3ce46b3838ba38c5dc65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 0
+  maxHealth: 100
+  maxBossHealth: 250
+  currentHealth: 0
+  healthBar: {fileID: 2226446011992917550}
+  hurtParticlesPrefab: {fileID: 8806211054233520024, guid: c7a4790e5b1683043950ae30e5206018,
+    type: 3}
+  slowParticlesPrefab: {fileID: 4802142671950701617, guid: 60834733287faa246af9c68a667e8195,
+    type: 3}
+  animator: {fileID: 0}
+  slowed: 0
 --- !u!1 &4284643696524085262
 GameObject:
   m_ObjectHideFlags: 0
