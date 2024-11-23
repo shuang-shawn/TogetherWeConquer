@@ -236,7 +236,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07e056809be8c5842935337f791e2e3e, type: 2}
+  - {fileID: 2100000, guid: e1515246e8597b241b6c8ed8afccc8f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -825,6 +825,8 @@ MonoBehaviour:
   isInSoloCombo: 0
   isInDuoCombo: 0
   isInputEnabled: 1
+  finishedCombo: 0
+  revived: 0
 --- !u!114 &7311925358895068241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,7 +937,6 @@ MonoBehaviour:
   currentMoveDirection: {x: 0, y: 0, z: 0}
   lastDirectionX: {x: 1, y: 0, z: 0}
   canMove: 1
-  skillManagerObject: {fileID: 0}
 --- !u!135 &133246639862435295
 SphereCollider:
   m_ObjectHideFlags: 0
