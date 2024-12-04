@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     public ParticleSystem deathParticlesPrefab;
     public Crosshair crosshair;
     public float flashDuration = 0.6f;
-    public float flashInterval = 0.05f;
+    public float flashInterval = 0.1f;
 
     [SerializeField]
     private GameObject tombstone;

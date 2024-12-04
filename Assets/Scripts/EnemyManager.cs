@@ -17,12 +17,16 @@ public class EnemyManager : MonoBehaviour
     public ParticleSystem hurtParticlesPrefab;
     public ParticleSystem slowParticlesPrefab;
     public Animator animator;
+    public float flashDuration = 0.6f;
+    public float flashInterval = 0.1f;
 
     public bool slowed = false;
     private SlimeBoss slimeBoss;
     private TurtleBoss turtleBoss;
     private GameStateManager gameStateManager;
     private BasicAI enemyMovementAI;
+    private SpriteRenderer spriteRenderer;
+    private Material material;
     
     // Start is called before the first frame update
     void Start()
@@ -41,6 +45,10 @@ public class EnemyManager : MonoBehaviour
         turtleBoss = GetComponent<TurtleBoss>();
         gameStateManager = GameObject.Find("GameStateManager")?.GetComponent<GameStateManager>();
         enemyMovementAI = GetComponent<BasicAI>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null) {
+            material = spriteRenderer.material;
+        }
     }
 
     // Update is called once per frame
@@ -92,8 +100,8 @@ public class EnemyManager : MonoBehaviour
         {
             healthBar.UpdateHealthBar(currentHealth, maxHealth);
         }
-
-        SpawnHurtParticles();
+        FlashHurt();
+        // SpawnHurtParticles();
 
         if (currentHealth <= 0)
         {
@@ -129,6 +137,32 @@ public class EnemyManager : MonoBehaviour
 
     public bool IsDead() {
         return currentHealth <= 0;
+    }
+    private void FlashHurt() {
+        if (material != null) {
+            StartCoroutine(FlashRoutine(flashDuration, flashInterval));
+        }
+    }
+
+    private IEnumerator FlashRoutine(float duration, float interval)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Toggle the tint on
+            material.SetFloat("_isFlashing", 1f);
+            yield return new WaitForSeconds(interval / 2);
+
+            // Toggle the tint off
+            material.SetFloat("_isFlashing", 0f);
+            yield return new WaitForSeconds(interval / 2);
+
+            elapsedTime += interval;
+        }
+
+        // Ensure tint is off at the end
+        material.SetFloat("_UseTint", 0f);
     }
 
     private void SpawnHurtParticles()
