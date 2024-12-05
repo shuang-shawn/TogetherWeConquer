@@ -7,7 +7,9 @@ public enum ComboType
     Solo,
     Duo
 }
-
+/// <summary>
+/// Combo Object Class
+/// </summary>
 public class Combo
 {
     private List<KeyCode> comboSequence;

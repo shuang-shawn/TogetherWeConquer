@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Handles the logic of player reviving
+/// </summary>
 public class ReviveLogic : MonoBehaviour
 {
 
@@ -30,13 +33,17 @@ public class ReviveLogic : MonoBehaviour
     [SerializeField]
     private float timeLimit;
 
+    /** Reference to UI Game Objects. **/
     [SerializeField]
     private TextMeshProUGUI reviveHeader;
     [SerializeField]
     private TextMeshProUGUI progressHeader;
+
+    /** Animator. **/
     [SerializeField]
     private Animator progressHeaderSuccess;
 
+    /** Data related to revive combo loop. */
     private int maxComboSequence = 5;
     private int currentSequenceIndex = 0;
     private int currentComboLoop = 0;
@@ -106,6 +113,7 @@ public class ReviveLogic : MonoBehaviour
         }
     }
 
+
     private void StartReviveCombo(InputAction.CallbackContext context)
     {
         reviveHeader.gameObject.SetActive(false);
@@ -119,9 +127,10 @@ public class ReviveLogic : MonoBehaviour
         right.performed += ComboSequence;
     }
 
+    // Recursively goes through the combo loop
     private void StartComboLoop()
     {
-        if (currentComboLoop >= maxComboLoop)
+        if (currentComboLoop >= maxComboLoop) // If player completes revive combo
         {
             ResetSequence();
             OnDisable();

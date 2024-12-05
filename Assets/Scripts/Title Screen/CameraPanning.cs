@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles the logic of panning the camera in the title screen
+/// </summary>
 public class CameraPanning : MonoBehaviour
 {
     public Vector3 startPosition;      // The camera's starting position

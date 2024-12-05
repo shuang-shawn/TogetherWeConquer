@@ -6,7 +6,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+/// <summary>
+/// Handles the logic of player combo inputs and solo combo logic
+/// </summary>
 public class ComboInput : MonoBehaviour
 {
     // Input System

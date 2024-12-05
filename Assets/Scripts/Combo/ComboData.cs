@@ -55,21 +55,9 @@ public class ComboData : MonoBehaviour
     /** Flag for player reviving **/
     public bool revived = false;
 
-    //void PrintSummary()
-    //{
-    //    string summary = $"First Input: {firstInput}\n" +
-    //                     $"Second Input: {secondInput}\n" +
-    //                     $"Combo Selected: {string.Join(", ", currentCombo)}\n" +
-    //                     $"Total Mistake Count: {mistakeCount}\n" +
-    //                     $"Mistakes: {string.Join(", ", mistakeKeysPressed)}" +
-    //                     $"Order of wrong inputs: {string.Join(", ", mistakeOrder)}\n" +
-    //                     $"Remaining Time: {timerVal}s";
-
-    //    Debug.Log("--Click to view summary--\n" + summary);
-    //}
+    // Resets combo data
     public void ResetData()
     {
-        //PrintSummary();
 
         firstInput = KeyCode.None;
         secondInput = KeyCode.None;

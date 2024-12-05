@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the logic of Duo Combos
+/// </summary>
 public class DuoComboManager : MonoBehaviour
 {
     private const string Player1Tag = "Player1";
@@ -106,8 +109,6 @@ public class DuoComboManager : MonoBehaviour
             comboWindow.GetComboWindow(Player2Tag).SetActive(true);
         }
     }
-
-
 
     private void FindPlayers()
     {

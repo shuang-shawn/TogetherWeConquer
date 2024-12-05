@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Logic for changing button color in title screen
+/// </summary>
 public class TextColorChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TextMeshProUGUI buttonText;
