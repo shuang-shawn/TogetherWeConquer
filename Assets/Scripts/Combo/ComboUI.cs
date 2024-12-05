@@ -72,31 +72,33 @@ public class ComboUI : MonoBehaviour
         shake?.TriggerShake(currentComboUI[currentSequenceIndex].GetComponent<Image>());
     }
 
-    public void ShowScore(int mistakeCount, int totalKeys)
+    public string ShowScore(int mistakeCount, int totalKeys)
     {
         GameObject score = null;
         float ratio = (float)mistakeCount / totalKeys;
-        Debug.Log(ratio);
+        string grade;
 
         if (mistakeCount <= 0)
         {
             score = Instantiate(scores[0], scoreUIParent.transform);
-            Debug.Log("Perfect!");
+            grade = "Perfect";
+          
         }
         else if (ratio < 0.5f)
         {
             score = Instantiate(scores[1], scoreUIParent.transform);
-            Debug.Log("Good");
+            grade = "Good";
         }
         else
         {
             score = Instantiate(scores[2], scoreUIParent.transform);
-            Debug.Log("Fail");
+            grade = "Fail";
         }
 
         currentComboUI?.Add(score);
 
         shake.TriggerShake(score.GetComponent<Image>());
+        return grade;
     }
 
     public void ShowCancel()

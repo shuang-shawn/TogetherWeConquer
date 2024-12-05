@@ -56,6 +56,8 @@ public class ComboWindowUI : MonoBehaviour
 
     private Color highlightColor = Color.yellow;
 
+    private Color wrongColor = Color.red;
+
     // Cached instantiated P1 solo combo sequences
     private List<GameObject> p1SoloCombosCached = new List<GameObject>();
 
@@ -227,6 +229,10 @@ public class ComboWindowUI : MonoBehaviour
             if (inputKey == GetKeyFromImage(image))
             {
                 image.color = highlightColor;
+            }
+            else
+            {
+                image.color = wrongColor;
             }
         }
 
