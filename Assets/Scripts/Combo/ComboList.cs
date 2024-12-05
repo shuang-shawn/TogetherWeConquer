@@ -1,8 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Versioning;
 using UnityEngine;
 
+/// <summary>
+/// Handles definitions of combos & each players saved combos
+/// </summary>
 public class ComboList : MonoBehaviour
 {
     private const string Player1Tag = "Player1";
@@ -14,6 +15,7 @@ public class ComboList : MonoBehaviour
     // Master List of all Duo Combos
     public List<Combo> duoComboList = new List<Combo>();
 
+    // Individual list of stored combos
     public List<Combo> currentP1ComboList = new List<Combo>();
     public List<Combo> currentP2ComboList = new List<Combo>();
 
@@ -28,7 +30,7 @@ public class ComboList : MonoBehaviour
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.RightArrow }, "helpinghand", Resources.Load<Sprite>("Skill Icons/InvisSkillIcon"), "Invis Skill"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow, KeyCode.RightArrow }, "iceground", Resources.Load<Sprite>("Skill Icons/ice"), "Ice Skill"),
             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.DownArrow}, "swap", Resources.Load<Sprite>("Skill Icons/swap"), "Swap Skill"),
-             new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow }, "forceField", Resources.Load<Sprite>("Skill Icons/ForcefieldSkill"), "Forcefield Skill")
+            new Combo(ComboType.Solo, new List<KeyCode> { KeyCode.UpArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow }, "forceField", Resources.Load<Sprite>("Skill Icons/ForcefieldSkill"), "Forcefield Skill")
 
         };
 

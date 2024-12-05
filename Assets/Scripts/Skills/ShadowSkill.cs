@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the logic of Shadow Skill
+/// </summary>
 public class ShadowSkill : MonoBehaviour
 {
     const string P1_TAG = "Player1";
@@ -22,6 +25,8 @@ public class ShadowSkill : MonoBehaviour
         player1 = GameObject.Find(P1_TAG);
         player2 = GameObject.Find(P2_TAG);
     }
+
+    // Logic for placing a shadow
     public void CastShadow(string playerTag) 
     {
         GameObject player = (playerTag == P1_TAG) ? player1 : player2;
@@ -46,6 +51,7 @@ public class ShadowSkill : MonoBehaviour
         }
     }
 
+    // Logic for teleporting to shadow
     private void TeleportToShadow(GameObject player, GameObject currentShadow, string playerTag)
     {
         GameObject currTeleportEffect = Instantiate(teleportEffect, player.transform.position, Quaternion.identity);

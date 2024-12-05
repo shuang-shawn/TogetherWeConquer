@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+/// <summary>
+/// Arrow Spawner Logic
+/// </summary>
 public class ArrowSpawner : MonoBehaviour
 {
     [SerializeField]

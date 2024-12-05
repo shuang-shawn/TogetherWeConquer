@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles the logic UI elements in the combo sequence
+/// </summary>
 public class ComboUI : MonoBehaviour
 {
     public GameObject[] arrowImages;

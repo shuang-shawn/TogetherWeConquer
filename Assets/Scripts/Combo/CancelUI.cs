@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Handles the logic of the cancel UI
+/// </summary>
 public class CancelUI : MonoBehaviour
 {
     private InputActionMap comboP1;
@@ -20,7 +23,7 @@ public class CancelUI : MonoBehaviour
     private void Awake()
     {
         // Initialize the generated InputActions class
-        var inputActions = new InputActions(); // Ensure this matches your generated class name
+        var inputActions = new InputActions();
 
         // Access ComboP1 directly if it was generated as a property
         comboP1 = inputActions.ComboP1;
