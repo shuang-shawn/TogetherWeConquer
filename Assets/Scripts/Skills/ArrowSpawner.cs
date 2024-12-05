@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ArrowSpawner : MonoBehaviour
 {
@@ -26,6 +27,14 @@ public class ArrowSpawner : MonoBehaviour
 
     public bool spawnArrows = true;
 
+    [SerializeField]
+    private AudioSource arrowSFX;
+
+    [SerializeField]
+    private float audioDelay = 2f; // Delay between each sound
+
+    private float audioTimer = 0f; 
+
     private void Start()
     {
         StartCoroutine(SpawnArrows());
@@ -47,10 +56,18 @@ public class ArrowSpawner : MonoBehaviour
             }
 
             GameObject arrow = Instantiate(arrowPrefab, new Vector3(transform.position.x, randomHeight, transform.position.z), rotation, transform);
+            if (audioTimer <= 0f)
+            {
+                arrowSFX.PlayOneShot(arrowSFX.clip);
+                audioTimer = audioDelay; // Reset the timer
+            }
             // Destroy the arrow after its lifetime expires
             Destroy(arrow, arrowLifetime);
 
             float randomSpawnDelay = Random.Range(minSpawnRate, maxSpawnRate);
+
+            // Update the audio timer
+            audioTimer -= randomSpawnDelay;
 
             // Wait for the next spawn interval
             yield return new WaitForSeconds(randomSpawnDelay);
