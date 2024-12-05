@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42bbaf297a54e694fb14c7dba63ea421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillDamage: 1
+  skillDamage: 2
   slowFactor: 1
   slowTime: 0
   oneTimeUse: 1

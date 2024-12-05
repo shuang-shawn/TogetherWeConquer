@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Codex Button Logic
+/// </summary>
 public class CodexButton : MonoBehaviour
 {
 
