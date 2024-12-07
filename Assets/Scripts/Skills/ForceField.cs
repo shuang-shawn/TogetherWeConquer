@@ -51,19 +51,16 @@ public class ForceField : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Invalid player number!");
             return;
         }
 
         if (castingPlayer == null)
         {
-            Debug.LogError("Player is not assigned in the inspector!");
             return;
         }
 
         if (forceFieldPrefab == null)
         {
-            Debug.LogError("ForceField prefab is not assigned!");
             return;
         }
 
@@ -71,7 +68,6 @@ public class ForceField : MonoBehaviour
         if (activeForceField != null)
         {
             Destroy(activeForceField);
-            Debug.Log("Previous forcefield destroyed.");
         }
 
         // Instantiate the forcefield prefab around the player with an offset
@@ -89,13 +85,9 @@ public class ForceField : MonoBehaviour
             activeForceField2 = activeForceField;
         }
 
-        // Debug log to confirm forcefield instantiation
-        Debug.Log("ForceField instantiated successfully for Player " + playerNum);
-
         SkillCollisionHandler skillCollisionHandler = activeForceField.GetComponent<SkillCollisionHandler>();
         if (skillCollisionHandler == null)
         {
-            Debug.LogError("SkillCollisionHandler component not found on ForceField prefab!");
             return;
         }
 
