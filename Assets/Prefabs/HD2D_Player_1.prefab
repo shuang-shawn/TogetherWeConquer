@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3622858340195047637}
   - component: {fileID: 1753514111050158763}
   - component: {fileID: 2618633889733464137}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4316262862025198120}
   - component: {fileID: 4599474693492848754}
   - component: {fileID: 6049907654578253545}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ScoreUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 984580033802024717}
   - component: {fileID: 3368975903149292326}
   - component: {fileID: 4506345696060344075}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HD2D_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7800513938471352681}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 3242223022099164515}
   - component: {fileID: 6572672344141879039}
   - component: {fileID: 7336105137177031557}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Crosshair
   m_TagString: Hidden
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 4353020639416375401}
   - component: {fileID: 8816518242526403011}
   - component: {fileID: 4998184586217230004}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ComboUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 2433843023747779545}
   - component: {fileID: 7134881793210926882}
   - component: {fileID: 6491206276648202095}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +577,7 @@ GameObject:
   - component: {fileID: 7596085908208304534}
   - component: {fileID: 5646906610487624196}
   - component: {fileID: 8755807972209002914}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 4771417840253514877}
   - component: {fileID: 5709550971761974970}
   - component: {fileID: 4130082895205081822}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Hidden
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 397299946225599693}
   - component: {fileID: 2146291468075380449}
   - component: {fileID: 7311925358895068241}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player Combo Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +868,8 @@ GameObject:
   - component: {fileID: 8721881254856998211}
   - component: {fileID: 133246639862435295}
   - component: {fileID: 829766636043835359}
-  m_Layer: 0
+  - component: {fileID: 8382471571807650341}
+  m_Layer: 9
   m_Name: HD2D_Player_1
   m_TagString: Player1
   m_Icon: {fileID: 0}
@@ -978,9 +979,23 @@ MonoBehaviour:
   deathParticlesPrefab: {fileID: 6555381002103090657, guid: e5212976a99ce114abb6c7d3d26b32f1,
     type: 3}
   crosshair: {fileID: 7336105137177031557}
+  flashDuration: 0.6
+  flashInterval: 0.2
   tombstone: {fileID: 6667328446845882700, guid: d7774f3ffa8950140afe279cdc4e4daf,
     type: 3}
   timer: {fileID: 4755752813063710339}
+--- !u!114 &8382471571807650341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102977279164715253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e153ee356f8271e44acc5513663c6f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2113284923608014499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -989,6 +1004,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3761426528758450555}
     m_Modifications:
+    - target: {fileID: 837382533264599276, guid: 8d2e3985668f633428985ff7a8a1b079,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220531214541066397, guid: 8d2e3985668f633428985ff7a8a1b079,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2240102389485902848, guid: 8d2e3985668f633428985ff7a8a1b079,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1089,10 +1114,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6658462876053223457, guid: 8d2e3985668f633428985ff7a8a1b079,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6677772324468570144, guid: 8d2e3985668f633428985ff7a8a1b079,
         type: 3}
       propertyPath: m_Name
       value: Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6677772324468570144, guid: 8d2e3985668f633428985ff7a8a1b079,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

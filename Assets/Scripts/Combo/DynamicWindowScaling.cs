@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Logic for dynamically resizing the combo windows
+/// </summary>
 public class DynamicWindowScaling : MonoBehaviour
 {
     public RectTransform mainWindowP1;    // Main Window for Player 1

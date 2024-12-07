@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Handles the logic of the arrow skill
+/// </summary>
 public class ArrowSkill : MonoBehaviour
 {
     const string P1_TAG = "Player1";

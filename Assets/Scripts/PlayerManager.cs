@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     public ParticleSystem hurtParticlesPrefab;
     public ParticleSystem deathParticlesPrefab;
     public Crosshair crosshair;
+    public float flashDuration = 0.6f;
+    public float flashInterval = 0.1f;
 
     [SerializeField]
     private GameObject tombstone;
@@ -21,10 +23,18 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private GameObject timer;
     // Start is called before the first frame update
+
+    private SpriteRenderer spriteRenderer;
+    private Material material;
+
     void Start()
     {
         currentHealth = maxHealth;
         duoComboManager = GameObject.FindGameObjectWithTag("DuoComboManager");
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer != null) {
+            material = spriteRenderer.material;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -45,7 +55,8 @@ public class PlayerManager : MonoBehaviour
 
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
-        SpawnHurtParticles();
+        FlashHurt();
+        // SpawnHurtParticles();
 
         if (currentHealth <= 0)
         {
@@ -81,6 +92,33 @@ public class PlayerManager : MonoBehaviour
     }
     public bool IsDead() {
         return currentHealth <= 0;
+    }
+
+    private void FlashHurt() {
+        if (material != null) {
+            StartCoroutine(FlashRoutine(flashDuration, flashInterval));
+        }
+    }
+
+    private IEnumerator FlashRoutine(float duration, float interval)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Toggle the tint on
+            material.SetFloat("_isFlashing", 1f);
+            yield return new WaitForSeconds(interval / 2);
+
+            // Toggle the tint off
+            material.SetFloat("_isFlashing", 0f);
+            yield return new WaitForSeconds(interval / 2);
+
+            elapsedTime += interval;
+        }
+
+        // Ensure tint is off at the end
+        material.SetFloat("_UseTint", 0f);
     }
 
     private void SpawnHurtParticles()

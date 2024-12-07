@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Arrow Projectile Logic
+/// </summary>
 public class Arrow : MonoBehaviour
 {
     [SerializeField]

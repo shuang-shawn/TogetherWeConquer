@@ -5,9 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles the logic of the Combo Windows
+/// </summary>
 public class ComboWindowUI : MonoBehaviour
 {
-
+    /** Player tag constants **/
     private const string Player1Tag = "Player1";
     private const string Player2Tag = "Player2";
 
@@ -22,31 +25,38 @@ public class ComboWindowUI : MonoBehaviour
     /** Reference to UI GameObjects **/
     [SerializeField]
     private GameObject p1ComboListView;
+
     [SerializeField]
     private GameObject p2ComboListView;
 
     [SerializeField]
     private TextMeshProUGUI p1Header;
+
     [SerializeField]
     private TextMeshProUGUI p2Header;
 
+    [SerializeField]
+    private GameObject comboSequencePrefab;
+
+    /** Flags determining which state the combo window is in. **/
     private bool p1IsInDuoView = false;
     private bool p2IsInDuoView = false;
 
+
+    /** Animators **/
     [SerializeField]
     private Animator p1WindowAnimator;
 
     [SerializeField]
     private Animator p2WindowAnimator;
 
-    [SerializeField]
-    private GameObject comboSequencePrefab;
-
     // Arrow Image UI
     [SerializeField]
     private GameObject[] arrowImages;
 
     private Color highlightColor = Color.yellow;
+
+    private Color wrongColor = Color.red;
 
     // Cached instantiated P1 solo combo sequences
     private List<GameObject> p1SoloCombosCached = new List<GameObject>();
@@ -76,6 +86,7 @@ public class ComboWindowUI : MonoBehaviour
         }
     }
 
+    // Public reference to access AddComboToWindow function
     public void AddNewCombo(string playerTag, Combo newCombo)
     {
         switch (playerTag)
@@ -89,6 +100,7 @@ public class ComboWindowUI : MonoBehaviour
         }
     }
 
+    // Adds a new combo instance to the list of cached combos
     private void AddComboToWindow(Combo combo, List<GameObject> soloComboCache, List<GameObject> duoComboCache, GameObject comboListView, bool isInDuo = false)
     {
         GameObject currentComboSequence = Instantiate(comboSequencePrefab, comboListView.transform);
@@ -130,6 +142,7 @@ public class ComboWindowUI : MonoBehaviour
         }
     }
 
+    // Creates combo icon in front of combo
     private void InstantiateIconAtFront(GameObject comboSequence, Sprite icon)
     {
         // Create a new UI image for the icon and set its sprite
@@ -147,7 +160,7 @@ public class ComboWindowUI : MonoBehaviour
 
 
 
-    // Alternatives between solo and duo combo lists for each player
+    // Alternates between solo and duo combo lists for each player
     public void SwitchComboList(bool isInDuo, string playerTag)
     { 
         List<GameObject> soloCombosCached = playerTag.Equals(Player1Tag) ? p1SoloCombosCached : p2SoloCombosCached;
@@ -216,19 +229,23 @@ public class ComboWindowUI : MonoBehaviour
             if (inputKey == GetKeyFromImage(image))
             {
                 image.color = highlightColor;
-                return;
+            }
+            else
+            {
+                image.color = wrongColor;
             }
         }
 
     }
 
-
+    // Resets state of combo windows
     public void ResetComboList(bool isInDuo, string playerTag)
     {
         ResetHighlight(isInDuo, playerTag);
         SwitchComboList(isInDuo, playerTag);
     }
 
+    // Resets highlights in combos
     private void ResetHighlight(bool isInDuo, string playerTag)
     {
         List<GameObject> soloCombosCached = playerTag.Equals(Player1Tag) ? p1SoloCombosCached : p2SoloCombosCached;
