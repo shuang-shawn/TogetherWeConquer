@@ -6,12 +6,11 @@ using UnityEngine;
 public class MovementTutorial : MonoBehaviour
 {
     public GameObject tutorialPanel;            // The UI Panel object
-    public TextMeshProUGUI instructionsTextP1;  // The main instructions text
-    public TextMeshProUGUI keyStatusTextP1;     // The text showing key status
-    public TextMeshProUGUI instructionsTextP2;  // The main instructions text
-    public TextMeshProUGUI keyStatusTextP2;     // The text showing key status
+    public TextMeshProUGUI instructionsText;  // The main instructions text
+    public TextMeshProUGUI keyStatusText;     // The text showing key status
 
     private bool active = false;
+    private bool player1 = true;
     private bool pressedW, pressedA, pressedS, pressedD, pressedSpace;
     private bool pressedUp, pressedLeft, pressedDown, pressedRight, pressedM;
 
@@ -19,24 +18,35 @@ public class MovementTutorial : MonoBehaviour
     {
         if (active)
         {
-            if (Input.GetKeyDown(KeyCode.W)) pressedW = true;
-            if (Input.GetKeyDown(KeyCode.A)) pressedA = true;
-            if (Input.GetKeyDown(KeyCode.S)) pressedS = true;
-            if (Input.GetKeyDown(KeyCode.D)) pressedD = true;
-            if (Input.GetKeyDown(KeyCode.Space)) pressedSpace = true;
-            if (Input.GetKeyDown(KeyCode.UpArrow)) pressedUp = true;
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) pressedLeft = true;
-            if (Input.GetKeyDown(KeyCode.DownArrow)) pressedDown = true;
-            if (Input.GetKeyDown(KeyCode.RightArrow)) pressedRight = true;
-            if (Input.GetKeyDown(KeyCode.M)) pressedM = true;
+            if (player1)
+            {
+                if (Input.GetKeyDown(KeyCode.W)) pressedW = true;
+                if (Input.GetKeyDown(KeyCode.A)) pressedA = true;
+                if (Input.GetKeyDown(KeyCode.S)) pressedS = true;
+                if (Input.GetKeyDown(KeyCode.D)) pressedD = true;
+                if (Input.GetKeyDown(KeyCode.Space)) pressedSpace = true;
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow)) pressedUp = true;
+                if (Input.GetKeyDown(KeyCode.LeftArrow)) pressedLeft = true;
+                if (Input.GetKeyDown(KeyCode.DownArrow)) pressedDown = true;
+                if (Input.GetKeyDown(KeyCode.RightArrow)) pressedRight = true;
+                if (Input.GetKeyDown(KeyCode.M)) pressedM = true;
+            }
 
             // Update the key status text
             UpdateKeyStatus();
 
             // Check if all keys are pressed
-            if (pressedW && pressedA && pressedS && pressedD && pressedSpace && pressedUp && pressedLeft && pressedDown && pressedRight && pressedM)
+            if (pressedW && pressedA && pressedS && pressedD && pressedSpace)
             {
-                CompleteTutorial();
+                player1 = false;
+                instructionsText.text = "Player 2, press\n↑, ←, ↓, and →\nto move as well as\nM\nto dash.";
+                if (pressedUp && pressedLeft && pressedDown && pressedRight && pressedM)
+                {
+                    CompleteTutorial();
+                }
             }
         }
     }
@@ -45,27 +55,30 @@ public class MovementTutorial : MonoBehaviour
     {
         tutorialPanel.SetActive(true);
         active = true;
-        instructionsTextP1.text = "Press W, A, S, and D to move\nas well as Space to dash.";
-        instructionsTextP2.text = "Press ↑, ←, ↓, and → to move\nas well as M to dash.";
+        instructionsText.text = "Player 1, press\nW, A, S, and D\nto move as well as\nSpace\nto dash.";
         UpdateKeyStatus();
     }
     void UpdateKeyStatus()
     {
         // Update the text to show which keys are pressed
-        keyStatusTextP1.text = $"Keys Pressed: " +
-                             $"{(pressedW ? "<color=green>W</color> " : "W ")}" +
-                             $"{(pressedA ? "<color=green>A</color> " : "A ")}" +
-                             $"{(pressedS ? "<color=green>S</color> " : "S ")}" +
-                             $"{(pressedD ? "<color=green>D</color> " : "D ")}" +
-                             $"{(pressedSpace ? "<color=green>Space</color> " : "Space ")}";
-
-
-        keyStatusTextP2.text = $"Keys Pressed: " +
-                             $"{(pressedUp ? "<color=green>↑</color> " : "↑ ")}" +
-                             $"{(pressedLeft ? "<color=green>←</color> " : "← ")}" +
-                             $"{(pressedDown ? "<color=green>↓</color> " : "↓ ")}" +
-                             $"{(pressedRight ? "<color=green>→</color> " : "→ ")}" +
-                             $"{(pressedM ? "<color=green>M</color> " : "M ")}";
+        if (player1)
+        {
+            keyStatusText.text = $"Keys Pressed: " +
+                                 $"{(pressedW ? "<color=green>W</color> " : "W ")}" +
+                                 $"{(pressedA ? "<color=green>A</color> " : "A ")}" +
+                                 $"{(pressedS ? "<color=green>S</color> " : "S ")}" +
+                                 $"{(pressedD ? "<color=green>D</color> " : "D ")}" +
+                                 $"{(pressedSpace ? "<color=green>Space</color> " : "Space ")}";
+        }
+        else
+        {
+            keyStatusText.text = $"Keys Pressed: " +
+                                 $"{(pressedUp ? "<color=green>↑</color> " : "↑ ")}" +
+                                 $"{(pressedLeft ? "<color=green>←</color> " : "← ")}" +
+                                 $"{(pressedDown ? "<color=green>↓</color> " : "↓ ")}" +
+                                 $"{(pressedRight ? "<color=green>→</color> " : "→ ")}" +
+                                 $"{(pressedM ? "<color=green>M</color> " : "M ")}";
+        }
     }
 
     void CompleteTutorial()

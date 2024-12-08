@@ -10,12 +10,11 @@ public class ComboTutorial : MonoBehaviour
     public GameObject player2;                  // Player 2
     private ComboData comboDataP1;              // Player 1 combo data
     private ComboData comboDataP2;              // Player 2 combo data
-    public TextMeshProUGUI instructionsTextP1;  // The main instructions text
-    public TextMeshProUGUI keyStatusTextP1;     // The text showing key status
-    public TextMeshProUGUI instructionsTextP2;  // The main instructions text
-    public TextMeshProUGUI keyStatusTextP2;     // The text showing key status
+    public TextMeshProUGUI instructionsText;  // The main instructions text
+    public TextMeshProUGUI keyStatusText;     // The text showing key status
 
     private bool active = false;
+    private bool p2Combo = false;
     private bool finishedComboP1 = false;
     private bool finishedComboP2 = false;
 
@@ -27,7 +26,7 @@ public class ComboTutorial : MonoBehaviour
             {
                 finishedComboP1 = true;
             }
-            if (comboDataP2.finishedCombo)
+            if (p2Combo && comboDataP2.finishedCombo)
             {
                 finishedComboP2 = true;
             }
@@ -36,9 +35,14 @@ public class ComboTutorial : MonoBehaviour
             UpdateStatus();
 
             // Check if all keys are pressed
-            if (finishedComboP1 && finishedComboP2)
+            if (finishedComboP1)
             {
-                CompleteTutorial();
+                p2Combo = true;
+                instructionsText.text = "Player 2, press\nP(↑), L(←), ;(↓), and '(→)\nto activate a solo combo.\nPress Q to cancel.";
+                if (finishedComboP2)
+                {
+                    CompleteTutorial();
+                }
             }
         }
     }
@@ -51,17 +55,21 @@ public class ComboTutorial : MonoBehaviour
         comboDataP1 = player1.GetComponentInChildren<ComboData>();
         comboDataP2 = player2.GetComponentInChildren<ComboData>();
 
-        instructionsTextP1.text = "Press Y(↑), G(←), H(↓), and J(→) to activate a solo combo.";
-        instructionsTextP2.text = "Press P(↑), L(←), ;(↓), and '(→) to activate a solo combo.";
+        instructionsText.text = "Player 1, press\nY(↑), G(←), H(↓), and J(→)\nto activate a solo combo.\nPress Q to cancel.";
         UpdateStatus();
     }
 
     void UpdateStatus()
     {
         // Update the text to show which keys are pressed
-        keyStatusTextP1.text = $"Player 1 Combo " + $"{(finishedComboP1 ? "<color=green>Complete</color>" : "Complete")}";
-
-        keyStatusTextP2.text = $"Player 2 Combo " + $"{(finishedComboP2 ? "<color=green>Complete</color>" : "Complete")}";
+        if (!p2Combo)
+        {
+            keyStatusText.text = $"Player 1 Combo " + $"{(finishedComboP1 ? "<color=green>Complete</color>" : "Complete")}";
+        }
+        else
+        {
+            keyStatusText.text = $"Player 2 Combo " + $"{(finishedComboP2 ? "<color=green>Complete</color>" : "Complete")}";
+        }
     }
 
     void CompleteTutorial()

@@ -39,11 +39,8 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!tutorial)
-        {
-            enemyTheme = songs[0];
-            bossTheme = songs[1];
-        }
+        enemyTheme = songs[0];
+        bossTheme = songs[1];
 
         if(SceneManager.GetActiveScene().name == "Tutorial")
         {
@@ -299,8 +296,6 @@ public class GameStateManager : MonoBehaviour
         }
 
         UnityEngine.Debug.Log("Done Duo Combo Tutorial");
-
-        playerManager1.TakeDamage(100);
 
         deathTutorial.Play();
 

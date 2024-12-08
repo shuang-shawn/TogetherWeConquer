@@ -7,10 +7,15 @@ public class DeathTutorial : MonoBehaviour
 {
     public GameObject tutorialPanel;            // The UI Panel object
     public GameObject player1;                  // Player 1 
+    public GameObject player2;                  // Player 2
     private ComboData comboDataP1;              // Player 1 combo data
-    public TextMeshProUGUI instructionsTextP1;  // The main instructions text
-    public TextMeshProUGUI keyStatusTextP1;     // The text showing key status
+    private ComboData comboDataP2;              // Player 2 combo data
+    private PlayerManager p1Manager;             // Player 1 player manager
+    private PlayerManager p2Manager;             // Player 2 player manager
+    public TextMeshProUGUI instructionsText;  // The main instructions text
+    public TextMeshProUGUI keyStatusText;     // The text showing key status
 
+    private bool p1dead = true;
     private bool active = false;
     private bool pressedKey = false;
     private bool reviving = false;
@@ -19,25 +24,42 @@ public class DeathTutorial : MonoBehaviour
     {
         if (active)
         {
-            if(reviving)
+            if (p1dead)
             {
-                if(comboDataP1.revived)
+                if (reviving)
                 {
-                    CompleteTutorial();
+                    if(comboDataP1.revived)
+                    {
+                        p2Manager.TakeDamage(100);
+                        instructionsText.text = "Player 2, press\nO\nto start revival combo.";
+                        pressedKey = false;
+                    }
+                }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.E)) pressedKey = true;
+
+                    if (pressedKey)
+                    {
+                        reviving = true;
+                    }
                 }
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.E)) pressedKey = true;
+                if (Input.GetKeyDown(KeyCode.O)) pressedKey = true;
 
-                // Check if all keys are pressed
                 if (pressedKey)
                 {
                     reviving = true;
                 }
             }
 
-            // Update the key status text
+            if (comboDataP2.revived)
+            {
+                CompleteTutorial();
+            }
+
             UpdateStatus();
         }
     }
@@ -48,20 +70,30 @@ public class DeathTutorial : MonoBehaviour
         active = true;
 
         comboDataP1 = player1.GetComponentInChildren<ComboData>();
+        comboDataP2 = player2.GetComponentInChildren<ComboData>();
 
-        instructionsTextP1.text = "Dead player press combo key to start revival.";
+        p1Manager = player1.GetComponent<PlayerManager>();
+        p2Manager = player2.GetComponent<PlayerManager>();
+
+        p1Manager.TakeDamage(100);
+
+        instructionsText.text = "Player 1, press\nE\nto start revival combo.";
         UpdateStatus();
     }
+
     void UpdateStatus()
     {
         if (reviving)
         {
-            keyStatusTextP1.text = "Perform 5 combos to revive.";
+            keyStatusText.text = "Perform 5 combos to revive.";
+        }
+        else if (p1dead)
+        {
+            keyStatusText.text = $"Key Pressed: " + $"{(pressedKey ? "<color=green>E</color> " : "E ")}";
         }
         else
         {
-            // Update the text to show which keys are pressed
-            keyStatusTextP1.text = $"Key Pressed: " + $"{(pressedKey ? "<color=green>E</color> " : "E ")}";
+            keyStatusText.text = $"Key Pressed: " + $"{(pressedKey ? "<color=green>O</color> " : "O ")}";
         }
     }
 
