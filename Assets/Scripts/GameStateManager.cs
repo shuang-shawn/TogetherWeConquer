@@ -32,6 +32,7 @@ public class GameStateManager : MonoBehaviour
     private bool lastBossSpawned = false;
     private AudioSource enemyTheme;
     private AudioSource bossTheme;
+    private AudioSource pause;
     private bool isBoss = false;
 
 
@@ -41,6 +42,7 @@ public class GameStateManager : MonoBehaviour
     {
         enemyTheme = songs[0];
         bossTheme = songs[1];
+        pause = songs[2];
 
         if(SceneManager.GetActiveScene().name == "Tutorial")
         {
@@ -156,6 +158,8 @@ public class GameStateManager : MonoBehaviour
                     lastBoss = boss;
 
                 }
+
+                isBoss = true;
             } else {
                 mobSpawner.SpawnMobs();
             }
@@ -181,6 +185,8 @@ public class GameStateManager : MonoBehaviour
     public void HandleBossDeath() {
         StartCoroutine(HandleLevelUp());
         mobSpawner.SpawnMobs();
+
+        isBoss = false;
     }
 
     private IEnumerator HandleLevelUp()
@@ -190,14 +196,14 @@ public class GameStateManager : MonoBehaviour
 
         if (enemyTheme.isPlaying)
         {
-            enemyTheme.Stop();
-            isBoss = true;
+            enemyTheme.Pause();
         }
         else
         {
-            bossTheme.Stop();
-            isBoss = false;
+            bossTheme.Pause();
         }
+
+        pause.Play();
 
         LevelUp();
         UnityEngine.Debug.Log(levelUp);
@@ -223,6 +229,8 @@ public class GameStateManager : MonoBehaviour
         {
             yield return null;
         }
+
+        pause.Pause();
 
         if (!tutorial)
         {
