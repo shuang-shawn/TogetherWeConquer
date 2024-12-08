@@ -35,7 +35,6 @@ public class Sawblade : MonoBehaviour
             Vector3 offsetPosition1 = player1.transform.position + new Vector3(distanceOffset * Mathf.Cos(angle1), heightOffset, distanceOffset * Mathf.Sin(angle1));
             activeSawblade1.transform.position = offsetPosition1;
             activeSawblade1.transform.Rotate(Vector3.forward, rotationSpeed * Time.fixedDeltaTime);
-            //Debug.Log("Updating Sawblade for Player 1");
         }
 
         if (activeSawblade2)
@@ -44,7 +43,6 @@ public class Sawblade : MonoBehaviour
             Vector3 offsetPosition2 = player2.transform.position + new Vector3(distanceOffset * Mathf.Cos(angle2), heightOffset, distanceOffset * Mathf.Sin(angle2));
             activeSawblade2.transform.position = offsetPosition2;
             activeSawblade2.transform.Rotate(Vector3.forward, rotationSpeed * Time.fixedDeltaTime);
-            //Debug.Log("Updating Sawblade for Player 2");
         }
     }
 
@@ -52,7 +50,6 @@ public class Sawblade : MonoBehaviour
     {
         if (sawbladePrefab == null)
         {
-            //Debug.LogError("Sawblade prefab is not assigned!");
             return;
         }
 
@@ -60,13 +57,11 @@ public class Sawblade : MonoBehaviour
         if (activeSawblade1 != null)
         {
             Destroy(activeSawblade1);
-           // Debug.Log("Previous sawblade for player 1 destroyed.");
         }
 
         if (activeSawblade2 != null)
         {
             Destroy(activeSawblade2);
-            //Debug.Log("Previous sawblade for player 2 destroyed.");
         }
 
         // Instantiate the sawblade prefab around player 1 with an offset
@@ -77,7 +72,6 @@ public class Sawblade : MonoBehaviour
         SkillCollisionHandler skillCollisionHandler1 = activeSawblade1.GetComponentInChildren<SkillCollisionHandler>();
         if (skillCollisionHandler1 == null)
         {
-            //Debug.LogError("SkillCollisionHandler component not found on Sawblade prefab for player 1!");
             return;
         }
         skillCollisionHandler1.skillDamage = damage;
@@ -91,14 +85,10 @@ public class Sawblade : MonoBehaviour
         SkillCollisionHandler skillCollisionHandler2 = activeSawblade2.GetComponentInChildren<SkillCollisionHandler>();
         if (skillCollisionHandler2 == null)
         {
-            //Debug.LogError("SkillCollisionHandler component not found on Sawblade prefab for player 2!");
             return;
         }
         skillCollisionHandler2.skillDamage = damage;
         skillCollisionHandler2.oneTimeUse = false;
-
-        // Debug log to confirm sawblade instantiation
-        //Debug.Log("Sawblades instantiated successfully.");
 
         // Set timers to destroy the sawblades after a duration
         Destroy(activeSawblade1, duration);

@@ -143,8 +143,17 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void Slow(float slowFactor, float slowTime) {
-        UnityEngine.Debug.Log("slowing down " + gameObject.name);
-        StartCoroutine(SlowDownForDuration(slowFactor, slowTime));
+
+        if (gameObject.tag == "mob")
+        {
+            return;
+        }
+        else
+        {
+            UnityEngine.Debug.Log("slowing down " + gameObject.name);
+            StartCoroutine(SlowDownForDuration(slowFactor, slowTime));
+        }
+      
 
     }
 
