@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour
     public DuoComboTutorial duoComboTutorial;
     public DeathTutorial deathTutorial;
     public ExpBar expBar;
+    public AudioSource[] songs;
 
     public int currXP;
     public int nextLevel = 100;
@@ -29,12 +30,17 @@ public class GameStateManager : MonoBehaviour
     public bool duoLevel = false;
     private GameObject lastBoss = null;
     private bool lastBossSpawned = false;
+    private AudioSource enemyTheme;
+    private AudioSource bossTheme;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        enemyTheme = songs[0];
+        bossTheme = songs[1];
+
         if(SceneManager.GetActiveScene().name == "Tutorial")
         {
             tutorial = true;
@@ -87,6 +93,7 @@ public class GameStateManager : MonoBehaviour
 
         if (!tutorial)
         {
+            enemyTheme.Play();
             StartCoroutine(HandleStart());
         }
         else
@@ -143,7 +150,8 @@ public class GameStateManager : MonoBehaviour
 
             StartCoroutine(HandleLevelUp());
             if (level % 2 == 0) {
-
+                enemyTheme.Stop();
+                bossTheme.Play();
                 GameObject boss = mobSpawner.SpawnBoss();
                 if (mobSpawner.isLastBoss() && boss != null) {
                     lastBossSpawned = true;
@@ -151,6 +159,8 @@ public class GameStateManager : MonoBehaviour
 
                 }
             } else {
+                bossTheme.Stop();
+                enemyTheme.Play();
                 mobSpawner.SpawnMobs();
             }
         }

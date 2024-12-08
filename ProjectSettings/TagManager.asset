@@ -21,6 +21,12 @@ TagManager:
   - LevelUpWindow
   - ComboListManager
   - Player2
+  - moveTutorial
+  - levelUpTutorial
+  - comboTutorial
+  - duoComboTutorial
+  - deathTutorial
+  - completeTutorial
   layers:
   - Default
   - TransparentFX
@@ -32,28 +38,28 @@ TagManager:
   - SawBlades
   - SnowParticles
   - Player
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
