@@ -187,6 +187,7 @@ public class GameStateManager : MonoBehaviour
         mobSpawner.SpawnMobs();
 
         isBoss = false;
+        bossTheme.Stop();
     }
 
     private IEnumerator HandleLevelUp()
