@@ -32,14 +32,18 @@ public class GameStateManager : MonoBehaviour
     private bool lastBossSpawned = false;
     private AudioSource enemyTheme;
     private AudioSource bossTheme;
+    private bool isBoss = false;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyTheme = songs[0];
-        bossTheme = songs[1];
+        if (!tutorial)
+        {
+            enemyTheme = songs[0];
+            bossTheme = songs[1];
+        }
 
         if(SceneManager.GetActiveScene().name == "Tutorial")
         {
@@ -93,7 +97,6 @@ public class GameStateManager : MonoBehaviour
 
         if (!tutorial)
         {
-            enemyTheme.Play();
             StartCoroutine(HandleStart());
         }
         else
@@ -150,8 +153,6 @@ public class GameStateManager : MonoBehaviour
 
             StartCoroutine(HandleLevelUp());
             if (level % 2 == 0) {
-                enemyTheme.Stop();
-                bossTheme.Play();
                 GameObject boss = mobSpawner.SpawnBoss();
                 if (mobSpawner.isLastBoss() && boss != null) {
                     lastBossSpawned = true;
@@ -159,8 +160,6 @@ public class GameStateManager : MonoBehaviour
 
                 }
             } else {
-                bossTheme.Stop();
-                enemyTheme.Play();
                 mobSpawner.SpawnMobs();
             }
         }
@@ -192,6 +191,17 @@ public class GameStateManager : MonoBehaviour
         UnityEngine.Debug.Log("Level: " + level + "\nCurrXP: " + currXP + "\nNextLevel: " + nextLevel);
         UnityEngine.Debug.Log(duoLevel);
 
+        if (enemyTheme.isPlaying)
+        {
+            enemyTheme.Stop();
+            isBoss = true;
+        }
+        else
+        {
+            bossTheme.Stop();
+            isBoss = false;
+        }
+
         LevelUp();
         UnityEngine.Debug.Log(levelUp);
 
@@ -215,6 +225,18 @@ public class GameStateManager : MonoBehaviour
         while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
         {
             yield return null;
+        }
+
+        if (!tutorial)
+        {
+            if (isBoss)
+            {
+                bossTheme.Play();
+            }
+            else
+            {
+                enemyTheme.Play();
+            }
         }
 
         isPlayer1Level = true;
