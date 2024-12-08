@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles the logic of fade in UI in the title screen
+/// </summary>
 public class ButtonFadeIn : MonoBehaviour
 {
     [SerializeField] private Button startButton;

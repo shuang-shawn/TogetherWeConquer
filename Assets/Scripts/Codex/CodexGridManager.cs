@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
+/// <summary>
+/// Codex Grid Logic
+/// </summary>
 public class CodexGridManager : MonoBehaviour
 {
     [SerializeField]
@@ -31,6 +34,7 @@ public class CodexGridManager : MonoBehaviour
 
     [SerializeField]
     private GameObject[] arrowImages;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -40,9 +44,8 @@ public class CodexGridManager : MonoBehaviour
         PopulateGrid();
     }
 
-
-
-    void PopulateGrid()
+    // Logic for populating the grid
+    private void PopulateGrid()
     {
         foreach (Combo combo in comboList.soloComboList)
         {
@@ -62,6 +65,7 @@ public class CodexGridManager : MonoBehaviour
         }
     }
 
+    // Callback function for when a button is clicked
     private void OnComboButtonClick(Combo selectedCombo)
     {
         comboIcon.gameObject.SetActive(true);

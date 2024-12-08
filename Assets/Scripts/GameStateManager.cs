@@ -17,6 +17,7 @@ public class GameStateManager : MonoBehaviour
     public ComboTutorial comboTutorial;
     public DuoComboTutorial duoComboTutorial;
     public DeathTutorial deathTutorial;
+    public ExpBar expBar;
 
     public int currXP;
     public int nextLevel = 100;
@@ -28,6 +29,7 @@ public class GameStateManager : MonoBehaviour
     public bool duoLevel = false;
     private GameObject lastBoss = null;
     private bool lastBossSpawned = false;
+
 
 
     // Start is called before the first frame update
@@ -133,9 +135,11 @@ public class GameStateManager : MonoBehaviour
 
         if (currXP >= nextLevel)
         {
+            expBar.SetExp(currXP, nextLevel);
             level += 1;
             currXP %= nextLevel;
             nextLevel += 25;
+            
 
             StartCoroutine(HandleLevelUp());
             if (level % 2 == 0) {
@@ -166,6 +170,7 @@ public class GameStateManager : MonoBehaviour
     public void AddXP(int xp)
     {
         currXP += xp;
+        expBar.SetExp(currXP, nextLevel);
     }
     public void HandleBossDeath() {
         StartCoroutine(HandleLevelUp());
@@ -208,7 +213,7 @@ public class GameStateManager : MonoBehaviour
         UnityEngine.Debug.Log(levelUp);
 
         duoLevel = false;
-     
+        expBar.SetExp(currXP, nextLevel);
         
     }
 

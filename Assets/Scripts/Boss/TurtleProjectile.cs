@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Turtle Boss Projectile Logic
+/// </summary>
 public class TurtleProjectile : MonoBehaviour
 {
     public float speed = 8;

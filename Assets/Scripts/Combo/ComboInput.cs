@@ -6,7 +6,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+/// <summary>
+/// Handles the logic of player combo inputs and solo combo logic
+/// </summary>
 public class ComboInput : MonoBehaviour
 {
     // Input System
@@ -246,6 +248,7 @@ public class ComboInput : MonoBehaviour
                 comboData.mistakeKeysPressed.Add(inputKey);
                 comboData.mistakeCount++;
                 comboUI.UpdateArrow(comboData.currentSequenceIndex, false);
+                comboWindowUI.HighlightSequentialKeys(inputKey, comboData.currentSequenceIndex, comboData.isInDuoCombo, playerTag);
             }
         }
 
@@ -255,17 +258,6 @@ public class ComboInput : MonoBehaviour
         if (comboData.currentSequenceIndex == comboData.currentCombo.Count)
         {
             StartCoroutine(Scoring(true));
-            if (comboData.isInDuoCombo)
-            {
-                duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
-            } else
-            {
-                UnityEngine.Debug.Log("Solo skill by: " + playerTag);
-                string skillToCast = comboData.currentComboObject.GetComboSkill();
-                UnityEngine.Debug.Log("Casting solo skill: " + skillToCast);
-                skillManager.CastSkill(skillToCast, playerTag, comboData.currentComboObject.GetComboType());
-
-            }
         }
     }
 
@@ -273,8 +265,29 @@ public class ComboInput : MonoBehaviour
     {
         if (isComplete)
         {
-            comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
+            string grade = comboUI.ShowScore(comboData.mistakeCount, comboData.currentCombo.Count);
             // Combo Completed
+            if (grade == "Perfect" || grade=="Good")
+            {
+                if (comboData.isInDuoCombo)
+                {
+                    duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, comboData.isAbrupt);
+                }
+                else
+                {
+                    UnityEngine.Debug.Log("Solo skill by: " + playerTag);
+                    string skillToCast = comboData.currentComboObject.GetComboSkill();
+                    UnityEngine.Debug.Log("Casting solo skill: " + skillToCast);
+                    skillManager.CastSkill(skillToCast, playerTag, comboData.currentComboObject.GetComboType());
+
+                }
+            } else
+            {
+                if (comboData.isInDuoCombo)
+                {
+                    duoComboManager.CompletedHalf(transform.parent.gameObject, comboData.timerVal, true);
+                }
+            }
         }
         else
         {

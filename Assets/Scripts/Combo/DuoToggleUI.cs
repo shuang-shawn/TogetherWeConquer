@@ -5,6 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Handles the logic of the duo toggle UI
+/// </summary>
 public class DuoToggleUI : MonoBehaviour
 {
     private InputActionMap comboP1;
@@ -20,9 +23,9 @@ public class DuoToggleUI : MonoBehaviour
     private void Awake()
     {
         // Initialize the generated InputActions class
-        var inputActions = new InputActions(); // Ensure this matches your generated class name
+        var inputActions = new InputActions();
 
-        // Access ComboP1 directly if it was generated as a property
+        // Access ComboP1 
         comboP1 = inputActions.ComboP1;
         comboP2 = inputActions.ComboP2;
         duoToggleP1 = comboP1.FindAction("DuoToggle");
