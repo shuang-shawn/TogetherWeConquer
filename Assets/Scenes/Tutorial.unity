@@ -4679,6 +4679,7 @@ MonoBehaviour:
   comboTutorial: {fileID: 0}
   duoComboTutorial: {fileID: 0}
   deathTutorial: {fileID: 0}
+  expBar: {fileID: 0}
   currXP: 0
   nextLevel: 100
   level: 1
