@@ -18,7 +18,7 @@ public class Swap : MonoBehaviour
     // Update is called once per frame
     public void CastSwap() {
 
-        Debug.Log("Swapping Positions");
+        // Debug.Log("Swapping Positions");
 
         Rigidbody player1RigidBody = player1.GetComponent<Rigidbody>();
         Rigidbody player2RigidBody = player2.GetComponent<Rigidbody>();

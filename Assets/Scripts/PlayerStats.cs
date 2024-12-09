@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour
     public void playerGotHit(int damage){
         currentHealth -= damage;
 
-        Debug.Log("Current Health: " + currentHealth);
+        // Debug.Log("Current Health: " + currentHealth);
         
         //Set an invulnerability window
     }
