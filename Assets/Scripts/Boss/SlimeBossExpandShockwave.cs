@@ -47,16 +47,16 @@ public class SlimeBossExpandShockwave : MonoBehaviour
             return;
         } 
         else {
-            Debug.Log("Particle hit: " + other.name);
+            // Debug.Log("Particle hit: " + other.name);
             bool addedSuccessfully = objectsHit.Add(other);
         
-            Debug.Log(addedSuccessfully 
-            ? "Added successfully: " + other 
-            : "Failed to add: " + other);
+            // Debug.Log(addedSuccessfully 
+            // ? "Added successfully: " + other 
+            // : "Failed to add: " + other);
 
             string otherTag = other.gameObject.tag;
             
-            Debug.Log(otherTag);
+            // Debug.Log(otherTag);
             if(otherTag == "Player1" || otherTag == "Player2") {
                 //Player takes damage
                 other.gameObject.GetComponent<PlayerManager>().TakeDamage(shockwaveDamage);

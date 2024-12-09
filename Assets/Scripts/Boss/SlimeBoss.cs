@@ -29,10 +29,10 @@ public class SlimeBoss : MonoBehaviour
     public ParticleSystem shockwavePrefab;
 
     // For slime splitting
-    private static int slimeID = 1;
-    public GameObject slimeBossPrefab;
-    private int maxSplitSlimes = 3;
-    public int currentSlimeMaxHealth;
+    // private static int slimeID = 1;
+    // public GameObject slimeBossPrefab;
+    // private int maxSplitSlimes = 3;
+    // public int currentSlimeMaxHealth;
 
     // Pause and Resume state
     private bool isPaused = false;
@@ -170,10 +170,10 @@ public class SlimeBoss : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
-        if (slimeID == 1)
-        {
-            currentSlimeMaxHealth = gameObject.GetComponent<EnemyManager>().getMaxBossHealth();
-        }
+        // if (slimeID == 1)
+        // {
+        //     currentSlimeMaxHealth = gameObject.GetComponent<EnemyManager>().getMaxBossHealth();
+        // }
     }
 
     private void updateSpeed(float percent)
@@ -192,36 +192,36 @@ public class SlimeBoss : MonoBehaviour
         hopFrequency = 5f;
     }
 
-    private void splitSlime()
-    {
-        spawnSlime();
-        spawnSlime();
-    }
+    // private void splitSlime()
+    // {
+    //     spawnSlime();
+    //     spawnSlime();
+    // }
 
-    private void spawnSlime()
-    {
-        slimeID++;
-        GameObject tempSlime = Instantiate(slimeBossPrefab, gameObject.transform.position, Quaternion.identity);
-        tempSlime.GetComponent<SlimeBoss>().updateMaxHealth(currentSlimeMaxHealth / 2);
-        tempSlime.transform.localScale = gameObject.transform.localScale * 0.5f;
-    }
+    // private void spawnSlime()
+    // {
+    //     slimeID++;
+    //     GameObject tempSlime = Instantiate(slimeBossPrefab, gameObject.transform.position, Quaternion.identity);
+    //     tempSlime.GetComponent<SlimeBoss>().updateMaxHealth(currentSlimeMaxHealth / 2);
+    //     tempSlime.transform.localScale = gameObject.transform.localScale * 0.5f;
+    // }
 
-    public void updateMaxHealth(int newMaxHealth)
-    {
-        currentSlimeMaxHealth = newMaxHealth;
-        gameObject.GetComponent<EnemyManager>().setMaxHealth(currentSlimeMaxHealth);
-    }
+    // public void updateMaxHealth(int newMaxHealth)
+    // {
+    //     currentSlimeMaxHealth = newMaxHealth;
+    //     gameObject.GetComponent<EnemyManager>().setMaxHealth(currentSlimeMaxHealth);
+    // }
 
     public void Pause()
     {
         isPaused = true;
-        Debug.Log("SlimeBoss is paused.");
+        // Debug.Log("SlimeBoss is paused.");
     }
 
     public void Resume()
     {
         isPaused = false;
-        Debug.Log("SlimeBoss is resumed.");
+        // Debug.Log("SlimeBoss is resumed.");
     }
 
     void FixedUpdate()
@@ -262,10 +262,10 @@ public class SlimeBoss : MonoBehaviour
                 HopToPlayer();
             }
         }
-        else if (slimeID < maxSplitSlimes)
-        {
-            splitSlime();
-            Destroy(gameObject);
-        }
+        // else if (slimeID < maxSplitSlimes)
+        // {
+        //     splitSlime();
+        //     Destroy(gameObject);
+        // }
     }
 }
