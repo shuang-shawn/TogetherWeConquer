@@ -5780,6 +5780,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 397299946225599693, guid: b612d3ca49b9641438c108c6fb8a5b15,
         type: 3}
+      propertyPath: duoComboManager
+      value: 
+      objectReference: {fileID: 1055241499}
+    - target: {fileID: 397299946225599693, guid: b612d3ca49b9641438c108c6fb8a5b15,
+        type: 3}
       propertyPath: skillManagerObject
       value: 
       objectReference: {fileID: 582710431}
