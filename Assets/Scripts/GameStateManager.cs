@@ -33,6 +33,7 @@ public class GameStateManager : MonoBehaviour
     private AudioSource enemyTheme;
     private AudioSource bossTheme;
     private AudioSource pause;
+    private AudioSource bossTwoTheme;
     private bool isBoss = false;
     private bool isStarted = false;
 
@@ -44,6 +45,7 @@ public class GameStateManager : MonoBehaviour
         enemyTheme = songs[0];
         bossTheme = songs[1];
         pause = songs[2];
+        bossTwoTheme = songs[3];
 
         if(SceneManager.GetActiveScene().name == "Tutorial")
         {
@@ -165,6 +167,7 @@ public class GameStateManager : MonoBehaviour
                     lastBossSpawned = true;
                     lastBoss = boss;
 
+                    bossTheme = bossTwoTheme;
                 }
 
                 isBoss = true;
