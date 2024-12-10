@@ -34,6 +34,7 @@ public class GameStateManager : MonoBehaviour
     private AudioSource bossTheme;
     private AudioSource pause;
     private bool isBoss = false;
+    private bool isStarted = false;
 
 
 
@@ -106,6 +107,7 @@ public class GameStateManager : MonoBehaviour
 
     private IEnumerator HandleStart()
     {
+        pause.Play();
         StartCoroutine(HandleLevelUp());
         while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
         {
@@ -115,6 +117,13 @@ public class GameStateManager : MonoBehaviour
         duoLevel = true;
         StartCoroutine(HandleLevelUp());
         mobSpawner.SpawnMobs();
+        while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
+        {
+            yield return null;
+        }
+        pause.Stop();
+
+        isStarted = true;
     }
 
     // Update is called once per frame
@@ -148,7 +157,6 @@ public class GameStateManager : MonoBehaviour
             level += 1;
             currXP %= nextLevel;
             nextLevel += 25;
-            
 
             StartCoroutine(HandleLevelUp());
             if (level % 2 == 0) {
@@ -204,7 +212,10 @@ public class GameStateManager : MonoBehaviour
             bossTheme.Pause();
         }
 
-        pause.Play();
+        if (isStarted)
+        {
+            pause.Play();
+        }
 
         LevelUp();
         UnityEngine.Debug.Log(levelUp);
@@ -231,7 +242,10 @@ public class GameStateManager : MonoBehaviour
             yield return null;
         }
 
-        pause.Pause();
+        if(isStarted)
+        {
+            pause.Stop();
+        }
 
         if (!tutorial)
         {
