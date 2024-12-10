@@ -23,7 +23,7 @@ public class DuoSnipe : MonoBehaviour
     }
     
     public void CastSnipePrep(int playerNum) {
-        Debug.Log("player " + playerNum + " casting sniper prep");
+        // Debug.Log("player " + playerNum + " casting sniper prep");
         prepingPlayer = GameObject.FindWithTag("Player" + playerNum);
         if (prepingPlayer.TryGetComponent<PlayerManager>(out PlayerManager player)) {
             player.crosshair.ToggleCrosshair();
@@ -32,7 +32,7 @@ public class DuoSnipe : MonoBehaviour
     }  
 
     public void CastSnipe(int playerNum) {
-        Debug.Log("player " + playerNum + " casting sniper end");
+        // Debug.Log("player " + playerNum + " casting sniper end");
         castingPlayer = GameObject.FindWithTag("Player" + playerNum);
         if(playerNum == 1) {
             prepingPlayer = GameObject.FindWithTag("Player2");

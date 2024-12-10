@@ -28,7 +28,7 @@ public class SnipeBullet : MonoBehaviour
         }
         if (!objectRenderer.isVisible)
         {
-            Debug.Log($"{gameObject.name} is not visible in the current scene.");
+            // Debug.Log($"{gameObject.name} is not visible in the current scene.");
             Destroy(gameObject);
 
             // Perform any action if the object is not visible

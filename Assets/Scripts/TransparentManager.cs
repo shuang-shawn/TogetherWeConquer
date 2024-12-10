@@ -42,7 +42,7 @@ public class TransparentManager : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2")) {
-            Debug.Log("Player visually blocked by boss");
+            // Debug.Log("Player visually blocked by boss");
             playersInTrigger.Add(other.gameObject);
             spriteRenderer.material.SetFloat("_Transparency", transparency);
 
@@ -56,7 +56,7 @@ public class TransparentManager : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player1") || other.gameObject.CompareTag("Player2")) {
-            Debug.Log("Player exited boss collider");
+            // Debug.Log("Player exited boss collider");
             playersInTrigger.Remove(other.gameObject);
         }
     }

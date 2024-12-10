@@ -83,11 +83,11 @@ public class EnemyManager : MonoBehaviour
             UnityEngine.Debug.Log("this is a turtle");
             float damageFactor = turtleBoss.CalculateDamageFactor(hitPosition);
             currentHealth -=  Mathf.FloorToInt(damageFactor * damage);
-            UnityEngine.Debug.Log(gameObject.name + " took " + damageFactor * damage + " modified damage!");
+            // UnityEngine.Debug.Log(gameObject.name + " took " + damageFactor * damage + " modified damage!");
 
         } else {
             currentHealth -= damage;
-            UnityEngine.Debug.Log(gameObject.name + " took " + damage + " damage!");
+            // UnityEngine.Debug.Log(gameObject.name + " took " + damage + " damage!");
         }
 
         if (gameObject.tag == "boss")
@@ -105,7 +105,7 @@ public class EnemyManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            UnityEngine.Debug.Log(gameObject.name + " has died!");
+            // UnityEngine.Debug.Log(gameObject.name + " has died!");
             
             Die();
         }
@@ -113,10 +113,10 @@ public class EnemyManager : MonoBehaviour
 
     void Die()
     {
-        UnityEngine.Debug.Log(gameObject.name + " has died!");
+        // UnityEngine.Debug.Log(gameObject.name + " has died!");
         //Destroy this mob
         if(gameObject.tag == "mob") {
-            UnityEngine.Debug.Log("gainning exp");
+            // UnityEngine.Debug.Log("gainning exp");
             gameStateManager.AddXP(mobExp);
             Destroy(gameObject);
         } else {            
@@ -184,7 +184,7 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.Log("slowing down " + gameObject.name);
+            // UnityEngine.Debug.Log("slowing down " + gameObject.name);
             StartCoroutine(SlowDownForDuration(slowFactor, slowTime));
         }
       
@@ -217,8 +217,8 @@ public class EnemyManager : MonoBehaviour
         float size = Mathf.Max(collider.x, collider.y, collider.z);
         float radius = size * 2f;
 
-        UnityEngine.Debug.Log("Size " + size);
-        UnityEngine.Debug.Log("Radius " + radius);
+        // UnityEngine.Debug.Log("Size " + size);
+        // UnityEngine.Debug.Log("Radius " + radius);
 
         var slowMain = slowParticles.main;
         var slowShape = slowParticles.shape;

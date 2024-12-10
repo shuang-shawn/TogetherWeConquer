@@ -681,7 +681,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07e056809be8c5842935337f791e2e3e, type: 2}
+  - {fileID: 2100000, guid: e1515246e8597b241b6c8ed8afccc8f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -790,6 +790,8 @@ MonoBehaviour:
   slowParticlesPrefab: {fileID: 4802142671950701617, guid: 60834733287faa246af9c68a667e8195,
     type: 3}
   animator: {fileID: 0}
+  flashDuration: 0.6
+  flashInterval: 0.1
   slowed: 0
 --- !u!136 &8255115908438798914
 CapsuleCollider:

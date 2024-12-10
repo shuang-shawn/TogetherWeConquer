@@ -225,14 +225,14 @@ public class GameStateManager : MonoBehaviour
 
         if (!duoLevel)
         {
-            UnityEngine.Debug.Log("Level up player 1");
+            // UnityEngine.Debug.Log("Level up player 1");
             canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
             while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
             {
                 yield return null; // Wait for the next frame
             }
             isPlayer1Level = false;
-            UnityEngine.Debug.Log("Level up player 2");
+            // UnityEngine.Debug.Log("Level up player 2");
             canvas.transform.Find("LevelUpWindow").gameObject.SetActive(true);
         }
         else
@@ -283,7 +283,7 @@ public class GameStateManager : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        UnityEngine.Debug.Log("Done Movement Tutorial");
+        // UnityEngine.Debug.Log("Done Movement Tutorial");
 
         StartCoroutine(HandleLevelUp());
 
@@ -301,7 +301,7 @@ public class GameStateManager : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        UnityEngine.Debug.Log("Done Combo Tutorial");
+        // UnityEngine.Debug.Log("Done Combo Tutorial");
 
         duoLevel = true;
 
@@ -321,7 +321,7 @@ public class GameStateManager : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        UnityEngine.Debug.Log("Done Duo Combo Tutorial");
+        // UnityEngine.Debug.Log("Done Duo Combo Tutorial");
 
         deathTutorial.Play();
 

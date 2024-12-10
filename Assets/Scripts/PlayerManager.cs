@@ -35,12 +35,19 @@ public class PlayerManager : MonoBehaviour
         if (spriteRenderer != null) {
             material = spriteRenderer.material;
         }
+        resetHurtStatusColor();
+    }
+
+    void OnEnable()
+    {
+        resetHurtStatusColor();
+        
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collision detected");
-        Debug.Log(collision.gameObject.name);
+        // Debug.Log("collision detected");
+        // Debug.Log(collision.gameObject.name);
         // Check if the object that collided with this one has an "Attacker" component
         EnemyManager attacker = collision.gameObject.GetComponent<EnemyManager>();
         if (attacker != null)
@@ -51,7 +58,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage(int damage) {
         currentHealth -= damage;
-        Debug.Log(gameObject.name + " took " + damage + " damage!");
+        // Debug.Log(gameObject.name + " took " + damage + " damage!");
 
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
@@ -82,7 +89,7 @@ public class PlayerManager : MonoBehaviour
         ExitComboLoop();
         SpawnDeathParticles();
       
-        Debug.Log(gameObject.name + " has died!");
+        // Debug.Log(gameObject.name + " has died!");
 
         // Add death handling here (destroy, play animation, etc.)
         // Destroy(gameObject);
@@ -119,6 +126,12 @@ public class PlayerManager : MonoBehaviour
 
         // Ensure tint is off at the end
         material.SetFloat("_UseTint", 0f);
+    }
+    public void resetHurtStatusColor() {
+        if (material != null) {
+            material.SetFloat("_isFlashing", 0f);
+            material.SetFloat("_UseTint", 0f);
+        }
     }
 
     private void SpawnHurtParticles()

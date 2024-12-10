@@ -20,7 +20,7 @@ public class SkillCollisionHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Debug log to check for collisions
-        Debug.Log("Collision detected with: " + other.gameObject.name);
+        // Debug.Log("Collision detected with: " + other.gameObject.name);
 
         // Ensure the collision is with an enemy
         if (other.gameObject.CompareTag("boss") || other.gameObject.CompareTag("mob")) // or "mob"
@@ -29,7 +29,7 @@ public class SkillCollisionHandler : MonoBehaviour
             if (target != null && !other.isTrigger)
             {
                 // Log enemy hit
-                Debug.Log("Enemy hit! Taking damage.");
+                // Debug.Log("Enemy hit! Taking damage.");
                 Vector3 hitPosition = other.ClosestPoint(transform.position);
                 target.TakeDamage(skillDamage, hitPosition);
 
@@ -53,7 +53,7 @@ public class SkillCollisionHandler : MonoBehaviour
         }
         else
         {
-            Debug.Log("Collision with non-enemy object.");
+            // Debug.Log("Collision with non-enemy object.");
         }
     }
 }

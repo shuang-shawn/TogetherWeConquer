@@ -60,7 +60,7 @@ public class MobSpawner : MonoBehaviour
         // }
 
             if (spawnBossList != null && spawnBossIndex < spawnBossList.Count) {
-                Debug.Log("spawning next boss");
+                // Debug.Log("spawning next boss");
                 GameObject boss = Instantiate(spawnBossList[spawnBossIndex], new Vector3(0, 0, 0), Quaternion.identity);
                 spawnBossIndex += 1;
                 return boss;
@@ -121,7 +121,7 @@ public class MobSpawner : MonoBehaviour
             return hit.point; // Return the point where the ray hit the ground
         }
 
-        Debug.LogWarning("No ground detected at position: " + position);
+        // Debug.LogWarning("No ground detected at position: " + position);
         return Vector3.zero; // Return zero if no ground was found
     }
 }
