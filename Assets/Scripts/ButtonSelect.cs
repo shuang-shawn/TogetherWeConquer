@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,9 @@ public class OptionSelector : MonoBehaviour
     public Button option2Button;
     public Button option3Button;
     public Button confirmButton;
+    public Sprite P1Background;
+    public Sprite P2Background;
+    public Sprite DuoBackground;
 
     public GameObject comboListManager;
     private ComboList comboList;
@@ -20,6 +24,21 @@ public class OptionSelector : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!stateManager.duoLevel)
+        {
+            if (stateManager.isPlayer1Level)
+            {
+                gameObject.GetComponent<Image>().sprite = P1Background;
+            }
+            else
+            {
+                gameObject.GetComponent<Image>().sprite = P2Background;
+            }
+        }
+        else
+        {
+            gameObject.GetComponent<Image>().sprite = DuoBackground;
+        }
         confirmButton.gameObject.SetActive(false);
 
         comboList = comboListManager.GetComponent<ComboList>();

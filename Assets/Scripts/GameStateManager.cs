@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour
     public DuoComboTutorial duoComboTutorial;
     public DeathTutorial deathTutorial;
     public ExpBar expBar;
+    public AudioSource[] songs;
 
     public int currXP;
     public int nextLevel = 100;
@@ -29,12 +30,21 @@ public class GameStateManager : MonoBehaviour
     public bool duoLevel = false;
     private GameObject lastBoss = null;
     private bool lastBossSpawned = false;
+    private AudioSource enemyTheme;
+    private AudioSource bossTheme;
+    private AudioSource pause;
+    private bool isBoss = false;
+    private bool isStarted = false;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        enemyTheme = songs[0];
+        bossTheme = songs[1];
+        pause = songs[2];
+
         if(SceneManager.GetActiveScene().name == "Tutorial")
         {
             tutorial = true;
@@ -97,6 +107,7 @@ public class GameStateManager : MonoBehaviour
 
     private IEnumerator HandleStart()
     {
+        pause.Play();
         StartCoroutine(HandleLevelUp());
         while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
         {
@@ -106,6 +117,13 @@ public class GameStateManager : MonoBehaviour
         duoLevel = true;
         StartCoroutine(HandleLevelUp());
         mobSpawner.SpawnMobs();
+        while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
+        {
+            yield return null;
+        }
+        pause.Stop();
+
+        isStarted = true;
     }
 
     // Update is called once per frame
@@ -139,17 +157,17 @@ public class GameStateManager : MonoBehaviour
             level += 1;
             currXP %= nextLevel;
             nextLevel += 25;
-            
 
             StartCoroutine(HandleLevelUp());
             if (level % 2 == 0) {
-
                 GameObject boss = mobSpawner.SpawnBoss();
                 if (mobSpawner.isLastBoss() && boss != null) {
                     lastBossSpawned = true;
                     lastBoss = boss;
 
                 }
+
+                isBoss = true;
             } else {
                 mobSpawner.SpawnMobs();
             }
@@ -175,12 +193,29 @@ public class GameStateManager : MonoBehaviour
     public void HandleBossDeath() {
         StartCoroutine(HandleLevelUp());
         mobSpawner.SpawnMobs();
+
+        isBoss = false;
+        bossTheme.Stop();
     }
 
     private IEnumerator HandleLevelUp()
     {
         UnityEngine.Debug.Log("Level: " + level + "\nCurrXP: " + currXP + "\nNextLevel: " + nextLevel);
         UnityEngine.Debug.Log(duoLevel);
+
+        if (enemyTheme.isPlaying)
+        {
+            enemyTheme.Pause();
+        }
+        else
+        {
+            bossTheme.Pause();
+        }
+
+        if (isStarted)
+        {
+            pause.Play();
+        }
 
         LevelUp();
         UnityEngine.Debug.Log(levelUp);
@@ -205,6 +240,23 @@ public class GameStateManager : MonoBehaviour
         while (canvas.transform.Find("LevelUpWindow").gameObject.activeSelf)
         {
             yield return null;
+        }
+
+        if(isStarted)
+        {
+            pause.Stop();
+        }
+
+        if (!tutorial)
+        {
+            if (isBoss)
+            {
+                bossTheme.Play();
+            }
+            else
+            {
+                enemyTheme.Play();
+            }
         }
 
         isPlayer1Level = true;
@@ -267,8 +319,6 @@ public class GameStateManager : MonoBehaviour
         }
 
         UnityEngine.Debug.Log("Done Duo Combo Tutorial");
-
-        playerManager1.TakeDamage(100);
 
         deathTutorial.Play();
 

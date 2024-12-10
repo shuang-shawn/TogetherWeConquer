@@ -13,6 +13,10 @@ public class LevelUpTutorial : MonoBehaviour
 
     private void Update()
     {
+        if (!gameStateManager.isPlayer1Level)
+        {
+            instructionsText.text = "Player 2, select a combo and then press Accept.";
+        }
         if (!gameStateManager.levelUp)
         {
             CompleteTutorial();
@@ -23,7 +27,14 @@ public class LevelUpTutorial : MonoBehaviour
     {
         tutorialPanel.SetActive(true);
         active = true;
-        instructionsText.text = "Select a combo and then press Done.";
+        if (!gameStateManager.duoLevel)
+        {
+            instructionsText.text = "Player 1, select a combo and then press Accept.";
+        }
+        else
+        {
+            instructionsText.text = "Select a duo combo and then press Accept.";
+        }
     }
 
     void CompleteTutorial()

@@ -204,13 +204,18 @@ public class ComboInput : MonoBehaviour
     // Logic for finish combo and resetting data
     public void RestartCombo()
     {
+        bool abrupt = comboData.isAbrupt;
+
         comboData.ResetData();
         comboUI.ResetUI();
         comboWindowUI.ResetComboList(false, playerTag);
         StopAllCoroutines();
 
-        comboData.finishedCombo = true;
-        StartCoroutine(ResetCompleteFlag());
+        if (!abrupt)
+        {
+            comboData.finishedCombo = true;
+            StartCoroutine(ResetCompleteFlag());
+        }
 
         UpdateComboInputCallbacks(false);
     }
